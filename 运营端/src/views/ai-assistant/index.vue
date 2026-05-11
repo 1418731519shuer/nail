@@ -6,58 +6,7 @@
       <p>智能分析运营数据，生成专业建议，辅助决策</p>
     </div>
 
-    <el-row :gutter="20">
-      <!-- 左侧：快捷问题 -->
-      <el-col :span="8">
-        <el-card class="quick-questions-card">
-          <template #header>
-            <span>快捷问题</span>
-          </template>
-          <div class="quick-questions">
-            <div 
-              v-for="question in quickQuestions" 
-              :key="question.id"
-              class="question-item"
-              @click="askQuestion(question)"
-            >
-              <el-icon :size="20" :color="question.color">
-                <component :is="question.icon" />
-              </el-icon>
-              <span>{{ question.text }}</span>
-            </div>
-          </div>
-        </el-card>
-
-        <!-- 使用说明 -->
-        <el-card class="tips-card">
-          <template #header>
-            <span>使用说明</span>
-          </template>
-          <div class="tips-content">
-            <p>AI运营助手可以帮您：</p>
-            <ul>
-              <li>分析今日运营数据</li>
-              <li>发现爆款和潜力款</li>
-              <li>预警冷门款式</li>
-              <li>生成运营建议</li>
-              <li>调整推荐位策略</li>
-            </ul>
-            <el-alert 
-              type="warning" 
-              :closable="false"
-              show-icon
-            >
-              <template #title>
-                AI建议仅供参考，实际操作需商家确认
-              </template>
-            </el-alert>
-          </div>
-        </el-card>
-      </el-col>
-
-      <!-- 右侧：对话区域 -->
-      <el-col :span="16">
-        <el-card class="chat-card">
+    <el-card class="chat-card">
           <template #header>
             <div class="chat-header">
               <span>AI运营助手</span>
@@ -74,7 +23,6 @@
               <div class="welcome-icon">🤖</div>
               <h3>你好，我是AI运营助手</h3>
               <p>我可以帮你分析今日试戴数据、发现爆款、预警冷门款，并生成运营建议。</p>
-              <p>你可以点击左侧快捷问题，或直接输入你想了解的问题。</p>
             </div>
 
             <div 
@@ -120,6 +68,18 @@
 
           <!-- 输入框 -->
           <div class="chat-input">
+            <!-- 快捷问题 -->
+            <div class="quick-questions-bar">
+              <el-button 
+                v-for="question in quickQuestions" 
+                :key="question.id"
+                size="small"
+                round
+                @click="askQuestion(question)"
+              >
+                {{ question.text }}
+              </el-button>
+            </div>
             <el-input
               v-model="inputMessage"
               placeholder="请输入你想了解的问题..."
@@ -133,8 +93,6 @@
             </el-input>
           </div>
         </el-card>
-      </el-col>
-    </el-row>
   </div>
 </template>
 
@@ -378,50 +336,6 @@ function clearChat() {
   padding: 0;
 }
 
-.quick-questions-card {
-  margin-bottom: 20px;
-}
-
-.quick-questions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.question-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: #F5F7FA;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.question-item:hover {
-  background: #FFF0F5;
-  color: #FF6B9D;
-}
-
-.tips-card {
-  margin-bottom: 20px;
-}
-
-.tips-content {
-  font-size: 14px;
-  color: #666;
-}
-
-.tips-content ul {
-  margin: 12px 0;
-  padding-left: 20px;
-}
-
-.tips-content li {
-  margin-bottom: 8px;
-}
-
 .chat-card {
   height: calc(100vh - 200px);
   display: flex;
@@ -466,6 +380,27 @@ function clearChat() {
 
 .welcome-message p {
   margin-bottom: 8px;
+}
+
+.chat-input {
+  padding: 16px 20px;
+  border-top: 1px solid #E4E7ED;
+}
+
+.quick-questions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.quick-questions-bar .el-button {
+  border-color: #FF6B9D;
+  color: #FF6B9D;
+}
+
+.quick-questions-bar .el-button:hover {
+  background: #FFF0F5;
 }
 
 .message-item {

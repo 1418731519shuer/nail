@@ -80,6 +80,18 @@ export const hotStyles = [
     hotIndex: 68.4,
     tags: ['裸色', '纯欲', '日常'],
     trend: 'stable'
+  },
+  {
+    id: 6,
+    name: '极光猫眼',
+    image: 'https://picsum.photos/seed/nail6/200/200',
+    tryOnCount: 723,
+    confirmCount: 98,
+    confirmRate: 13.5,
+    clickRate: 4.8,
+    hotIndex: 62.8,
+    tags: ['猫眼', '极光', '派对'],
+    trend: 'up'
   }
 ]
 
@@ -134,6 +146,16 @@ export const coldStyles = [
     confirmRate: 5.6,
     type: 'cold',
     suggestion: '建议下架或降权'
+  },
+  {
+    id: 106,
+    name: '波点复古',
+    image: 'https://picsum.photos/seed/nail106/200/200',
+    tryOnCount: 52,
+    confirmCount: 15,
+    confirmRate: 28.8,
+    type: 'potential',
+    suggestion: '建议提高曝光'
   }
 ]
 

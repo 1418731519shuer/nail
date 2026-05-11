@@ -13,14 +13,14 @@
           <el-input 
             v-model="searchKeyword" 
             placeholder="搜索款式名称" 
-            style="width: 240px"
+            style="width: 200px"
             clearable
           >
             <template #prefix>
               <el-icon><Search /></el-icon>
             </template>
           </el-input>
-          <el-select v-model="filterCategory" placeholder="选择分类" clearable style="width: 140px">
+          <el-select v-model="filterCategory" placeholder="选择分类" clearable style="width: 120px">
             <el-option label="全部" value="" />
             <el-option label="法式" value="法式" />
             <el-option label="渐变" value="渐变" />
@@ -28,10 +28,34 @@
             <el-option label="猫眼" value="猫眼" />
             <el-option label="纯色" value="纯色" />
           </el-select>
-          <el-select v-model="filterStatus" placeholder="状态" clearable style="width: 120px">
+          <el-select v-model="filterStatus" placeholder="状态" clearable style="width: 100px">
             <el-option label="全部" value="" />
             <el-option label="上架中" value="active" />
             <el-option label="已下架" value="inactive" />
+          </el-select>
+          <el-divider direction="vertical" />
+          <el-select v-model="sortBy" placeholder="排序方式" clearable style="width: 140px">
+            <el-option label="默认排序" value="" />
+            <el-option label="试戴次数 降序" value="tryOnCount-desc" />
+            <el-option label="试戴次数 升序" value="tryOnCount-asc" />
+            <el-option label="意向率 降序" value="confirmRate-desc" />
+            <el-option label="意向率 升序" value="confirmRate-asc" />
+            <el-option label="价格 降序" value="price-desc" />
+            <el-option label="价格 升序" value="price-asc" />
+          </el-select>
+          <el-select v-model="filterTryOnRange" placeholder="试戴次数" clearable style="width: 130px">
+            <el-option label="全部" value="" />
+            <el-option label="1000次以上" value="1000+" />
+            <el-option label="500-1000次" value="500-1000" />
+            <el-option label="100-500次" value="100-500" />
+            <el-option label="100次以下" value="0-100" />
+          </el-select>
+          <el-select v-model="filterConfirmRate" placeholder="意向率" clearable style="width: 120px">
+            <el-option label="全部" value="" />
+            <el-option label="50%以上" value="50+" />
+            <el-option label="30-50%" value="30-50" />
+            <el-option label="10-30%" value="10-30" />
+            <el-option label="10%以下" value="0-10" />
           </el-select>
         </div>
         <div class="toolbar-right">
@@ -255,20 +279,71 @@ import { styleList as mockStyleList } from '@/mock/data'
 const searchKeyword = ref('')
 const filterCategory = ref('')
 const filterStatus = ref('')
+const sortBy = ref('')
+const filterTryOnRange = ref('')
+const filterConfirmRate = ref('')
 const currentPage = ref(1)
 const pageSize = ref(10)
 
 // 款式列表
 const styleList = ref([...mockStyleList])
 
-// 过滤后的列表
+// 过滤和排序后的列表
 const filteredStyles = computed(() => {
-  return styleList.value.filter(item => {
-    if (searchKeyword.value && !item.name.includes(searchKeyword.value)) return false
-    if (filterCategory.value && item.category !== filterCategory.value) return false
-    if (filterStatus.value && item.status !== filterStatus.value) return false
-    return true
-  })
+  let result = [...styleList.value]
+  
+  // 搜索过滤
+  if (searchKeyword.value) {
+    result = result.filter(item => item.name.includes(searchKeyword.value))
+  }
+  
+  // 分类过滤
+  if (filterCategory.value) {
+    result = result.filter(item => item.category === filterCategory.value)
+  }
+  
+  // 状态过滤
+  if (filterStatus.value) {
+    result = result.filter(item => item.status === filterStatus.value)
+  }
+  
+  // 试戴次数过滤
+  if (filterTryOnRange.value) {
+    result = result.filter(item => {
+      switch (filterTryOnRange.value) {
+        case '1000+': return item.tryOnCount >= 1000
+        case '500-1000': return item.tryOnCount >= 500 && item.tryOnCount < 1000
+        case '100-500': return item.tryOnCount >= 100 && item.tryOnCount < 500
+        case '0-100': return item.tryOnCount < 100
+        default: return true
+      }
+    })
+  }
+  
+  // 意向率过滤
+  if (filterConfirmRate.value) {
+    result = result.filter(item => {
+      switch (filterConfirmRate.value) {
+        case '50+': return item.confirmRate >= 50
+        case '30-50': return item.confirmRate >= 30 && item.confirmRate < 50
+        case '10-30': return item.confirmRate >= 10 && item.confirmRate < 30
+        case '0-10': return item.confirmRate < 10
+        default: return true
+      }
+    })
+  }
+  
+  // 排序
+  if (sortBy.value) {
+    const [field, order] = sortBy.value.split('-')
+    result.sort((a, b) => {
+      const aVal = a[field] || 0
+      const bVal = b[field] || 0
+      return order === 'asc' ? aVal - bVal : bVal - aVal
+    })
+  }
+  
+  return result
 })
 
 // 对话框

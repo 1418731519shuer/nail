@@ -38,7 +38,7 @@
         >
           <el-icon :size="24"><Refresh /></el-icon>
           <div class="strategy-info">
-            <div class="strategy-name">清冷款</div>
+            <div class="strategy-name">清库存</div>
             <div class="strategy-desc">激活冷门款，提高曝光</div>
           </div>
         </div>
