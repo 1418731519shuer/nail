@@ -1,0 +1,457 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>美甲 AI 试戴</title>
+    <link rel="stylesheet" href="./styles.css?v=20260511-nail-seg" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="美甲 AI 试戴首页">
+        <span class="brand-mark"></span>
+        <span>指尖灵感</span>
+      </a>
+      <nav class="tabs" aria-label="页面导航">
+        <button class="tab active" data-page="catalog">款式概览</button>
+        <button class="tab" data-page="tryon">自定义试戴</button>
+        <button class="tab" data-page="recommend">智能推荐</button>
+        <button class="tab" data-page="batchResults">一键试戴结果</button>
+        <button class="tab" data-page="wantList">我想做/确认做</button>
+        <button class="tab" data-page="dataDesign">数据设计</button>
+      </nav>
+      <div class="user-chip" aria-label="当前用户身份">
+        <span id="userLoginState">匿名用户</span>
+        <strong id="currentUserId">生成中</strong>
+        <button id="mockLoginBtn" type="button">模拟登录</button>
+      </div>
+    </header>
+
+    <div class="toast" id="resultToast" role="status" aria-live="polite">
+      <span id="toastText">一键试戴已生成</span>
+      <button data-page-target="batchResults">查看结果</button>
+    </div>
+
+    <main>
+      <section class="page active" id="catalog" aria-labelledby="catalog-title">
+        <div class="hero">
+          <img src="./assets/nail-hero.png" alt="现代美甲试戴视觉图" />
+          <div class="hero-copy">
+            <p class="eyebrow">Style Gallery</p>
+            <h1 id="catalog-title">先看款式，再点图试戴</h1>
+            <p>浏览店内真实款式笔记、自然评分、点赞和用户反馈。点击任意美甲图片，即可进入试戴预览。</p>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Popular Nails</p>
+            <h2>店内款式笔记</h2>
+          </div>
+          <div class="filter-area" aria-label="美甲筛选">
+            <div class="filter-groups-row" id="primaryFilters" aria-label="季节与风格"></div>
+            <div class="filter-groups-row sub-filters" id="secondaryFilters" aria-label="款式与甲型"></div>
+          </div>
+        </div>
+
+        <p class="filter-status" id="filterStatus">当前展示全部店内款式</p>
+        <div class="tryon-basket" id="tryonBasket">
+          <div>
+            <strong>已加入试戴 0 款</strong>
+            <span>可多选款式后批量生成试戴结果</span>
+          </div>
+          <label class="basket-upload">
+            <input id="batchHandUpload" type="file" accept="image/*" capture="environment" />
+            <span id="batchHandLabel">上传手图</span>
+          </label>
+          <button class="primary-action" id="batchTryonBtn" disabled>一键试戴</button>
+          <button class="secondary-action" id="batchHyperrealTryonBtn" disabled>超仿真试戴</button>
+          <div class="batch-progress" id="batchProgress">
+            <div class="progress-track"><i id="batchProgressBar"></i></div>
+            <span id="batchProgressText">等待生成</span>
+          </div>
+        </div>
+        <div class="nail-grid" id="nailGrid"></div>
+      </section>
+
+      <section class="page" id="tryon" aria-labelledby="tryon-title">
+        <div class="tool-layout">
+          <aside class="tool-panel">
+            <p class="eyebrow">Custom Try-On</p>
+            <h1 id="tryon-title">上传款式图和手部图，生成试戴预览</h1>
+            <p>上传款式图和手部图后，会调用豆包浏览器版生成真实试戴图，生成完成后自动展示结果。</p>
+
+            <label class="upload-box">
+              <input id="styleUpload" type="file" accept="image/*" />
+              <span class="upload-icon">+</span>
+              <strong>上传美甲款式图片</strong>
+              <small>支持 JPG / PNG</small>
+            </label>
+
+            <label class="upload-box">
+              <input id="handUpload" type="file" accept="image/*" />
+              <span class="upload-icon">+</span>
+              <strong>上传或拍摄手部图片</strong>
+              <small>移动端可调起相机</small>
+            </label>
+
+            <button class="secondary-action" id="handModelBtn" type="button">生成手部模型</button>
+            <button class="secondary-action" id="nailSegmentBtn" type="button">识别指甲位置</button>
+            <button class="primary-action" id="composeBtn">生成试戴预览</button>
+            <button class="secondary-action" id="hyperrealComposeBtn">生成超仿真试戴</button>
+          </aside>
+
+          <div class="preview-stage">
+            <div class="preview-column">
+              <span>款式图</span>
+              <div class="image-slot" id="stylePreview">待上传</div>
+            </div>
+            <div class="preview-column">
+              <span>手部图</span>
+              <div class="image-slot" id="handPreview">待上传</div>
+            </div>
+            <div class="preview-column wide">
+              <span>试戴结果</span>
+              <div class="tryon-result" id="tryonResult">
+                <p>上传两张图片后，真实结果图返回后会显示在这里。</p>
+              </div>
+            </div>
+            <div class="preview-column wide">
+              <span>手部 3D 模型</span>
+              <div class="hand-model-result" id="handModelResult">
+                <p>上传手部图片后，可生成关键点和 3D 网格叠加图。</p>
+              </div>
+            </div>
+            <div class="preview-column wide">
+              <span>指甲分割与手指归属</span>
+              <div class="nail-segment-result" id="nailSegmentResult">
+                <p>上传手部图片后，可识别指甲区域、横框和对应手指。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="recommend" aria-labelledby="recommend-title">
+        <div class="ai-shell">
+          <section class="ai-chat-panel" aria-label="AI 美甲顾问对话">
+            <p class="eyebrow">AI Nail Advisor</p>
+            <h1 id="recommend-title">和 AI 美甲顾问聊需求</h1>
+            <p>上传或拍摄手部照片，再像聊天一样告诉它预算、场景、风格、顾虑和喜好。后续可接完整 prompt、知识库召回和用户记忆。</p>
+
+            <div class="chat-window" id="chatWindow" aria-live="polite">
+              <div class="message ai">
+                <div class="avatar">AI</div>
+                <div class="bubble">
+                  我会根据你的手部照片、肤色倾向、甲床长度、使用场景和店内款式库来推荐。你可以直接说：“想要显白、不要太夸张、预算 200 左右”。
+                </div>
+              </div>
+            </div>
+
+            <div class="quick-prompts" aria-label="快捷需求">
+              <button data-prompt="我想要日常通勤、显白、不要太夸张，短甲也好看的款式。">通勤显白</button>
+              <button data-prompt="我喜欢可爱一点的，但担心手绘翻车，帮我推荐店里更稳的款。">可爱但稳</button>
+              <button data-prompt="我想做猫眼，预算 200-300，希望 3 周后长出来也别太明显。">猫眼预算</button>
+              <button data-prompt="我手偏黄，想要冰透感，帮我避开容易显黑的颜色。">黄皮冰透</button>
+            </div>
+
+            <form class="chat-composer" id="chatForm">
+              <label class="photo-chip">
+                <input id="recommendUpload" type="file" accept="image/*" capture="environment" />
+                <span class="align-guide" id="recommendPreview">
+                  <img class="hand-guide-overlay" src="./assets/hand-guide-outline.png" alt="" />
+                  <small>手掌对准线框拍摄</small>
+                </span>
+              </label>
+              <textarea id="chatInput" rows="2" placeholder="告诉 AI：场景、预算、喜欢/不喜欢、甲型、肤色顾虑..."></textarea>
+              <button class="primary-action" type="submit">发送</button>
+            </form>
+          </section>
+
+          <aside class="ai-side-panel">
+            <div class="memory-card">
+              <p class="eyebrow">Memory Draft</p>
+              <h2>本次对话记忆</h2>
+              <div class="memory-list" id="memoryList">
+                <span>待提取：肤色倾向</span>
+                <span>待提取：甲型/甲床</span>
+                <span>待提取：预算</span>
+                <span>待提取：禁忌偏好</span>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p class="eyebrow">Knowledge Base</p>
+              <h2>可调用知识</h2>
+              <ul>
+                <li><strong>店内款式：</strong>可爱、猫眼、冰透·渐变、冰透</li>
+                <li><strong>适配规则：</strong>黄皮显白、短甲友好、深甲床打底</li>
+                <li><strong>风险提醒：</strong>手绘翻车、猫眼持久度、渐变长出分层</li>
+                <li><strong>后续接口：</strong>prompt 编排、RAG 召回、用户长期记忆</li>
+              </ul>
+            </div>
+
+            <div class="memory-card">
+              <p class="eyebrow">Shop Picks</p>
+              <h2>当前可推荐（可下滑查看）</h2>
+              <div class="mini-picks" id="recommendResults"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page" id="batchResults" aria-labelledby="batch-results-title">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">Batch Try-On</p>
+            <h1 id="batch-results-title">一键试戴结果</h1>
+            <p>这里展示从款式概览中批量选择后生成的试戴结果。每个款式会独立请求生成，返回一张就展示一张。</p>
+            <p class="build-note">当前构建：豆包新增图片绑定版 2026-05-08</p>
+          </div>
+          <button class="primary-action" data-page-target="catalog">继续选款</button>
+        </div>
+
+        <div class="batch-empty" id="batchEmpty">
+          还没有生成结果。先去“款式概览”加入多个款式，再点击“一键试戴”。
+        </div>
+        <div class="batch-grid" id="batchResultGrid"></div>
+      </section>
+
+      <section class="page" id="wantList" aria-labelledby="want-list-title">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">Want To Do</p>
+            <h1 id="want-list-title">我想做 / 确认做</h1>
+            <p>这里是候选意向池和预约成交池。用户也可以从款式卡片、详情页或试戴结果页直接确认要做，减少决策步骤。</p>
+          </div>
+          <div class="page-actions">
+            <button class="secondary-action" id="refreshWantListBtn" type="button">刷新</button>
+            <button class="primary-action" data-page-target="batchResults">看试戴结果</button>
+          </div>
+        </div>
+        <div class="intent-columns">
+          <section>
+            <h2>我想做</h2>
+            <p>已加入候选，适合稍后比较后再确认。</p>
+            <div class="batch-empty" id="wantEmpty">还没有“我想做”的款式。可以从款式概览、详情、自定义试戴或一键试戴结果加入，也可以直接确认要做。</div>
+            <div class="batch-grid" id="wantListGrid"></div>
+          </section>
+          <section>
+            <h2>已确认做</h2>
+            <p>MVP 阶段默认代表预约成交。</p>
+            <div class="batch-empty" id="orderEmpty">还没有确认做的预约成交。</div>
+            <div class="batch-grid" id="orderListGrid"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="dataDesign" aria-labelledby="data-design-title">
+        <div class="data-hero">
+          <div>
+            <p class="eyebrow">Data Model</p>
+            <h1 id="data-design-title">门店试戴数据设计</h1>
+            <p>这页把登录 ID、业务表、埋点触发、指标公式和搜索索引放在一起，方便后续接真实数据库、后台看板和推荐系统。</p>
+          </div>
+          <div class="identity-panel">
+            <span>当前记录 ID</span>
+            <strong id="dataPageUserId">--</strong>
+            <p>首次进入生成匿名用户，登录后绑定微信或手机号，试戴、意向、订单、AI 对话都归到同一个 user_id。</p>
+          </div>
+        </div>
+
+        <div class="data-section">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Trend Simulation</p>
+              <h2>90~180 天趋势模拟</h2>
+            </div>
+            <button class="secondary-action" id="refreshSimulationBtn" type="button">刷新模拟结果</button>
+          </div>
+          <p class="filter-status">模拟系统先生成每日聚合数据，再按 7 日窗口打 HotUp / ColdDown / Stable / Potential / Untested 标签，并用上一窗口指标预测下一窗口。</p>
+          <div class="metric-live-grid" id="simulationCards"></div>
+          <div class="simulation-panels">
+            <article>
+              <h3>热门趋势榜</h3>
+              <div id="simulationHotList" class="simulation-list"></div>
+            </article>
+            <article>
+              <h3>冷门预警榜</h3>
+              <div id="simulationColdList" class="simulation-list"></div>
+            </article>
+            <article>
+              <h3>模型效果</h3>
+              <div id="simulationModelReport" class="simulation-list"></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="data-section">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">MVP Metrics</p>
+              <h2>模拟数据看板</h2>
+            </div>
+            <button class="secondary-action" id="refreshMetricsBtn" type="button">刷新指标</button>
+          </div>
+          <p class="filter-status">当前口径：试戴 = 深度兴趣；我想做 = 加入购物车/强意向；确认做/下单 = 预约成交。AI 试戴当前走模拟生成，后续保留真实 API 接入位。</p>
+          <div class="metric-live-grid" id="metricCards"></div>
+          <div class="metric-table metric-table-wide metric-live-table">
+            <div class="metric-row metric-row-live head"><span>款式</span><span>曝光</span><span>加入试戴</span><span>试戴</span><span>我想做</span><span>下单</span><span>意向率</span></div>
+            <div id="metricStyleRows"></div>
+          </div>
+          <div class="recent-events">
+            <h3>最近埋点</h3>
+            <ul id="metricRecentEvents"></ul>
+          </div>
+        </div>
+
+        <div class="data-section">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Database Tables</p>
+              <h2>数据库分层</h2>
+            </div>
+          </div>
+          <div class="schema-grid">
+            <article class="schema-card">
+              <h3>身份与门店</h3>
+              <ul>
+                <li><strong>stores</strong><span>门店基础信息，所有数据按 store_id 隔离。</span></li>
+                <li><strong>users</strong><span>顾客主 ID，匿名用户和登录用户都落这里。</span></li>
+                <li><strong>user_identities</strong><span>绑定微信 openid、unionid、手机号或匿名 device_id。</span></li>
+                <li><strong>user_sessions</strong><span>进入、离开、停留时长、入口页面。</span></li>
+              </ul>
+            </article>
+
+            <article class="schema-card">
+              <h3>款式与素材</h3>
+              <ul>
+                <li><strong>nail_styles</strong><span>款式名称、介绍、价格、主图、搜索文本。</span></li>
+                <li><strong>基础属性</strong><span>category、color_system、craft_type、price_level、store_can_make 等字段用于同类比较。</span></li>
+                <li><strong>style_tags</strong><span>冰透、渐变、猫眼、显白、通勤等标签字典。</span></li>
+                <li><strong>nail_style_tags</strong><span>款式与一级、二级、扩展标签的关系。</span></li>
+                <li><strong>style_images</strong><span>封面图、详情图、豆包参考图。</span></li>
+                <li><strong>uploaded_assets</strong><span>用户手图、上传款式图、生成结果图。</span></li>
+              </ul>
+            </article>
+
+            <article class="schema-card">
+              <h3>试戴与成交</h3>
+              <ul>
+                <li><strong>try_on_jobs</strong><span>每生成一次试戴写一行，是核心统计表。</span></li>
+                <li><strong>batch_try_on_jobs</strong><span>一键试戴批量任务和进度。</span></li>
+                <li><strong>style_exposures</strong><span>款式卡片进入视口后的曝光记录。</span></li>
+                <li><strong>user_style_events</strong><span>统一记录 style_view、want_click、tryon_click、confirm_click 等用户事件。</span></li>
+                <li><strong>style_intents</strong><span>收藏、想做、预约、订单意向。</span></li>
+                <li><strong>orders</strong><span>成交订单，区分 ai_try_on、walk_in、manual 来源。</span></li>
+              </ul>
+            </article>
+
+            <article class="schema-card">
+              <h3>画像与看板</h3>
+              <ul>
+                <li><strong>event_logs</strong><span>所有原始埋点，方便回放和排查。</span></li>
+                <li><strong>user_tag_scores</strong><span>用户偏好标签分数，做个性化推荐。</span></li>
+                <li><strong>store_tag_scores</strong><span>门店偏好画像，指导上新和排序。</span></li>
+                <li><strong>style_daily_stats</strong><span>款式每日曝光、试戴、意向、成交。</span></li>
+                <li><strong>style_daily_metrics</strong><span>每日 view、detail、tryon、want、confirm 及转化率。</span></li>
+                <li><strong>style_window_metrics</strong><span>7日热门/冷门趋势标签、分位和运营建议。</span></li>
+                <li><strong>store_daily_stats</strong><span>门店每日活跃、试戴人数、平均停留。</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="data-section">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Metric Logic</p>
+              <h2>指标生成逻辑</h2>
+            </div>
+          </div>
+          <div class="metric-table metric-table-wide">
+            <div class="metric-row metric-row-wide head"><span>指标</span><span>公式</span><span>触发计算逻辑</span><span>看板</span></div>
+            <div class="metric-row metric-row-wide"><span>小程序选款渗透率</span><span>AI试戴用户数 / 到店顾客数</span><span>每日商家录入到店数后重算 store_daily_stats，AI试戴用户数来自 try_on_jobs 去重 user_id。</span><span>否</span></div>
+            <div class="metric-row metric-row-wide"><span>人均试戴次数</span><span>今日试戴次数 / AI试戴用户数</span><span>每次 try_on_success 后可异步刷新当日门店统计，也可每日定时聚合。</span><span>待定</span></div>
+            <div class="metric-row metric-row-wide"><span>试戴热度排名</span><span>按单款试戴总次数排序</span><span>try_on_jobs 成功后累加 style_daily_stats.try_on_count，运营日报按 1/7/30 天排序。</span><span>运营日报</span></div>
+            <div class="metric-row metric-row-wide"><span>意向率 IntentRate</span><span>意向量 / 单款试戴总次数</span><span>set_intent 写 style_intents 后更新 intent_count，再用 intent_count / try_on_count 生成款式分层。</span><span>待定</span></div>
+            <div class="metric-row metric-row-wide"><span>试戴点击率</span><span>单款试戴总次数 / 曝光次数</span><span>style_exposure 记录曝光，try_on_success 记录试戴，聚合后用于降低低点击款推荐权重。</span><span>推荐系统</span></div>
+            <div class="metric-row metric-row-wide"><span>冷门款激活率</span><span>冷门款意向次数 / 冷门款曝光次数</span><span>推荐页第六格曝光冷门款，标记 is_cold_start，统计该款曝光后的意向转化。</span><span>运营日报</span></div>
+            <div class="metric-row metric-row-wide"><span>主推款命中率</span><span>主推款成交数 / 主推款试戴数</span><span>商家标记 is_promoted，成交写 orders 后按主推款聚合判断主推是否有效。</span><span>运营日报</span></div>
+            <div class="metric-row metric-row-wide"><span>款式生命周期</span><span>上架后试戴/意向随时间变化</span><span>nail_styles.listed_at 作为起点，style_daily_stats 按天展示试戴、意向、点击率趋势。</span><span>运营日报</span></div>
+            <div class="metric-row metric-row-wide"><span>平均客单价 AOV</span><span>成交金额 / 成交订单数</span><span>订单完成或老板录入成交金额后更新 store_daily_stats.revenue_amount 与 aov。</span><span>不上，汇报</span></div>
+            <div class="metric-row metric-row-wide"><span>AI试戴顾客客单价</span><span>AI试戴成交金额 / AI试戴订单数</span><span>线下确认 AI 试戴订单，orders.source=ai_try_on 后聚合 ai_revenue_amount / ai_order_count。</span><span>可上，汇报</span></div>
+            <div class="metric-row metric-row-wide"><span>热门颜色偏好</span><span>按试戴/意向统计颜色标签</span><span>款式绑定 color 标签，试戴 +1、意向 +3、下单 +5 更新 user_tag_scores/store_tag_scores。</span><span>商家选品</span></div>
+            <div class="metric-row metric-row-wide"><span>热门风格偏好</span><span>按试戴/意向统计风格标签</span><span>款式绑定 style 标签，按通勤、甜酷、法式、猫眼、纯欲、高级感聚合。</span><span>商家选品</span></div>
+            <div class="metric-row metric-row-wide"><span>热门甲型偏好</span><span>按试戴/意向统计甲型</span><span>款式绑定 shape 标签，按短甲、方圆、杏仁、长甲聚合。</span><span>商家选品</span></div>
+          </div>
+        </div>
+
+        <div class="data-section">
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">Recommendation Logic</p>
+              <h2>推荐系统分层</h2>
+            </div>
+          </div>
+          <div class="segment-grid">
+            <article><strong>爆款</strong><span>高试戴 + 高意向率，首页和推荐位优先展示。</span></article>
+            <article><strong>引流款</strong><span>高试戴 + 低意向率，适合吸引点击，但需要优化图、价格或详情。</span></article>
+            <article><strong>潜力款</strong><span>低试戴 + 高意向率，增加曝光，放到推荐页或运营位测试。</span></article>
+            <article><strong>弱势款</strong><span>低试戴 + 低意向率，降低权重或下架观察。</span></article>
+          </div>
+        </div>
+
+        <div class="data-section two-column">
+          <article class="flow-card">
+            <p class="eyebrow">Event Flow</p>
+            <h2>触发写入</h2>
+            <ol>
+              <li><strong>打开页面</strong><span>创建或读取 user_id，开启 user_sessions。</span></li>
+              <li><strong>款式曝光</strong><span>写 style_exposures，同 session 同款 5 分钟去重；曝光参与点击率和冷门款激活率。</span></li>
+              <li><strong>点击试戴</strong><span>创建 try_on_jobs running；生成成功后计入试戴次数和人均试戴次数。</span></li>
+              <li><strong>生成成功</strong><span>写 uploaded_assets，更新 try_on_jobs succeeded，并给款式标签加试戴权重。</span></li>
+              <li><strong>设为意向</strong><span>写 style_intents，更新意向率、冷门款激活率和偏好标签。</span></li>
+              <li><strong>成交完成</strong><span>写 orders，更新 AOV、AI AOV、主推款命中率。</span></li>
+              <li><strong>每日聚合</strong><span>定时刷新 store_daily_stats 和 style_daily_stats，供运营日报和商家选品看板读取。</span></li>
+            </ol>
+          </article>
+
+          <article class="flow-card">
+            <p class="eyebrow">Search Index</p>
+            <h2>搜索与加速</h2>
+            <ul class="index-list">
+              <li><code>try_on_jobs(store_id, started_at)</code></li>
+              <li><code>try_on_jobs(store_id, style_id, started_at)</code></li>
+              <li><code>style_exposures(store_id, style_id, exposed_at)</code></li>
+              <li><code>style_intents(store_id, style_id, created_at)</code></li>
+              <li><code>orders(store_id, source, status, ordered_at)</code></li>
+              <li><code>user_tag_scores(store_id, user_id, score)</code></li>
+            </ul>
+            <p>小规模先用 search_text 搜索款式，正式版升级 PostgreSQL tsvector 或 Meilisearch。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="tryon-dialog" id="tryonDialog">
+      <button class="dialog-close" id="closeDialog" aria-label="关闭">x</button>
+      <div class="dialog-body">
+        <div class="dialog-art" id="dialogArt"></div>
+        <div>
+          <p class="eyebrow">Instant Try-On</p>
+          <h2 id="dialogTitle">试戴预览</h2>
+          <p id="dialogDesc"></p>
+          <div class="result-actions">
+            <button class="select-action" id="dialogIntentBtn" type="button">加入我想做</button>
+            <button class="primary-action" id="dialogConfirmBtn" type="button">确认要做</button>
+          </div>
+          <button class="primary-action" data-page-target="tryon">去自定义试戴</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./app.js?v=20260511-nail-seg"></script>
+  </body>
+</html>
+

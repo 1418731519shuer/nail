@@ -1,0 +1,349 @@
+{
+  "draftConfig": {
+    "versionId": "draft-home-1780294912916",
+    "strategyId": "potential",
+    "strategyName": "潜力放大",
+    "intentText": "",
+    "customCategories": [],
+    "slots": [
+      {
+        "position": 1,
+        "slotName": "P1 主爆款位",
+        "category": "hot",
+        "strategyLabel": "热门",
+        "reason": "优先放高热度、高确认承接的主成交款，负责首屏快速吸引和成交。",
+        "styleId": "xhs-683122f8000000000303f81c",
+        "styleName": "????????"
+      },
+      {
+        "position": 2,
+        "slotName": "P2 稳转化位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "优先放稳定高想做率、高确认率款，负责承接首屏稳定转化。",
+        "styleId": "xhs-69955f12000000000a02ba73",
+        "styleName": "??????"
+      },
+      {
+        "position": 3,
+        "slotName": "P3 潜力激活位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "优先放低曝光高转化的潜力款，负责补曝光和测试放量。",
+        "styleId": "xhs-68e866ec000000000302e4d2",
+        "styleName": "????????"
+      },
+      {
+        "position": 4,
+        "slotName": "P4 风格补位",
+        "category": "personalized",
+        "strategyLabel": "个性化",
+        "reason": "优先放与前 3 位差异更大的优质款，负责拉开首屏风格层次。",
+        "styleId": "xhs-69095f35000000000302f457",
+        "styleName": "??????"
+      },
+      {
+        "position": 5,
+        "slotName": "P5 下滑吸引位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "优先放视觉冲击更强的款式，负责引导用户继续下滑浏览。",
+        "styleId": "xhs-69ff12cb0000000035033239",
+        "styleName": "?????????"
+      },
+      {
+        "position": 6,
+        "slotName": "P6 新品测试位",
+        "category": "personalized",
+        "strategyLabel": "个性化",
+        "reason": "优先放新上架或样本不足但资料完整的款，负责做首轮曝光测试。",
+        "styleId": "xhs-69c23c1700000000200397f1",
+        "styleName": "????????"
+      },
+      {
+        "position": 7,
+        "slotName": "P7 潜力扩展位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "继续测试潜力候补款，观察加曝光后的承接表现。",
+        "styleId": "xhs-69ae6167000000001d02462b",
+        "styleName": "????????"
+      },
+      {
+        "position": 8,
+        "slotName": "P8 多样性兜底位",
+        "category": "hot",
+        "strategyLabel": "热门",
+        "reason": "补足颜色、风格、工艺差异，保证前 8 款不单调。",
+        "styleId": "xhs-69cc70600000000023004397",
+        "styleName": "????????"
+      }
+    ],
+    "savedAt": "2026-06-01T06:49:58.319Z"
+  },
+  "publishedConfig": {
+    "versionId": "draft-home-1780294912916",
+    "strategyId": "potential",
+    "strategyName": "潜力放大",
+    "intentText": "",
+    "customCategories": [],
+    "slots": [
+      {
+        "position": 1,
+        "slotName": "P1 主爆款位",
+        "category": "hot",
+        "strategyLabel": "热门",
+        "reason": "优先放高热度、高确认承接的主成交款，负责首屏快速吸引和成交。",
+        "styleId": "xhs-683122f8000000000303f81c",
+        "styleName": "????????"
+      },
+      {
+        "position": 2,
+        "slotName": "P2 稳转化位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "优先放稳定高想做率、高确认率款，负责承接首屏稳定转化。",
+        "styleId": "xhs-69955f12000000000a02ba73",
+        "styleName": "??????"
+      },
+      {
+        "position": 3,
+        "slotName": "P3 潜力激活位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "优先放低曝光高转化的潜力款，负责补曝光和测试放量。",
+        "styleId": "xhs-68e866ec000000000302e4d2",
+        "styleName": "????????"
+      },
+      {
+        "position": 4,
+        "slotName": "P4 风格补位",
+        "category": "personalized",
+        "strategyLabel": "个性化",
+        "reason": "优先放与前 3 位差异更大的优质款，负责拉开首屏风格层次。",
+        "styleId": "xhs-69095f35000000000302f457",
+        "styleName": "??????"
+      },
+      {
+        "position": 5,
+        "slotName": "P5 下滑吸引位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "优先放视觉冲击更强的款式，负责引导用户继续下滑浏览。",
+        "styleId": "xhs-69ff12cb0000000035033239",
+        "styleName": "?????????"
+      },
+      {
+        "position": 6,
+        "slotName": "P6 新品测试位",
+        "category": "personalized",
+        "strategyLabel": "个性化",
+        "reason": "优先放新上架或样本不足但资料完整的款，负责做首轮曝光测试。",
+        "styleId": "xhs-69c23c1700000000200397f1",
+        "styleName": "????????"
+      },
+      {
+        "position": 7,
+        "slotName": "P7 潜力扩展位",
+        "category": "potential",
+        "strategyLabel": "潜力",
+        "reason": "继续测试潜力候补款，观察加曝光后的承接表现。",
+        "styleId": "xhs-69ae6167000000001d02462b",
+        "styleName": "????????"
+      },
+      {
+        "position": 8,
+        "slotName": "P8 多样性兜底位",
+        "category": "hot",
+        "strategyLabel": "热门",
+        "reason": "补足颜色、风格、工艺差异，保证前 8 款不单调。",
+        "styleId": "xhs-69cc70600000000023004397",
+        "styleName": "????????"
+      }
+    ],
+    "savedAt": "2026-06-01T06:49:58.319Z",
+    "appliedAt": "2026-06-01T06:49:58.319Z"
+  },
+  "pendingConfig": null,
+  "rolloutStatus": "fully_live",
+  "rolloutUpdatedAt": "2026-06-01T06:49:58.319Z",
+  "userActivity": {
+    "sessionId": "recommend_session_mpyw4dtz_1914d53f",
+    "sessionOpen": true,
+    "hasFocus": false,
+    "documentHidden": false,
+    "currentPage": "catalog",
+    "lastSeenAt": "2026-06-04T02:43:19.699Z"
+  },
+  "history": [
+    {
+      "event": "applied",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "潜力放大",
+      "createdAt": "2026-06-01T06:49:58.319Z",
+      "reason": "user_inactive_on_save"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "潜力放大",
+      "createdAt": "2026-06-01T06:49:58.319Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "codex-consistency-1780296598294",
+      "strategyName": "热门优先",
+      "createdAt": "2026-06-01T06:49:58.313Z",
+      "reason": "session_closed"
+    },
+    {
+      "event": "queued",
+      "versionId": "codex-consistency-1780296598294",
+      "strategyName": "热门优先",
+      "createdAt": "2026-06-01T06:49:58.305Z",
+      "reason": "user_active"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "codex-consistency-1780296598294",
+      "strategyName": "热门优先",
+      "createdAt": "2026-06-01T06:49:58.305Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:41:31.545Z",
+      "reason": "user_inactive_on_save"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:41:31.545Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "codex-consistency-1780296091501",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:41:31.541Z",
+      "reason": "session_closed"
+    },
+    {
+      "event": "queued",
+      "versionId": "codex-consistency-1780296091501",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:41:31.536Z",
+      "reason": "user_active"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "codex-consistency-1780296091501",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:41:31.536Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:35:25.382Z",
+      "reason": "user_inactive_on_save"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:35:25.382Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "codex-consistency-test-1780295725298",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:35:25.354Z",
+      "reason": "session_closed"
+    },
+    {
+      "event": "queued",
+      "versionId": "codex-consistency-test-1780295725298",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:35:25.346Z",
+      "reason": "user_active"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "codex-consistency-test-1780295725298",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T06:35:25.346Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "潜力放大",
+      "createdAt": "2026-06-01T06:21:52.952Z",
+      "reason": "user_inactive_on_save"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "draft-home-1780294912916",
+      "strategyName": "潜力放大",
+      "createdAt": "2026-06-01T06:21:52.952Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "ops-test-v2",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T04:30:35.270Z",
+      "reason": "session_closed"
+    },
+    {
+      "event": "queued",
+      "versionId": "ops-test-v2",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T04:30:35.249Z",
+      "reason": "user_active"
+    },
+    {
+      "event": "draft_saved",
+      "versionId": "ops-test-v2",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T04:30:35.249Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "ops-test-v1",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T04:29:45.564Z",
+      "reason": "state_read"
+    },
+    {
+      "event": "queued",
+      "versionId": "ops-test-v1",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-06-01T04:27:11.822Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "default-hot-8",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-05-30T08:36:30.524Z"
+    },
+    {
+      "event": "queued",
+      "versionId": "default-hot-8",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-05-30T08:36:30.505Z"
+    },
+    {
+      "event": "applied",
+      "versionId": "test-version",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-05-30T08:35:50.951Z"
+    },
+    {
+      "event": "queued",
+      "versionId": "test-version",
+      "strategyName": "推荐策略",
+      "createdAt": "2026-05-30T08:35:30.669Z"
+    }
+  ]
+}

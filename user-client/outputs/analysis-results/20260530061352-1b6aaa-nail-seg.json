@@ -1,0 +1,335 @@
+{
+  "num_nails": 1,
+  "detections": [
+    {
+      "id": 1,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.9241,
+      "bbox": [
+        431.77,
+        486.64,
+        580.17,
+        769.77
+      ],
+      "center": [
+        503.77,
+        625.9
+      ],
+      "polygon": [
+        [
+          450.0,
+          481.5
+        ],
+        [
+          443.25,
+          497.25
+        ],
+        [
+          441.0,
+          501.75
+        ],
+        [
+          434.25,
+          510.75
+        ],
+        [
+          427.5,
+          612.0
+        ],
+        [
+          436.5,
+          614.25
+        ],
+        [
+          438.75,
+          618.75
+        ],
+        [
+          441.0,
+          623.25
+        ],
+        [
+          443.25,
+          630.0
+        ],
+        [
+          445.5,
+          639.0
+        ],
+        [
+          447.75,
+          650.25
+        ],
+        [
+          450.0,
+          657.0
+        ],
+        [
+          452.25,
+          666.0
+        ],
+        [
+          454.5,
+          675.0
+        ],
+        [
+          456.75,
+          684.0
+        ],
+        [
+          459.0,
+          693.0
+        ],
+        [
+          461.25,
+          702.0
+        ],
+        [
+          463.5,
+          713.25
+        ],
+        [
+          465.75,
+          724.5
+        ],
+        [
+          468.0,
+          731.25
+        ],
+        [
+          470.25,
+          735.75
+        ],
+        [
+          472.5,
+          740.25
+        ],
+        [
+          492.75,
+          762.75
+        ],
+        [
+          497.25,
+          765.0
+        ],
+        [
+          504.0,
+          769.5
+        ],
+        [
+          540.0,
+          776.25
+        ],
+        [
+          544.5,
+          765.0
+        ],
+        [
+          549.0,
+          762.75
+        ],
+        [
+          553.5,
+          760.5
+        ],
+        [
+          567.0,
+          749.25
+        ],
+        [
+          569.25,
+          744.75
+        ],
+        [
+          578.25,
+          634.5
+        ],
+        [
+          569.25,
+          632.25
+        ],
+        [
+          567.0,
+          625.5
+        ],
+        [
+          564.75,
+          614.25
+        ],
+        [
+          562.5,
+          603.0
+        ],
+        [
+          560.25,
+          594.0
+        ],
+        [
+          558.0,
+          589.5
+        ],
+        [
+          555.75,
+          585.0
+        ],
+        [
+          553.5,
+          580.5
+        ],
+        [
+          551.25,
+          576.0
+        ],
+        [
+          549.0,
+          571.5
+        ],
+        [
+          544.5,
+          564.75
+        ],
+        [
+          542.25,
+          560.25
+        ],
+        [
+          537.75,
+          553.5
+        ],
+        [
+          535.5,
+          549.0
+        ],
+        [
+          533.25,
+          544.5
+        ],
+        [
+          528.75,
+          537.75
+        ],
+        [
+          526.5,
+          533.25
+        ],
+        [
+          524.25,
+          528.75
+        ],
+        [
+          517.5,
+          519.75
+        ],
+        [
+          510.75,
+          510.75
+        ],
+        [
+          495.0,
+          492.75
+        ],
+        [
+          490.5,
+          490.5
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          503.77,
+          625.9
+        ],
+        "width": 375.8,
+        "height": 165.32,
+        "angle": 71.24,
+        "points": [
+          [
+            365.08,
+            474.56
+          ],
+          [
+            521.62,
+            421.39
+          ],
+          [
+            642.47,
+            777.23
+          ],
+          [
+            485.93,
+            830.4
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          503.77,
+          625.9
+        ],
+        "oriented_box_points": [
+          [
+            365.08,
+            474.56
+          ],
+          [
+            521.62,
+            421.39
+          ],
+          [
+            642.47,
+            777.23
+          ],
+          [
+            485.93,
+            830.4
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    }
+  ],
+  "ai_orientation_payload": [
+    {
+      "nail_id": 1,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        503.77,
+        625.9
+      ],
+      "oriented_box_points": [
+        [
+          365.08,
+          474.56
+        ],
+        [
+          521.62,
+          421.39
+        ],
+        [
+          642.47,
+          777.23
+        ],
+        [
+          485.93,
+          830.4
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    }
+  ],
+  "ai_orientation_note": "Use ai_orientation_payload to align nail art. Keep the uploaded hand photo unchanged except the nail surfaces; never render these boxes, labels, arrows, or metadata in the final image.",
+  "hand_count": 0,
+  "hand_layers": [],
+  "message": "Success"
+}

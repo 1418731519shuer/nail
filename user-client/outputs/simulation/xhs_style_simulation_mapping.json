@@ -1,0 +1,986 @@
+[
+  {
+    "style_id": "xhs-68e8aa600000000003035e44",
+    "style_name": "老钱风香槟色搭裸粉猫眼",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0010",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-683d7a4200000000230168d1",
+    "style_name": "夏日小短甲蓝色玻璃珠",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0125",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69e89cc70000000022000253",
+    "style_name": "莫兰迪色系猫眼跳色",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0002",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-687cbd4400000000120319eb",
+    "style_name": "白开水美甲简约温柔",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0168",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-683122f8000000000303f81c",
+    "style_name": "高级感美甲款式推荐",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0053",
+    "mapped_label": "HotUp",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-682094020000000022037424",
+    "style_name": "把画布搬到手上抽象油画",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0127",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-6886511f0000000015020ee4",
+    "style_name": "夏日baby蓝猫眼美甲",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0239",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-68e866ec000000000302e4d2",
+    "style_name": "只此青绿猫眼渐变美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0138",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-694215f5000000001e028258",
+    "style_name": "温柔花朵指尖绽放",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0060",
+    "mapped_label": "Potential",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-68ea1aaa000000000401595c",
+    "style_name": "短甲也能精致好看",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0167",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-684fe33e0000000012000b47",
+    "style_name": "猫眼与钻饰的闪耀组合",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0244",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69c23c1700000000200397f1",
+    "style_name": "清新苹果汽水配色",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0252",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-6688df8c000000000a0246b3",
+    "style_name": "夏日星空猫眼美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0009",
+    "mapped_label": "Potential",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69095f35000000000302f457",
+    "style_name": "高级感秋日花朵美甲",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0189",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-68e10bd600000000050305fd",
+    "style_name": "六款精选美甲任你选",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0100",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69a152e5000000002602c955",
+    "style_name": "春日薄荷曼波多巴胺美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0085",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-69a7d3fe00000000150208f2",
+    "style_name": "黄皮友好甜酷风猫眼美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0174",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68c7b87f000000001c011019",
+    "style_name": "夏日花朵温柔感美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0109",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68b95c80000000001b037c74",
+    "style_name": "海盐气泡冰透渐变蓝猫眼",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0249",
+    "mapped_label": "Potential",
+    "mapped_true_state": "ColdDown"
+  },
+  {
+    "style_id": "xhs-6895f7580000000023039150",
+    "style_name": "冰透猫眼加碎钻清透高级",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0038",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-68bfc7a8000000001d01a48e",
+    "style_name": "粉色KT少女心甜妹美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0131",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69cb7599000000001d01f980",
+    "style_name": "春天系温柔美甲款式精选",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0263",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-6778f0d40000000013018463",
+    "style_name": "玻璃珠猫眼手绘爱心蝴蝶结",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0220",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Cold_AfterWant"
+  },
+  {
+    "style_id": "xhs-68b02dd5000000001c03d849",
+    "style_name": "清新仙气花朵渐变美甲细节",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0103",
+    "mapped_label": "Potential",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-66c2d5e2000000001d01a13f",
+    "style_name": "黑暗陨石猫眼，显白又高级",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0101",
+    "mapped_label": "Untested",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-688a0c9a0000000023034876",
+    "style_name": "人鱼姬极光猫眼，夏日梦幻之选",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0236",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69e1ed3b0000000021011ea7",
+    "style_name": "浮光锦猫眼，春日短甲新宠",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0181",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69441a71000000001b0219f4",
+    "style_name": "浪漫雪花氛围甲，冬日高级感",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0186",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68cbd55f0000000013013eb6",
+    "style_name": "冰透猫眼清冷甲，高级感满分",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0229",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-68835b9c0000000020018599",
+    "style_name": "小香风格纹猫眼，夏日温柔千金",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0267",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-69955f12000000000a02ba73",
+    "style_name": "淡雅顺顺美甲，清新简约高级",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0063",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-6969b3aa00000000220302c8",
+    "style_name": "赤茶琉璃猫眼，裸色美甲天花板",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0277",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-69f1a666000000003700d0f0",
+    "style_name": "清透温柔醋酸月光渐变",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0293",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-6a0d78200000000038037344",
+    "style_name": "视觉降温的蓝茶猫眼美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0064",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a0aff7f00000000080036ab",
+    "style_name": "夏日缤纷多彩猫眼美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0130",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69a166ac000000001a01c692",
+    "style_name": "春日薄荷奶绿波点蝴蝶结短甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0045",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Cold_Detail"
+  },
+  {
+    "style_id": "xhs-68a585fa000000001d028505",
+    "style_name": "少女心爆棚的西瓜冰美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0260",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-6932af6f000000001e00225c",
+    "style_name": "温柔高级肉桂色云雾晕染",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0238",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-68c6b4f9000000001d01b4f0",
+    "style_name": "五款温柔高级美甲推荐",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0235",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Cold_AfterWant"
+  },
+  {
+    "style_id": "xhs-69ae6167000000001d02462b",
+    "style_name": "春日仙气粉紫猫眼醋酸美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0140",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-69fc6423000000003601eb3a",
+    "style_name": "夏日薄荷海，清透温柔",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0075",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-691847bf0000000005003484",
+    "style_name": "冰感蓝猫眼，清冷显白",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0150",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69df7e3d000000002102faf1",
+    "style_name": "紫色猫眼钻饰，高级感",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0185",
+    "mapped_label": "Potential",
+    "mapped_true_state": "ColdDown"
+  },
+  {
+    "style_id": "xhs-696b56700000000021030dab",
+    "style_name": "韩味蝴蝶结，温柔粉嫩",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0214",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69d5c796000000001f000c90",
+    "style_name": "冰蓝猫眼，清爽干净",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0228",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69abc09b000000002602f912",
+    "style_name": "奶fufu鹅黄渐变，春日清新",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0099",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68b54b22000000001b020e0f",
+    "style_name": "蓝眼泪指尖钻，闪耀夏日",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0169",
+    "mapped_label": "Potential",
+    "mapped_true_state": "ColdDown"
+  },
+  {
+    "style_id": "xhs-68a30d5d000000001d0363d7",
+    "style_name": "粉色夏日渐变，短甲可爱",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0104",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-670ddb70000000002401445d",
+    "style_name": "冰透葡萄色显白仙气美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0265",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Cold_Detail"
+  },
+  {
+    "style_id": "xhs-691fe81b000000001e03bcd6",
+    "style_name": "财阀千金感法式猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0115",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69f2fd4400000000230157f1",
+    "style_name": "温柔手绘小蛋糕云朵小熊短甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0102",
+    "mapped_label": "Cold_AfterTryon",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-69b952ba000000001a020922",
+    "style_name": "粉嫩醋酸美甲教程款",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0030",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a0c1eb000000000370346e7",
+    "style_name": "酷辣个性风美甲设计",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0208",
+    "mapped_label": "Cold_Detail",
+    "mapped_true_state": "Cold_AfterWant"
+  },
+  {
+    "style_id": "xhs-69cc70600000000023004397",
+    "style_name": "短甲必备裸金法式温柔美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0098",
+    "mapped_label": "HotUp",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69f3577600000000380211f4",
+    "style_name": "清爽白月光碎钻细闪法式",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0019",
+    "mapped_label": "Cold_Detail",
+    "mapped_true_state": "Cold_Detail"
+  },
+  {
+    "style_id": "xhs-69d607030000000022000a40",
+    "style_name": "Ins风波点蓝莓韩系美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0055",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69845e6200000000210296e2",
+    "style_name": "黄皮显白百搭天花板",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0052",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a06b89f0000000035031aa1",
+    "style_name": "超日系可爱春夏美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0294",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69d0e4aa000000001f00336d",
+    "style_name": "高级感菱格纹猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0050",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68dcecd6000000000301f88f",
+    "style_name": "猫爪美甲精髓版",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0023",
+    "mapped_label": "Cold_AfterTryon",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-69f49fa0000000002003b43a",
+    "style_name": "夏日清爽海盐冰气泡美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0062",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-6a046f12000000003502c7ce",
+    "style_name": "高级感海莉风猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0072",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-69999487000000000a0287a3",
+    "style_name": "富家千金奶油海莉渐变美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0054",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68ce1d50000000000e020057",
+    "style_name": "清冷感蓝色猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0258",
+    "mapped_label": "Cold_FirstLook",
+    "mapped_true_state": "Cold_FirstLook"
+  },
+  {
+    "style_id": "xhs-6a1153eb00000000380361b0",
+    "style_name": "夏日清新番石榴清茶美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0222",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69c0efdd0000000023023763",
+    "style_name": "春夏短甲猫眼腮红美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0144",
+    "mapped_label": "Cold_Detail",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69e831070000000023016550",
+    "style_name": "葡萄冰沙猫眼温柔美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0200",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69dd4733000000001f006a44",
+    "style_name": "夏日发光玻璃花猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0273",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69cfdb950000000022003ffc",
+    "style_name": "首次尝试裸色延长甲美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0187",
+    "mapped_label": "Cold_FirstLook",
+    "mapped_true_state": "Cold_FirstLook"
+  },
+  {
+    "style_id": "xhs-6a16c58c000000003601d6d3",
+    "style_name": "夏日显白孔雀蓝美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0087",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a1544950000000008024d49",
+    "style_name": "ins风奶fufu碎花短甲美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0191",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69e36f83000000001d01bc05",
+    "style_name": "粉白渐变裸色温柔美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0298",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69d92f330000000023005c1f",
+    "style_name": "温柔仙气花朵猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0137",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68c300b7000000001b03305b",
+    "style_name": "不忽悠顾客的实诚美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0276",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69e5cea2000000002200d381",
+    "style_name": "清冷甜妹冰蓝粉渐变美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0184",
+    "mapped_label": "Cold_AfterWant",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69b97fde000000001d01e1ea",
+    "style_name": "显白高级极光绿猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0133",
+    "mapped_label": "Cold_AfterWant",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69d5b0f60000000023011355",
+    "style_name": "美拉德风裸棕渐变碎钻美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0259",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-6a15ae960000000035026466",
+    "style_name": "高级感紫葡萄猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0210",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-6a173fc80000000036033bb2",
+    "style_name": "高级感Ins风手绘花朵美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0126",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68996a7c0000000004004970",
+    "style_name": "梦幻蓝色猫眼波点美甲",
+    "recommend_bucket": "hot",
+    "mapped_sim_style_id": "S0082",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69cca8e1000000001f0063f1",
+    "style_name": "我给美甲师的VS美甲师给我的",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0124",
+    "mapped_label": "Potential",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69bfbd32000000001b022953",
+    "style_name": "深圳58元本甲建构猫眼美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0155",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-666eb917000000001c0355e7",
+    "style_name": "黑银猫眼新中式国风竹美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0025",
+    "mapped_label": "Untested",
+    "mapped_true_state": "Cold_AfterWant"
+  },
+  {
+    "style_id": "xhs-6a0a7b0e0000000036003e89",
+    "style_name": "夏日薄荷巧克力波点美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0195",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a1583a20000000006022d3f",
+    "style_name": "赛里木湖灵感猫眼美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0073",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68f07b2e000000000301bace",
+    "style_name": "秋冬小短甲裸粉极光渐变",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0203",
+    "mapped_label": "Potential",
+    "mapped_true_state": "ColdDown"
+  },
+  {
+    "style_id": "xhs-68eccc7b000000000701471d",
+    "style_name": "高级气质裸色通勤美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0148",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69ff12cb0000000035033239",
+    "style_name": "清冷雾霾蓝猫眼星星美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0291",
+    "mapped_label": "Potential",
+    "mapped_true_state": "Potential"
+  },
+  {
+    "style_id": "xhs-6a10353a000000000702145d",
+    "style_name": "夏日清透米菲兔美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0197",
+    "mapped_label": "Cold_FirstLook",
+    "mapped_true_state": "Cold_FirstLook"
+  },
+  {
+    "style_id": "xhs-68a6b389000000001d00becb",
+    "style_name": "香槟金猫眼钻饰法式美甲",
+    "recommend_bucket": "potential",
+    "mapped_sim_style_id": "S0241",
+    "mapped_label": "Potential",
+    "mapped_true_state": "ColdDown"
+  },
+  {
+    "style_id": "xhs-687f5779000000000d027d0a",
+    "style_name": "夏日果汁法式显白短甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0204",
+    "mapped_label": "Cold_AfterWant",
+    "mapped_true_state": "Cold_Detail"
+  },
+  {
+    "style_id": "xhs-69daf7ce0000000021012ef8",
+    "style_name": "夏日黄色系简约美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0170",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a054cc6000000003703516a",
+    "style_name": "蓝白猫眼格纹复古短甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0121",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-69c22f7b000000002102dccf",
+    "style_name": "春日薄荷绿雏菊短甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0088",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69eaf91c000000001901e004",
+    "style_name": "夏日浅蓝渐变清透美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0268",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69dddbcc0000000021011c74",
+    "style_name": "甜酷蝴蝶结纯欲风美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0106",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Cold_AfterWant"
+  },
+  {
+    "style_id": "xhs-69c3380e000000001a023109",
+    "style_name": "春日蝴蝶星光渐变美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0165",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-68a6a1cf000000001b03e775",
+    "style_name": "夏日温柔高级感美甲合集",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0021",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-6a106184000000003700d631",
+    "style_name": "ins感海盐蓝星星波点法式美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0264",
+    "mapped_label": "Cold_FirstLook",
+    "mapped_true_state": "Cold_FirstLook"
+  },
+  {
+    "style_id": "xhs-6a11884f00000000070237d6",
+    "style_name": "甜酷少女黑粉配色小煤球美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0242",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69f72ee2000000001a02ce47",
+    "style_name": "超可爱奶黄色小鸡手绘短甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0206",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69ccf2040000000022028076",
+    "style_name": "春日限定奶绿小花温柔渐变美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0069",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69c9d419000000002103986a",
+    "style_name": "春日限定甜妹蝴蝶结法式美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0107",
+    "mapped_label": "Cold_AfterTryon",
+    "mapped_true_state": "Cold_AfterTryon"
+  },
+  {
+    "style_id": "xhs-6a04794400000000060323de",
+    "style_name": "仙女们帮忙投票选夏日美甲款",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0120",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68e20d380000000003013d9b",
+    "style_name": "温柔感满分的晨露白月光美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0290",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6936c776000000001b02312e",
+    "style_name": "秋冬美甲极限五选一，纠结中",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0018",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a0d22d3000000000603289b",
+    "style_name": "夏日果冻海猫眼美甲，温柔高级",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0173",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69b7c8240000000020038f00",
+    "style_name": "夏日限定海洋风猫眼格纹海星美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0213",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69b3e23d000000002103a258",
+    "style_name": "ins极简线条猫眼美甲，气质温柔",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0261",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69ca5aa9000000001a02e3e0",
+    "style_name": "闪耀仲夏夜碎钻猫眼飘带美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0286",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69d62b000000000023010380",
+    "style_name": "春日约会本命裸粉闪爱心美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0182",
+    "mapped_label": "Cold_Detail",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-692bbcaa000000001b0233b4",
+    "style_name": "被问爆的自然贴合穿戴甲，宛如本甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0095",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69f839ad00000000380235b9",
+    "style_name": "四线小城顶级美甲店花朵款",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0026",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-6a0b18b1000000003601e8e7",
+    "style_name": "夏日清透树莓粉猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0046",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69d46328000000001d019b17",
+    "style_name": "莫奈黄昏油画感日出美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0035",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69e61cf40000000021039197",
+    "style_name": "甜美系蓝色小猫美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0234",
+    "mapped_label": "Cold_AfterWant",
+    "mapped_true_state": "Cold_AfterWant"
+  },
+  {
+    "style_id": "xhs-6a12b1dc0000000035031abb",
+    "style_name": "夏日玻璃珠猫眼美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0193",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69fddad000000000360013de",
+    "style_name": "甜酷风格线条美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0061",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69d8a2ba000000001a0253b1",
+    "style_name": "清新薄荷绿小猫美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0172",
+    "mapped_label": "Cold_AfterWant",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-68c54c57000000001c0058e7",
+    "style_name": "油画感莫奈睡莲钻饰美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0161",
+    "mapped_label": "Stable",
+    "mapped_true_state": "HotUp"
+  },
+  {
+    "style_id": "xhs-69cdd931000000001a02264b",
+    "style_name": "把童话画在指尖的可爱美甲",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0196",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69761054000000001a037e3f",
+    "style_name": "简约裸色猫眼，意外好看",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0177",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  },
+  {
+    "style_id": "xhs-69b69c3a0000000028009a19",
+    "style_name": "彩色美甲，点亮指尖心情",
+    "recommend_bucket": "cold",
+    "mapped_sim_style_id": "S0001",
+    "mapped_label": "Stable",
+    "mapped_true_state": "Stable"
+  }
+]

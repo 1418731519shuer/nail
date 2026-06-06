@@ -1,0 +1,2103 @@
+{
+  "num_nails": 10,
+  "detections": [
+    {
+      "id": 1,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.9216,
+      "bbox": [
+        470.61,
+        614.24,
+        627.7,
+        772.35
+      ],
+      "center": [
+        552.22,
+        698.28
+      ],
+      "polygon": [
+        [
+          534.66,
+          605.05
+        ],
+        [
+          534.66,
+          614.04
+        ],
+        [
+          528.67,
+          620.03
+        ],
+        [
+          528.67,
+          623.03
+        ],
+        [
+          519.69,
+          632.01
+        ],
+        [
+          516.69,
+          632.01
+        ],
+        [
+          507.71,
+          641.0
+        ],
+        [
+          504.71,
+          641.0
+        ],
+        [
+          480.75,
+          664.96
+        ],
+        [
+          477.75,
+          664.96
+        ],
+        [
+          474.76,
+          667.95
+        ],
+        [
+          462.78,
+          667.95
+        ],
+        [
+          462.78,
+          706.89
+        ],
+        [
+          474.76,
+          706.89
+        ],
+        [
+          510.7,
+          742.84
+        ],
+        [
+          510.7,
+          745.83
+        ],
+        [
+          525.68,
+          760.81
+        ],
+        [
+          525.68,
+          769.8
+        ],
+        [
+          594.57,
+          769.8
+        ],
+        [
+          594.57,
+          760.81
+        ],
+        [
+          612.54,
+          742.84
+        ],
+        [
+          612.54,
+          739.84
+        ],
+        [
+          615.54,
+          736.85
+        ],
+        [
+          627.52,
+          736.85
+        ],
+        [
+          627.52,
+          679.94
+        ],
+        [
+          618.53,
+          679.94
+        ],
+        [
+          612.54,
+          673.95
+        ],
+        [
+          612.54,
+          670.95
+        ],
+        [
+          609.55,
+          667.95
+        ],
+        [
+          609.55,
+          664.96
+        ],
+        [
+          603.56,
+          658.97
+        ],
+        [
+          603.56,
+          655.97
+        ],
+        [
+          576.6,
+          629.02
+        ],
+        [
+          576.6,
+          626.02
+        ],
+        [
+          567.61,
+          617.03
+        ],
+        [
+          567.61,
+          605.05
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          552.22,
+          698.28
+        ],
+        "width": 199.39,
+        "height": 178.07,
+        "angle": 48.81,
+        "points": [
+          [
+            419.56,
+            681.88
+          ],
+          [
+            553.56,
+            564.62
+          ],
+          [
+            684.87,
+            714.67
+          ],
+          [
+            550.87,
+            831.93
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          552.22,
+          698.28
+        ],
+        "oriented_box_points": [
+          [
+            419.56,
+            681.88
+          ],
+          [
+            553.56,
+            564.62
+          ],
+          [
+            684.87,
+            714.67
+          ],
+          [
+            550.87,
+            831.93
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 2,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.9072,
+      "bbox": [
+        444.44,
+        906.09,
+        592.25,
+        1058.22
+      ],
+      "center": [
+        520.25,
+        990.36
+      ],
+      "polygon": [
+        [
+          504.71,
+          904.58
+        ],
+        [
+          504.71,
+          913.57
+        ],
+        [
+          501.71,
+          916.57
+        ],
+        [
+          498.72,
+          916.57
+        ],
+        [
+          495.72,
+          919.56
+        ],
+        [
+          492.73,
+          919.56
+        ],
+        [
+          486.74,
+          925.55
+        ],
+        [
+          483.74,
+          925.55
+        ],
+        [
+          477.75,
+          931.54
+        ],
+        [
+          474.76,
+          931.54
+        ],
+        [
+          471.76,
+          934.54
+        ],
+        [
+          468.77,
+          934.54
+        ],
+        [
+          456.79,
+          946.52
+        ],
+        [
+          453.79,
+          946.52
+        ],
+        [
+          447.8,
+          952.51
+        ],
+        [
+          438.81,
+          952.51
+        ],
+        [
+          438.81,
+          1000.43
+        ],
+        [
+          447.8,
+          1000.43
+        ],
+        [
+          459.78,
+          1012.42
+        ],
+        [
+          459.78,
+          1015.41
+        ],
+        [
+          471.76,
+          1027.39
+        ],
+        [
+          471.76,
+          1030.39
+        ],
+        [
+          489.73,
+          1048.36
+        ],
+        [
+          489.73,
+          1057.35
+        ],
+        [
+          561.62,
+          1057.35
+        ],
+        [
+          561.62,
+          1045.36
+        ],
+        [
+          564.62,
+          1042.37
+        ],
+        [
+          567.61,
+          1042.37
+        ],
+        [
+          579.59,
+          1030.39
+        ],
+        [
+          591.57,
+          1030.39
+        ],
+        [
+          591.57,
+          967.49
+        ],
+        [
+          582.59,
+          967.49
+        ],
+        [
+          576.6,
+          961.5
+        ],
+        [
+          576.6,
+          958.5
+        ],
+        [
+          573.6,
+          955.5
+        ],
+        [
+          573.6,
+          952.51
+        ],
+        [
+          567.61,
+          946.52
+        ],
+        [
+          567.61,
+          943.52
+        ],
+        [
+          561.62,
+          937.53
+        ],
+        [
+          561.62,
+          934.54
+        ],
+        [
+          555.63,
+          928.55
+        ],
+        [
+          555.63,
+          925.55
+        ],
+        [
+          546.64,
+          916.57
+        ],
+        [
+          546.64,
+          904.58
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          520.25,
+          990.36
+        ],
+        "width": 191.57,
+        "height": 175.17,
+        "angle": 53.97,
+        "points": [
+          [
+            393.08,
+            964.41
+          ],
+          [
+            534.75,
+            861.38
+          ],
+          [
+            647.43,
+            1016.3
+          ],
+          [
+            505.76,
+            1119.33
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          520.25,
+          990.36
+        ],
+        "oriented_box_points": [
+          [
+            393.08,
+            964.41
+          ],
+          [
+            534.75,
+            861.38
+          ],
+          [
+            647.43,
+            1016.3
+          ],
+          [
+            505.76,
+            1119.33
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 3,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.8951,
+      "bbox": [
+        240.52,
+        1025.13,
+        342.24,
+        1126.67
+      ],
+      "center": [
+        289.04,
+        1075.46
+      ],
+      "polygon": [
+        [
+          271.08,
+          1024.4
+        ],
+        [
+          271.08,
+          1033.38
+        ],
+        [
+          262.09,
+          1042.37
+        ],
+        [
+          259.09,
+          1042.37
+        ],
+        [
+          253.1,
+          1048.36
+        ],
+        [
+          250.11,
+          1048.36
+        ],
+        [
+          244.12,
+          1054.35
+        ],
+        [
+          235.13,
+          1054.35
+        ],
+        [
+          235.13,
+          1093.29
+        ],
+        [
+          244.12,
+          1093.29
+        ],
+        [
+          268.08,
+          1117.25
+        ],
+        [
+          268.08,
+          1129.23
+        ],
+        [
+          307.02,
+          1129.23
+        ],
+        [
+          307.02,
+          1120.25
+        ],
+        [
+          316.01,
+          1111.26
+        ],
+        [
+          319.0,
+          1111.26
+        ],
+        [
+          330.98,
+          1099.28
+        ],
+        [
+          339.97,
+          1099.28
+        ],
+        [
+          339.97,
+          1054.35
+        ],
+        [
+          327.99,
+          1054.35
+        ],
+        [
+          324.99,
+          1051.35
+        ],
+        [
+          324.99,
+          1048.36
+        ],
+        [
+          310.01,
+          1033.38
+        ],
+        [
+          310.01,
+          1024.4
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          289.04,
+          1075.46
+        ],
+        "width": 126.6,
+        "height": 126.59,
+        "angle": 137.73,
+        "points": [
+          [
+            293.31,
+            986.04
+          ],
+          [
+            378.46,
+            1079.72
+          ],
+          [
+            284.77,
+            1164.88
+          ],
+          [
+            199.62,
+            1071.2
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          289.04,
+          1075.46
+        ],
+        "oriented_box_points": [
+          [
+            293.31,
+            986.04
+          ],
+          [
+            378.46,
+            1079.72
+          ],
+          [
+            284.77,
+            1164.88
+          ],
+          [
+            199.62,
+            1071.2
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 4,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.8784,
+      "bbox": [
+        890.81,
+        463.81,
+        956.27,
+        528.3
+      ],
+      "center": [
+        922.55,
+        495.72
+      ],
+      "polygon": [
+        [
+          882.12,
+          461.28
+        ],
+        [
+          882.12,
+          506.21
+        ],
+        [
+          894.1,
+          506.21
+        ],
+        [
+          909.08,
+          521.18
+        ],
+        [
+          909.08,
+          530.17
+        ],
+        [
+          948.02,
+          530.17
+        ],
+        [
+          948.02,
+          518.19
+        ],
+        [
+          954.01,
+          512.2
+        ],
+        [
+          962.99,
+          512.2
+        ],
+        [
+          962.99,
+          494.23
+        ],
+        [
+          954.01,
+          494.23
+        ],
+        [
+          948.02,
+          488.24
+        ],
+        [
+          948.02,
+          485.24
+        ],
+        [
+          936.04,
+          473.26
+        ],
+        [
+          936.04,
+          461.28
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          922.55,
+          495.72
+        ],
+        "width": 98.66,
+        "height": 84.05,
+        "angle": 180.0,
+        "points": [
+          [
+            971.89,
+            453.7
+          ],
+          [
+            971.89,
+            537.75
+          ],
+          [
+            873.22,
+            537.75
+          ],
+          [
+            873.22,
+            453.7
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          922.55,
+          495.72
+        ],
+        "oriented_box_points": [
+          [
+            971.89,
+            453.7
+          ],
+          [
+            971.89,
+            537.75
+          ],
+          [
+            873.22,
+            537.75
+          ],
+          [
+            873.22,
+            453.7
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 5,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.877,
+      "bbox": [
+        182.22,
+        1146.8,
+        263.4,
+        1233.95
+      ],
+      "center": [
+        221.07,
+        1189.81
+      ],
+      "polygon": [
+        [
+          205.18,
+          1144.21
+        ],
+        [
+          205.18,
+          1153.2
+        ],
+        [
+          193.2,
+          1165.18
+        ],
+        [
+          190.2,
+          1165.18
+        ],
+        [
+          184.21,
+          1171.17
+        ],
+        [
+          175.23,
+          1171.17
+        ],
+        [
+          175.23,
+          1210.11
+        ],
+        [
+          187.21,
+          1210.11
+        ],
+        [
+          193.2,
+          1216.1
+        ],
+        [
+          193.2,
+          1219.09
+        ],
+        [
+          202.18,
+          1228.08
+        ],
+        [
+          202.18,
+          1237.06
+        ],
+        [
+          235.13,
+          1237.06
+        ],
+        [
+          235.13,
+          1228.08
+        ],
+        [
+          247.11,
+          1216.1
+        ],
+        [
+          250.11,
+          1216.1
+        ],
+        [
+          253.1,
+          1213.1
+        ],
+        [
+          253.1,
+          1210.11
+        ],
+        [
+          256.1,
+          1207.11
+        ],
+        [
+          268.08,
+          1207.11
+        ],
+        [
+          268.08,
+          1177.16
+        ],
+        [
+          259.09,
+          1177.16
+        ],
+        [
+          253.1,
+          1171.17
+        ],
+        [
+          253.1,
+          1168.17
+        ],
+        [
+          250.11,
+          1165.18
+        ],
+        [
+          250.11,
+          1162.18
+        ],
+        [
+          244.12,
+          1156.19
+        ],
+        [
+          244.12,
+          1144.21
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          221.07,
+          1189.81
+        ],
+        "width": 116.25,
+        "height": 108.64,
+        "angle": 138.01,
+        "points": [
+          [
+            227.93,
+            1110.55
+          ],
+          [
+            300.61,
+            1191.3
+          ],
+          [
+            214.21,
+            1269.07
+          ],
+          [
+            141.52,
+            1188.33
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          221.07,
+          1189.81
+        ],
+        "oriented_box_points": [
+          [
+            227.93,
+            1110.55
+          ],
+          [
+            300.61,
+            1191.3
+          ],
+          [
+            214.21,
+            1269.07
+          ],
+          [
+            141.52,
+            1188.33
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 6,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.8704,
+      "bbox": [
+        626.09,
+        495.67,
+        713.9,
+        581.44
+      ],
+      "center": [
+        668.08,
+        537.8
+      ],
+      "polygon": [
+        [
+          654.48,
+          485.24
+        ],
+        [
+          654.48,
+          494.23
+        ],
+        [
+          642.49,
+          506.21
+        ],
+        [
+          639.5,
+          506.21
+        ],
+        [
+          627.52,
+          518.19
+        ],
+        [
+          618.53,
+          518.19
+        ],
+        [
+          618.53,
+          554.13
+        ],
+        [
+          630.51,
+          554.13
+        ],
+        [
+          636.5,
+          560.12
+        ],
+        [
+          639.5,
+          560.12
+        ],
+        [
+          648.49,
+          569.11
+        ],
+        [
+          651.48,
+          569.11
+        ],
+        [
+          657.47,
+          575.1
+        ],
+        [
+          660.47,
+          575.1
+        ],
+        [
+          666.46,
+          581.09
+        ],
+        [
+          666.46,
+          590.08
+        ],
+        [
+          681.43,
+          590.08
+        ],
+        [
+          681.43,
+          581.09
+        ],
+        [
+          687.42,
+          575.1
+        ],
+        [
+          690.42,
+          575.1
+        ],
+        [
+          702.4,
+          563.12
+        ],
+        [
+          711.39,
+          563.12
+        ],
+        [
+          711.39,
+          521.18
+        ],
+        [
+          702.4,
+          521.18
+        ],
+        [
+          690.42,
+          509.2
+        ],
+        [
+          690.42,
+          503.21
+        ],
+        [
+          687.42,
+          500.22
+        ],
+        [
+          687.42,
+          497.22
+        ],
+        [
+          684.43,
+          494.23
+        ],
+        [
+          684.43,
+          485.24
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          668.08,
+          537.8
+        ],
+        "width": 116.96,
+        "height": 116.06,
+        "angle": 47.49,
+        "points": [
+          [
+            585.79,
+            533.89
+          ],
+          [
+            671.35,
+            455.48
+          ],
+          [
+            750.37,
+            541.7
+          ],
+          [
+            664.81,
+            620.11
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          668.08,
+          537.8
+        ],
+        "oriented_box_points": [
+          [
+            585.79,
+            533.89
+          ],
+          [
+            671.35,
+            455.48
+          ],
+          [
+            750.37,
+            541.7
+          ],
+          [
+            664.81,
+            620.11
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 7,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.8662,
+      "bbox": [
+        766.23,
+        457.42,
+        844.95,
+        537.78
+      ],
+      "center": [
+        802.95,
+        497.45
+      ],
+      "polygon": [
+        [
+          786.27,
+          449.3
+        ],
+        [
+          786.27,
+          461.28
+        ],
+        [
+          774.29,
+          473.26
+        ],
+        [
+          762.31,
+          473.26
+        ],
+        [
+          762.31,
+          512.2
+        ],
+        [
+          771.29,
+          512.2
+        ],
+        [
+          792.26,
+          533.17
+        ],
+        [
+          792.26,
+          542.15
+        ],
+        [
+          822.21,
+          542.15
+        ],
+        [
+          822.21,
+          530.17
+        ],
+        [
+          825.21,
+          527.17
+        ],
+        [
+          828.2,
+          527.17
+        ],
+        [
+          831.2,
+          524.18
+        ],
+        [
+          843.18,
+          524.18
+        ],
+        [
+          843.18,
+          482.25
+        ],
+        [
+          834.19,
+          482.25
+        ],
+        [
+          822.21,
+          470.26
+        ],
+        [
+          822.21,
+          467.27
+        ],
+        [
+          813.23,
+          458.28
+        ],
+        [
+          813.23,
+          449.3
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          802.95,
+          497.45
+        ],
+        "width": 114.3,
+        "height": 97.59,
+        "angle": 47.73,
+        "points": [
+          [
+            728.4,
+            487.97
+          ],
+          [
+            800.61,
+            422.34
+          ],
+          [
+            877.49,
+            506.92
+          ],
+          [
+            805.28,
+            572.56
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          802.95,
+          497.45
+        ],
+        "oriented_box_points": [
+          [
+            728.4,
+            487.97
+          ],
+          [
+            800.61,
+            422.34
+          ],
+          [
+            877.49,
+            506.92
+          ],
+          [
+            805.28,
+            572.56
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 8,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.8556,
+      "bbox": [
+        140.22,
+        1286.61,
+        222.48,
+        1372.83
+      ],
+      "center": [
+        176.72,
+        1329.92
+      ],
+      "polygon": [
+        [
+          169.24,
+          1276.0
+        ],
+        [
+          169.24,
+          1284.99
+        ],
+        [
+          136.29,
+          1317.94
+        ],
+        [
+          127.3,
+          1317.94
+        ],
+        [
+          127.3,
+          1350.89
+        ],
+        [
+          139.28,
+          1350.89
+        ],
+        [
+          145.27,
+          1356.88
+        ],
+        [
+          148.27,
+          1356.88
+        ],
+        [
+          154.26,
+          1362.87
+        ],
+        [
+          157.25,
+          1362.87
+        ],
+        [
+          166.24,
+          1371.85
+        ],
+        [
+          166.24,
+          1380.84
+        ],
+        [
+          184.21,
+          1380.84
+        ],
+        [
+          184.21,
+          1371.85
+        ],
+        [
+          199.19,
+          1356.88
+        ],
+        [
+          202.18,
+          1356.88
+        ],
+        [
+          211.17,
+          1347.89
+        ],
+        [
+          220.16,
+          1347.89
+        ],
+        [
+          220.16,
+          1311.95
+        ],
+        [
+          211.17,
+          1311.95
+        ],
+        [
+          202.18,
+          1302.96
+        ],
+        [
+          202.18,
+          1299.97
+        ],
+        [
+          196.19,
+          1293.97
+        ],
+        [
+          196.19,
+          1290.98
+        ],
+        [
+          193.2,
+          1287.98
+        ],
+        [
+          193.2,
+          1276.0
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          176.72,
+          1329.92
+        ],
+        "width": 121.46,
+        "height": 105.94,
+        "angle": 135.0,
+        "points": [
+          [
+            182.21,
+            1249.52
+          ],
+          [
+            257.12,
+            1324.44
+          ],
+          [
+            171.24,
+            1410.32
+          ],
+          [
+            96.33,
+            1335.4
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          176.72,
+          1329.92
+        ],
+        "oriented_box_points": [
+          [
+            182.21,
+            1249.52
+          ],
+          [
+            257.12,
+            1324.44
+          ],
+          [
+            171.24,
+            1410.32
+          ],
+          [
+            96.33,
+            1335.4
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 9,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.8261,
+      "bbox": [
+        126.89,
+        1468.39,
+        181.91,
+        1532.93
+      ],
+      "center": [
+        149.76,
+        1502.15
+      ],
+      "polygon": [
+        [
+          127.3,
+          1467.7
+        ],
+        [
+          127.3,
+          1476.69
+        ],
+        [
+          124.31,
+          1479.68
+        ],
+        [
+          115.32,
+          1479.68
+        ],
+        [
+          115.32,
+          1518.62
+        ],
+        [
+          124.31,
+          1518.62
+        ],
+        [
+          133.29,
+          1527.61
+        ],
+        [
+          133.29,
+          1536.6
+        ],
+        [
+          166.24,
+          1536.6
+        ],
+        [
+          166.24,
+          1527.61
+        ],
+        [
+          175.23,
+          1518.62
+        ],
+        [
+          184.21,
+          1518.62
+        ],
+        [
+          184.21,
+          1491.67
+        ],
+        [
+          175.23,
+          1491.67
+        ],
+        [
+          163.24,
+          1479.68
+        ],
+        [
+          163.24,
+          1467.7
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          149.76,
+          1502.15
+        ],
+        "width": 84.06,
+        "height": 84.05,
+        "angle": 90.0,
+        "points": [
+          [
+            107.74,
+            1460.12
+          ],
+          [
+            191.79,
+            1460.12
+          ],
+          [
+            191.79,
+            1544.18
+          ],
+          [
+            107.74,
+            1544.18
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          149.76,
+          1502.15
+        ],
+        "oriented_box_points": [
+          [
+            107.74,
+            1460.12
+          ],
+          [
+            191.79,
+            1460.12
+          ],
+          [
+            191.79,
+            1544.18
+          ],
+          [
+            107.74,
+            1544.18
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    },
+    {
+      "id": 10,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.7269,
+      "bbox": [
+        1027.04,
+        479.82,
+        1076.87,
+        528.24
+      ],
+      "center": [
+        1046.95,
+        501.71
+      ],
+      "polygon": [
+        [
+          1013.91,
+          473.26
+        ],
+        [
+          1013.91,
+          506.21
+        ],
+        [
+          1022.9,
+          506.21
+        ],
+        [
+          1031.89,
+          515.19
+        ],
+        [
+          1034.88,
+          515.19
+        ],
+        [
+          1037.88,
+          518.19
+        ],
+        [
+          1037.88,
+          530.17
+        ],
+        [
+          1080.0,
+          530.17
+        ],
+        [
+          1080.0,
+          500.22
+        ],
+        [
+          1073.82,
+          500.22
+        ],
+        [
+          1067.83,
+          494.23
+        ],
+        [
+          1067.83,
+          491.23
+        ],
+        [
+          1061.84,
+          485.24
+        ],
+        [
+          1061.84,
+          473.26
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          1046.95,
+          501.71
+        ],
+        "width": 80.63,
+        "height": 69.43,
+        "angle": -0.0,
+        "points": [
+          [
+            1006.64,
+            536.43
+          ],
+          [
+            1006.64,
+            467.0
+          ],
+          [
+            1087.27,
+            467.0
+          ],
+          [
+            1087.27,
+            536.43
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          1046.95,
+          501.71
+        ],
+        "oriented_box_points": [
+          [
+            1006.64,
+            536.43
+          ],
+          [
+            1006.64,
+            467.0
+          ],
+          [
+            1087.27,
+            467.0
+          ],
+          [
+            1087.27,
+            536.43
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    }
+  ],
+  "ai_orientation_payload": [
+    {
+      "nail_id": 1,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        552.22,
+        698.28
+      ],
+      "oriented_box_points": [
+        [
+          419.56,
+          681.88
+        ],
+        [
+          553.56,
+          564.62
+        ],
+        [
+          684.87,
+          714.67
+        ],
+        [
+          550.87,
+          831.93
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 2,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        520.25,
+        990.36
+      ],
+      "oriented_box_points": [
+        [
+          393.08,
+          964.41
+        ],
+        [
+          534.75,
+          861.38
+        ],
+        [
+          647.43,
+          1016.3
+        ],
+        [
+          505.76,
+          1119.33
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 3,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        289.04,
+        1075.46
+      ],
+      "oriented_box_points": [
+        [
+          293.31,
+          986.04
+        ],
+        [
+          378.46,
+          1079.72
+        ],
+        [
+          284.77,
+          1164.88
+        ],
+        [
+          199.62,
+          1071.2
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 4,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        922.55,
+        495.72
+      ],
+      "oriented_box_points": [
+        [
+          971.89,
+          453.7
+        ],
+        [
+          971.89,
+          537.75
+        ],
+        [
+          873.22,
+          537.75
+        ],
+        [
+          873.22,
+          453.7
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 5,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        221.07,
+        1189.81
+      ],
+      "oriented_box_points": [
+        [
+          227.93,
+          1110.55
+        ],
+        [
+          300.61,
+          1191.3
+        ],
+        [
+          214.21,
+          1269.07
+        ],
+        [
+          141.52,
+          1188.33
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 6,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        668.08,
+        537.8
+      ],
+      "oriented_box_points": [
+        [
+          585.79,
+          533.89
+        ],
+        [
+          671.35,
+          455.48
+        ],
+        [
+          750.37,
+          541.7
+        ],
+        [
+          664.81,
+          620.11
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 7,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        802.95,
+        497.45
+      ],
+      "oriented_box_points": [
+        [
+          728.4,
+          487.97
+        ],
+        [
+          800.61,
+          422.34
+        ],
+        [
+          877.49,
+          506.92
+        ],
+        [
+          805.28,
+          572.56
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 8,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        176.72,
+        1329.92
+      ],
+      "oriented_box_points": [
+        [
+          182.21,
+          1249.52
+        ],
+        [
+          257.12,
+          1324.44
+        ],
+        [
+          171.24,
+          1410.32
+        ],
+        [
+          96.33,
+          1335.4
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 9,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        149.76,
+        1502.15
+      ],
+      "oriented_box_points": [
+        [
+          107.74,
+          1460.12
+        ],
+        [
+          191.79,
+          1460.12
+        ],
+        [
+          191.79,
+          1544.18
+        ],
+        [
+          107.74,
+          1544.18
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    },
+    {
+      "nail_id": 10,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        1046.95,
+        501.71
+      ],
+      "oriented_box_points": [
+        [
+          1006.64,
+          536.43
+        ],
+        [
+          1006.64,
+          467.0
+        ],
+        [
+          1087.27,
+          467.0
+        ],
+        [
+          1087.27,
+          536.43
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    }
+  ],
+  "ai_orientation_note": "Use ai_orientation_payload to align nail art. Keep the uploaded hand photo unchanged except the nail surfaces; never render these boxes, labels, arrows, or metadata in the final image.",
+  "hand_count": 0,
+  "hand_layers": [],
+  "message": "Success"
+}

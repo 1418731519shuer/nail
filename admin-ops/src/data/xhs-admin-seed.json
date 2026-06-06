@@ -1,0 +1,7874 @@
+[
+  {
+    "id": "xhs-68e8aa600000000003035e44",
+    "styleCode": "XHS0001",
+    "name": "香槟裸粉猫眼美甲",
+    "description": "香槟色搭配裸粉猫眼，高级显白，修容自然不泛红，高光提亮妆容更干净。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=68e8aa600000000003035e44_32112d03c0bc.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-01",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "ins风"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "显白",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 344,
+      "view": 172,
+      "detail": 50,
+      "basketAdd": 67,
+      "tryonSuccess": 69,
+      "resultView": 58,
+      "want": 62,
+      "confirm": 48,
+      "orders": 42,
+      "hotScore": 88,
+      "coldRiskScore": 12,
+      "growthScore": 32,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 13,
+        "detail": 7,
+        "tryon_result": 12,
+        "ai_recommend": 9,
+        "want_list": 7
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.0,
+      "resultViewDurationSec": 50
+    }
+  },
+  {
+    "id": "xhs-683d7a4200000000230168d1",
+    "styleCode": "XHS0002",
+    "name": "蓝色玻璃珠短甲",
+    "description": "清凉蓝色猫眼美甲，如玻璃珠般透亮，适合夏日海边，短甲也能精致出彩。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=683d7a4200000000230168d1_2cf523513f4d.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-02",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "个性风"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲",
+        "DIY"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 497,
+      "view": 207,
+      "detail": 56,
+      "basketAdd": 40,
+      "tryonSuccess": 41,
+      "resultView": 34,
+      "want": 81,
+      "confirm": 70,
+      "orders": 62,
+      "hotScore": 88,
+      "coldRiskScore": 12,
+      "growthScore": 63,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 20,
+        "detail": 10,
+        "tryon_result": 18,
+        "ai_recommend": 13,
+        "want_list": 9
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.0,
+      "resultViewDurationSec": 53
+    }
+  },
+  {
+    "id": "xhs-69e89cc70000000022000253",
+    "styleCode": "XHS0003",
+    "name": "莫兰迪猫眼跳色美甲",
+    "description": "雾蓝、水粉、奶茶棕三色猫眼跳色，搭配乳白贝母，油画感十足，低调显气质。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69e89cc70000000022000253_0661bb363e5d.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-03",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日",
+        "春日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 1174,
+      "view": 587,
+      "detail": 209,
+      "basketAdd": 150,
+      "tryonSuccess": 156,
+      "resultView": 131,
+      "want": 211,
+      "confirm": 144,
+      "orders": 127,
+      "hotScore": 90,
+      "coldRiskScore": 10,
+      "growthScore": 49,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 40,
+        "detail": 20,
+        "tryon_result": 37,
+        "ai_recommend": 26,
+        "want_list": 21
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.9,
+      "resultViewDurationSec": 50
+    }
+  },
+  {
+    "id": "xhs-687cbd4400000000120319eb",
+    "styleCode": "XHS0004",
+    "name": "白开水美甲",
+    "description": "清透简约的白开水美甲，温柔显白，适合夏日，百搭不挑手型。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=687cbd4400000000120319eb_6736824aa22e.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-04",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 386,
+      "view": 193,
+      "detail": 74,
+      "basketAdd": 45,
+      "tryonSuccess": 45,
+      "resultView": 38,
+      "want": 56,
+      "confirm": 45,
+      "orders": 40,
+      "hotScore": 94,
+      "coldRiskScore": 6,
+      "growthScore": 30,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 13,
+        "detail": 6,
+        "tryon_result": 12,
+        "ai_recommend": 8,
+        "want_list": 6
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.7,
+      "resultViewDurationSec": 44
+    }
+  },
+  {
+    "id": "xhs-683122f8000000000303f81c",
+    "styleCode": "XHS0005",
+    "name": "高级感美甲六选一",
+    "description": "精选六款高级感美甲，夏日百搭，显白不挑肤色，总有一款适合你。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=683122f8000000000303f81c_c329d9707b0c.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-05",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 848,
+      "view": 424,
+      "detail": 148,
+      "basketAdd": 101,
+      "tryonSuccess": 102,
+      "resultView": 86,
+      "want": 141,
+      "confirm": 127,
+      "orders": 112,
+      "hotScore": 91,
+      "coldRiskScore": 9,
+      "growthScore": 72,
+      "trendLabel": "HotUp",
+      "sampleStatus": "enough",
+      "suggestion": "热度和确认都高，适合继续保留在首页主推位。",
+      "sourceBreakdown": {
+        "card": 36,
+        "detail": 18,
+        "tryon_result": 33,
+        "ai_recommend": 23,
+        "want_list": 17
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.9,
+      "resultViewDurationSec": 48
+    }
+  },
+  {
+    "id": "xhs-682094020000000022037424",
+    "styleCode": "XHS0006",
+    "name": "抽象油画手绘美甲",
+    "description": "抽象主义油画美甲，色彩自由搭配，巨显白，原创设计独一无二。",
+    "status": "published",
+    "category": "手绘",
+    "price": 183,
+    "coverImage": "/api/xhs-image?file=682094020000000022037424_30a6b0bb4acb.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-06",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 964,
+      "view": 482,
+      "detail": 182,
+      "basketAdd": 163,
+      "tryonSuccess": 155,
+      "resultView": 130,
+      "want": 247,
+      "confirm": 188,
+      "orders": 165,
+      "hotScore": 92,
+      "coldRiskScore": 8,
+      "growthScore": 32,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 53,
+        "detail": 26,
+        "tryon_result": 49,
+        "ai_recommend": 34,
+        "want_list": 26
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.8,
+      "resultViewDurationSec": 64
+    }
+  },
+  {
+    "id": "xhs-6886511f0000000015020ee4",
+    "styleCode": "XHS0007",
+    "name": "baby蓝猫眼夏日美甲",
+    "description": "清新baby蓝猫眼美甲，原图直出，夏日感满满，显白又清爽。",
+    "status": "published",
+    "category": "夏日",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=6886511f0000000015020ee4_819f06d0c661.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-07",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "夏日"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 689,
+      "view": 287,
+      "detail": 69,
+      "basketAdd": 96,
+      "tryonSuccess": 98,
+      "resultView": 82,
+      "want": 88,
+      "confirm": 112,
+      "orders": 99,
+      "hotScore": 94,
+      "coldRiskScore": 6,
+      "growthScore": 58,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 31,
+        "detail": 16,
+        "tryon_result": 29,
+        "ai_recommend": 20,
+        "want_list": 16
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.7,
+      "resultViewDurationSec": 46
+    }
+  },
+  {
+    "id": "xhs-68e866ec000000000302e4d2",
+    "styleCode": "XHS0008",
+    "name": "青绿猫眼渐变美甲",
+    "description": "青绿色猫眼渐变美甲，如山水画般雅致，高级感十足，适合各种场合。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 205,
+    "coverImage": "/api/xhs-image?file=68e866ec000000000302e4d2_31db80da6e26.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-08",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼",
+        "渐变"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "渐变"
+      ]
+    },
+    "metrics": {
+      "exposure": 46,
+      "view": 19,
+      "detail": 5,
+      "basketAdd": 6,
+      "tryonSuccess": 7,
+      "resultView": 6,
+      "want": 8,
+      "confirm": 9,
+      "orders": 8,
+      "hotScore": 92,
+      "coldRiskScore": 8,
+      "growthScore": 75,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.8,
+      "resultViewDurationSec": 56
+    }
+  },
+  {
+    "id": "xhs-694215f5000000001e028258",
+    "styleCode": "XHS0009",
+    "name": "指尖生花手绘美甲",
+    "description": "以手绘花朵点缀指尖，温柔感十足，适合喜欢自然甜美风格的你。",
+    "status": "published",
+    "category": "花朵",
+    "price": 201,
+    "coverImage": "/api/xhs-image?file=694215f5000000001e028258_d6068cc43358.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-09",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "花朵",
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 98,
+      "view": 49,
+      "detail": 17,
+      "basketAdd": 9,
+      "tryonSuccess": 10,
+      "resultView": 8,
+      "want": 12,
+      "confirm": 11,
+      "orders": 10,
+      "hotScore": 81,
+      "coldRiskScore": 19,
+      "growthScore": 49,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.4,
+      "resultViewDurationSec": 40
+    }
+  },
+  {
+    "id": "xhs-68ea1aaa000000000401595c",
+    "styleCode": "XHS0010",
+    "name": "短甲简约美甲",
+    "description": "专为短甲设计，简约不简单，显白又日常，轻松驾驭各种场合。",
+    "status": "published",
+    "category": "短甲",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=68ea1aaa000000000401595c_dc631996ff83.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-10",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "短甲"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 96,
+      "view": 48,
+      "detail": 15,
+      "basketAdd": 9,
+      "tryonSuccess": 7,
+      "resultView": 6,
+      "want": 3,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 78,
+      "coldRiskScore": 22,
+      "growthScore": 27,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.5,
+      "resultViewDurationSec": 24
+    }
+  },
+  {
+    "id": "xhs-684fe33e0000000012000b47",
+    "styleCode": "XHS0011",
+    "name": "璀璨猫眼钻饰美甲",
+    "description": "猫眼效果搭配精致钻饰，光泽迷人，让指尖成为焦点。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 213,
+    "coverImage": "/api/xhs-image?file=684fe33e0000000012000b47_f5e2ae045157.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-11",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 210,
+      "view": 105,
+      "detail": 41,
+      "basketAdd": 36,
+      "tryonSuccess": 35,
+      "resultView": 29,
+      "want": 44,
+      "confirm": 38,
+      "orders": 33,
+      "hotScore": 95,
+      "coldRiskScore": 5,
+      "growthScore": 44,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 11,
+        "detail": 5,
+        "tryon_result": 10,
+        "ai_recommend": 7,
+        "want_list": 5
+      },
+      "generationSuccessRate": 0.95,
+      "avgLatencySec": 7.7,
+      "resultViewDurationSec": 56
+    }
+  },
+  {
+    "id": "xhs-69c23c1700000000200397f1",
+    "styleCode": "XHS0012",
+    "name": "苹果汽水春日美甲",
+    "description": "春日气息的苹果绿与汽水感配色，清新高级，仿佛喝了一口凉爽的汽水。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69c23c1700000000200397f1_71b7c5698bbb.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-12",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 586,
+      "view": 293,
+      "detail": 95,
+      "basketAdd": 110,
+      "tryonSuccess": 113,
+      "resultView": 95,
+      "want": 110,
+      "confirm": 116,
+      "orders": 102,
+      "hotScore": 87,
+      "coldRiskScore": 13,
+      "growthScore": 44,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 32,
+        "detail": 16,
+        "tryon_result": 30,
+        "ai_recommend": 21,
+        "want_list": 17
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.1,
+      "resultViewDurationSec": 52
+    }
+  },
+  {
+    "id": "xhs-6688df8c000000000a0246b3",
+    "styleCode": "XHS0013",
+    "name": "星星猫眼夏日美甲",
+    "description": "猫眼基底搭配星星装饰，清新简约，夏日指尖的清凉之选。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 213,
+    "coverImage": "/api/xhs-image?file=6688df8c000000000a0246b3_7a7d3be6f965.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-13",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "清新简约"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 188,
+      "view": 94,
+      "detail": 28,
+      "basketAdd": 18,
+      "tryonSuccess": 18,
+      "resultView": 15,
+      "want": 20,
+      "confirm": 29,
+      "orders": 26,
+      "hotScore": 85,
+      "coldRiskScore": 15,
+      "growthScore": 19,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 8,
+        "detail": 4,
+        "tryon_result": 8,
+        "ai_recommend": 5,
+        "want_list": 4
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.2,
+      "resultViewDurationSec": 37
+    }
+  },
+  {
+    "id": "xhs-69095f35000000000302f457",
+    "styleCode": "XHS0014",
+    "name": "秋日花朵美甲",
+    "description": "以花朵元素呈现秋日氛围，高级感配色，温柔又显气质。",
+    "status": "published",
+    "category": "花朵",
+    "price": 168,
+    "coverImage": "/api/xhs-image?file=69095f35000000000302f457_1e4f9ab6bd63.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-14",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "花朵"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 510,
+      "view": 255,
+      "detail": 76,
+      "basketAdd": 94,
+      "tryonSuccess": 99,
+      "resultView": 83,
+      "want": 101,
+      "confirm": 93,
+      "orders": 82,
+      "hotScore": 89,
+      "coldRiskScore": 11,
+      "growthScore": 52,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 26,
+        "detail": 13,
+        "tryon_result": 24,
+        "ai_recommend": 17,
+        "want_list": 13
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.0,
+      "resultViewDurationSec": 54
+    }
+  },
+  {
+    "id": "xhs-68e10bd600000000050305fd",
+    "styleCode": "XHS0015",
+    "name": "精选美甲款式推荐",
+    "description": "精选六款热门美甲，风格各异，帮你解决选择困难症。",
+    "status": "published",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=68e10bd600000000050305fd_3f62da8d559a.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-15",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 79,
+      "view": 33,
+      "detail": 8,
+      "basketAdd": 8,
+      "tryonSuccess": 8,
+      "resultView": 7,
+      "want": 5,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 43,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 32
+    }
+  },
+  {
+    "id": "xhs-69a152e5000000002602c955",
+    "styleCode": "XHS0016",
+    "name": "薄荷曼波猫眼短甲",
+    "description": "冰透蓝、小鸡黄、蜜瓜绿渐变，搭配猫眼和立体花花，甜妹必备短甲款。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69a152e5000000002602c955_2d8b1df867d2.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-16",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 38,
+      "view": 19,
+      "detail": 6,
+      "basketAdd": 2,
+      "tryonSuccess": 1,
+      "resultView": 1,
+      "want": 7,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 64,
+      "coldRiskScore": 36,
+      "growthScore": 45,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.3,
+      "resultViewDurationSec": 51
+    }
+  },
+  {
+    "id": "xhs-69a7d3fe00000000150208f2",
+    "styleCode": "XHS0017",
+    "name": "黑粉甜酷猫眼美甲",
+    "description": "黑粉配色打造甜酷风格，猫眼效果高级显白，黄皮也能轻松驾驭。日常通勤或约会炸街都合适，贴片即用，20+价格超值。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69a7d3fe00000000150208f2_4f803f58f5c2.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-17",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感",
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 40,
+      "view": 13,
+      "detail": 1,
+      "basketAdd": 4,
+      "tryonSuccess": 4,
+      "resultView": 3,
+      "want": 7,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 65,
+      "coldRiskScore": 35,
+      "growthScore": 96,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 66
+    }
+  },
+  {
+    "id": "xhs-68c7b87f000000001c011019",
+    "styleCode": "XHS0018",
+    "name": "夏日花朵温柔美甲",
+    "description": "以花朵为主题，温柔感十足，适合夏日。简约设计不失高级，是美甲决赛圈的优选款式。",
+    "status": "published",
+    "category": "花朵",
+    "price": 168,
+    "coverImage": "/api/xhs-image?file=68c7b87f000000001c011019_0fd8c94fe29c.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-18",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "花朵"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 239,
+      "view": 77,
+      "detail": 7,
+      "basketAdd": 15,
+      "tryonSuccess": 15,
+      "resultView": 13,
+      "want": 16,
+      "confirm": 5,
+      "orders": 4,
+      "hotScore": 64,
+      "coldRiskScore": 36,
+      "growthScore": 63,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.3,
+      "resultViewDurationSec": 37
+    }
+  },
+  {
+    "id": "xhs-68b95c80000000001b037c74",
+    "styleCode": "XHS0019",
+    "name": "海盐气泡冰透蓝猫眼",
+    "description": "冰透质感搭配渐变蓝色猫眼，清爽如海盐气泡，活力满满。高级感十足，适合追求清新风格的你。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=68b95c80000000001b037c74_12b0b968a795.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-19",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 43,
+      "view": 14,
+      "detail": 1,
+      "basketAdd": 2,
+      "tryonSuccess": 2,
+      "resultView": 2,
+      "want": 4,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 66,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 44
+    }
+  },
+  {
+    "id": "xhs-6895f7580000000023039150",
+    "styleCode": "XHS0020",
+    "name": "冰透猫眼碎钻美甲",
+    "description": "冰透猫眼搭配碎钻点缀，清透又高级，温柔感满分。法式风格融合钻饰，细节精致。",
+    "status": "published",
+    "category": "钻饰",
+    "price": 205,
+    "coverImage": "/api/xhs-image?file=6895f7580000000023039150_52a4548b1643.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-20",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "钻饰",
+        "法式"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "精致",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 186,
+      "view": 93,
+      "detail": 31,
+      "basketAdd": 37,
+      "tryonSuccess": 33,
+      "resultView": 28,
+      "want": 14,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 65,
+      "coldRiskScore": 35,
+      "growthScore": 59,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 32
+    }
+  },
+  {
+    "id": "xhs-68bfc7a8000000001d01a48e",
+    "styleCode": "XHS0021",
+    "name": "粉色KT甜妹美甲",
+    "description": "粉色KT主题，少女心满满，甜妹专属。高级感设计，适合秋冬季节，展现甜美气质。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=68bfc7a8000000001d01a48e_5f45f51d9baa.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-21",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 82,
+      "view": 34,
+      "detail": 8,
+      "basketAdd": 2,
+      "tryonSuccess": 2,
+      "resultView": 2,
+      "want": 6,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 27,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 34
+    }
+  },
+  {
+    "id": "xhs-69cb7599000000001d01f980",
+    "styleCode": "XHS0022",
+    "name": "春天系温柔美甲精选",
+    "description": "温温柔柔的春天系美甲，多款精选，适合选择困难症。每一款都充满春日气息，温柔又高级。",
+    "status": "published",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69cb7599000000001d01f980_45e0ce4c4f2f.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-22",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 192,
+      "view": 80,
+      "detail": 17,
+      "basketAdd": 24,
+      "tryonSuccess": 26,
+      "resultView": 22,
+      "want": 14,
+      "confirm": 5,
+      "orders": 4,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 49,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 34
+    }
+  },
+  {
+    "id": "xhs-6778f0d40000000013018463",
+    "styleCode": "XHS0023",
+    "name": "玻璃珠猫眼蝴蝶结美甲",
+    "description": "玻璃珠猫眼效果搭配手绘魔镜粉爱心蝴蝶结，甜美又精致。猫眼与手绘结合，款式独特。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 223,
+    "coverImage": "/api/xhs-image?file=6778f0d40000000013018463_8524f43105e8.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-23",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼",
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 223,
+      "view": 93,
+      "detail": 18,
+      "basketAdd": 24,
+      "tryonSuccess": 24,
+      "resultView": 20,
+      "want": 28,
+      "confirm": 5,
+      "orders": 4,
+      "hotScore": 59,
+      "coldRiskScore": 41,
+      "growthScore": 39,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 45
+    }
+  },
+  {
+    "id": "xhs-68b02dd5000000001c03d849",
+    "styleCode": "XHS0024",
+    "name": "清新仙气花朵渐变美甲",
+    "description": "清新仙气风格，花朵与渐变结合，细节精致。大拇指特写展现独特设计，仙气十足。",
+    "status": "published",
+    "category": "花朵",
+    "price": 171,
+    "coverImage": "/api/xhs-image?file=68b02dd5000000001c03d849_a0b9eafe3dfc.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-24",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "花朵",
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "渐变"
+      ]
+    },
+    "metrics": {
+      "exposure": 110,
+      "view": 46,
+      "detail": 12,
+      "basketAdd": 10,
+      "tryonSuccess": 10,
+      "resultView": 8,
+      "want": 16,
+      "confirm": 15,
+      "orders": 13,
+      "hotScore": 86,
+      "coldRiskScore": 14,
+      "growthScore": 30,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.1,
+      "resultViewDurationSec": 49
+    }
+  },
+  {
+    "id": "xhs-66c2d5e2000000001d01a13f",
+    "styleCode": "XHS0025",
+    "name": "黑暗陨石猫眼甲",
+    "description": "黑暗陨石风格猫眼美甲，深邃色调搭配猫眼光泽，短甲也能轻松驾驭，显白效果出众，个性又高级。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=66c2d5e2000000001d01a13f_2ec54ec89b9c.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-25",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "个性风"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 168,
+      "view": 84,
+      "detail": 25,
+      "basketAdd": 13,
+      "tryonSuccess": 11,
+      "resultView": 9,
+      "want": 21,
+      "confirm": 19,
+      "orders": 17,
+      "hotScore": 74,
+      "coldRiskScore": 26,
+      "growthScore": 14,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 5,
+        "detail": 3,
+        "tryon_result": 5,
+        "ai_recommend": 3,
+        "want_list": 3
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.7,
+      "resultViewDurationSec": 40
+    }
+  },
+  {
+    "id": "xhs-688a0c9a0000000023034876",
+    "styleCode": "XHS0026",
+    "name": "人鱼姬极光猫眼甲",
+    "description": "裸粉色打底叠加人鱼姬偏光色，指尖流转彩虹光晕，圆润甲型温柔显白，极光粉薄涂打造鎏光感，夏日必备。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=688a0c9a0000000023034876_c4d81974cdc6.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-26",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 84,
+      "view": 42,
+      "detail": 17,
+      "basketAdd": 12,
+      "tryonSuccess": 12,
+      "resultView": 10,
+      "want": 11,
+      "confirm": 5,
+      "orders": 4,
+      "hotScore": 69,
+      "coldRiskScore": 31,
+      "growthScore": 34,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.0,
+      "resultViewDurationSec": 42
+    }
+  },
+  {
+    "id": "xhs-69e1ed3b0000000021011ea7",
+    "styleCode": "XHS0027",
+    "name": "浮光锦猫眼甲",
+    "description": "单色猫眼款式，简约而不简单，适合短甲和DIY爱好者，春日气息满满，轻松打造高级感。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69e1ed3b0000000021011ea7_3265b069f911.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-27",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲",
+        "DIY"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 132,
+      "view": 55,
+      "detail": 10,
+      "basketAdd": 12,
+      "tryonSuccess": 13,
+      "resultView": 11,
+      "want": 10,
+      "confirm": 7,
+      "orders": 6,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 82,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 34
+    }
+  },
+  {
+    "id": "xhs-69441a71000000001b0219f4",
+    "styleCode": "XHS0028",
+    "name": "浪漫雪花氛围甲",
+    "description": "透明渐变搭配立体雪花与金色线条，细节满分，原图直出也美到窒息，适合穿戴甲，冬日氛围感拉满。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69441a71000000001b0219f4_15f0058a6aab.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-28",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 156,
+      "view": 78,
+      "detail": 22,
+      "basketAdd": 8,
+      "tryonSuccess": 8,
+      "resultView": 7,
+      "want": 6,
+      "confirm": 7,
+      "orders": 6,
+      "hotScore": 64,
+      "coldRiskScore": 36,
+      "growthScore": 18,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.3,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-68cbd55f0000000013013eb6",
+    "styleCode": "XHS0029",
+    "name": "冰透猫眼清冷甲",
+    "description": "冰透质感猫眼美甲，清冷高级，无滤镜原相机直出也好看，适合追求简约高级感的你。",
+    "status": "published",
+    "category": "钻饰",
+    "price": 185,
+    "coverImage": "/api/xhs-image?file=68cbd55f0000000013013eb6_c012ccb13645.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-01",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 26,
+      "view": 11,
+      "detail": 3,
+      "basketAdd": 4,
+      "tryonSuccess": 4,
+      "resultView": 3,
+      "want": 2,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 74,
+      "coldRiskScore": 26,
+      "growthScore": 49,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.7,
+      "resultViewDurationSec": 34
+    }
+  },
+  {
+    "id": "xhs-68835b9c0000000020018599",
+    "styleCode": "XHS0030",
+    "name": "小香风格纹猫眼甲",
+    "description": "小香风千金格纹搭配冰透猫眼，温柔又显白，夏日美甲首选，同款已做都说好看。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=68835b9c0000000020018599_2e2b853c0a99.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-02",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 81,
+      "view": 26,
+      "detail": 3,
+      "basketAdd": 4,
+      "tryonSuccess": 5,
+      "resultView": 4,
+      "want": 7,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 73,
+      "coldRiskScore": 27,
+      "growthScore": 67,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.8,
+      "resultViewDurationSec": 42
+    }
+  },
+  {
+    "id": "xhs-69955f12000000000a02ba73",
+    "styleCode": "XHS0031",
+    "name": "淡雅顺顺美甲",
+    "description": "淡淡的颜色带来顺顺的心情，清新简约风格，高级感十足，适合日常通勤。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69955f12000000000a02ba73_78e65e40fc9c.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-03",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "清新简约"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 46,
+      "view": 19,
+      "detail": 5,
+      "basketAdd": 10,
+      "tryonSuccess": 11,
+      "resultView": 9,
+      "want": 9,
+      "confirm": 8,
+      "orders": 7,
+      "hotScore": 90,
+      "coldRiskScore": 10,
+      "growthScore": 81,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 7.9,
+      "resultViewDurationSec": 61
+    }
+  },
+  {
+    "id": "xhs-6969b3aa00000000220302c8",
+    "styleCode": "XHS0032",
+    "name": "赤茶琉璃猫眼甲",
+    "description": "赤茶琉璃色调，金色微笑猫眼，又嫩又显白，秋冬穿戴甲首选，温柔高级。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 205,
+    "coverImage": "/api/xhs-image?file=6969b3aa00000000220302c8_b8f4c25f5af5.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-04",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼",
+        "渐变"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "渐变",
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 14,
+      "view": 7,
+      "detail": 3,
+      "basketAdd": 1,
+      "tryonSuccess": 1,
+      "resultView": 1,
+      "want": 1,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 65,
+      "coldRiskScore": 35,
+      "growthScore": 95,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 31
+    }
+  },
+  {
+    "id": "xhs-69f1a666000000003700d0f0",
+    "styleCode": "XHS0033",
+    "name": "醋酸月光渐变美甲",
+    "description": "乳白渐变叠加月光粉，清透感十足。食指无名指雪绒胶晕染搭配贝壳片，波光粼粼，适合春夏的温柔美甲。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69f1a666000000003700d0f0_1e87cc884e61.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-05",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日",
+        "春日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 168,
+      "view": 70,
+      "detail": 14,
+      "basketAdd": 33,
+      "tryonSuccess": 34,
+      "resultView": 29,
+      "want": 15,
+      "confirm": 1,
+      "orders": 1,
+      "hotScore": 65,
+      "coldRiskScore": 35,
+      "growthScore": 20,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 37
+    }
+  },
+  {
+    "id": "xhs-6a0d78200000000038037344",
+    "styleCode": "XHS0034",
+    "name": "夏日冰塔蓝茶美甲",
+    "description": "夏日冰塔蓝茶美甲，猫眼与手绘结合，清凉感十足，短甲也能轻松驾驭，带来视觉降温效果。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 223,
+    "coverImage": "/api/xhs-image?file=6a0d78200000000038037344_00d49ad36431.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-06",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼",
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 221,
+      "view": 92,
+      "detail": 22,
+      "basketAdd": 11,
+      "tryonSuccess": 12,
+      "resultView": 10,
+      "want": 13,
+      "confirm": 7,
+      "orders": 6,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 72,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 31
+    }
+  },
+  {
+    "id": "xhs-6a0aff7f00000000080036ab",
+    "styleCode": "XHS0035",
+    "name": "五颜六色夏日美甲",
+    "description": "五颜六色的夏日美甲，猫眼元素搭配短甲，活泼亮眼，展现高级感与个性。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=6a0aff7f00000000080036ab_0eb6ec07b9c1.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-07",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 211,
+      "view": 68,
+      "detail": 7,
+      "basketAdd": 12,
+      "tryonSuccess": 14,
+      "resultView": 12,
+      "want": 21,
+      "confirm": 9,
+      "orders": 8,
+      "hotScore": 62,
+      "coldRiskScore": 37,
+      "growthScore": 69,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 46
+    }
+  },
+  {
+    "id": "xhs-69a166ac000000001a01c692",
+    "styleCode": "XHS0036",
+    "name": "薄荷奶绿波点蝴蝶结美甲",
+    "description": "早春多巴胺撞色爱心美甲，薄荷曼波渐变搭配奶油白咖色晕染，韩系波点蝴蝶结显白又可爱。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69a166ac000000001a01c692_b1c1881f5ae4.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-08",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 74,
+      "view": 37,
+      "detail": 15,
+      "basketAdd": 3,
+      "tryonSuccess": 3,
+      "resultView": 3,
+      "want": 2,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 59,
+      "coldRiskScore": 41,
+      "growthScore": 45,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.6,
+      "resultViewDurationSec": 23
+    }
+  },
+  {
+    "id": "xhs-68a585fa000000001d028505",
+    "styleCode": "XHS0037",
+    "name": "夏日西瓜冰美甲",
+    "description": "夏日西瓜冰美甲，清新可爱，少女心满满，ins风格适合夏日搭配。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=68a585fa000000001d028505_25773ce2d550.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-09",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 84,
+      "view": 35,
+      "detail": 5,
+      "basketAdd": 15,
+      "tryonSuccess": 17,
+      "resultView": 14,
+      "want": 12,
+      "confirm": 7,
+      "orders": 6,
+      "hotScore": 73,
+      "coldRiskScore": 27,
+      "growthScore": 72,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.8,
+      "resultViewDurationSec": 49
+    }
+  },
+  {
+    "id": "xhs-6932af6f000000001e00225c",
+    "styleCode": "XHS0038",
+    "name": "肉桂色云雾晕染美甲",
+    "description": "肉桂色温柔晕染，云雾层次感十足，搭配花朵元素，展现高级质感，适合秋冬。",
+    "status": "published",
+    "category": "花朵",
+    "price": 183,
+    "coverImage": "/api/xhs-image?file=6932af6f000000001e00225c_eddc1a09c034.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-10",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "高级感",
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "花朵",
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "渐变",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 34,
+      "view": 14,
+      "detail": 2,
+      "basketAdd": 1,
+      "tryonSuccess": 1,
+      "resultView": 1,
+      "want": 2,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 59,
+      "coldRiskScore": 41,
+      "growthScore": 51,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 31
+    }
+  },
+  {
+    "id": "xhs-68c6b4f9000000001d01b4f0",
+    "styleCode": "XHS0039",
+    "name": "温柔感美甲五选一",
+    "description": "精选五款温柔感美甲，风格高级，适合不同场合，总有一款适合你。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=68c6b4f9000000001d01b4f0_64f5336a98a5.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-11",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 90,
+      "view": 45,
+      "detail": 15,
+      "basketAdd": 4,
+      "tryonSuccess": 3,
+      "resultView": 3,
+      "want": 13,
+      "confirm": 1,
+      "orders": 1,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 27,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 44
+    }
+  },
+  {
+    "id": "xhs-69ae6167000000001d02462b",
+    "styleCode": "XHS0040",
+    "name": "粉紫仙气醋酸美甲",
+    "description": "超仙粉紫猫眼醋酸美甲，把春日温柔浪漫焊在指尖，搭配柔雾唇妆，氛围感满分。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69ae6167000000001d02462b_9e3b2ccaced5.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-12",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "温柔感",
+        "ins风"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "约会",
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 12,
+      "view": 6,
+      "detail": 3,
+      "basketAdd": 4,
+      "tryonSuccess": 4,
+      "resultView": 3,
+      "want": 2,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 74,
+      "coldRiskScore": 26,
+      "growthScore": 91,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.8,
+      "resultViewDurationSec": 48
+    }
+  },
+  {
+    "id": "xhs-69fc6423000000003601eb3a",
+    "styleCode": "XHS0041",
+    "name": "清透薄荷海美甲",
+    "description": "清透薄荷蓝搭配星星，如薄荷海般清凉。指尖藏着夏日温柔，底妆也要清透服帖。玛丽黛佳种籽气垫，抗暗沉保湿，打造伪素颜奶油肌。",
+    "status": "published",
+    "category": "清透",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69fc6423000000003601eb3a_6c6339f5ed56.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-13",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 156,
+      "view": 65,
+      "detail": 15,
+      "basketAdd": 17,
+      "tryonSuccess": 15,
+      "resultView": 13,
+      "want": 18,
+      "confirm": 12,
+      "orders": 11,
+      "hotScore": 78,
+      "coldRiskScore": 22,
+      "growthScore": 54,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.6,
+      "resultViewDurationSec": 43
+    }
+  },
+  {
+    "id": "xhs-691847bf0000000005003484",
+    "styleCode": "XHS0042",
+    "name": "冰感蓝猫眼美甲",
+    "description": "冰感蓝色猫眼美甲，清冷风格，显白效果极佳。简约而不失高级感，适合夏日清爽搭配。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 205,
+    "coverImage": "/api/xhs-image?file=691847bf0000000005003484_d2536b6892f6.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-14",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感",
+        "清新简约"
+      ],
+      "craft": [
+        "猫眼",
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "渐变",
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 180,
+      "view": 90,
+      "detail": 37,
+      "basketAdd": 21,
+      "tryonSuccess": 21,
+      "resultView": 18,
+      "want": 18,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 69,
+      "coldRiskScore": 31,
+      "growthScore": 31,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.0,
+      "resultViewDurationSec": 36
+    }
+  },
+  {
+    "id": "xhs-69df7e3d000000002102faf1",
+    "styleCode": "XHS0043",
+    "name": "紫色猫眼钻饰美甲",
+    "description": "紫色猫眼搭配钻饰，高级感十足。短甲设计，适合夏日，低调奢华。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 225,
+    "coverImage": "/api/xhs-image?file=69df7e3d000000002102faf1_715b608a3c04.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-15",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 28,
+      "view": 9,
+      "detail": 1,
+      "basketAdd": 2,
+      "tryonSuccess": 2,
+      "resultView": 2,
+      "want": 2,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 68,
+      "coldRiskScore": 32,
+      "growthScore": 38,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 38
+    }
+  },
+  {
+    "id": "xhs-696b56700000000021030dab",
+    "styleCode": "XHS0044",
+    "name": "韩系蝴蝶结美甲",
+    "description": "粉粉嫩嫩的蝴蝶结美甲，韩味满满，超温柔。穿戴甲设计，方便佩戴，甜美可爱。",
+    "status": "published",
+    "category": "蝴蝶结",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=696b56700000000021030dab_ae0adf1e163c.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-16",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 98,
+      "view": 49,
+      "detail": 14,
+      "basketAdd": 11,
+      "tryonSuccess": 12,
+      "resultView": 10,
+      "want": 10,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 68,
+      "coldRiskScore": 32,
+      "growthScore": 40,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 36
+    }
+  },
+  {
+    "id": "xhs-69d5c796000000001f000c90",
+    "styleCode": "XHS0045",
+    "name": "冰蓝猫眼美甲",
+    "description": "炎炎夏日，冰蓝色猫眼美甲搭配钻饰，清爽干净。简约设计，显白又高级。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 213,
+    "coverImage": "/api/xhs-image?file=69d5c796000000001f000c90_78959ec49c96.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-17",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "清新简约"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 138,
+      "view": 69,
+      "detail": 29,
+      "basketAdd": 16,
+      "tryonSuccess": 16,
+      "resultView": 13,
+      "want": 16,
+      "confirm": 11,
+      "orders": 10,
+      "hotScore": 84,
+      "coldRiskScore": 16,
+      "growthScore": 91,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.2,
+      "resultViewDurationSec": 39
+    }
+  },
+  {
+    "id": "xhs-69abc09b000000002602f912",
+    "styleCode": "XHS0046",
+    "name": "鹅黄渐变花朵美甲",
+    "description": "春日限定鹅黄色渐变美甲，搭配立体小花花，清新又春天。多巴胺风格，可爱满分。",
+    "status": "published",
+    "category": "渐变",
+    "price": 156,
+    "coverImage": "/api/xhs-image?file=69abc09b000000002602f912_688fba1177ec.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-18",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "ins风",
+        "清新简约"
+      ],
+      "craft": [
+        "花朵"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 223,
+      "view": 93,
+      "detail": 25,
+      "basketAdd": 29,
+      "tryonSuccess": 29,
+      "resultView": 24,
+      "want": 19,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 79,
+      "coldRiskScore": 21,
+      "growthScore": 92,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.5,
+      "resultViewDurationSec": 36
+    }
+  },
+  {
+    "id": "xhs-68b54b22000000001b020e0f",
+    "styleCode": "XHS0047",
+    "name": "蓝眼泪钻饰美甲",
+    "description": "收藏已久的蓝眼泪指尖钻美甲，指尖亮闪闪，非常漂亮。夏日必备，高级感十足。",
+    "status": "published",
+    "category": "钻饰",
+    "price": 185,
+    "coverImage": "/api/xhs-image?file=68b54b22000000001b020e0f_d0ce3a7d22db.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-19",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 18,
+      "view": 9,
+      "detail": 3,
+      "basketAdd": 3,
+      "tryonSuccess": 3,
+      "resultView": 3,
+      "want": 1,
+      "confirm": 1,
+      "orders": 1,
+      "hotScore": 62,
+      "coldRiskScore": 38,
+      "growthScore": 89,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-68a30d5d000000001d0363d7",
+    "styleCode": "XHS0048",
+    "name": "粉色渐变短甲美甲",
+    "description": "裸色粉色渐变，夏日小短甲，超级可爱。简约设计，适合日常，甜美又减龄。",
+    "status": "published",
+    "category": "渐变",
+    "price": 153,
+    "coverImage": "/api/xhs-image?file=68a30d5d000000001d0363d7_82387e20b992.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-20",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "渐变"
+      ]
+    },
+    "metrics": {
+      "exposure": 348,
+      "view": 145,
+      "detail": 26,
+      "basketAdd": 40,
+      "tryonSuccess": 40,
+      "resultView": 34,
+      "want": 65,
+      "confirm": 51,
+      "orders": 45,
+      "hotScore": 74,
+      "coldRiskScore": 26,
+      "growthScore": 6,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 14,
+        "detail": 7,
+        "tryon_result": 13,
+        "ai_recommend": 9,
+        "want_list": 8
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.7,
+      "resultViewDurationSec": 58
+    }
+  },
+  {
+    "id": "xhs-670ddb70000000002401445d",
+    "styleCode": "XHS0049",
+    "name": "清透梅子冰美甲",
+    "description": "清透冰透的梅子色，bulingbuling闪亮效果，显白又仙气，适合喜欢高级感风格的你。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=670ddb70000000002401445d_e1a018fcec53.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-21",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 564,
+      "view": 282,
+      "detail": 112,
+      "basketAdd": 18,
+      "tryonSuccess": 18,
+      "resultView": 15,
+      "want": 21,
+      "confirm": 5,
+      "orders": 4,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 50,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-691fe81b000000001e03bcd6",
+    "styleCode": "XHS0050",
+    "name": "法式猫眼千金美甲",
+    "description": "法式猫眼设计，优雅中带着贵气，指尖闪耀迷人光泽，温柔又高级。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 198,
+    "coverImage": "/api/xhs-image?file=691fe81b000000001e03bcd6_2251a800ac0a.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-22",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "猫眼",
+        "法式"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "精致"
+      ]
+    },
+    "metrics": {
+      "exposure": 940,
+      "view": 470,
+      "detail": 148,
+      "basketAdd": 120,
+      "tryonSuccess": 122,
+      "resultView": 102,
+      "want": 92,
+      "confirm": 128,
+      "orders": 113,
+      "hotScore": 85,
+      "coldRiskScore": 15,
+      "growthScore": 51,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 36,
+        "detail": 18,
+        "tryon_result": 33,
+        "ai_recommend": 23,
+        "want_list": 18
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.2,
+      "resultViewDurationSec": 36
+    }
+  },
+  {
+    "id": "xhs-69f2fd4400000000230157f1",
+    "styleCode": "XHS0051",
+    "name": "浅杏奶茶手绘短甲",
+    "description": "奶杏色打底，软糯温柔，手绘小蛋糕、云朵和小熊图案，可爱不突兀，黄皮友好，日常通勤首选。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69f2fd4400000000230157f1_346c7224ec6d.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-23",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 446,
+      "view": 223,
+      "detail": 69,
+      "basketAdd": 71,
+      "tryonSuccess": 75,
+      "resultView": 63,
+      "want": 26,
+      "confirm": 13,
+      "orders": 11,
+      "hotScore": 57,
+      "coldRiskScore": 43,
+      "growthScore": 50,
+      "trendLabel": "Cold_AfterTryon",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.6,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-69b952ba000000001a020922",
+    "styleCode": "XHS0052",
+    "name": "粉色醋酸美甲",
+    "description": "粉色醋酸美甲，简约粉嫩，适合喜欢甜美风格的你，教程可分享。",
+    "status": "published",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69b952ba000000001a020922_3d0504496cdc.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-24",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 656,
+      "view": 328,
+      "detail": 123,
+      "basketAdd": 43,
+      "tryonSuccess": 46,
+      "resultView": 39,
+      "want": 44,
+      "confirm": 20,
+      "orders": 18,
+      "hotScore": 65,
+      "coldRiskScore": 35,
+      "growthScore": 78,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 6,
+        "detail": 3,
+        "tryon_result": 5,
+        "ai_recommend": 4,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 30
+    }
+  },
+  {
+    "id": "xhs-6a0c1eb000000000370346e7",
+    "styleCode": "XHS0053",
+    "name": "辣妹酷感美甲",
+    "description": "辣妹风格美甲，酷酷的设计，彰显个性与时尚，适合追求独特风格的你。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=6a0c1eb000000000370346e7_7acca7f1d87d.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-25",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 250,
+      "view": 125,
+      "detail": 45,
+      "basketAdd": 11,
+      "tryonSuccess": 13,
+      "resultView": 11,
+      "want": 35,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 46,
+      "coldRiskScore": 54,
+      "growthScore": 49,
+      "trendLabel": "Cold_Detail",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10.2,
+      "resultViewDurationSec": 43
+    }
+  },
+  {
+    "id": "xhs-69cc70600000000023004397",
+    "styleCode": "XHS0054",
+    "name": "裸金法式温柔美甲",
+    "description": "清透裸色打底，细碎金闪法式边，不挑皮显白，短甲友好，日常约会皆宜，细节感满满。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69cc70600000000023004397_60650701a1e7.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-26",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 542,
+      "view": 226,
+      "detail": 59,
+      "basketAdd": 60,
+      "tryonSuccess": 60,
+      "resultView": 50,
+      "want": 76,
+      "confirm": 64,
+      "orders": 56,
+      "hotScore": 80,
+      "coldRiskScore": 20,
+      "growthScore": 78,
+      "trendLabel": "HotUp",
+      "sampleStatus": "enough",
+      "suggestion": "热度和确认都高，适合继续保留在首页主推位。",
+      "sourceBreakdown": {
+        "card": 18,
+        "detail": 9,
+        "tryon_result": 17,
+        "ai_recommend": 12,
+        "want_list": 8
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.5,
+      "resultViewDurationSec": 48
+    }
+  },
+  {
+    "id": "xhs-69f3577600000000380211f4",
+    "styleCode": "XHS0055",
+    "name": "白月光法式渐变美甲",
+    "description": "裸粉渐变搭配碎钻细闪，清透显贵，自带柔光滤镜，仙气十足。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 210,
+    "coverImage": "/api/xhs-image?file=69f3577600000000380211f4_2a98c787561d.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-27",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼",
+        "法式"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "精致"
+      ]
+    },
+    "metrics": {
+      "exposure": 630,
+      "view": 315,
+      "detail": 112,
+      "basketAdd": 23,
+      "tryonSuccess": 22,
+      "resultView": 18,
+      "want": 11,
+      "confirm": 9,
+      "orders": 8,
+      "hotScore": 50,
+      "coldRiskScore": 50,
+      "growthScore": 98,
+      "trendLabel": "Cold_Detail",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 10.0,
+      "resultViewDurationSec": 21
+    }
+  },
+  {
+    "id": "xhs-69d607030000000022000a40",
+    "styleCode": "XHS0056",
+    "name": "波点蓝莓韩系美甲",
+    "description": "韩系波点蓝莓设计，ins高级感，清新可爱，适合春日穿戴。",
+    "status": "published",
+    "category": "ins风",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69d607030000000022000a40_77627b3df7c4.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-28",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "ins风"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 312,
+      "view": 130,
+      "detail": 30,
+      "basketAdd": 22,
+      "tryonSuccess": 21,
+      "resultView": 18,
+      "want": 39,
+      "confirm": 10,
+      "orders": 9,
+      "hotScore": 80,
+      "coldRiskScore": 20,
+      "growthScore": 42,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 1,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.4,
+      "resultViewDurationSec": 45
+    }
+  },
+  {
+    "id": "xhs-69845e6200000000210296e2",
+    "styleCode": "XHS0057",
+    "name": "豆沙裸温柔美甲",
+    "description": "清透豆沙调揉着淡淡裸感，不挑皮巨显白，低调精致温柔到骨子里。通勤约会皆宜，搭卫衣小裙子西装都适配，百搭天花板非它莫属。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69845e6200000000210296e2_957f5d6bb73b.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-01",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 319,
+      "view": 133,
+      "detail": 28,
+      "basketAdd": 26,
+      "tryonSuccess": 28,
+      "resultView": 24,
+      "want": 24,
+      "confirm": 13,
+      "orders": 11,
+      "hotScore": 66,
+      "coldRiskScore": 34,
+      "growthScore": 78,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 34
+    }
+  },
+  {
+    "id": "xhs-6a06b89f0000000035031aa1",
+    "styleCode": "XHS0058",
+    "name": "日系美萌春夏美甲",
+    "description": "充满日系美萌感的春夏美甲，可爱风格点亮指尖，适合追求个性与甜美的你。",
+    "status": "published",
+    "category": "ins风",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=6a06b89f0000000035031aa1_679a12fe111b.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-02",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "ins风"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 490,
+      "view": 204,
+      "detail": 57,
+      "basketAdd": 92,
+      "tryonSuccess": 91,
+      "resultView": 76,
+      "want": 71,
+      "confirm": 47,
+      "orders": 41,
+      "hotScore": 79,
+      "coldRiskScore": 21,
+      "growthScore": 28,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 13,
+        "detail": 7,
+        "tryon_result": 12,
+        "ai_recommend": 8,
+        "want_list": 7
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.5,
+      "resultViewDurationSec": 49
+    }
+  },
+  {
+    "id": "xhs-69d0e4aa000000001f00336d",
+    "styleCode": "XHS0059",
+    "name": "菱格纹猫眼美甲",
+    "description": "菱格纹与猫眼结合，高级感十足，温柔又显气质，适合春夏季节。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 225,
+    "coverImage": "/api/xhs-image?file=69d0e4aa000000001f00336d_1215a7cecfe5.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-03",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日",
+        "春日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 415,
+      "view": 173,
+      "detail": 40,
+      "basketAdd": 15,
+      "tryonSuccess": 16,
+      "resultView": 13,
+      "want": 19,
+      "confirm": 12,
+      "orders": 11,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 63,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-68dcecd6000000000301f88f",
+    "styleCode": "XHS0060",
+    "name": "简约可爱猫爪美甲",
+    "description": "猫猫系列美甲，简约可爱，业余美甲师精心设计，立志做出可实现的好看猫爪，持续改进。",
+    "status": "published",
+    "category": "可爱风",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=68dcecd6000000000301f88f_09a68ca7a51e.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-04",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 562,
+      "view": 234,
+      "detail": 40,
+      "basketAdd": 74,
+      "tryonSuccess": 73,
+      "resultView": 61,
+      "want": 25,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 39,
+      "coldRiskScore": 61,
+      "growthScore": 76,
+      "trendLabel": "Cold_AfterTryon",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10.6,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-69f49fa0000000002003b43a",
+    "styleCode": "XHS0061",
+    "name": "海盐冰气泡渐变美甲",
+    "description": "裸透底色到奶蓝色渐变，像加了冰的海盐气泡水，清透显白。不规则手绘加小碎钻，温柔有设计感，短甲黄皮皆可，清爽夏日感。",
+    "status": "published",
+    "category": "渐变",
+    "price": 153,
+    "coverImage": "/api/xhs-image?file=69f49fa0000000002003b43a_37a41a98857b.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-05",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "清新简约"
+      ],
+      "craft": [
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "渐变",
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 326,
+      "view": 136,
+      "detail": 31,
+      "basketAdd": 33,
+      "tryonSuccess": 37,
+      "resultView": 31,
+      "want": 37,
+      "confirm": 31,
+      "orders": 27,
+      "hotScore": 83,
+      "coldRiskScore": 17,
+      "growthScore": 12,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 9,
+        "detail": 4,
+        "tryon_result": 8,
+        "ai_recommend": 6,
+        "want_list": 4
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.3,
+      "resultViewDurationSec": 42
+    }
+  },
+  {
+    "id": "xhs-6a046f12000000003502c7ce",
+    "styleCode": "XHS0062",
+    "name": "海莉风猫眼美甲",
+    "description": "海莉风格猫眼美甲，高级感十足，适合短甲，清新简约又不失个性。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=6a046f12000000003502c7ce_6a21ad30e4a9.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-06",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风",
+        "清新简约"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 425,
+      "view": 177,
+      "detail": 33,
+      "basketAdd": 44,
+      "tryonSuccess": 45,
+      "resultView": 38,
+      "want": 29,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 64,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 33
+    }
+  },
+  {
+    "id": "xhs-69999487000000000a0287a3",
+    "styleCode": "XHS0063",
+    "name": "奶油海莉渐变美甲",
+    "description": "裸透极光底色配细钻链条，温柔显贵，富家千金指尖氛围感。搭配拼朵朵美甲工具，轻松打造。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69999487000000000a0287a3_5e772660c430.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-07",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 414,
+      "view": 207,
+      "detail": 61,
+      "basketAdd": 42,
+      "tryonSuccess": 45,
+      "resultView": 38,
+      "want": 52,
+      "confirm": 17,
+      "orders": 15,
+      "hotScore": 69,
+      "coldRiskScore": 31,
+      "growthScore": 59,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 5,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 3
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.0,
+      "resultViewDurationSec": 41
+    }
+  },
+  {
+    "id": "xhs-68ce1d50000000000e020057",
+    "styleCode": "XHS0064",
+    "name": "蓝色猫眼清冷美甲",
+    "description": "蓝色猫眼美甲，清冷感拉满，适合秋冬季节，短甲也可驾驭。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=68ce1d50000000000e020057_76d1637fd09d.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-08",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲",
+        "DIY"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 388,
+      "view": 125,
+      "detail": 8,
+      "basketAdd": 5,
+      "tryonSuccess": 6,
+      "resultView": 5,
+      "want": 3,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 19,
+      "coldRiskScore": 81,
+      "growthScore": 73,
+      "trendLabel": "Cold_FirstLook",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.91,
+      "avgLatencySec": 11.6,
+      "resultViewDurationSec": 20
+    }
+  },
+  {
+    "id": "xhs-6a1153eb00000000380361b0",
+    "styleCode": "XHS0065",
+    "name": "番石榴清茶美甲",
+    "description": "夏日番石榴清茶配色，清新手绘图案，短甲友好，带来清凉感。",
+    "status": "published",
+    "category": "手绘",
+    "price": 183,
+    "coverImage": "/api/xhs-image?file=6a1153eb00000000380361b0_0eb916501ab7.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-09",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 374,
+      "view": 156,
+      "detail": 39,
+      "basketAdd": 13,
+      "tryonSuccess": 11,
+      "resultView": 9,
+      "want": 15,
+      "confirm": 13,
+      "orders": 11,
+      "hotScore": 68,
+      "coldRiskScore": 32,
+      "growthScore": 69,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 27
+    }
+  },
+  {
+    "id": "xhs-69c0efdd0000000023023763",
+    "styleCode": "XHS0066",
+    "name": "可爱猫眼腮红美甲",
+    "description": "侧光猫眼搭配腮红拍拍，手绘图案可爱满分，短甲也能拥有ins风。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69c0efdd0000000023023763_1dcf7beb01a7.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-10",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "ins风"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲",
+        "穿戴甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 218,
+      "view": 109,
+      "detail": 35,
+      "basketAdd": 11,
+      "tryonSuccess": 9,
+      "resultView": 8,
+      "want": 13,
+      "confirm": 8,
+      "orders": 7,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 48,
+      "trendLabel": "Cold_Detail",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 29
+    }
+  },
+  {
+    "id": "xhs-69e831070000000023016550",
+    "styleCode": "XHS0067",
+    "name": "葡萄冰沙猫眼美甲",
+    "description": "葡萄冰沙配色猫眼美甲，温柔感十足，搭配钻饰更显高级。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 213,
+    "coverImage": "/api/xhs-image?file=69e831070000000023016550_db18e4648f80.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-11",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 319,
+      "view": 133,
+      "detail": 27,
+      "basketAdd": 35,
+      "tryonSuccess": 38,
+      "resultView": 32,
+      "want": 24,
+      "confirm": 14,
+      "orders": 12,
+      "hotScore": 67,
+      "coldRiskScore": 33,
+      "growthScore": 38,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 34
+    }
+  },
+  {
+    "id": "xhs-69dd4733000000001f006a44",
+    "styleCode": "XHS0068",
+    "name": "发光玻璃花美甲",
+    "description": "会发光的玻璃花效果，猫眼工艺，短甲穿戴甲均可，夏日吸睛款。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69dd4733000000001f006a44_c6f7410b2681.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-12",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲",
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 1025,
+      "view": 427,
+      "detail": 119,
+      "basketAdd": 61,
+      "tryonSuccess": 64,
+      "resultView": 54,
+      "want": 69,
+      "confirm": 32,
+      "orders": 28,
+      "hotScore": 60,
+      "coldRiskScore": 40,
+      "growthScore": 86,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 9,
+        "detail": 4,
+        "tryon_result": 8,
+        "ai_recommend": 6,
+        "want_list": 5
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 33
+    }
+  },
+  {
+    "id": "xhs-69cfdb950000000022003ffc",
+    "styleCode": "XHS0069",
+    "name": "裸色延长甲美甲",
+    "description": "第一次尝试裸色以外的颜色，还原度高，价格合理，延长甲效果自然。",
+    "status": "published",
+    "category": "延长甲",
+    "price": 168,
+    "coverImage": "/api/xhs-image?file=69cfdb950000000022003ffc_750d0a650f90.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-13",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": false,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "延长甲"
+      ],
+      "length": [
+        "延长甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 322,
+      "view": 104,
+      "detail": 7,
+      "basketAdd": 8,
+      "tryonSuccess": 9,
+      "resultView": 8,
+      "want": 5,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 32,
+      "coldRiskScore": 68,
+      "growthScore": 46,
+      "trendLabel": "Cold_FirstLook",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.0,
+      "resultViewDurationSec": 22
+    }
+  },
+  {
+    "id": "xhs-6a16c58c000000003601d6d3",
+    "styleCode": "XHS0070",
+    "name": "孔雀蓝显白美甲",
+    "description": "孔雀蓝配色超级显白，伸手就赢，夏日必备显白神甲。",
+    "status": "published",
+    "category": "夏日",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=6a16c58c000000003601d6d3_50f78f14ca69.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-14",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "夏日"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 320,
+      "view": 160,
+      "detail": 65,
+      "basketAdd": 10,
+      "tryonSuccess": 11,
+      "resultView": 9,
+      "want": 16,
+      "confirm": 9,
+      "orders": 8,
+      "hotScore": 67,
+      "coldRiskScore": 33,
+      "growthScore": 79,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 27
+    }
+  },
+  {
+    "id": "xhs-6a1544950000000008024d49",
+    "styleCode": "XHS0071",
+    "name": "奶fufu碎花美甲",
+    "description": "奶fufu的碎花图案，ins风清新简约，短甲也能甜美可爱。",
+    "status": "published",
+    "category": "花朵",
+    "price": 156,
+    "coverImage": "/api/xhs-image?file=6a1544950000000008024d49_b64528446910.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-15",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "ins风",
+        "清新简约"
+      ],
+      "craft": [
+        "花朵"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 570,
+      "view": 285,
+      "detail": 93,
+      "basketAdd": 70,
+      "tryonSuccess": 73,
+      "resultView": 61,
+      "want": 106,
+      "confirm": 76,
+      "orders": 67,
+      "hotScore": 87,
+      "coldRiskScore": 13,
+      "growthScore": 37,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 21,
+        "detail": 11,
+        "tryon_result": 20,
+        "ai_recommend": 14,
+        "want_list": 10
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.1,
+      "resultViewDurationSec": 51
+    }
+  },
+  {
+    "id": "xhs-69e36f83000000001d01bc05",
+    "styleCode": "XHS0072",
+    "name": "粉白渐变温柔美甲",
+    "description": "裸粉渐变温柔显气质，清透果冻质感，不挑皮不挑甲型，日常通勤约会皆宜。",
+    "status": "published",
+    "category": "渐变",
+    "price": 165,
+    "coverImage": "/api/xhs-image?file=69e36f83000000001d01bc05_d9c97a5e317f.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-16",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感",
+        "ins风",
+        "清新简约"
+      ],
+      "craft": [
+        "渐变"
+      ],
+      "length": [
+        "短甲",
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常",
+        "约会"
+      ],
+      "effect": [
+        "渐变"
+      ]
+    },
+    "metrics": {
+      "exposure": 494,
+      "view": 206,
+      "detail": 45,
+      "basketAdd": 26,
+      "tryonSuccess": 26,
+      "resultView": 22,
+      "want": 24,
+      "confirm": 14,
+      "orders": 12,
+      "hotScore": 65,
+      "coldRiskScore": 35,
+      "growthScore": 80,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.2,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-69d92f330000000023005c1f",
+    "styleCode": "XHS0073",
+    "name": "仙气花花猫眼美甲",
+    "description": "清透猫眼搭配立体花朵与细钻，温柔仙气，夏日指尖的浪漫。中长椭圆甲型修饰手型，日常百搭。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 231,
+    "coverImage": "/api/xhs-image?file=69d92f330000000023005c1f_2283367ecd93.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-17",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰",
+        "花朵"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 252,
+      "view": 126,
+      "detail": 38,
+      "basketAdd": 12,
+      "tryonSuccess": 14,
+      "resultView": 12,
+      "want": 13,
+      "confirm": 16,
+      "orders": 14,
+      "hotScore": 68,
+      "coldRiskScore": 32,
+      "growthScore": 82,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 3
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 27
+    }
+  },
+  {
+    "id": "xhs-68c300b7000000001b03305b",
+    "styleCode": "XHS0074",
+    "name": "实诚美甲师还原款",
+    "description": "十年美甲师坚持真实还原，不忽悠顾客。款式精致，比原图更美，红色水彩渐变层次丰富。",
+    "status": "published",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=68c300b7000000001b03305b_f33c7c94592a.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-18",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 410,
+      "view": 171,
+      "detail": 37,
+      "basketAdd": 20,
+      "tryonSuccess": 21,
+      "resultView": 18,
+      "want": 38,
+      "confirm": 13,
+      "orders": 11,
+      "hotScore": 68,
+      "coldRiskScore": 32,
+      "growthScore": 51,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.1,
+      "resultViewDurationSec": 38
+    }
+  },
+  {
+    "id": "xhs-69e5cea2000000002200d381",
+    "styleCode": "XHS0075",
+    "name": "冰蓝粉渐变蝴蝶结美甲",
+    "description": "裸粉渐变冰蓝，细闪猫眼水光感，立体蝴蝶结与细钻点缀，温柔灵动。中长椭圆甲型显手长，低饱和不挑皮。",
+    "status": "published",
+    "category": "渐变",
+    "price": 195,
+    "coverImage": "/api/xhs-image?file=69e5cea2000000002200d381_1841570c4b57.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-19",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "渐变"
+      ],
+      "length": [
+        "穿戴甲",
+        "延长甲"
+      ],
+      "scene": [
+        "日常",
+        "约会",
+        "出游"
+      ],
+      "effect": [
+        "渐变"
+      ]
+    },
+    "metrics": {
+      "exposure": 320,
+      "view": 160,
+      "detail": 51,
+      "basketAdd": 22,
+      "tryonSuccess": 23,
+      "resultView": 19,
+      "want": 27,
+      "confirm": 13,
+      "orders": 11,
+      "hotScore": 62,
+      "coldRiskScore": 38,
+      "growthScore": 48,
+      "trendLabel": "Cold_AfterWant",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 33
+    }
+  },
+  {
+    "id": "xhs-69b97fde000000001d01e1ea",
+    "styleCode": "XHS0076",
+    "name": "极光绿猫眼美甲",
+    "description": "极光绿搭配猫眼效果，光泽感强，上手显白显贵气。温柔高级，适合秋冬季节。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69b97fde000000001d01e1ea_3c89e4651123.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-20",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼",
+        "显白",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 826,
+      "view": 344,
+      "detail": 87,
+      "basketAdd": 40,
+      "tryonSuccess": 43,
+      "resultView": 36,
+      "want": 22,
+      "confirm": 20,
+      "orders": 18,
+      "hotScore": 49,
+      "coldRiskScore": 51,
+      "growthScore": 44,
+      "trendLabel": "Cold_AfterWant",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 6,
+        "detail": 3,
+        "tryon_result": 5,
+        "ai_recommend": 4,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10.0,
+      "resultViewDurationSec": 24
+    }
+  },
+  {
+    "id": "xhs-69d5b0f60000000023011355",
+    "styleCode": "XHS0077",
+    "name": "裸棕渐变碎钻美甲",
+    "description": "裸棕渐变搭配爆闪碎钻，高级感十足，阳光下如银河般闪耀。温柔氛围感，通勤约会皆宜。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69d5b0f60000000023011355_6b5e2180253b.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-21",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 446,
+      "view": 186,
+      "detail": 46,
+      "basketAdd": 40,
+      "tryonSuccess": 42,
+      "resultView": 35,
+      "want": 66,
+      "confirm": 54,
+      "orders": 48,
+      "hotScore": 82,
+      "coldRiskScore": 18,
+      "growthScore": 47,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 15,
+        "detail": 8,
+        "tryon_result": 14,
+        "ai_recommend": 10,
+        "want_list": 7
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.3,
+      "resultViewDurationSec": 50
+    }
+  },
+  {
+    "id": "xhs-6a15ae960000000035026466",
+    "styleCode": "XHS0078",
+    "name": "紫葡萄猫眼美甲",
+    "description": "紫色猫眼美甲，宛如一颗紫葡萄，光泽迷人，高级感满满。简约ins风，指尖亮点。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=6a15ae960000000035026466_a16af92849dc.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-22",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 1486,
+      "view": 619,
+      "detail": 148,
+      "basketAdd": 148,
+      "tryonSuccess": 150,
+      "resultView": 126,
+      "want": 187,
+      "confirm": 162,
+      "orders": 143,
+      "hotScore": 76,
+      "coldRiskScore": 24,
+      "growthScore": 69,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 45,
+        "detail": 23,
+        "tryon_result": 42,
+        "ai_recommend": 29,
+        "want_list": 23
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.6,
+      "resultViewDurationSec": 45
+    }
+  },
+  {
+    "id": "xhs-6a173fc80000000036033bb2",
+    "styleCode": "XHS0079",
+    "name": "Ins风手绘花花美甲",
+    "description": "手绘花朵图案，ins风格，简约高级。适合短甲，精致耐看。",
+    "status": "published",
+    "category": "手绘",
+    "price": 195,
+    "coverImage": "/api/xhs-image?file=6a173fc80000000036033bb2_9fa1d09d73f2.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-23",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 293,
+      "view": 122,
+      "detail": 26,
+      "basketAdd": 17,
+      "tryonSuccess": 17,
+      "resultView": 14,
+      "want": 14,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 64,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-68996a7c0000000004004970",
+    "styleCode": "XHS0080",
+    "name": "蓝色猫眼波点美甲",
+    "description": "深蓝浅蓝猫眼搭配亮片波点，如银河海洋。短甲友好，夏日清凉感十足。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 213,
+    "coverImage": "/api/xhs-image?file=68996a7c0000000004004970_599bf41595b3.jpg",
+    "isPromoted": true,
+    "isColdStart": false,
+    "listedAt": "2026-05-24",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰"
+      ],
+      "length": [
+        "短甲",
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 626,
+      "view": 313,
+      "detail": 110,
+      "basketAdd": 113,
+      "tryonSuccess": 111,
+      "resultView": 93,
+      "want": 86,
+      "confirm": 69,
+      "orders": 61,
+      "hotScore": 89,
+      "coldRiskScore": 11,
+      "growthScore": 68,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 19,
+        "detail": 10,
+        "tryon_result": 18,
+        "ai_recommend": 12,
+        "want_list": 10
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.0,
+      "resultViewDurationSec": 43
+    }
+  },
+  {
+    "id": "xhs-69cca8e1000000001f0063f1",
+    "styleCode": "XHS0081",
+    "name": "猫眼短甲翻车实录",
+    "description": "分享猫眼短甲翻车经历，原图与实物对比，五颜六色太花哨，效果怪怪的，避雷参考。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69cca8e1000000001f0063f1_7ba5e57760b2.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-25",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 221,
+      "view": 92,
+      "detail": 25,
+      "basketAdd": 31,
+      "tryonSuccess": 31,
+      "resultView": 26,
+      "want": 28,
+      "confirm": 29,
+      "orders": 26,
+      "hotScore": 84,
+      "coldRiskScore": 16,
+      "growthScore": 59,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 8,
+        "detail": 4,
+        "tryon_result": 8,
+        "ai_recommend": 5,
+        "want_list": 4
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.3,
+      "resultViewDurationSec": 45
+    }
+  },
+  {
+    "id": "xhs-69bfbd32000000001b022953",
+    "styleCode": "XHS0082",
+    "name": "深圳58元玻璃珠猫眼",
+    "description": "深圳58元本甲建构猫眼美甲，无美颜无滤镜实拍，分享玻璃珠猫眼3个注意点：选透色胶、裸色打底、叠加亮面胶。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69bfbd32000000001b022953_8272d50273ed.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-26",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "清新简约"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 190,
+      "view": 79,
+      "detail": 13,
+      "basketAdd": 20,
+      "tryonSuccess": 23,
+      "resultView": 19,
+      "want": 9,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 70,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 28
+    }
+  },
+  {
+    "id": "xhs-666eb917000000001c0355e7",
+    "styleCode": "XHS0083",
+    "name": "黑银猫眼新中式",
+    "description": "黑银猫眼搭配新中式国风竹元素，高级感满满，猫眼效果绝佳，适合追求独特风格的你。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=666eb917000000001c0355e7_7b6cbc61fab1.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-27",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 166,
+      "view": 83,
+      "detail": 25,
+      "basketAdd": 12,
+      "tryonSuccess": 14,
+      "resultView": 12,
+      "want": 26,
+      "confirm": 3,
+      "orders": 3,
+      "hotScore": 61,
+      "coldRiskScore": 39,
+      "growthScore": 47,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "样本不足，先给基础曝光，不急着判断冷热。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 46
+    }
+  },
+  {
+    "id": "xhs-6a0a7b0e0000000036003e89",
+    "styleCode": "XHS0084",
+    "name": "薄荷巧克力波点",
+    "description": "薄荷巧克力波点美甲，清新夏日风格，波点元素俏皮可爱，薄荷绿与巧克力色搭配，甜美又清爽。",
+    "status": "published",
+    "category": "夏日",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=6a0a7b0e0000000036003e89_4b4d8480a746.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-28",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "夏日"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 206,
+      "view": 86,
+      "detail": 16,
+      "basketAdd": 7,
+      "tryonSuccess": 8,
+      "resultView": 7,
+      "want": 12,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 63,
+      "coldRiskScore": 37,
+      "growthScore": 64,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.3,
+      "resultViewDurationSec": 31
+    }
+  },
+  {
+    "id": "xhs-6a1583a20000000006022d3f",
+    "styleCode": "XHS0085",
+    "name": "赛里木湖猫眼美甲",
+    "description": "灵感来自赛里木湖的猫眼美甲，清透蓝色调，猫眼光泽如湖水波光，夏日必备，仙气十足。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=6a1583a20000000006022d3f_f2510e8b44c2.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-01",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 188,
+      "view": 94,
+      "detail": 30,
+      "basketAdd": 17,
+      "tryonSuccess": 17,
+      "resultView": 14,
+      "want": 16,
+      "confirm": 8,
+      "orders": 7,
+      "hotScore": 75,
+      "coldRiskScore": 25,
+      "growthScore": 28,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.7,
+      "resultViewDurationSec": 33
+    }
+  },
+  {
+    "id": "xhs-68f07b2e000000000301bace",
+    "styleCode": "XHS0086",
+    "name": "裸粉极光渐变短甲",
+    "description": "裸粉色渐变极光色，细碎闪片波光粼粼，白色星星点缀，温柔梦幻，秋冬配毛衣绝美，公主风满满。",
+    "status": "published",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=68f07b2e000000000301bace_b4c7ed69379a.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-02",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 36,
+      "view": 18,
+      "detail": 9,
+      "basketAdd": 4,
+      "tryonSuccess": 5,
+      "resultView": 4,
+      "want": 3,
+      "confirm": 2,
+      "orders": 2,
+      "hotScore": 59,
+      "coldRiskScore": 41,
+      "growthScore": 86,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 0,
+        "tryon_result": 1,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 33
+    }
+  },
+  {
+    "id": "xhs-68eccc7b000000000701471d",
+    "styleCode": "XHS0087",
+    "name": "高级气质裸色通勤甲",
+    "description": "高级气质裸色美甲，淡人天菜，简约通勤风，温柔不张扬，适合日常上班，低调又显气质。",
+    "status": "published",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=68eccc7b000000000701471d_efccfbe9b9c3.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-03",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感",
+        "清新简约"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 209,
+      "view": 87,
+      "detail": 19,
+      "basketAdd": 14,
+      "tryonSuccess": 16,
+      "resultView": 13,
+      "want": 16,
+      "confirm": 8,
+      "orders": 7,
+      "hotScore": 59,
+      "coldRiskScore": 41,
+      "growthScore": 29,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.5,
+      "resultViewDurationSec": 35
+    }
+  },
+  {
+    "id": "xhs-69ff12cb0000000035033239",
+    "styleCode": "XHS0088",
+    "name": "清冷雾霾蓝猫眼星星",
+    "description": "清冷雾霾蓝猫眼星星美甲，搭配珍珠柔光和锆石细碎光泽，温柔不刻意，高级感十足，适合夏日。",
+    "status": "published",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69ff12cb0000000035033239_5400d8f73c4b.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-04",
+    "unpublishedAt": null,
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲",
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 30,
+      "view": 15,
+      "detail": 5,
+      "basketAdd": 3,
+      "tryonSuccess": 3,
+      "resultView": 3,
+      "want": 5,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 83,
+      "coldRiskScore": 17,
+      "growthScore": 70,
+      "trendLabel": "Potential",
+      "sampleStatus": "low_sample",
+      "suggestion": "曝光还没吃满，但转化不差，建议继续给测试位。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.3,
+      "resultViewDurationSec": 48
+    }
+  },
+  {
+    "id": "xhs-6a10353a000000000702145d",
+    "styleCode": "XHS0089",
+    "name": "米菲兔清透蓝猫眼",
+    "description": "蓝色猫眼搭配米菲兔手绘，清透感十足，夏日必备萌系美甲，显白又高级。",
+    "status": "pending_review",
+    "category": "手绘",
+    "price": 195,
+    "coverImage": "/api/xhs-image?file=6a10353a000000000702145d_8f039b74340b.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感",
+        "ins风",
+        "清新简约"
+      ],
+      "craft": [
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.2,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-68a6b389000000001d00becb",
+    "styleCode": "XHS0090",
+    "name": "香槟金小香风法式",
+    "description": "香槟金猫眼搭配拼钻，闪耀贵气，初秋精致感满分，适合追求高级感的你。",
+    "status": "pending_review",
+    "category": "钻饰",
+    "price": 185,
+    "coverImage": "/api/xhs-image?file=68a6b389000000001d00becb_4f3111b84358.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.8,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-687f5779000000000d027d0a",
+    "styleCode": "XHS0091",
+    "name": "果汁感多巴胺短甲",
+    "description": "甜甜果汁感法式短甲，多巴胺配色超显白，搭配钻戒拍照出片，清新灵动。",
+    "status": "pending_review",
+    "category": "ins风",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=687f5779000000000d027d0a_e463d58899a6.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "ins风"
+      ],
+      "craft": [
+        "ins风"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 7,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69daf7ce0000000021012ef8",
+    "styleCode": "XHS0092",
+    "name": "黄色系清新美甲",
+    "description": "明亮黄色系美甲，简约清新，适合夏日，为指尖增添一抹活力。",
+    "status": "pending_review",
+    "category": "夏日",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69daf7ce0000000021012ef8_c5ee9827c274.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "夏日"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 7.6,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-6a054cc6000000003703516a",
+    "styleCode": "XHS0093",
+    "name": "蓝色格纹猫眼短甲",
+    "description": "蓝色猫眼深邃神秘，白色猫眼清透温柔，无名指格纹设计精致复古，不夸张。",
+    "status": "pending_review",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=6a054cc6000000003703516a_d943616cc8c9.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 8.2,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69c22f7b000000002102dccf",
+    "styleCode": "XHS0094",
+    "name": "薄荷绿小雏菊美甲",
+    "description": "薄荷绿底色搭配小雏菊，清新自然，适合春日，短甲友好，温柔高级。",
+    "status": "pending_review",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69c22f7b000000002102dccf_d9901a992d3e.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "春日"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 8.8,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69eaf91c000000001901e004",
+    "styleCode": "XHS0095",
+    "name": "浅蓝渐变降温美甲",
+    "description": "浅蓝渐变如夏日清凉，简约高级，为指尖降降温，适合炎热天气。",
+    "status": "pending_review",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69eaf91c000000001901e004_292cb1c2fdf3.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "高级感",
+        "清新简约"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69dddbcc0000000021011c74",
+    "styleCode": "XHS0096",
+    "name": "纯欲甜酷蝴蝶结美甲",
+    "description": "蝴蝶结元素搭配纯欲甜酷风格，个性十足，适合追求独特风格的你。",
+    "status": "pending_review",
+    "category": "温柔感",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69dddbcc0000000021011c74_1b032a121c3d.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "个性风"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69c3380e000000001a023109",
+    "styleCode": "XHS0097",
+    "name": "蝴蝶星光渐变美甲",
+    "description": "裸粉渐变打底，细闪如碎钻月光，立体白蝴蝶灵动温柔，珍珠点缀似露珠落花瓣，仙气十足。",
+    "status": "pending_review",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69c3380e000000001a023109_df0c5efebc81.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日",
+        "春日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10.6,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-68a6a1cf000000001b03e775",
+    "styleCode": "XHS0098",
+    "name": "温柔感美甲合集",
+    "description": "精选多款温柔高级感美甲，适合夏日穿戴甲，简约优雅，百搭不挑手。",
+    "status": "pending_review",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=68a6a1cf000000001b03e775_c048b05c370f.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.2,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-6a106184000000003700d631",
+    "styleCode": "XHS0099",
+    "name": "海盐蓝星星波点法式美甲",
+    "description": "韩系海盐蓝法式搭配波点星星元素，清新元气少女感，夏日氛围满满。",
+    "status": "pending_review",
+    "category": "法式",
+    "price": 170,
+    "coverImage": "/api/xhs-image?file=6a106184000000003700d631_af53464ca1e2.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "法式"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "精致"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.8,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-6a11884f00000000070237d6",
+    "styleCode": "XHS0100",
+    "name": "黑粉配色小煤球美甲",
+    "description": "可爱小煤球图案搭配黑粉配色，小眼睛点缀萌趣十足，甜酷风格，穿戴甲款式。",
+    "status": "pending_review",
+    "category": "个性风",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=6a11884f00000000070237d6_eb3abd2b9b38.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感",
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 7,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69f72ee2000000001a02ce47",
+    "styleCode": "XHS0101",
+    "name": "奶黄色小鸡手绘美甲",
+    "description": "奶黄色小鸡图案，手绘风格，可爱满分，适合短甲，春日气息满满。",
+    "status": "draft",
+    "category": "手绘",
+    "price": 183,
+    "coverImage": "/api/xhs-image?file=69f72ee2000000001a02ce47_03650ff89405.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日",
+        "春日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "手绘"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 7.6,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69ccf2040000000022028076",
+    "styleCode": "XHS0102",
+    "name": "奶绿小花渐变美甲",
+    "description": "清透奶绿渐变打底，金箔碎钻点缀，指尖小白花精致灵动，小绿钻增添小心机，显手长不挑皮。",
+    "status": "draft",
+    "category": "高级感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69ccf2040000000022028076_7927e4436122.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日",
+        "春日"
+      ],
+      "style": [
+        "高级感",
+        "清新简约"
+      ],
+      "craft": [
+        "高级感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会",
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 8.2,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69c9d419000000002103986a",
+    "styleCode": "XHS0103",
+    "name": "蝴蝶结甜妹美甲",
+    "description": "裸粉底色搭配奶白法式，立体蝴蝶结与金闪细边，仙气灵动，短甲友好，春日氛围感拉满。",
+    "status": "draft",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69c9d419000000002103986a_b72000e061f1.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 8.8,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-6a04794400000000060323de",
+    "styleCode": "XHS0104",
+    "name": "夏日美甲款式投票",
+    "description": "美甲换款纠结中，征集仙女们意见，夏天适合的款式推荐。",
+    "status": "draft",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=6a04794400000000060323de_5b095cc57058.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 9.4,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-68e20d380000000003013d9b",
+    "styleCode": "XHS0105",
+    "name": "晨露唯美白月光",
+    "description": "晨露般的清透质感，温柔又高级，像白月光一样纯净美好，让人一眼心动。",
+    "status": "draft",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=68e20d380000000003013d9b_243390b93116.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "穿戴甲",
+        "DIY"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-6936c776000000001b02312e",
+    "styleCode": "XHS0106",
+    "name": "秋冬五选一美甲",
+    "description": "五款秋冬美甲款式任你挑选，每一款都精致独特，适合纠结星人参考。",
+    "status": "draft",
+    "category": "秋冬",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=6936c776000000001b02312e_26d2560dad3f.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "秋冬"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10.6,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-6a0d22d3000000000603289b",
+    "styleCode": "XHS0107",
+    "name": "果冻海猫眼美甲",
+    "description": "果冻海般的清透蓝色，搭配猫眼效果，温柔又高级，短甲也能轻松驾驭。",
+    "status": "draft",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=6a0d22d3000000000603289b_2f102407573a.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.2,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69b7c8240000000020038f00",
+    "styleCode": "XHS0108",
+    "name": "海洋猫眼格纹海星",
+    "description": "蓝色海洋风美甲，猫眼搭配格纹和海星装饰，珠光白与蓝色交织，夏日感满满。",
+    "status": "draft",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69b7c8240000000020038f00_bc4ccfb83986.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 11.8,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69b3e23d000000002103a258",
+    "styleCode": "XHS0109",
+    "name": "极简线条猫眼美甲",
+    "description": "清透自然的淡人美甲，极简线条搭配猫眼效果，气质温柔，氛围感十足。",
+    "status": "draft",
+    "category": "猫眼",
+    "price": 190,
+    "coverImage": "/api/xhs-image?file=69b3e23d000000002103a258_accdb7b812e6.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 7,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69ca5aa9000000001a02e3e0",
+    "styleCode": "XHS0110",
+    "name": "仲夏夜碎钻猫眼",
+    "description": "亮晶晶的碎钻猫眼美甲，搭配飘带设计，闪耀迷人，温柔又高级。",
+    "status": "draft",
+    "category": "钻饰",
+    "price": 185,
+    "coverImage": "/api/xhs-image?file=69ca5aa9000000001a02e3e0_a0b45f630a5c.jpg",
+    "isPromoted": false,
+    "isColdStart": true,
+    "unpublishedAt": null,
+    "crawled": true,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 0,
+      "view": 0,
+      "detail": 0,
+      "basketAdd": 0,
+      "tryonSuccess": 0,
+      "resultView": 0,
+      "want": 0,
+      "confirm": 0,
+      "orders": 0,
+      "hotScore": 26,
+      "coldRiskScore": 36,
+      "growthScore": 32,
+      "trendLabel": "Untested",
+      "sampleStatus": "low_sample",
+      "suggestion": "新导入款或审核中款，建议先补齐资料再做小流量测试。",
+      "sourceBreakdown": {
+        "card": 0,
+        "detail": 0,
+        "tryon_result": 0,
+        "ai_recommend": 0,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 7.6,
+      "resultViewDurationSec": 25
+    }
+  },
+  {
+    "id": "xhs-69d62b000000000023010380",
+    "styleCode": "XHS0111",
+    "name": "裸粉闪爱心美甲",
+    "description": "奶呼呼的清透裸粉，搭配多款爱心闪片和立体造型，甜而不腻，显白又温柔。",
+    "status": "unpublished",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=69d62b000000000023010380_076567f88596.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-27",
+    "unpublishedAt": "2026-05-10",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会",
+        "出游"
+      ],
+      "effect": [
+        "显白"
+      ]
+    },
+    "metrics": {
+      "exposure": 314,
+      "view": 131,
+      "detail": 33,
+      "basketAdd": 9,
+      "tryonSuccess": 10,
+      "resultView": 8,
+      "want": 16,
+      "confirm": 4,
+      "orders": 4,
+      "hotScore": 44,
+      "coldRiskScore": 56,
+      "growthScore": 49,
+      "trendLabel": "Cold_Detail",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 1,
+        "detail": 1,
+        "tryon_result": 1,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.92,
+      "avgLatencySec": 10.3,
+      "resultViewDurationSec": 29
+    }
+  },
+  {
+    "id": "xhs-692bbcaa000000001b0233b4",
+    "styleCode": "XHS0112",
+    "name": "自然贴合穿戴甲",
+    "description": "穿戴甲服帖如原生甲，好看又自然，温柔高级，值得入手。",
+    "status": "unpublished",
+    "category": "穿戴甲",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=692bbcaa000000001b0233b4_04f4e0adedcc.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-28",
+    "unpublishedAt": "2026-05-11",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "秋冬"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "穿戴甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 548,
+      "view": 274,
+      "detail": 94,
+      "basketAdd": 77,
+      "tryonSuccess": 80,
+      "resultView": 67,
+      "want": 93,
+      "confirm": 76,
+      "orders": 67,
+      "hotScore": 84,
+      "coldRiskScore": 16,
+      "growthScore": 22,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 21,
+        "detail": 11,
+        "tryon_result": 20,
+        "ai_recommend": 14,
+        "want_list": 10
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.3,
+      "resultViewDurationSec": 49
+    }
+  },
+  {
+    "id": "xhs-69f839ad00000000380235b9",
+    "styleCode": "XHS0113",
+    "name": "精致花朵美甲",
+    "description": "四线城市县城顶级美甲店制作的花朵美甲，浅贴片设计，会员折后约280元。花朵雕刻精致，还原度高，适合追求高级感的你。",
+    "status": "unpublished",
+    "category": "花朵",
+    "price": 168,
+    "coverImage": "/api/xhs-image?file=69f839ad00000000380235b9_1c313cdad6b1.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-01",
+    "unpublishedAt": "2026-05-12",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "高级感"
+      ],
+      "craft": [
+        "花朵"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 329,
+      "view": 137,
+      "detail": 27,
+      "basketAdd": 21,
+      "tryonSuccess": 23,
+      "resultView": 19,
+      "want": 13,
+      "confirm": 10,
+      "orders": 9,
+      "hotScore": 72,
+      "coldRiskScore": 27,
+      "growthScore": 26,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 3,
+        "detail": 1,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.8,
+      "resultViewDurationSec": 27
+    }
+  },
+  {
+    "id": "xhs-6a0b18b1000000003601e8e7",
+    "styleCode": "XHS0114",
+    "name": "清透树莓粉猫眼",
+    "description": "清透树莓粉猫眼美甲，夏日感满满。融合猫眼、钻饰、手绘与渐变元素，短甲友好，显白不挑肤色。",
+    "status": "unpublished",
+    "category": "猫眼",
+    "price": 273,
+    "coverImage": "/api/xhs-image?file=6a0b18b1000000003601e8e7_8981b409eebf.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-02",
+    "unpublishedAt": "2026-05-13",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "猫眼",
+        "钻饰",
+        "手绘",
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "出游"
+      ],
+      "effect": [
+        "猫眼",
+        "渐变"
+      ]
+    },
+    "metrics": {
+      "exposure": 674,
+      "view": 281,
+      "detail": 72,
+      "basketAdd": 80,
+      "tryonSuccess": 83,
+      "resultView": 70,
+      "want": 77,
+      "confirm": 64,
+      "orders": 56,
+      "hotScore": 83,
+      "coldRiskScore": 17,
+      "growthScore": 18,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 18,
+        "detail": 9,
+        "tryon_result": 17,
+        "ai_recommend": 12,
+        "want_list": 8
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.3,
+      "resultViewDurationSec": 43
+    }
+  },
+  {
+    "id": "xhs-69d46328000000001d019b17",
+    "styleCode": "XHS0115",
+    "name": "油画感日出美甲",
+    "description": "以清透裸色打底，用油画笔触晕染橙红落日与渐变海波，暖金色阳光洒落，温柔高级，黄皮友好，短甲中长甲皆可。",
+    "status": "unpublished",
+    "category": "手绘",
+    "price": 210,
+    "coverImage": "/api/xhs-image?file=69d46328000000001d019b17_3a3201e3245e.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-03",
+    "unpublishedAt": "2026-05-14",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感",
+        "ins风"
+      ],
+      "craft": [
+        "手绘",
+        "渐变"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常",
+        "约会"
+      ],
+      "effect": [
+        "渐变",
+        "高级感"
+      ]
+    },
+    "metrics": {
+      "exposure": 1262,
+      "view": 631,
+      "detail": 187,
+      "basketAdd": 212,
+      "tryonSuccess": 214,
+      "resultView": 180,
+      "want": 214,
+      "confirm": 185,
+      "orders": 163,
+      "hotScore": 86,
+      "coldRiskScore": 14,
+      "growthScore": 45,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 52,
+        "detail": 26,
+        "tryon_result": 48,
+        "ai_recommend": 33,
+        "want_list": 26
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.1,
+      "resultViewDurationSec": 49
+    }
+  },
+  {
+    "id": "xhs-69e61cf40000000021039197",
+    "styleCode": "XHS0116",
+    "name": "甜美蓝色小猫美甲",
+    "description": "甜美风格的蓝色小猫美甲，可爱俏皮，适合喜欢清新甜美风格的你。",
+    "status": "unpublished",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69e61cf40000000021039197_4a793e8f3bb9.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-04",
+    "unpublishedAt": "2026-05-15",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 307,
+      "view": 128,
+      "detail": 21,
+      "basketAdd": 33,
+      "tryonSuccess": 30,
+      "resultView": 25,
+      "want": 33,
+      "confirm": 6,
+      "orders": 5,
+      "hotScore": 57,
+      "coldRiskScore": 43,
+      "growthScore": 61,
+      "trendLabel": "Cold_AfterWant",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 0
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.6,
+      "resultViewDurationSec": 41
+    }
+  },
+  {
+    "id": "xhs-6a12b1dc0000000035031abb",
+    "styleCode": "XHS0117",
+    "name": "玻璃珠猫眼美甲",
+    "description": "玻璃珠般的猫眼效果，温柔高级，夏日感十足，适合追求精致与高级感的你。",
+    "status": "unpublished",
+    "category": "温柔感",
+    "price": 150,
+    "coverImage": "/api/xhs-image?file=6a12b1dc0000000035031abb_4042d3158154.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-05",
+    "unpublishedAt": "2026-05-16",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "夏日"
+      ],
+      "style": [
+        "温柔感",
+        "高级感"
+      ],
+      "craft": [
+        "温柔感"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 293,
+      "view": 122,
+      "detail": 30,
+      "basketAdd": 25,
+      "tryonSuccess": 24,
+      "resultView": 20,
+      "want": 17,
+      "confirm": 13,
+      "orders": 11,
+      "hotScore": 71,
+      "coldRiskScore": 29,
+      "growthScore": 37,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 3,
+        "ai_recommend": 2,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.9,
+      "resultViewDurationSec": 31
+    }
+  },
+  {
+    "id": "xhs-69fddad000000000360013de",
+    "styleCode": "XHS0118",
+    "name": "甜酷线条美甲",
+    "description": "收藏已久的甜酷线条美甲，简约线条设计，短甲友好，甜酷风格轻松驾驭。",
+    "status": "unpublished",
+    "category": "短甲",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69fddad000000000360013de_d154f76a242d.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-06",
+    "unpublishedAt": "2026-05-17",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "短甲"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 444,
+      "view": 185,
+      "detail": 44,
+      "basketAdd": 28,
+      "tryonSuccess": 27,
+      "resultView": 23,
+      "want": 27,
+      "confirm": 20,
+      "orders": 18,
+      "hotScore": 71,
+      "coldRiskScore": 29,
+      "growthScore": 58,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 6,
+        "detail": 3,
+        "tryon_result": 5,
+        "ai_recommend": 4,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.9,
+      "resultViewDurationSec": 31
+    }
+  },
+  {
+    "id": "xhs-69d8a2ba000000001a0253b1",
+    "styleCode": "XHS0119",
+    "name": "薄荷绿小猫美甲",
+    "description": "薄荷绿色调的小猫美甲，清新可爱，适合夏日，为指尖增添一抹清凉。",
+    "status": "archived",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69d8a2ba000000001a0253b1_36c7206c4acc.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-07",
+    "unpublishedAt": "2026-05-18",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 254,
+      "view": 106,
+      "detail": 21,
+      "basketAdd": 22,
+      "tryonSuccess": 22,
+      "resultView": 18,
+      "want": 27,
+      "confirm": 7,
+      "orders": 6,
+      "hotScore": 50,
+      "coldRiskScore": 50,
+      "growthScore": 73,
+      "trendLabel": "Cold_AfterWant",
+      "sampleStatus": "enough",
+      "suggestion": "漏斗偏弱，优先检查封面、价格和试戴结果。",
+      "sourceBreakdown": {
+        "card": 2,
+        "detail": 1,
+        "tryon_result": 2,
+        "ai_recommend": 1,
+        "want_list": 1
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 10.0,
+      "resultViewDurationSec": 41
+    }
+  },
+  {
+    "id": "xhs-68c54c57000000001c0058e7",
+    "styleCode": "XHS0120",
+    "name": "莫奈睡莲油画美甲",
+    "description": "以莫奈睡莲为灵感，油画风格搭配精致钻饰，温柔高级，ins风与个性风兼具。",
+    "status": "archived",
+    "category": "钻饰",
+    "price": 185,
+    "coverImage": "/api/xhs-image?file=68c54c57000000001c0058e7_a07d394524c4.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-08",
+    "unpublishedAt": "2026-05-19",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "温柔感",
+        "高级感",
+        "ins风",
+        "个性风"
+      ],
+      "craft": [
+        "钻饰"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 1860,
+      "view": 775,
+      "detail": 205,
+      "basketAdd": 161,
+      "tryonSuccess": 162,
+      "resultView": 136,
+      "want": 162,
+      "confirm": 167,
+      "orders": 147,
+      "hotScore": 87,
+      "coldRiskScore": 13,
+      "growthScore": 32,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 47,
+        "detail": 23,
+        "tryon_result": 43,
+        "ai_recommend": 30,
+        "want_list": 24
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.1,
+      "resultViewDurationSec": 37
+    }
+  },
+  {
+    "id": "xhs-69cdd931000000001a02264b",
+    "styleCode": "XHS0121",
+    "name": "童话猫猫美甲",
+    "description": "秀秀猫猫美甲，将童话元素融入指尖设计，可爱又梦幻，仿佛置身童话世界。",
+    "status": "archived",
+    "category": "精选",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69cdd931000000001a02264b_0b98f2fa7262.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-09",
+    "unpublishedAt": "2026-05-20",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "精选"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 266,
+      "view": 133,
+      "detail": 41,
+      "basketAdd": 31,
+      "tryonSuccess": 34,
+      "resultView": 29,
+      "want": 29,
+      "confirm": 15,
+      "orders": 13,
+      "hotScore": 71,
+      "coldRiskScore": 29,
+      "growthScore": 38,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.9,
+      "resultViewDurationSec": 38
+    }
+  },
+  {
+    "id": "xhs-69761054000000001a037e3f",
+    "styleCode": "XHS0122",
+    "name": "裸色猫眼美甲",
+    "description": "预约美甲师后，将原图改为裸色加简单设计，效果意外好看，清新简约又显气质。",
+    "status": "archived",
+    "category": "猫眼",
+    "price": 178,
+    "coverImage": "/api/xhs-image?file=69761054000000001a037e3f_e08614341f76.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-10",
+    "unpublishedAt": "2026-05-21",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "清新简约"
+      ],
+      "craft": [
+        "猫眼"
+      ],
+      "length": [
+        "短甲"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "猫眼"
+      ]
+    },
+    "metrics": {
+      "exposure": 535,
+      "view": 223,
+      "detail": 45,
+      "basketAdd": 33,
+      "tryonSuccess": 35,
+      "resultView": 29,
+      "want": 47,
+      "confirm": 17,
+      "orders": 15,
+      "hotScore": 68,
+      "coldRiskScore": 32,
+      "growthScore": 66,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 5,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 3
+      },
+      "generationSuccessRate": 0.93,
+      "avgLatencySec": 9.0,
+      "resultViewDurationSec": 37
+    }
+  },
+  {
+    "id": "xhs-69b69c3a0000000028009a19",
+    "styleCode": "XHS0123",
+    "name": "彩色短甲美甲",
+    "description": "今天的美甲是彩色的，适合短甲和穿戴甲，DIY也方便，色彩缤纷，活力满满。",
+    "status": "archived",
+    "category": "短甲",
+    "price": 138,
+    "coverImage": "/api/xhs-image?file=69b69c3a0000000028009a19_ac0fd6eebada.jpg",
+    "isPromoted": false,
+    "isColdStart": false,
+    "listedAt": "2026-05-11",
+    "unpublishedAt": "2026-05-22",
+    "crawled": false,
+    "makeable": true,
+    "tags": {
+      "color": [
+        "通用"
+      ],
+      "style": [
+        "精选"
+      ],
+      "craft": [
+        "短甲"
+      ],
+      "length": [
+        "短甲",
+        "穿戴甲",
+        "DIY"
+      ],
+      "scene": [
+        "日常"
+      ],
+      "effect": [
+        "耐看"
+      ]
+    },
+    "metrics": {
+      "exposure": 220,
+      "view": 110,
+      "detail": 34,
+      "basketAdd": 29,
+      "tryonSuccess": 31,
+      "resultView": 26,
+      "want": 24,
+      "confirm": 15,
+      "orders": 13,
+      "hotScore": 77,
+      "coldRiskScore": 23,
+      "growthScore": 64,
+      "trendLabel": "Stable",
+      "sampleStatus": "enough",
+      "suggestion": "表现稳定，适合作为稳转化款持续承接。",
+      "sourceBreakdown": {
+        "card": 4,
+        "detail": 2,
+        "tryon_result": 4,
+        "ai_recommend": 3,
+        "want_list": 2
+      },
+      "generationSuccessRate": 0.94,
+      "avgLatencySec": 8.6,
+      "resultViewDurationSec": 38
+    }
+  }
+]

@@ -1,0 +1,147 @@
+{
+  "num_nails": 1,
+  "detections": [
+    {
+      "id": 1,
+      "class_id": 0,
+      "class_name": "Nail",
+      "confidence": 0.5517,
+      "bbox": [
+        322.28,
+        506.56,
+        339.63,
+        523.92
+      ],
+      "center": [
+        332.25,
+        512.25
+      ],
+      "polygon": [
+        [
+          321.0,
+          501.0
+        ],
+        [
+          321.0,
+          523.5
+        ],
+        [
+          343.5,
+          523.5
+        ],
+        [
+          343.5,
+          508.5
+        ],
+        [
+          339.0,
+          508.5
+        ],
+        [
+          337.5,
+          507.0
+        ],
+        [
+          337.5,
+          501.0
+        ]
+      ],
+      "oriented_box": {
+        "center": [
+          332.25,
+          512.25
+        ],
+        "width": 27.45,
+        "height": 27.45,
+        "angle": 90.0,
+        "points": [
+          [
+            318.52,
+            498.52
+          ],
+          [
+            345.98,
+            498.52
+          ],
+          [
+            345.98,
+            525.97
+          ],
+          [
+            318.52,
+            525.97
+          ]
+        ],
+        "scale": 1.22
+      },
+      "finger_axis_angle": null,
+      "long_axis_vector": null,
+      "ai_orientation": {
+        "center": [
+          332.25,
+          512.25
+        ],
+        "oriented_box_points": [
+          [
+            318.52,
+            498.52
+          ],
+          [
+            345.98,
+            498.52
+          ],
+          [
+            345.98,
+            525.97
+          ],
+          [
+            318.52,
+            525.97
+          ]
+        ],
+        "angle_degrees": null,
+        "long_axis_vector": null,
+        "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+      },
+      "assignment": null
+    }
+  ],
+  "ai_orientation_payload": [
+    {
+      "nail_id": 1,
+      "finger": null,
+      "finger_label": null,
+      "hand_side": null,
+      "hand_side_label": null,
+      "center": [
+        332.25,
+        512.25
+      ],
+      "oriented_box_points": [
+        [
+          318.52,
+          498.52
+        ],
+        [
+          345.98,
+          498.52
+        ],
+        [
+          345.98,
+          525.97
+        ],
+        [
+          318.52,
+          525.97
+        ]
+      ],
+      "angle_degrees": null,
+      "long_axis_vector": null,
+      "instruction": "Only use this metadata for nail-art alignment. Do not draw labels, arrows, or overlays on the nail."
+    }
+  ],
+  "ai_orientation_note": "Use ai_orientation_payload to align nail art. Keep the uploaded hand photo unchanged except the nail surfaces; never render these boxes, labels, arrows, or metadata in the final image.",
+  "hand_count": 0,
+  "hand_layers": [],
+  "message": "Success"
+}

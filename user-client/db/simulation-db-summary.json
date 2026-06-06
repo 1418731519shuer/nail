@@ -1,0 +1,290 @@
+{
+  "database": "C:\\Users\\chen\\Documents\\Codex\\2026-05-08\\new-chat\\db\\nail_simulation.sqlite",
+  "store_id": "demo_store",
+  "tables": {
+    "stores": 1,
+    "users": 8000,
+    "user_sessions": 37446,
+    "user_style_events_sampled": 40732,
+    "user_style_events_estimated": 2036600,
+    "try_on_jobs_sampled": 3875,
+    "style_intents_sampled": 3279,
+    "orders_sampled": 1200,
+    "nail_styles": 300,
+    "style_daily_metrics": 36000,
+    "style_window_metrics": 5400
+  },
+  "event_sampling": {
+    "sample_rate": 0.02,
+    "scale_factor": 50,
+    "detail_event_days": 30,
+    "note": "明细事件按比例抽样生成；聚合日表和窗口表为全量模拟口径。"
+  },
+  "date_range": {
+    "daily_start": "2026-01-01",
+    "daily_end": "2026-04-30",
+    "n_days": 120,
+    "latest_week": 17
+  },
+  "latest_week_distribution": {
+    "Stable": 123,
+    "Untested": 110,
+    "Potential": 49,
+    "Cold_AfterWant": 5,
+    "Cold_Detail": 4,
+    "Cold_FirstLook": 4,
+    "Cold_AfterTryon": 3,
+    "HotUp": 2
+  },
+  "latest_3class_distribution": {
+    "Normal": 282,
+    "ColdRisk": 16,
+    "HotUp": 2
+  },
+  "top_hot_from_db": [
+    {
+      "style_id": "S0244",
+      "category": "cat_eye",
+      "price_level": "low",
+      "view_uv": 105,
+      "tryon_uv": 41,
+      "confirm_7d": 38,
+      "hot_score": 0.9464,
+      "trend_label": "Stable"
+    },
+    {
+      "style_id": "S0168",
+      "category": "gradient",
+      "price_level": "low",
+      "view_uv": 193,
+      "tryon_uv": 51,
+      "confirm_7d": 45,
+      "hot_score": 0.9429,
+      "trend_label": "Stable"
+    },
+    {
+      "style_id": "S0239",
+      "category": "solid",
+      "price_level": "low",
+      "view_uv": 287,
+      "tryon_uv": 109,
+      "confirm_7d": 112,
+      "hot_score": 0.9375,
+      "trend_label": "Stable"
+    },
+    {
+      "style_id": "S0138",
+      "category": "handpaint",
+      "price_level": "low",
+      "view_uv": 19,
+      "tryon_uv": 7,
+      "confirm_7d": 9,
+      "hot_score": 0.925,
+      "trend_label": "Potential"
+    },
+    {
+      "style_id": "S0127",
+      "category": "gradient",
+      "price_level": "mid",
+      "view_uv": 482,
+      "tryon_uv": 185,
+      "confirm_7d": 188,
+      "hot_score": 0.9174,
+      "trend_label": "Stable"
+    },
+    {
+      "style_id": "S0053",
+      "category": "handpaint",
+      "price_level": "mid",
+      "view_uv": 424,
+      "tryon_uv": 115,
+      "confirm_7d": 127,
+      "hot_score": 0.9074,
+      "trend_label": "HotUp"
+    },
+    {
+      "style_id": "S0002",
+      "category": "gradient",
+      "price_level": "high",
+      "view_uv": 587,
+      "tryon_uv": 171,
+      "confirm_7d": 144,
+      "hot_score": 0.9,
+      "trend_label": "Stable"
+    },
+    {
+      "style_id": "S0063",
+      "category": "french",
+      "price_level": "mid",
+      "view_uv": 19,
+      "tryon_uv": 11,
+      "confirm_7d": 8,
+      "hot_score": 0.898,
+      "trend_label": "Potential"
+    },
+    {
+      "style_id": "S0189",
+      "category": "french",
+      "price_level": "mid",
+      "view_uv": 255,
+      "tryon_uv": 107,
+      "confirm_7d": 93,
+      "hot_score": 0.8882,
+      "trend_label": "Stable"
+    },
+    {
+      "style_id": "S0082",
+      "category": "cat_eye",
+      "price_level": "high",
+      "view_uv": 313,
+      "tryon_uv": 128,
+      "confirm_7d": 69,
+      "hot_score": 0.8857,
+      "trend_label": "Stable"
+    }
+  ],
+  "top_cold_from_db": [
+    {
+      "style_id": "S0044",
+      "category": "solid",
+      "price_level": "mid",
+      "view_uv": 1,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8663,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0089",
+      "category": "solid",
+      "price_level": "mid",
+      "view_uv": 3,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8663,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0033",
+      "category": "solid",
+      "price_level": "low",
+      "view_uv": 0,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.85,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0171",
+      "category": "cat_eye",
+      "price_level": "mid",
+      "view_uv": 0,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8473,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0269",
+      "category": "cat_eye",
+      "price_level": "mid",
+      "view_uv": 1,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8473,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0091",
+      "category": "rhinestone",
+      "price_level": "mid",
+      "view_uv": 73,
+      "tryon_uv": 2,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8464,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0059",
+      "category": "handpaint",
+      "price_level": "mid",
+      "view_uv": 2,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8352,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0097",
+      "category": "handpaint",
+      "price_level": "mid",
+      "view_uv": 0,
+      "tryon_uv": 0,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8352,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0224",
+      "category": "rhinestone",
+      "price_level": "low",
+      "view_uv": 54,
+      "tryon_uv": 6,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.825,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    },
+    {
+      "style_id": "S0154",
+      "category": "gradient",
+      "price_level": "mid",
+      "view_uv": 46,
+      "tryon_uv": 3,
+      "confirm_7d": 0,
+      "cold_risk_score": 0.8217,
+      "trend_label": "Untested",
+      "sample_status": "insufficient"
+    }
+  ],
+  "event_type_distribution_sampled": [
+    {
+      "event_type": "style_view",
+      "sampled_count": 23524,
+      "estimated_count": 1176200
+    },
+    {
+      "event_type": "detail_view",
+      "sampled_count": 5457,
+      "estimated_count": 272850
+    },
+    {
+      "event_type": "tryon_click",
+      "sampled_count": 3875,
+      "estimated_count": 193750
+    },
+    {
+      "event_type": "tryon_result_view",
+      "sampled_count": 3397,
+      "estimated_count": 169850
+    },
+    {
+      "event_type": "want_click",
+      "sampled_count": 3279,
+      "estimated_count": 163950
+    },
+    {
+      "event_type": "confirm_click",
+      "sampled_count": 1200,
+      "estimated_count": 60000
+    }
+  ]
+}

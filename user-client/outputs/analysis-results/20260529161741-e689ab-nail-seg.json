@@ -1,0 +1,9 @@
+{
+  "num_nails": 0,
+  "detections": [],
+  "ai_orientation_payload": [],
+  "ai_orientation_note": "Use ai_orientation_payload to align nail art. Keep the uploaded hand photo unchanged except the nail surfaces; never render these boxes, labels, arrows, or metadata in the final image.",
+  "hand_count": 0,
+  "hand_layers": [],
+  "message": "Success"
+}
