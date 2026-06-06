@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff8f4"/>
+      <stop offset="1" stop-color="#f0e7df"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#8f6f61" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="960" height="720" fill="url(#bg)"/>
+  <text x="64" y="72" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#36231f">模拟 AI 美甲试戴结果</text>
+  <text x="64" y="112" font-family="Arial, sans-serif" font-size="18" fill="#7d6259">已写入试戴任务、试戴成功埋点和指标数据。后续可替换为真实生图 API。</text>
+  <g filter="url(#shadow)">
+    <rect x="64" y="150" width="380" height="430" rx="22" fill="#ffffff"/>
+    <image href="/uploads/user-hands/20260523141014-4f0799-hand.png" x="84" y="170" width="340" height="340" preserveAspectRatio="xMidYMid slice"/>
+    <text x="84" y="548" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#3b2b27">用户手图</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="516" y="150" width="380" height="430" rx="22" fill="#ffffff"/>
+    <image href="/uploads/nail-styles/20260523141014-4f0799-style.jpg" x="536" y="170" width="340" height="340" preserveAspectRatio="xMidYMid slice"/>
+    <text x="536" y="548" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#3b2b27">粉橘薄荷渐变</text>
+  </g>
+  <rect x="300" y="612" width="360" height="54" rx="27" fill="#2f211d"/>
+  <text x="480" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#fffaf5">Mock Try-On · 可接真实 API</text>
+</svg>

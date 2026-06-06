@@ -3,6 +3,6 @@ node_modules/
 db/mock-analytics.json
 .dumate/
 
-uploads/
-outputs/
-db/*.sqlite
+
+
+

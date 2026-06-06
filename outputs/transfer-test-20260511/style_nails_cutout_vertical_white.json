@@ -1,0 +1,41 @@
+{
+  "image": "C:\\Users\\chen\\Documents\\Codex\\2026-05-08\\new-chat\\outputs\\transfer-test-20260511\\style_nails_cutout_vertical_white.jpg",
+  "left_to_right_order": [
+    {
+      "order": 1,
+      "finger": "thumb",
+      "finger_label": "??",
+      "source_detection_id": 5,
+      "orientation": "fingertip/free edge at top; cuticle/root at bottom"
+    },
+    {
+      "order": 2,
+      "finger": "index",
+      "finger_label": "??",
+      "source_detection_id": 2,
+      "orientation": "fingertip/free edge at top; cuticle/root at bottom"
+    },
+    {
+      "order": 3,
+      "finger": "middle",
+      "finger_label": "??",
+      "source_detection_id": 4,
+      "orientation": "fingertip/free edge at top; cuticle/root at bottom"
+    },
+    {
+      "order": 4,
+      "finger": "ring",
+      "finger_label": "???",
+      "source_detection_id": 1,
+      "orientation": "fingertip/free edge at top; cuticle/root at bottom"
+    },
+    {
+      "order": 5,
+      "finger": "pinky",
+      "finger_label": "??",
+      "source_detection_id": 10,
+      "orientation": "fingertip/free edge at top; cuticle/root at bottom"
+    }
+  ],
+  "note": "White background only. All five nail cutouts are upright: fingertip/free edge at top, cuticle/root at bottom."
+}

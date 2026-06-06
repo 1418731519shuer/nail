@@ -1,0 +1,225 @@
+{
+  "image": "C:\\Users\\chen\\Documents\\Codex\\2026-05-08\\new-chat\\outputs\\transfer-test-20260511\\clean_hand_orientation_visual_prompt.jpg",
+  "legend": [
+    {
+      "finger": "ring",
+      "finger_label": "???",
+      "color_bgr": [
+        210,
+        60,
+        210
+      ],
+      "visual_rule": "colored dot is root/cuticle side; arrow points to fingertip/free-edge direction; arrow is intentionally outside nail surface",
+      "external_arrow_root": [
+        392.68,
+        386.35
+      ],
+      "external_arrow_tip": [
+        385.96,
+        271.57
+      ],
+      "actual_nail_axis_root": [
+        326.79,
+        390.2
+      ],
+      "actual_nail_axis_tip": [
+        320.07,
+        275.42
+      ],
+      "oriented_box_points": [
+        [
+          366.03,
+          387.91
+        ],
+        [
+          287.54,
+          392.5
+        ],
+        [
+          280.83,
+          277.71
+        ],
+        [
+          359.32,
+          273.12
+        ]
+      ]
+    },
+    {
+      "finger": "index",
+      "finger_label": "??",
+      "color_bgr": [
+        40,
+        170,
+        40
+      ],
+      "visual_rule": "colored dot is root/cuticle side; arrow points to fingertip/free-edge direction; arrow is intentionally outside nail surface",
+      "external_arrow_root": [
+        703.61,
+        418.0
+      ],
+      "external_arrow_tip": [
+        725.47,
+        302.08
+      ],
+      "actual_nail_axis_root": [
+        638.75,
+        405.77
+      ],
+      "actual_nail_axis_tip": [
+        660.61,
+        289.85
+      ],
+      "oriented_box_points": [
+        [
+          681.5,
+          413.83
+        ],
+        [
+          596,
+          397.7
+        ],
+        [
+          617.86,
+          281.79
+        ],
+        [
+          703.36,
+          297.92
+        ]
+      ]
+    },
+    {
+      "finger": "middle",
+      "finger_label": "??",
+      "color_bgr": [
+        255,
+        90,
+        30
+      ],
+      "visual_rule": "colored dot is root/cuticle side; arrow points to fingertip/free-edge direction; arrow is intentionally outside nail surface",
+      "external_arrow_root": [
+        554.55,
+        333.49
+      ],
+      "external_arrow_tip": [
+        561.53,
+        228.37
+      ],
+      "actual_nail_axis_root": [
+        488.69,
+        329.12
+      ],
+      "actual_nail_axis_tip": [
+        495.67,
+        224
+      ],
+      "oriented_box_points": [
+        [
+          531.94,
+          331.99
+        ],
+        [
+          445.45,
+          326.25
+        ],
+        [
+          452.42,
+          221.13
+        ],
+        [
+          538.91,
+          226.87
+        ]
+      ]
+    },
+    {
+      "finger": "pinky",
+      "finger_label": "??",
+      "color_bgr": [
+        40,
+        40,
+        230
+      ],
+      "visual_rule": "colored dot is root/cuticle side; arrow points to fingertip/free-edge direction; arrow is intentionally outside nail surface",
+      "external_arrow_root": [
+        222.95,
+        537.21
+      ],
+      "external_arrow_tip": [
+        184.67,
+        433.09
+      ],
+      "actual_nail_axis_root": [
+        161,
+        559.99
+      ],
+      "actual_nail_axis_tip": [
+        122.72,
+        455.87
+      ],
+      "oriented_box_points": [
+        [
+          194.94,
+          547.51
+        ],
+        [
+          127.07,
+          572.47
+        ],
+        [
+          88.78,
+          468.35
+        ],
+        [
+          156.65,
+          443.39
+        ]
+      ]
+    },
+    {
+      "finger": "thumb",
+      "finger_label": "??",
+      "color_bgr": [
+        0,
+        128,
+        255
+      ],
+      "visual_rule": "colored dot is root/cuticle side; arrow points to fingertip/free-edge direction; arrow is intentionally outside nail surface",
+      "external_arrow_root": [
+        807.83,
+        777.52
+      ],
+      "external_arrow_tip": [
+        885.17,
+        688.58
+      ],
+      "actual_nail_axis_root": [
+        776.14,
+        749.96
+      ],
+      "actual_nail_axis_tip": [
+        853.48,
+        661.02
+      ],
+      "oriented_box_points": [
+        [
+          795.89,
+          767.14
+        ],
+        [
+          756.38,
+          732.78
+        ],
+        [
+          833.73,
+          643.84
+        ],
+        [
+          873.24,
+          678.2
+        ]
+      ]
+    }
+  ]
+}

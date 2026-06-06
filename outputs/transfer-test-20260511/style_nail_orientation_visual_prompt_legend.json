@@ -1,0 +1,230 @@
+{
+  "image": "C:\\Users\\chen\\Documents\\Codex\\2026-05-08\\new-chat\\outputs\\transfer-test-20260511\\style_nail_orientation_visual_prompt.jpg",
+  "legend": [
+    {
+      "source_nail_id": 1,
+      "finger": "ring",
+      "finger_label": "无名指",
+      "color_bgr": [
+        230,
+        0,
+        230
+      ],
+      "source_box_points": [
+        [
+          435.61,
+          399.09
+        ],
+        [
+          575.28,
+          367.28
+        ],
+        [
+          620.51,
+          565.91
+        ],
+        [
+          480.84,
+          597.72
+        ]
+      ],
+      "source_root_point": [
+        506.35,
+        387.16
+      ],
+      "source_tip_point": [
+        549.77,
+        577.84
+      ],
+      "external_arrow_root": [
+        469.3,
+        395.6
+      ],
+      "external_arrow_tip": [
+        512.72,
+        586.28
+      ],
+      "meaning": "Use this source nail style for the same color/finger on the target hand. Dot is source root/cuticle; arrow points toward source tip/free edge."
+    },
+    {
+      "source_nail_id": 2,
+      "finger": "index",
+      "finger_label": "食指",
+      "color_bgr": [
+        40,
+        200,
+        40
+      ],
+      "source_box_points": [
+        [
+          144.51,
+          564.09
+        ],
+        [
+          253.54,
+          488.15
+        ],
+        [
+          378.83,
+          668.05
+        ],
+        [
+          269.8,
+          743.99
+        ]
+      ],
+      "source_root_point": [
+        201.54,
+        529.71
+      ],
+      "source_tip_point": [
+        321.8,
+        702.43
+      ],
+      "external_arrow_root": [
+        170.35,
+        551.43
+      ],
+      "external_arrow_tip": [
+        290.62,
+        724.14
+      ],
+      "meaning": "Use this source nail style for the same color/finger on the target hand. Dot is source root/cuticle; arrow points toward source tip/free edge."
+    },
+    {
+      "source_nail_id": 4,
+      "finger": "middle",
+      "finger_label": "中指",
+      "color_bgr": [
+        255,
+        50,
+        30
+      ],
+      "source_box_points": [
+        [
+          292.75,
+          463.57
+        ],
+        [
+          447.25,
+          415.31
+        ],
+        [
+          517.95,
+          641.63
+        ],
+        [
+          363.45,
+          689.89
+        ]
+      ],
+      "source_root_point": [
+        371.41,
+        443.97
+      ],
+      "source_tip_point": [
+        439.29,
+        661.23
+      ],
+      "external_arrow_root": [
+        335.14,
+        455.3
+      ],
+      "external_arrow_tip": [
+        403.02,
+        672.56
+      ],
+      "meaning": "Use this source nail style for the same color/finger on the target hand. Dot is source root/cuticle; arrow points toward source tip/free edge."
+    },
+    {
+      "source_nail_id": 5,
+      "finger": "thumb",
+      "finger_label": "拇指",
+      "color_bgr": [
+        0,
+        128,
+        255
+      ],
+      "source_box_points": [
+        [
+          113.36,
+          834.05
+        ],
+        [
+          10.58,
+          726.2
+        ],
+        [
+          161.72,
+          582.17
+        ],
+        [
+          264.5,
+          690.02
+        ]
+      ],
+      "source_root_point": [
+        64.99,
+        777.25
+      ],
+      "source_tip_point": [
+        210.09,
+        638.97
+      ],
+      "external_arrow_root": [
+        91.21,
+        804.75
+      ],
+      "external_arrow_tip": [
+        236.3,
+        666.48
+      ],
+      "meaning": "Use this source nail style for the same color/finger on the target hand. Dot is source root/cuticle; arrow points toward source tip/free edge."
+    },
+    {
+      "source_nail_id": 10,
+      "finger": "pinky",
+      "finger_label": "小指",
+      "color_bgr": [
+        30,
+        30,
+        230
+      ],
+      "source_box_points": [
+        [
+          606.87,
+          363.91
+        ],
+        [
+          720.41,
+          374.65
+        ],
+        [
+          709.55,
+          489.53
+        ],
+        [
+          596.01,
+          478.79
+        ]
+      ],
+      "source_root_point": [
+        663.42,
+        371.57
+      ],
+      "source_tip_point": [
+        653.0,
+        481.87
+      ],
+      "external_arrow_root": [
+        625.59,
+        368.0
+      ],
+      "external_arrow_tip": [
+        615.17,
+        478.29
+      ],
+      "meaning": "Use this source nail style for the same color/finger on the target hand. Dot is source root/cuticle; arrow points toward source tip/free edge."
+    }
+  ]
+}

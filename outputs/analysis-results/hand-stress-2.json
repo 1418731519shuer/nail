@@ -1,0 +1,1335 @@
+{
+  "num_hands": 2,
+  "hands": [
+    {
+      "hand_index": 0,
+      "is_right": true,
+      "hand_side": "right",
+      "hand_side_label": "右手",
+      "bbox": [
+        444.0,
+        287.0,
+        1279.0,
+        1714.0
+      ],
+      "keypoints_2d": [
+        [
+          1101.0341796875,
+          1482.6800537109375
+        ],
+        [
+          942.8649291992188,
+          1353.2286376953125
+        ],
+        [
+          838.8473510742188,
+          1210.15234375
+        ],
+        [
+          745.98974609375,
+          1048.3348388671875
+        ],
+        [
+          616.6643676757812,
+          854.5896606445312
+        ],
+        [
+          828.451416015625,
+          879.4097900390625
+        ],
+        [
+          725.3427734375,
+          655.290771484375
+        ],
+        [
+          627.8045654296875,
+          522.360595703125
+        ],
+        [
+          526.6011352539062,
+          364.530517578125
+        ],
+        [
+          820.4365844726562,
+          831.404296875
+        ],
+        [
+          760.8314819335938,
+          616.4275512695312
+        ],
+        [
+          603.9257202148438,
+          553.2854614257812
+        ],
+        [
+          420.2781677246094,
+          575.5194702148438
+        ],
+        [
+          825.3906860351562,
+          935.0528564453125
+        ],
+        [
+          752.2909545898438,
+          741.7407836914062
+        ],
+        [
+          617.3068237304688,
+          635.6336669921875
+        ],
+        [
+          441.7297058105469,
+          624.6414184570312
+        ],
+        [
+          810.6818237304688,
+          1045.606689453125
+        ],
+        [
+          685.7638549804688,
+          965.3346557617188
+        ],
+        [
+          545.4266967773438,
+          959.6560668945312
+        ],
+        [
+          422.0018615722656,
+          984.19580078125
+        ]
+      ],
+      "keypoints_3d": [
+        [
+          0.09530024230480194,
+          0.006350654177367687,
+          0.0061675431206822395
+        ],
+        [
+          0.07404814660549164,
+          -0.011227480135858059,
+          -0.020470570772886276
+        ],
+        [
+          0.060195110738277435,
+          -0.0303206704556942,
+          -0.04005735367536545
+        ],
+        [
+          0.047949597239494324,
+          -0.05165800079703331,
+          -0.051202088594436646
+        ],
+        [
+          0.030998848378658295,
+          -0.07706312835216522,
+          -0.07027795165777206
+        ],
+        [
+          0.058974482119083405,
+          -0.07380492240190506,
+          -0.013739424757659435
+        ],
+        [
+          0.04534634202718735,
+          -0.10347549617290497,
+          -0.009656518697738647
+        ],
+        [
+          0.032431770116090775,
+          -0.12111017107963562,
+          -0.0061671920120716095
+        ],
+        [
+          0.019004210829734802,
+          -0.14210495352745056,
+          -0.0005857571959495544
+        ],
+        [
+          0.05804317444562912,
+          -0.08018186688423157,
+          0.010445996187627316
+        ],
+        [
+          0.05015507712960243,
+          -0.10885073989629745,
+          0.021215012297034264
+        ],
+        [
+          0.029233599081635475,
+          -0.11731794476509094,
+          0.02661287598311901
+        ],
+        [
+          0.0047534555196762085,
+          -0.11431089043617249,
+          0.022026866674423218
+        ],
+        [
+          0.058826152235269547,
+          -0.06635440140962601,
+          0.033131133764982224
+        ],
+        [
+          0.04908216744661331,
+          -0.09222050756216049,
+          0.04095543920993805
+        ],
+        [
+          0.031004248186945915,
+          -0.1064879298210144,
+          0.04988366365432739
+        ],
+        [
+          0.007488958537578583,
+          -0.10791586339473724,
+          0.043415360152721405
+        ],
+        [
+          0.05693938583135605,
+          -0.0514971986413002,
+          0.04882698133587837
+        ],
+        [
+          0.04019532725214958,
+          -0.062243614345788956,
+          0.05565163865685463
+        ],
+        [
+          0.02134370058774948,
+          -0.06300428509712219,
+          0.056426018476486206
+        ],
+        [
+          0.004820611327886581,
+          -0.05973803624510765,
+          0.04742739722132683
+        ]
+      ],
+      "cam_t": [
+        -0.03398136794567108,
+        0.07511571794748306,
+        4.50636100769043
+      ],
+      "focal_length": 33964.84375,
+      "finger_axes": {
+        "thumb": {
+          "from": 3,
+          "to": 4,
+          "vector": [
+            -129.3254,
+            -193.7452
+          ],
+          "angle": -123.7232,
+          "length": 232.9426
+        },
+        "index": {
+          "from": 7,
+          "to": 8,
+          "vector": [
+            -101.2034,
+            -157.8301
+          ],
+          "angle": -122.6687,
+          "length": 187.4899
+        },
+        "middle": {
+          "from": 11,
+          "to": 12,
+          "vector": [
+            -183.6476,
+            22.234
+          ],
+          "angle": 173.0969,
+          "length": 184.9886
+        },
+        "ring": {
+          "from": 15,
+          "to": 16,
+          "vector": [
+            -175.5771,
+            -10.9922
+          ],
+          "angle": -176.4176,
+          "length": 175.9209
+        },
+        "pinky": {
+          "from": 19,
+          "to": 20,
+          "vector": [
+            -123.4248,
+            24.5397
+          ],
+          "angle": 168.7549,
+          "length": 125.8407
+        }
+      }
+    },
+    {
+      "hand_index": 1,
+      "is_right": false,
+      "hand_side": "left",
+      "hand_side_label": "左手",
+      "bbox": [
+        0.0,
+        301.0,
+        948.0,
+        1648.0
+      ],
+      "keypoints_2d": [
+        [
+          95.44021606445312,
+          1324.7425537109375
+        ],
+        [
+          311.28271484375,
+          1191.2156982421875
+        ],
+        [
+          425.2462158203125,
+          1021.4397583007812
+        ],
+        [
+          524.1713256835938,
+          852.617919921875
+        ],
+        [
+          648.440673828125,
+          635.4857788085938
+        ],
+        [
+          509.8169860839844,
+          779.618408203125
+        ],
+        [
+          645.166015625,
+          609.5982055664062
+        ],
+        [
+          762.599853515625,
+          520.0010375976562
+        ],
+        [
+          880.84765625,
+          408.53704833984375
+        ],
+        [
+          495.8419494628906,
+          778.432373046875
+        ],
+        [
+          632.5345458984375,
+          620.8916015625
+        ],
+        [
+          753.578125,
+          535.4148559570312
+        ],
+        [
+          880.11328125,
+          417.43255615234375
+        ],
+        [
+          440.89324951171875,
+          914.8649291992188
+        ],
+        [
+          569.3229370117188,
+          779.1041259765625
+        ],
+        [
+          691.978759765625,
+          711.3883666992188
+        ],
+        [
+          827.0308227539062,
+          613.1279907226562
+        ],
+        [
+          412.66302490234375,
+          1050.408447265625
+        ],
+        [
+          516.2999877929688,
+          977.7903442382812
+        ],
+        [
+          617.3504028320312,
+          938.1069946289062
+        ],
+        [
+          727.7354125976562,
+          877.5187377929688
+        ]
+      ],
+      "keypoints_3d": [
+        [
+          -0.09528321027755737,
+          0.00635172612965107,
+          0.006165971513837576
+        ],
+        [
+          -0.06673794984817505,
+          -0.01137174479663372,
+          -0.012288054451346397
+        ],
+        [
+          -0.05172917991876602,
+          -0.03365820646286011,
+          -0.02705041691660881
+        ],
+        [
+          -0.03879493847489357,
+          -0.055676013231277466,
+          -0.03583509847521782
+        ],
+        [
+          -0.022620733827352524,
+          -0.08383595198392868,
+          -0.05150790885090828
+        ],
+        [
+          -0.04084765911102295,
+          -0.0653071478009224,
+          0.012345397844910622
+        ],
+        [
+          -0.023032208904623985,
+          -0.08780589699745178,
+          0.02842540107667446
+        ],
+        [
+          -0.007484390400350094,
+          -0.0997454822063446,
+          0.03869027644395828
+        ],
+        [
+          0.008265092968940735,
+          -0.11468394100666046,
+          0.05214846879243851
+        ],
+        [
+          -0.042792316526174545,
+          -0.06553009152412415,
+          0.03727883845567703
+        ],
+        [
+          -0.024705512449145317,
+          -0.08649075031280518,
+          0.05253533273935318
+        ],
+        [
+          -0.008591488003730774,
+          -0.09796039760112762,
+          0.06465794146060944
+        ],
+        [
+          0.008339408785104752,
+          -0.11382562667131424,
+          0.07640233635902405
+        ],
+        [
+          -0.0501694530248642,
+          -0.04745054244995117,
+          0.05527162179350853
+        ],
+        [
+          -0.03313479945063591,
+          -0.06552745401859283,
+          0.0696922317147255
+        ],
+        [
+          -0.016760582104325294,
+          -0.07462850213050842,
+          0.08578292280435562
+        ],
+        [
+          0.0013682767748832703,
+          -0.08785898238420486,
+          0.09722335636615753
+        ],
+        [
+          -0.05399615317583084,
+          -0.029380453750491142,
+          0.06661374866962433
+        ],
+        [
+          -0.04023716226220131,
+          -0.03901316970586777,
+          0.07925684750080109
+        ],
+        [
+          -0.02674712985754013,
+          -0.04428946599364281,
+          0.09136110544204712
+        ],
+        [
+          -0.011940088123083115,
+          -0.05240212753415108,
+          0.10017203539609909
+        ]
+      ],
+      "cam_t": [
+        0.023780575022101402,
+        0.0534781776368618,
+        4.457637310028076
+      ],
+      "focal_length": 33964.84375,
+      "finger_axes": {
+        "thumb": {
+          "from": 3,
+          "to": 4,
+          "vector": [
+            124.2693,
+            -217.1321
+          ],
+          "angle": -60.2166,
+          "length": 250.1784
+        },
+        "index": {
+          "from": 7,
+          "to": 8,
+          "vector": [
+            118.2478,
+            -111.464
+          ],
+          "angle": -43.3084,
+          "length": 162.5016
+        },
+        "middle": {
+          "from": 11,
+          "to": 12,
+          "vector": [
+            126.5352,
+            -117.9823
+          ],
+          "angle": -42.9967,
+          "length": 173.0057
+        },
+        "ring": {
+          "from": 15,
+          "to": 16,
+          "vector": [
+            135.0521,
+            -98.2604
+          ],
+          "angle": -36.0387,
+          "length": 167.0155
+        },
+        "pinky": {
+          "from": 19,
+          "to": 20,
+          "vector": [
+            110.385,
+            -60.5883
+          ],
+          "angle": -28.7616,
+          "length": 125.9198
+        }
+      }
+    }
+  ],
+  "message": "Success",
+  "3d_depth_layers": [
+    {
+      "hand_index": 1,
+      "is_right": false,
+      "hand_side": "left",
+      "hand_side_label": "左手",
+      "layer_rank": 0,
+      "front_pixels": 52732,
+      "overlap_pixels": 83175,
+      "visible_pixels": 372357
+    },
+    {
+      "hand_index": 0,
+      "is_right": true,
+      "hand_side": "right",
+      "hand_side_label": "右手",
+      "layer_rank": 1,
+      "front_pixels": 0,
+      "overlap_pixels": 83175,
+      "visible_pixels": 429663
+    }
+  ],
+  "3d_depth_pairs": [
+    {
+      "a": 0,
+      "b": 1,
+      "overlap_pixels": 83175,
+      "front": 1,
+      "confidence": 0.634,
+      "a_front_pixels": 30443,
+      "b_front_pixels": 52732
+    }
+  ],
+  "visual_layers": [
+    {
+      "hand_index": 1,
+      "is_right": false,
+      "hand_side": "left",
+      "hand_side_label": "左手",
+      "layer_rank": 0,
+      "visual_score": 55.0,
+      "occludes_score": 55.0,
+      "occluded_by_score": 46.5,
+      "overlap_keypoints": 18
+    },
+    {
+      "hand_index": 0,
+      "is_right": true,
+      "hand_side": "right",
+      "hand_side_label": "右手",
+      "layer_rank": 1,
+      "visual_score": 46.5,
+      "occludes_score": 46.5,
+      "occluded_by_score": 55.0,
+      "overlap_keypoints": 20
+    }
+  ],
+  "visual_overlap_evidence": [
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 1,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 2,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 3,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 4,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 5,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 6,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 7,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 8,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 9,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 10,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 11,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 12,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 13,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 14,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 15,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 16,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 17,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 18,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 19,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 0,
+      "behind_candidate": 1,
+      "keypoint": 20,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 2,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 3,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 4,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 5,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 6,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 7,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 8,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 9,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 10,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 11,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 12,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 13,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 14,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 15,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 16,
+      "weight": 3.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 18,
+      "weight": 1.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 19,
+      "weight": 2.0
+    },
+    {
+      "front_candidate": 1,
+      "behind_candidate": 0,
+      "keypoint": 20,
+      "weight": 3.0
+    }
+  ],
+  "skeleton_crossings": [
+    {
+      "point": [
+        657.65,
+        915.99
+      ],
+      "front_candidate": null,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "thumb",
+        "from": 3,
+        "to": 4,
+        "t": 0.6831,
+        "distal_score": 5.5
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "pinky",
+        "from": 19,
+        "to": 20,
+        "t": 0.3651,
+        "distal_score": 5.5
+      }
+    },
+    {
+      "point": [
+        736.31,
+        679.13
+      ],
+      "front_candidate": 1,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "index",
+        "from": 5,
+        "to": 6,
+        "t": 0.8936,
+        "distal_score": 2.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "ring",
+        "from": 15,
+        "to": 16,
+        "t": 0.3283,
+        "distal_score": 5.5
+      }
+    },
+    {
+      "point": [
+        675.07,
+        586.78
+      ],
+      "front_candidate": null,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "index",
+        "from": 6,
+        "to": 7,
+        "t": 0.5154,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "index",
+        "from": 6,
+        "to": 7,
+        "t": 0.2547,
+        "distal_score": 3.0
+      }
+    },
+    {
+      "point": [
+        677.04,
+        589.46
+      ],
+      "front_candidate": null,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "index",
+        "from": 6,
+        "to": 7,
+        "t": 0.4952,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "middle",
+        "from": 10,
+        "to": 11,
+        "t": 0.3677,
+        "distal_score": 3.0
+      }
+    },
+    {
+      "point": [
+        771.18,
+        653.76
+      ],
+      "front_candidate": 1,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "middle",
+        "from": 9,
+        "to": 10,
+        "t": 0.8263,
+        "distal_score": 2.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "ring",
+        "from": 15,
+        "to": 16,
+        "t": 0.5865,
+        "distal_score": 5.5
+      }
+    },
+    {
+      "point": [
+        679.25,
+        583.6
+      ],
+      "front_candidate": null,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "middle",
+        "from": 10,
+        "to": 11,
+        "t": 0.52,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "index",
+        "from": 6,
+        "to": 7,
+        "t": 0.2902,
+        "distal_score": 3.0
+      }
+    },
+    {
+      "point": [
+        683.13,
+        585.16
+      ],
+      "front_candidate": null,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "middle",
+        "from": 10,
+        "to": 11,
+        "t": 0.4952,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "middle",
+        "from": 10,
+        "to": 11,
+        "t": 0.418,
+        "distal_score": 3.0
+      }
+    },
+    {
+      "point": [
+        638.72,
+        652.47
+      ],
+      "front_candidate": 1,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "ring",
+        "from": 14,
+        "to": 15,
+        "t": 0.8414,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "thumb",
+        "from": 3,
+        "to": 4,
+        "t": 0.9218,
+        "distal_score": 5.5
+      }
+    },
+    {
+      "point": [
+        621.69,
+        639.08
+      ],
+      "front_candidate": 0,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "ring",
+        "from": 14,
+        "to": 15,
+        "t": 0.9675,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "index",
+        "from": 5,
+        "to": 6,
+        "t": 0.8266,
+        "distal_score": 2.0
+      }
+    },
+    {
+      "point": [
+        618.76,
+        636.77
+      ],
+      "front_candidate": 0,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "ring",
+        "from": 14,
+        "to": 15,
+        "t": 0.9893,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "middle",
+        "from": 9,
+        "to": 10,
+        "t": 0.8992,
+        "distal_score": 2.0
+      }
+    },
+    {
+      "point": [
+        703.25,
+        703.19
+      ],
+      "front_candidate": 1,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "ring",
+        "from": 14,
+        "to": 15,
+        "t": 0.3633,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "ring",
+        "from": 15,
+        "to": 16,
+        "t": 0.0834,
+        "distal_score": 5.5
+      }
+    },
+    {
+      "point": [
+        560.88,
+        960.28
+      ],
+      "front_candidate": null,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "pinky",
+        "from": 18,
+        "to": 19,
+        "t": 0.8899,
+        "distal_score": 3.0
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "pinky",
+        "from": 18,
+        "to": 19,
+        "t": 0.4412,
+        "distal_score": 3.0
+      }
+    },
+    {
+      "point": [
+        450.38,
+        978.55
+      ],
+      "front_candidate": 0,
+      "a": {
+        "hand_index": 0,
+        "hand_side_label": "右手",
+        "finger": "pinky",
+        "from": 19,
+        "to": 20,
+        "t": 0.7701,
+        "distal_score": 5.5
+      },
+      "b": {
+        "hand_index": 1,
+        "hand_side_label": "左手",
+        "finger": "thumb",
+        "from": 2,
+        "to": 3,
+        "t": 0.254,
+        "distal_score": 3.0
+      }
+    }
+  ],
+  "hand_layers": [
+    {
+      "hand_index": 1,
+      "is_right": false,
+      "hand_side": "left",
+      "hand_side_label": "左手",
+      "layer_rank": 0,
+      "visual_score": 55.0,
+      "occludes_score": 55.0,
+      "occluded_by_score": 46.5,
+      "overlap_keypoints": 18
+    },
+    {
+      "hand_index": 0,
+      "is_right": true,
+      "hand_side": "right",
+      "hand_side_label": "右手",
+      "layer_rank": 1,
+      "visual_score": 46.5,
+      "occludes_score": 46.5,
+      "occluded_by_score": 55.0,
+      "overlap_keypoints": 20
+    }
+  ],
+  "visual_occlusion_relations": [
+    {
+      "occluding_hand": 1,
+      "occluding_side_label": "左手",
+      "occluded_hand": 0,
+      "occluded_side_label": "右手",
+      "score": 60.0,
+      "evidence_count": 23,
+      "evidence": [
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 2,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 3,
+          "weight": 2.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 4,
+          "weight": 3.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 5,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 6,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 7,
+          "weight": 2.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 8,
+          "weight": 3.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 9,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 10,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 11,
+          "weight": 2.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 12,
+          "weight": 3.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 13,
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "occluding_hand": 0,
+      "occluding_side_label": "右手",
+      "occluded_hand": 1,
+      "occluded_side_label": "左手",
+      "score": 46.5,
+      "evidence_count": 23,
+      "evidence": [
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 1,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 2,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 3,
+          "weight": 2.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 4,
+          "weight": 3.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 5,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 6,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 7,
+          "weight": 2.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 8,
+          "weight": 3.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 9,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 10,
+          "weight": 1.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 11,
+          "weight": 2.0
+        },
+        {
+          "type": "keypoint_inside_other_bbox",
+          "keypoint": 12,
+          "weight": 3.0
+        }
+      ]
+    }
+  ],
+  "render_plan": {
+    "render_order_back_to_front": [
+      0,
+      1
+    ],
+    "edges": [
+      {
+        "from_occluded": 0,
+        "to_occluding": 1,
+        "score": 60.0
+      }
+    ],
+    "suppressed_edges": [
+      {
+        "occluding_hand": 0,
+        "occluded_hand": 1,
+        "score": 46.5,
+        "reason": "weaker_reverse_relation"
+      }
+    ],
+    "cycle_breaks": [],
+    "supports_multi_instance_same_side": true
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "finger": "thumb",
+    "status": "ok",
+    "source_id": 5,
+    "target_id": 5,
+    "source_conf": 0.9347,
+    "target_conf": 0.845
+  },
+  {
+    "finger": "index",
+    "status": "ok",
+    "source_id": 2,
+    "target_id": 2,
+    "source_conf": 0.9418,
+    "target_conf": 0.8882
+  },
+  {
+    "finger": "middle",
+    "status": "ok",
+    "source_id": 4,
+    "target_id": 3,
+    "source_conf": 0.9374,
+    "target_conf": 0.8711
+  },
+  {
+    "finger": "ring",
+    "status": "ok",
+    "source_id": 1,
+    "target_id": 1,
+    "source_conf": 0.942,
+    "target_conf": 0.8902
+  },
+  {
+    "finger": "pinky",
+    "status": "ok",
+    "source_id": 10,
+    "target_id": 4,
+    "source_conf": 0.9033,
+    "target_conf": 0.8508
+  }
+]

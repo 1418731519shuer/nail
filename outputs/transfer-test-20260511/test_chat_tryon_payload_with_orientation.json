@@ -1,0 +1,256 @@
+{
+  "task": "nail_tryon_generation_test_with_explicit_orientation",
+  "coordinate_system": "image pixels; origin is top-left; x increases right; y increases downward",
+  "orientation_definition": "For every nail, nail_axis.root_point is near the nail root/cuticle and nail_axis.tip_point is near the fingertip/free edge. The nail art must be rotated so its vertical design direction follows root_point -> tip_point.",
+  "style_image": "C:/Users/chen/Documents/Codex/2026-05-08/new-chat/outputs/transfer-test-20260511/target_hand.jpg",
+  "target_hand_image": "C:/Users/chen/Documents/Codex/2026-05-08/new-chat/outputs/transfer-test-20260511/source_style.png",
+  "prompt": "??????????????????????????????????????????????????????????????????????????????????????????????????????? nail_orientation?? root_point ???? tip_point ??????????? root_to_tip_vector ???",
+  "nail_orientation": [
+    {
+      "nail_id": 1,
+      "hand_side": "left",
+      "hand_side_label": "??",
+      "finger": "ring",
+      "finger_label": "???",
+      "center": [
+        323.43,
+        332.81
+      ],
+      "orientation_meaning": "root_point -> tip_point, ???????",
+      "nail_axis": {
+        "root_point": [
+          326.79,
+          390.2
+        ],
+        "tip_point": [
+          320.07,
+          275.42
+        ],
+        "root_to_tip_vector": [
+          -0.0584,
+          -0.9983
+        ],
+        "angle_degrees_in_image_coordinates": -93.35,
+        "axis_length_pixels": 114.98
+      },
+      "oriented_box_points": [
+        [
+          366.03,
+          387.91
+        ],
+        [
+          287.54,
+          392.5
+        ],
+        [
+          280.83,
+          277.71
+        ],
+        [
+          359.32,
+          273.12
+        ]
+      ],
+      "edit_rule": "?? oriented_box_points ??????????????????????????? JSON ?????????"
+    },
+    {
+      "nail_id": 2,
+      "hand_side": "left",
+      "hand_side_label": "??",
+      "finger": "index",
+      "finger_label": "??",
+      "center": [
+        649.68,
+        347.81
+      ],
+      "orientation_meaning": "root_point -> tip_point, ???????",
+      "nail_axis": {
+        "root_point": [
+          638.75,
+          405.77
+        ],
+        "tip_point": [
+          660.61,
+          289.85
+        ],
+        "root_to_tip_vector": [
+          0.1853,
+          -0.9827
+        ],
+        "angle_degrees_in_image_coordinates": -79.32,
+        "axis_length_pixels": 117.96
+      },
+      "oriented_box_points": [
+        [
+          681.5,
+          413.83
+        ],
+        [
+          596,
+          397.7
+        ],
+        [
+          617.86,
+          281.79
+        ],
+        [
+          703.36,
+          297.92
+        ]
+      ],
+      "edit_rule": "?? oriented_box_points ??????????????????????????? JSON ?????????"
+    },
+    {
+      "nail_id": 3,
+      "hand_side": "left",
+      "hand_side_label": "??",
+      "finger": "middle",
+      "finger_label": "??",
+      "center": [
+        492.18,
+        276.56
+      ],
+      "orientation_meaning": "root_point -> tip_point, ???????",
+      "nail_axis": {
+        "root_point": [
+          488.69,
+          329.12
+        ],
+        "tip_point": [
+          495.67,
+          224
+        ],
+        "root_to_tip_vector": [
+          0.0662,
+          -0.9978
+        ],
+        "angle_degrees_in_image_coordinates": -86.21,
+        "axis_length_pixels": 105.35
+      },
+      "oriented_box_points": [
+        [
+          531.94,
+          331.99
+        ],
+        [
+          445.45,
+          326.25
+        ],
+        [
+          452.42,
+          221.13
+        ],
+        [
+          538.91,
+          226.87
+        ]
+      ],
+      "edit_rule": "?? oriented_box_points ??????????????????????????? JSON ?????????"
+    },
+    {
+      "nail_id": 4,
+      "hand_side": "left",
+      "hand_side_label": "??",
+      "finger": "pinky",
+      "finger_label": "??",
+      "center": [
+        141.86,
+        507.93
+      ],
+      "orientation_meaning": "root_point -> tip_point, ???????",
+      "nail_axis": {
+        "root_point": [
+          161,
+          559.99
+        ],
+        "tip_point": [
+          122.72,
+          455.87
+        ],
+        "root_to_tip_vector": [
+          -0.3451,
+          -0.9386
+        ],
+        "angle_degrees_in_image_coordinates": -110.19,
+        "axis_length_pixels": 110.94
+      },
+      "oriented_box_points": [
+        [
+          194.94,
+          547.51
+        ],
+        [
+          127.07,
+          572.47
+        ],
+        [
+          88.78,
+          468.35
+        ],
+        [
+          156.65,
+          443.39
+        ]
+      ],
+      "edit_rule": "?? oriented_box_points ??????????????????????????? JSON ?????????"
+    },
+    {
+      "nail_id": 5,
+      "hand_side": "left",
+      "hand_side_label": "??",
+      "finger": "thumb",
+      "finger_label": "??",
+      "center": [
+        814.81,
+        705.49
+      ],
+      "orientation_meaning": "root_point -> tip_point, ???????",
+      "nail_axis": {
+        "root_point": [
+          776.14,
+          749.96
+        ],
+        "tip_point": [
+          853.48,
+          661.02
+        ],
+        "root_to_tip_vector": [
+          0.6562,
+          -0.7546
+        ],
+        "angle_degrees_in_image_coordinates": -48.99,
+        "axis_length_pixels": 117.87
+      },
+      "oriented_box_points": [
+        [
+          795.89,
+          767.14
+        ],
+        [
+          756.38,
+          732.78
+        ],
+        [
+          833.73,
+          643.84
+        ],
+        [
+          873.24,
+          678.2
+        ]
+      ],
+      "edit_rule": "?? oriented_box_points ??????????????????????????? JSON ?????????"
+    }
+  ],
+  "negative_requirements": [
+    "??????",
+    "??????",
+    "??????",
+    "??????",
+    "??????",
+    "????",
+    "?????",
+    "?????",
+    "????????"
+  ]
+}

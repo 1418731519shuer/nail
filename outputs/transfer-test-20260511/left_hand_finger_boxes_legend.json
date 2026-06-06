@@ -1,0 +1,37 @@
+[
+  {
+    "finger": "thumb",
+    "label": "T",
+    "chinese": "??",
+    "color_name": "??",
+    "det_id": 5
+  },
+  {
+    "finger": "index",
+    "label": "I",
+    "chinese": "??",
+    "color_name": "??",
+    "det_id": 2
+  },
+  {
+    "finger": "middle",
+    "label": "M",
+    "chinese": "??",
+    "color_name": "??",
+    "det_id": 4
+  },
+  {
+    "finger": "ring",
+    "label": "R",
+    "chinese": "???",
+    "color_name": "??",
+    "det_id": 1
+  },
+  {
+    "finger": "pinky",
+    "label": "P",
+    "chinese": "??",
+    "color_name": "??",
+    "det_id": 10
+  }
+]

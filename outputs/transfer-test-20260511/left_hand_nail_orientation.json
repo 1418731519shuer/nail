@@ -1,0 +1,187 @@
+{
+  "image": "target_hand.jpg",
+  "coordinate_system": "pixel, origin at top-left, x right, y down",
+  "note_for_ai": "Do not cover the nail surface with labels. Use each nail oriented_box and long_axis_vector to align the transferred nail art. The long axis points from nail root/base area toward fingertip direction as estimated by the hand model.",
+  "left_hand_nails": [
+    {
+      "finger": "thumb",
+      "finger_cn": "??",
+      "detection_id": 5,
+      "confidence": 0.9347,
+      "center": [
+        137.54,
+        708.11
+      ],
+      "oriented_box_points": [
+        [
+          113.36,
+          834.05
+        ],
+        [
+          10.58,
+          726.2
+        ],
+        [
+          161.72,
+          582.17
+        ],
+        [
+          264.5,
+          690.02
+        ]
+      ],
+      "angle_degrees": -43.62,
+      "long_axis_vector": [
+        0.7239,
+        -0.6899
+      ],
+      "box_width": 208.78,
+      "box_height": 148.98,
+      "mask_polygon_available": true
+    },
+    {
+      "finger": "index",
+      "finger_cn": "??",
+      "detection_id": 2,
+      "confidence": 0.9418,
+      "center": [
+        261.67,
+        616.07
+      ],
+      "oriented_box_points": [
+        [
+          144.51,
+          564.09
+        ],
+        [
+          253.54,
+          488.15
+        ],
+        [
+          378.83,
+          668.05
+        ],
+        [
+          269.8,
+          743.99
+        ]
+      ],
+      "angle_degrees": -124.85,
+      "long_axis_vector": [
+        -0.5714,
+        -0.8207
+      ],
+      "box_width": 219.23,
+      "box_height": 132.88,
+      "mask_polygon_available": true
+    },
+    {
+      "finger": "middle",
+      "finger_cn": "??",
+      "detection_id": 4,
+      "confidence": 0.9374,
+      "center": [
+        405.35,
+        552.6
+      ],
+      "oriented_box_points": [
+        [
+          292.75,
+          463.57
+        ],
+        [
+          447.25,
+          415.31
+        ],
+        [
+          517.95,
+          641.63
+        ],
+        [
+          363.45,
+          689.89
+        ]
+      ],
+      "angle_degrees": -107.35,
+      "long_axis_vector": [
+        -0.2982,
+        -0.9545
+      ],
+      "box_width": 237.1,
+      "box_height": 161.86,
+      "mask_polygon_available": true
+    },
+    {
+      "finger": "ring",
+      "finger_cn": "???",
+      "detection_id": 1,
+      "confidence": 0.942,
+      "center": [
+        528.06,
+        482.5
+      ],
+      "oriented_box_points": [
+        [
+          435.61,
+          399.09
+        ],
+        [
+          575.28,
+          367.28
+        ],
+        [
+          620.51,
+          565.91
+        ],
+        [
+          480.84,
+          597.72
+        ]
+      ],
+      "angle_degrees": -102.83,
+      "long_axis_vector": [
+        -0.2221,
+        -0.975
+      ],
+      "box_width": 203.71,
+      "box_height": 143.25,
+      "mask_polygon_available": true
+    },
+    {
+      "finger": "pinky",
+      "finger_cn": "??",
+      "detection_id": 10,
+      "confidence": 0.9033,
+      "center": [
+        658.21,
+        426.72
+      ],
+      "oriented_box_points": [
+        [
+          606.87,
+          363.91
+        ],
+        [
+          720.41,
+          374.65
+        ],
+        [
+          709.55,
+          489.53
+        ],
+        [
+          596.01,
+          478.79
+        ]
+      ],
+      "angle_degrees": -84.6,
+      "long_axis_vector": [
+        0.0941,
+        -0.9956
+      ],
+      "box_width": 115.4,
+      "box_height": 114.05,
+      "mask_polygon_available": true
+    }
+  ]
+}
