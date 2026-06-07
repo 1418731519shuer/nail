@@ -97,12 +97,13 @@ async function onTabChange(tab) {
     dailyChart?.resize()
     weeklyChart?.resize()
   } else {
+    // 先 resize 让容器高度生效，再重绘（带动画）
+    compareChart?.resize()
     if (compareReady.value && compareData.value) {
       renderCompareChart()
     } else if (compareReady.value) {
       fetchCompareData()
     }
-    compareChart?.resize()
   }
 }
 
@@ -351,6 +352,9 @@ function buildCompareOption(data) {
 
   const valFmt = (v) => isRate ? `${(Number(v || 0) * 100).toFixed(1)}%` : `${Number(v || 0)}`
   return {
+    animation: true,
+    animationDuration: 800,
+    animationEasing: 'cubicOut',
     tooltip: { trigger: 'axis', valueFormatter: valFmt },
     legend: { data: series.map(s => s.styleName), bottom: 0 },
     grid: { left: 36, right: 24, top: 28, bottom: 48, containLabel: true },
@@ -386,12 +390,13 @@ function renderTrendCharts() {
   weeklyChart.setOption(buildWeeklyOption(selectedStyleTrend.value, predictResult.value))
 }
 
-function renderCompareChart() {
+async function renderCompareChart() {
   if (!compareData.value || !compareChartRef.value) return
+  // 先等 flex 布局稳定，让容器获得真实高度
+  await nextTick()
   if (!compareChart) compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
-  compareChart.setOption(buildCompareOption(compareData.value))
-  // flex 布局高度确定后需要 resize 一次以填满容器
-  nextTick(() => compareChart?.resize())
+  compareChart.resize()                                   // 以真实高度为准
+  compareChart.setOption(buildCompareOption(compareData.value), true)  // notMerge=true 重播动画
 }
 
 function clearCompareChart() {
