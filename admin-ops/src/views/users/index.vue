@@ -23,7 +23,6 @@
                   </div>
                 </div>
               </template>
-              <p class="summary-text">{{ summaryText }}</p>
               <el-row :gutter="12">
                 <el-col :span="12" v-for="dim in prefDims" :key="dim.key">
                   <div class="pref-dim-card">
@@ -89,7 +88,6 @@
               <div class="persona-primary">
                 <div>
                   <div class="persona-name" :style="{ color: crowdSegments[0]?.color }">{{ crowdSegments[0]?.label }}</div>
-                  <div class="persona-desc">{{ crowdSegments[0]?.desc }}</div>
                 </div>
               </div>
 
