@@ -1481,7 +1481,7 @@ function severityTagType(value) {
 
 /* ECharts 容器 */
 .fb-chart-row { display: flex; gap: 0; }
-.fb-donut-chart { width: 260px; height: 220px; flex-shrink: 0; }
+.fb-donut-chart { width: 300px; height: 220px; flex-shrink: 0; }
 .fb-line-chart { flex: 1; height: 220px; min-width: 0; }
 .fb-pie-chart { width: 100%; height: 220px; }
 
