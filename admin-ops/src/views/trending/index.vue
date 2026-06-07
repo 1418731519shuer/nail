@@ -95,63 +95,6 @@
       </div>
     </el-card>
 
-    <!-- 款式趋势预测面板 -->
-    <el-card shadow="never" class="panel detail-panel">
-      <template #header>
-        <div class="card-header">
-          <span>款式趋势预测</span>
-          <div style="display:flex;gap:8px;align-items:center">
-            <el-input v-model="trendSearch" size="small" placeholder="搜索款式" clearable style="width:180px" />
-            <el-select v-model="trendFilter" size="small" style="width:120px">
-              <el-option label="全部" value="" />
-              <el-option label="↑ 上升" value="up" />
-              <el-option label="→ 平稳" value="stable" />
-              <el-option label="↓ 下降" value="down" />
-            </el-select>
-          </div>
-        </div>
-      </template>
-      <el-table :data="filteredTrendRows" size="small" :row-class-name="trendRowClass">
-        <el-table-column label="款式" min-width="180">
-          <template #default="{ row }">
-            <div style="display:flex;align-items:center;gap:8px">
-              <el-image :src="row.image" style="width:36px;height:36px;border-radius:6px;flex-shrink:0" fit="cover" />
-              <span style="font-weight:600;font-size:13px">{{ row.name }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="当前" width="110" align="center">
-          <template #default="{ row }">
-            <el-tag :color="stateColor(row.current)" effect="dark" size="small" style="border:none">{{ stateLabel(row.current) }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="→" width="30" align="center">
-          <template #default="{ row }">
-            <span :style="{color: trendArrowColor(row.current, row.w1), fontWeight:700}">{{ trendArrow(row.current, row.w1) }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="下周 W+1" width="110" align="center">
-          <template #default="{ row }">
-            <el-tag :color="stateColor(row.w1)" effect="dark" size="small" style="border:none">{{ stateLabel(row.w1) }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="→" width="30" align="center">
-          <template #default="{ row }">
-            <span :style="{color: trendArrowColor(row.w1, row.w2), fontWeight:700}">{{ trendArrow(row.w1, row.w2) }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="两周后 W+2" width="110" align="center">
-          <template #default="{ row }">
-            <el-tag :color="stateColor(row.w2)" effect="dark" size="small" style="border:none">{{ stateLabel(row.w2) }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="趋势" width="80" align="center">
-          <template #default="{ row }">
-            <span :style="{color: dirColor(row.dir), fontWeight:700, fontSize:'15px'}">{{ dirIcon(row.dir) }}</span>
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-card>
 
     <el-card shadow="never" class="panel detail-panel">
       <template #header>
