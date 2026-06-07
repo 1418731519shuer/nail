@@ -120,7 +120,9 @@ const hotStyles = computed(() => ops.value?.hotStyles || [])
 const top5 = computed(() => {
   const list = hotStyles.value.slice(0, 5)
   const maxHot = Math.max(...list.map(s => s.hotIndex), 1)
-  return list.map(s => ({ ...s, hotBar: Math.round((s.hotIndex / maxHot) * 100) }))
+  const minHot = Math.min(...list.map(s => s.hotIndex), 0)
+  const range = maxHot - minHot || 1
+  return list.map(s => ({ ...s, hotBar: Math.round(((s.hotIndex - minHot) / range) * 85 + 15) }))
 })
 const suggestions = computed(() => ops.value?.suggestions || [])
 const activities = computed(() => ops.value?.activities || [])
