@@ -140,16 +140,6 @@
 
       <el-tab-pane label="用户反馈数据（总体）" name="feedback">
 
-        <!-- 顶部 4 个核心指标卡 -->
-        <div class="fb-hero-band">
-          <div v-for="(item, i) in feedbackStatCards" :key="item.label" class="fb-hero-card" :style="{ '--accent': fbAccents[i] }">
-            <div class="fb-hero-icon"><el-icon :size="22"><component :is="fbIcons[i]" /></el-icon></div>
-            <div class="fb-hero-val">{{ item.value }}</div>
-            <div class="fb-hero-label">{{ item.label }}</div>
-            <div class="fb-hero-sub">{{ item.desc }}</div>
-          </div>
-        </div>
-
         <el-row :gutter="16">
           <!-- 左列 -->
           <el-col :span="15">
@@ -723,14 +713,15 @@ function renderFbCharts() {
     textStyle: { fontFamily: CHART_FONT },
     tooltip: sharedTooltip('{b}<br/>{c} 条 ({d}%)'),
     legend: {
-      orient: 'vertical', left: 8, top: 'center',
-      itemWidth: 10, itemHeight: 10, borderRadius: 5,
+      orient: 'vertical', left: 6, top: 'center',
+      itemWidth: 9, itemHeight: 9, borderRadius: 9,
+      itemGap: 8,
       textStyle: legendStyle
     },
     series: [{
       type: 'pie',
       radius: ['52%', '78%'],
-      center: ['68%', '50%'],
+      center: ['72%', '50%'],
       label: { show: false },
       emphasis: { scale: true, scaleSize: 4, label: { show: false } },
       data: feedbackCategoryStats.value.map((item, i) => ({
@@ -1489,10 +1480,10 @@ function severityTagType(value) {
 .fb-hero-sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; }
 
 /* ECharts 容器 */
-.fb-chart-row { display: flex; gap: 8px; }
-.fb-donut-chart { width: 220px; height: 220px; flex-shrink: 0; }
-.fb-line-chart { flex: 1; height: 220px; }
-.fb-pie-chart { width: 100%; height: 200px; }
+.fb-chart-row { display: flex; gap: 0; }
+.fb-donut-chart { width: 260px; height: 220px; flex-shrink: 0; }
+.fb-line-chart { flex: 1; height: 220px; min-width: 0; }
+.fb-pie-chart { width: 100%; height: 220px; }
 
 /* 近期反馈记录 */
 .fb-record-list { display: flex; flex-direction: column; gap: 10px; }
