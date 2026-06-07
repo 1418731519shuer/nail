@@ -214,17 +214,6 @@
               </div>
             </el-card>
 
-            <!-- 反馈流向 -->
-            <el-card shadow="never" class="panel">
-              <template #header><span>反馈流向</span></template>
-              <div class="fb-pipeline">
-                <div v-for="item in pipelineStats" :key="item.key" class="fb-pipeline-item" :style="{ '--pc': fbPipelineColors[item.key] || '#888' }">
-                  <div class="fb-pipeline-count">{{ item.count }}</div>
-                  <div class="fb-pipeline-label">{{ item.label }}</div>
-                  <div class="fb-pipeline-desc">{{ item.desc }}</div>
-                </div>
-              </div>
-            </el-card>
           </el-col>
         </el-row>
       </el-tab-pane>
@@ -525,11 +514,10 @@ const crowdSegments = computed(() => classifyUserCrowd(profile.value, preference
 const rankedItems = computed(() => rankItemsForUser(mockNailItems, profile.value, filter.value))
 const recentLogs = computed(() => [...logs.value].slice(-12).reverse())
 
-// 反馈 tab 配色
-const fbAccents = ['#ff6b9d', '#faad14', '#36cfc9', '#722ed1']
+// 反馈 tab 配色 —— 品牌暖色系
+const fbAccents = ['#c97a4e', '#d4a843', '#4ab8b0', '#e87899']
 const fbIcons = ['Warning', 'Aim', 'ChatDotRound', 'Star']
-const fbCatColors = ['#ff6b9d', '#faad14', '#36cfc9', '#722ed1', '#52c41a', '#fa8c16', '#1677ff']
-const fbPipelineColors = { recommendation: '#ff6b9d', quality: '#faad14', content: '#36cfc9' }
+const fbCatColors = ['#c97a4e', '#e87899', '#d4a843', '#a85e35', '#4ab8b0', '#e0b898', '#b8846a']
 
 // 今日事件概况
 const todayStats = computed(() => {
@@ -553,7 +541,6 @@ const feedbackCategoryStats = computed(() => getFeedbackCategoryStats(mockFeedba
 const topIssueCodes = computed(() => getTopIssueCodes(mockFeedbackRecords))
 const versionTrendStats = computed(() => getVersionTrendStats(mockFeedbackRecords))
 const sourcePageStats = computed(() => getSourcePageStats(mockFeedbackRecords))
-const pipelineStats = computed(() => getPipelineStats(mockFeedbackRecords))
 const recentFeedbackRecords = computed(() => getRecentFeedbackRecords(mockFeedbackRecords))
 
 const profileStatCards = computed(() => [
@@ -719,7 +706,8 @@ function renderFbCharts() {
   const pieEl = document.getElementById('fb-pie-chart')
   if (!catEl || !lineEl || !pieEl) return
 
-  const sharedTextStyle = { fontFamily: CHART_FONT, fontSize: 12, color: 'rgba(45,26,16,0.62)' }
+  const inkMuted = 'rgba(45,26,16,0.55)'
+  const sharedTextStyle = { fontFamily: CHART_FONT, fontSize: 12, color: inkMuted }
   const sharedTooltip = (fmt) => ({
     trigger: 'item', formatter: fmt,
     backgroundColor: 'rgba(255,255,255,0.96)',
@@ -727,21 +715,27 @@ function renderFbCharts() {
     borderWidth: 1,
     textStyle: { fontFamily: CHART_FONT, fontSize: 12, color: '#2d1a10' }
   })
+  const legendStyle = { ...sharedTextStyle, fontSize: 12, lineHeight: 20 }
 
-  // 环形图：反馈分类
+  // 环形图：反馈分类（对齐 pref-dim 风格）
   if (!fbDonutChart) fbDonutChart = echarts.init(catEl, window.__ECHARTS_THEME__)
   fbDonutChart.setOption({
     textStyle: { fontFamily: CHART_FONT },
-    tooltip: sharedTooltip('{b}: {c} 条 ({d}%)'),
-    legend: { orient: 'vertical', left: 8, top: 'center', textStyle: { ...sharedTextStyle, fontSize: 11 } },
+    tooltip: sharedTooltip('{b}<br/>{c} 条 ({d}%)'),
+    legend: {
+      orient: 'vertical', left: 8, top: 'center',
+      itemWidth: 10, itemHeight: 10, borderRadius: 5,
+      textStyle: legendStyle
+    },
     series: [{
-      type: 'pie', radius: ['42%', '70%'],
-      center: ['65%', '50%'],
+      type: 'pie',
+      radius: ['52%', '78%'],
+      center: ['68%', '50%'],
       label: { show: false },
-      emphasis: { label: { show: true, fontSize: 13, fontWeight: 'bold', fontFamily: CHART_FONT } },
+      emphasis: { scale: true, scaleSize: 4, label: { show: false } },
       data: feedbackCategoryStats.value.map((item, i) => ({
         name: item.label, value: item.count,
-        itemStyle: { color: fbCatColors[i % fbCatColors.length] }
+        itemStyle: { color: fbCatColors[i % fbCatColors.length], borderRadius: 3 }
       }))
     }]
   })
@@ -752,31 +746,36 @@ function renderFbCharts() {
   fbLineChart.setOption({
     textStyle: { fontFamily: CHART_FONT },
     tooltip: { trigger: 'axis', backgroundColor: 'rgba(255,255,255,0.96)', borderColor: 'rgba(185,120,80,0.14)', borderWidth: 1, textStyle: { fontFamily: CHART_FONT, fontSize: 12 } },
-    legend: { data: ['试戴效果', '推荐匹配', '性能体验'], bottom: 0, textStyle: { ...sharedTextStyle, fontSize: 11 } },
+    legend: { data: ['试戴效果', '推荐匹配', '性能体验'], bottom: 0, textStyle: legendStyle, itemWidth: 12, itemHeight: 4 },
     grid: { left: 30, right: 12, top: 20, bottom: 40, containLabel: true },
-    xAxis: { type: 'category', data: versions, axisLabel: { ...sharedTextStyle, fontSize: 11 } },
+    xAxis: { type: 'category', data: versions, axisLabel: sharedTextStyle, axisTick: { show: false }, axisLine: { lineStyle: { color: 'rgba(185,120,80,0.18)' } } },
     yAxis: { type: 'value', axisLabel: sharedTextStyle, splitLine: { lineStyle: { color: 'rgba(185,120,80,0.10)', type: 'dashed' } } },
     series: [
-      { name: '试戴效果', type: 'line', smooth: true, color: '#ff6b9d', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.tryonEffect) },
-      { name: '推荐匹配', type: 'line', smooth: true, color: '#36cfc9', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.recommendation) },
-      { name: '性能体验', type: 'line', smooth: true, color: '#faad14', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.performance) }
+      { name: '试戴效果', type: 'line', smooth: true, color: '#c97a4e', symbol: 'circle', symbolSize: 6, lineStyle: { width: 2.5 }, data: versionTrendStats.value.map(v => v.tryonEffect) },
+      { name: '推荐匹配', type: 'line', smooth: true, color: '#4ab8b0', symbol: 'circle', symbolSize: 6, lineStyle: { width: 2.5 }, data: versionTrendStats.value.map(v => v.recommendation) },
+      { name: '性能体验', type: 'line', smooth: true, color: '#d4a843', symbol: 'circle', symbolSize: 6, lineStyle: { width: 2.5 }, data: versionTrendStats.value.map(v => v.performance) }
     ]
   })
 
-  // 饼图：来源页面
+  // 环形图：来源页面（对齐 pref-dim 风格）
   if (!fbPieChart) fbPieChart = echarts.init(pieEl, window.__ECHARTS_THEME__)
   fbPieChart.setOption({
     textStyle: { fontFamily: CHART_FONT },
-    tooltip: sharedTooltip('{b}: {c} 条 ({d}%)'),
-    legend: { orient: 'vertical', right: 8, top: 'center', textStyle: { ...sharedTextStyle, fontSize: 11 } },
+    tooltip: sharedTooltip('{b}<br/>{c} 条 ({d}%)'),
+    legend: {
+      orient: 'vertical', right: 8, top: 'center',
+      itemWidth: 10, itemHeight: 10, borderRadius: 5,
+      textStyle: legendStyle
+    },
     series: [{
-      type: 'pie', radius: ['35%', '62%'],
-      center: ['38%', '50%'],
+      type: 'pie',
+      radius: ['52%', '78%'],
+      center: ['36%', '50%'],
       label: { show: false },
-      emphasis: { label: { show: true, fontSize: 12, fontWeight: 'bold', fontFamily: CHART_FONT } },
+      emphasis: { scale: true, scaleSize: 4, label: { show: false } },
       data: sourcePageStats.value.map((item, i) => ({
         name: item.label, value: item.count,
-        itemStyle: { color: fbCatColors[i % fbCatColors.length] }
+        itemStyle: { color: fbCatColors[i % fbCatColors.length], borderRadius: 3 }
       }))
     }]
   })
