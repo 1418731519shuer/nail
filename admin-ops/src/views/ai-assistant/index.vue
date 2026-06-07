@@ -1,41 +1,40 @@
 <template>
   <div class="ops-agent-page">
     <div class="page-header">
-      <h2>AI 运营助手原子操作系统</h2>
-      <p>自然语言会被拆成已注册原子操作。写操作先预览，再确认，再执行并写审计日志。</p>
+      <h2>AI 运营助手</h2>
+      <p>用自然语言驱动运营操作。写操作先预览，再确认，再执行。</p>
     </div>
 
     <section class="agent-workbench">
       <div class="agent-input-panel">
         <div class="section-title">
-          <span>运营输入</span>
-          <el-tag type="info">Mock 数据模式</el-tag>
+          <span>告诉我你想做什么</span>
+          <el-tag type="info" size="small">Mock 数据模式</el-tag>
         </div>
 
         <div class="data-window">
-          <el-tag type="info">{{ trendRangeText }}</el-tag>
-          <el-tag type="success">{{ styleOptions.length }} 款同源样本</el-tag>
-          <el-tag v-if="trendStyleMeta" type="warning">
-            {{ trendStyleMeta.styleName }} · {{ latestTrendLabel }}
-          </el-tag>
+          <span class="data-chip">{{ trendRangeText }}</span>
+          <span class="data-chip accent">{{ styleOptions.length }} 款同源样本</span>
+          <span v-if="trendStyleMeta" class="data-chip warm">{{ trendStyleMeta.styleName }} · {{ latestTrendLabel }}</span>
         </div>
 
         <el-input
           v-model="input"
           type="textarea"
-          :rows="4"
+          :rows="5"
           placeholder="例如：把最近冷掉的款下架，但猫眼不要动。"
           @keyup.ctrl.enter="run"
+          class="ai-input"
         />
 
         <div class="quick-list">
-          <el-button v-for="item in quickQuestions" :key="item" round size="small" @click="ask(item)">
+          <button v-for="item in quickQuestions" :key="item" class="quick-chip" @click="ask(item)">
             {{ item }}
-          </el-button>
+          </button>
         </div>
 
         <div class="toolbar">
-          <el-select v-model="selectedStyleId" placeholder="分析款式" size="small" filterable>
+          <el-select v-model="selectedStyleId" placeholder="分析款式" filterable class="style-select">
             <el-option
               v-for="item in styleOptions"
               :key="item.id"
@@ -43,7 +42,7 @@
               :value="item.id"
             />
           </el-select>
-          <el-button type="primary" :loading="loading" @click="run">生成计划</el-button>
+          <el-button type="primary" :loading="loading" @click="run" class="run-btn">生成计划</el-button>
         </div>
       </div>
 
@@ -157,24 +156,6 @@
       </div>
     </section>
 
-    <section class="log-panel">
-      <div class="section-title">
-        <span>最近 AI 操作日志</span>
-        <el-button text @click="refreshLogs">刷新</el-button>
-      </div>
-
-      <el-table :data="logs" empty-text="暂无执行日志" size="small">
-        <el-table-column prop="createdAt" label="时间" min-width="170" />
-        <el-table-column prop="operationName" label="操作" min-width="150" />
-        <el-table-column prop="riskLevel" label="风险" width="100" />
-        <el-table-column prop="result" label="结果" width="100" />
-        <el-table-column label="对象" min-width="220">
-          <template #default="{ row }">
-            {{ row.targets.map((item) => item.targetName || item.targetId).join('、') }}
-          </template>
-        </el-table-column>
-      </el-table>
-    </section>
 
     <el-dialog v-model="previewDialog" title="操作预览详情" width="760px">
       <template v-if="result?.preview">
@@ -410,103 +391,181 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+/* ── 页面容器 ── */
 .ops-agent-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* ── 双栏布局 ── */
 .agent-workbench,
 .analysis-grid {
   display: grid;
   grid-template-columns: minmax(320px, 0.88fr) minmax(360px, 1.12fr);
   gap: 16px;
+  align-items: start;
 }
 
+/* ── 面板卡片：对齐全局 el-card 风格 ── */
 .agent-input-panel,
 .plan-panel,
 .analysis-main,
 .side-panel,
-.report-panel,
-.log-panel {
-  padding: 18px;
-  border: 1px solid #ebeef5;
-  border-radius: 8px;
-  background: #fff;
+.report-panel {
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.agent-input-panel:hover,
+.plan-panel:hover,
+.analysis-main:hover,
+.side-panel:hover {
+  box-shadow: var(--shadow-lg);
 }
 
-.section-title,
-.toolbar,
-.plan-meta,
-.sample-note,
-.approval-box,
-.approval-actions {
+/* ── 区块标题 ── */
+.section-title {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.section-title {
   justify-content: space-between;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: var(--text-base);
   font-weight: 700;
-  color: #303133;
+  color: var(--ink);
+  letter-spacing: -0.01em;
 }
 
-.quick-list,
-.target-list {
+/* ── 数据窗口标签 ── */
+.data-window {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-bottom: 14px;
 }
 
-.toolbar {
-  justify-content: space-between;
-  margin-top: 14px;
+.data-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  background: rgba(201,122,78,0.07);
+  color: var(--ink-2);
+  border: 1px solid var(--border);
+}
+.data-chip.accent { background: rgba(201,122,78,0.12); color: var(--accent-dark); border-color: rgba(201,122,78,0.22); }
+.data-chip.warm   { background: var(--pink-light); color: #b5516a; border-color: rgba(232,120,153,0.25); }
+
+/* ── 输入框强化 ── */
+.ai-input :deep(.el-textarea__inner) {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--ink);
+  background: rgba(253,245,238,0.6);
+  border-color: var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  resize: none;
+  transition: background var(--dur-base) var(--ease-out-quart), border-color var(--dur-base) var(--ease-out-quart);
+}
+.ai-input :deep(.el-textarea__inner:focus) {
+  background: rgba(255,255,255,0.9);
+  border-color: var(--accent);
 }
 
-.plan-meta {
+/* ── 快捷问题胶囊 ── */
+.quick-list {
+  display: flex;
   flex-wrap: wrap;
-  color: #606266;
-  font-size: 13px;
+  gap: 7px;
+  margin-top: 14px;
+  margin-bottom: 2px;
 }
+
+.quick-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.72);
+  color: var(--ink-2);
+  font-size: var(--text-xs);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    color var(--dur-fast) var(--ease-out-quart);
+}
+.quick-chip:hover {
+  background: var(--accent-light);
+  border-color: rgba(201,122,78,0.35);
+  color: var(--accent-dark);
+}
+
+/* ── 底部工具栏 ── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+}
+.style-select { flex: 1; }
+
+/* ── 任务计划 ── */
+.plan-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+  margin-bottom: 12px;
+}
+.plan-meta span { display: flex; align-items: center; gap: 4px; }
 
 .protected-box {
-  margin-top: 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
   color: #8a5a00;
-  background: #fff7e6;
+  background: rgba(212,168,67,0.10);
+  border: 1px solid rgba(212,168,67,0.25);
+  font-size: var(--text-sm);
 }
 
 .operation-list {
   margin: 14px 0 0;
   padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+.operation-list li { list-style: none; margin: 0; padding: 10px 14px; background: rgba(201,122,78,0.05); border: 1px solid var(--border); border-radius: var(--r-md); }
+.operation-list strong { display: block; color: var(--ink); font-size: var(--text-sm); margin-bottom: 3px; }
+.operation-list span { color: var(--ink-3); font-size: var(--text-xs); line-height: 1.5; }
 
-.operation-list li {
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-.operation-list strong {
-  display: block;
-  color: #303133;
-}
-
-.operation-list span,
-.conclusion,
-.side-panel p,
-.sample-note {
-  color: #606266;
+/* ── 分析区 ── */
+.conclusion {
+  color: var(--ink-2);
   line-height: 1.7;
+  font-size: var(--text-sm);
+  margin-bottom: 4px;
 }
 
 .info-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 16px;
   margin-top: 16px;
 }
 
@@ -515,41 +574,62 @@ onMounted(async () => {
 .report-section h3,
 .preview-detail h3 {
   margin: 0 0 8px;
-  font-size: 15px;
-  color: #303133;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--ink);
 }
 
-ul {
-  margin: 0;
-  padding-left: 18px;
-}
-
-li {
-  margin-bottom: 6px;
-  line-height: 1.55;
-}
+ul { margin: 0; padding-left: 16px; }
+li { margin-bottom: 6px; line-height: 1.55; color: var(--ink-2); font-size: var(--text-sm); }
 
 .sample-note {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 4px;
   margin-top: 14px;
-  padding: 12px;
-  border-radius: 8px;
-  background: #f7f8fa;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: rgba(201,122,78,0.05);
+  border: 1px solid var(--border);
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+}
+
+/* ── 操作预览侧栏 ── */
+.side-panel p { color: var(--ink-2); font-size: var(--text-sm); line-height: 1.65; }
+
+.target-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
 }
 
 .approval-box {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-top: 14px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: #f5f7fa;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  background: rgba(201,122,78,0.05);
+  border: 1px solid var(--border);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
 }
+.approval-box strong { color: var(--accent); font-weight: 700; }
 
 .approval-actions {
+  display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 8px;
   margin-top: 12px;
 }
+
+/* ── 报告分段 ── */
+.report-panel { margin-top: 0; }
 
 .report-grid {
   display: grid;
@@ -558,28 +638,24 @@ li {
 }
 
 .report-section {
-  min-height: 130px;
-  padding: 14px;
-  border: 1px solid #edf0f5;
-  border-radius: 8px;
-  background: #fbfcfe;
+  min-height: 120px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: rgba(253,245,238,0.5);
 }
+.report-section h3 { color: var(--ink); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 10px; }
 
+/* ── 预览弹窗 ── */
 .preview-detail pre {
   max-height: 220px;
   overflow: auto;
   padding: 12px;
-  border-radius: 8px;
-  background: #f6f8fa;
+  border-radius: var(--r-md);
+  background: rgba(201,122,78,0.05);
+  border: 1px solid var(--border);
   font-size: 12px;
-}
-
-.data-window {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  color: var(--ink-2);
 }
 
 @media (max-width: 1080px) {
