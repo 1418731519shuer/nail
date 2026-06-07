@@ -279,11 +279,15 @@ const extraSignals  = computed(() => deriveExtraSignals(logs.value))
 
 // ── 偏好环形图 —— 暖品牌色系 ──────────────────────────────────
 // 主色：赤陶 → 粉茶 → 暖金 → 蔷薇 → 暖茶 → 淡粉
+// 色相均匀分布：赤陶(20°) · 玫粉(340°) · 琥珀(48°) · 薄荷(168°) · 矢车菊(215°) · 薰衣草(270°)
+// 整体高明度、低饱和，确保区分度鲜明
+const PALETTE = ['#e0906a', '#f0a0bc', '#f0c860', '#60c8b4', '#80aad8', '#b094d4']
+
 const DIM_COLORS = {
-  season: ['#c97a4e', '#e87899', '#d4a843', '#4ab8b0'],
-  style:  ['#c97a4e', '#e87899', '#d4a843', '#a85e35', '#4ab8b0'],
-  type:   ['#c97a4e', '#e87899', '#d4a843', '#a85e35', '#4ab8b0', '#e0b898'],
-  shape:  ['#c97a4e', '#e87899', '#d4a843', '#4ab8b0']
+  season: [PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[3]],
+  style:  [PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[4], PALETTE[3]],
+  type:   [PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[4], PALETTE[3], PALETTE[5]],
+  shape:  [PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[3]]
 }
 
 const prefDimCharts = {}
@@ -507,7 +511,7 @@ const recentLogs = computed(() => [...logs.value].slice(-12).reverse())
 // 反馈 tab 配色 —— 品牌暖色系
 const fbAccents = ['#c97a4e', '#d4a843', '#4ab8b0', '#e87899']
 const fbIcons = ['Warning', 'Aim', 'ChatDotRound', 'Star']
-const fbCatColors = ['#c97a4e', '#e87899', '#d4a843', '#a85e35', '#4ab8b0', '#e0b898', '#b8846a']
+const fbCatColors = [PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[3], PALETTE[4], PALETTE[5], '#d4a87a']
 
 // 今日事件概况
 const todayStats = computed(() => {

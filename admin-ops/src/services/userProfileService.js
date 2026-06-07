@@ -354,7 +354,7 @@ export function classifyUserCrowd(profile, preferenceBundle, extraSignals = {}) 
       key: 'career',
       label: '职场女性',
       desc: '通勤 / 高级感，短甲实用，果断成单',
-      color: '#c97a4e',
+      color: '#e0906a',
       score:
         (stylePref['高级感'] || 0) * 0.50 +
         (stylePref['优雅']   || 0) * 0.30 +
@@ -375,7 +375,7 @@ export function classifyUserCrowd(profile, preferenceBundle, extraSignals = {}) 
       key: 'mom',
       label: '宝妈',
       desc: '精致工艺 / 延长甲，稳定复购，在意效果',
-      color: '#e87899',
+      color: '#f0a0bc',
       score:
         (stylePref['温柔感'] || 0) * 0.45 +
         (stylePref['优雅']   || 0) * 0.30 +
@@ -395,7 +395,7 @@ export function classifyUserCrowd(profile, preferenceBundle, extraSignals = {}) 
       key: 'student',
       label: '大学生',
       desc: '视觉系工艺 / 短甲，探索多成单少，价格敏感',
-      color: '#4ab8b0',
+      color: '#60c8b4',
       score:
         (stylePref['甜美'] || 0) * 0.35 +
         (stylePref['少女'] || 0) * 0.40 +
