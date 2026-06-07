@@ -2,14 +2,15 @@
   <div class="page">
     <div class="page-header">
       <h2>趋势洞察</h2>
-      <p>选择单款查看历史走势与 W+1/W+2 预测，或选多款横向对比关键指标变化。</p>
+      <p>选择单款查看历史走势与 W+1/W+2 预测，或切换多款横向对比关键指标变化。</p>
     </div>
 
-    <el-card shadow="never" class="panel detail-panel">
-      <template #header>
-        <div class="card-header">
-          <span>单款走势</span>
-          <div class="detail-header">
+    <el-card shadow="never" class="panel tab-card">
+      <el-tabs v-model="activeTab" class="insight-tabs" @tab-change="onTabChange">
+
+        <!-- ── 单款走势 ── -->
+        <el-tab-pane label="单款走势" name="single">
+          <div class="tab-toolbar">
             <el-select v-model="selectedStyleId" filterable size="small" placeholder="选择款式" style="width: 280px">
               <el-option v-for="item in selectableStyles" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
@@ -17,29 +18,25 @@
               <el-radio-button v-for="days in windowOptions" :key="days" :label="days">{{ days }} 天</el-radio-button>
             </el-radio-group>
           </div>
-        </div>
-      </template>
 
-      <div v-loading="trendLoading" class="trend-box">
-        <div v-if="selectedStyleTrend" class="style-meta">
-          <el-image :src="selectedStyleTrend.image" class="meta-image" fit="cover" />
-          <div class="meta-copy">
-            <strong>{{ selectedStyleTrend.styleName }}</strong>
-            <span>{{ selectedStyleTrend.primaryTag }} / {{ selectedStyleTrend.secondaryTag }}</span>
-            <p>只有在选中款式后才加载这一个款的趋势曲线，避免打开页面时读取全部 120 天明细。</p>
+          <div v-loading="trendLoading" class="trend-box">
+            <div v-if="selectedStyleTrend" class="style-meta">
+              <el-image :src="selectedStyleTrend.image" class="meta-image" fit="cover" />
+              <div class="meta-copy">
+                <strong>{{ selectedStyleTrend.styleName }}</strong>
+                <span>{{ selectedStyleTrend.primaryTag }} / {{ selectedStyleTrend.secondaryTag }}</span>
+                <p>只有在选中款式后才加载这一个款的趋势曲线，避免打开页面时读取全部 120 天明细。</p>
+              </div>
+            </div>
+            <el-empty v-else-if="!trendLoading" description="选择一个款式查看走势" />
+            <div ref="dailyChartRef" class="chart large"></div>
+            <div ref="weeklyChartRef" class="chart"></div>
           </div>
-        </div>
-        <el-empty v-else-if="!trendLoading" description="选择一个款式查看走势" />
-        <div ref="dailyChartRef" class="chart large"></div>
-        <div ref="weeklyChartRef" class="chart"></div>
-      </div>
-    </el-card>
+        </el-tab-pane>
 
-    <el-card shadow="never" class="panel detail-panel">
-      <template #header>
-        <div class="card-header compare-header">
-          <span>多款对比</span>
-          <div class="compare-controls">
+        <!-- ── 多款对比 ── -->
+        <el-tab-pane label="多款对比" name="compare">
+          <div class="tab-toolbar compare-toolbar">
             <el-select
               v-model="compareStyleIds"
               multiple
@@ -52,42 +49,63 @@
             >
               <el-option v-for="item in selectableStyles" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
-            <el-select v-model="compareMetric" size="small" placeholder="选择对比指标" style="width: 220px">
+            <el-select v-model="compareMetric" size="small" placeholder="选择对比指标" style="width: 200px">
               <el-option v-for="item in compareMetricOptions" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
             <el-radio-group v-model="compareWindowDays" size="small">
               <el-radio-button v-for="days in windowOptions" :key="days" :label="days">{{ days }} 天</el-radio-button>
             </el-radio-group>
           </div>
-        </div>
-      </template>
 
-      <div v-loading="compareLoading" class="trend-box compare-box">
-        <div class="compare-summary">
-          <div>
-            <strong>{{ currentCompareMetricLabel }}</strong>
-            <p>一次只对比一个指标。组合指标也按单指标处理，例如想做/浏览、确认做/想做。</p>
+          <div v-loading="compareLoading" class="trend-box compare-box">
+            <div class="compare-summary">
+              <div>
+                <strong>{{ currentCompareMetricLabel }}</strong>
+                <p>一次只对比一个指标。组合指标也按单指标处理，例如想做/浏览、确认做/想做。</p>
+              </div>
+              <el-alert
+                v-if="compareIsRate"
+                title="当前是比率指标，样本小的时候波动会更明显。"
+                type="warning"
+                :closable="false"
+                show-icon
+              />
+            </div>
+            <el-empty v-if="!compareReady && !compareLoading" description="至少选择 2 个款式进行对比" />
+            <div ref="compareChartRef" class="chart large"></div>
           </div>
-          <el-alert
-            v-if="compareIsRate"
-            title="当前是比率指标，样本小的时候波动会更明显。"
-            type="warning"
-            :closable="false"
-            show-icon
-          />
-        </div>
-        <el-empty v-if="!compareReady && !compareLoading" description="至少选择 2 个款式进行对比" />
-        <div ref="compareChartRef" class="chart large"></div>
-      </div>
+        </el-tab-pane>
+
+      </el-tabs>
     </el-card>
   </div>
 </template>
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import * as echarts from 'echarts'
 
+const route = useRoute()
+
 const overview = ref({})
+const activeTab = ref('single')
+
+async function onTabChange(tab) {
+  await nextTick()
+  if (tab === 'single') {
+    dailyChart?.resize()
+    weeklyChart?.resize()
+  } else {
+    if (compareReady.value && compareData.value) {
+      renderCompareChart()
+    } else if (compareReady.value) {
+      fetchCompareData()
+    }
+    compareChart?.resize()
+  }
+}
+
 const selectedStyleId = ref('')
 const selectedStyleTrend = ref(null)
 const trendLoading = ref(false)
@@ -453,7 +471,9 @@ watch(predictResult, async () => {
 
 onMounted(async () => {
   await fetchOverview()
-  selectedStyleId.value = overview.value.latestHotIds?.[0] || selectableStyles.value[0]?.id || ''
+  // 若从热度榜单跳转带了 styleId，优先选中它
+  const queryId = route.query.styleId
+  selectedStyleId.value = queryId || overview.value.latestHotIds?.[0] || selectableStyles.value[0]?.id || ''
   compareStyleIds.value = normalizeCompareSelection([
     overview.value.latestHotIds?.[0],
     overview.value.latestPotentialIds?.[0]
@@ -474,21 +494,45 @@ onBeforeUnmount(() => {
 .page-header h2 { margin: 0 0 6px; font-size: 22px; }
 .page-header p { margin: 0; color: #777; }
 .panel { margin-bottom: 16px; border-radius: 8px; }
-.card-header,
-.detail-header,
-.compare-controls,
-.compare-summary,
+.tab-card :deep(.el-card__body) { padding-top: 0; }
+
+/* Tab 样式跟 users 页保持一致 */
+.insight-tabs :deep(.el-tabs__header) {
+  margin-bottom: 20px;
+}
+.insight-tabs :deep(.el-tabs__item) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+}
+.insight-tabs :deep(.el-tabs__item.is-active) {
+  color: #b86e4a;
+  font-weight: 600;
+}
+.insight-tabs :deep(.el-tabs__active-bar) {
+  background-color: #b86e4a;
+}
+.insight-tabs :deep(.el-tabs__nav-wrap::after) {
+  height: 1px;
+  background-color: #f0ece8;
+}
+
+/* toolbar: 控件行 */
+.tab-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.compare-toolbar { justify-content: flex-start; }
+
+.trend-box { min-height: 420px; }
+.compare-box { min-height: 360px; }
+
 .style-meta {
   display: flex;
   align-items: center;
-}
-.card-header,
-.compare-summary { justify-content: space-between; }
-.detail-header,
-.compare-controls { gap: 10px; }
-.detail-panel { overflow: hidden; }
-.trend-box { min-height: 420px; }
-.style-meta {
   gap: 14px;
   margin-bottom: 16px;
   padding: 14px;
@@ -513,16 +557,15 @@ onBeforeUnmount(() => {
 }
 .meta-copy p,
 .compare-summary p { margin: 2px 0 0; line-height: 1.6; }
+
 .chart { height: 280px; }
 .chart.large { height: 360px; margin-bottom: 16px; }
-.compare-header {
-  align-items: flex-start;
-  gap: 12px;
+
+.compare-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
 }
-.compare-controls {
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-.compare-box { min-height: 360px; }
-.compare-summary { gap: 16px; margin-bottom: 16px; }
 </style>
