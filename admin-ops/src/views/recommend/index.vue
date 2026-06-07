@@ -103,7 +103,7 @@
           <div class="actions">
             <el-tag :type="item.isAuto ? 'success' : 'warning'" size="small">{{ item.isAuto ? 'AI 推荐' : '手动调整' }}</el-tag>
             <el-button text @click="openTrend(item)">走势</el-button>
-            <el-button text type="primary" @click="openChange(item)">换款</el-button>
+            <el-button type="primary" size="small" @click="openChange(item)">换款</el-button>
           </div>
         </div>
       </div>
