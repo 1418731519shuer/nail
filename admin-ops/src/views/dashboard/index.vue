@@ -128,7 +128,7 @@ function initChart() {
   if (chart) chart.dispose()
 
   const data = ops.value.trendData || { dates: [], hotTrend: [], coldTrend: [] }
-  chart = echarts.init(trendChartRef.value)
+  chart = echarts.init(trendChartRef.value, window.__ECHARTS_THEME__)
   chart.setOption({
     color: ['#ff6b9d', '#1890ff'],
     tooltip: {

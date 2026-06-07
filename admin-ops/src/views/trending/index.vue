@@ -346,7 +346,7 @@ function buildMockPrediction(styleId) {
 
 function renderPredictChart() {
   if (!predictChartRef.value) return
-  if (!predictChart) predictChart = echarts.init(predictChartRef.value)
+  if (!predictChart) predictChart = echarts.init(predictChartRef.value, window.__ECHARTS_THEME__)
   const m = predictResult.value.metrics
   const metrics = ['view_uv', 'want_uv', 'total_confirm_uv', 'tryon_result_uv']
   const labels = ['浏览', '想做', '确认做', '试戴成功']
@@ -635,15 +635,15 @@ function buildCompareOption(data) {
 
 function renderTrendCharts() {
   if (!selectedStyleTrend.value || !dailyChartRef.value || !weeklyChartRef.value) return
-  if (!dailyChart) dailyChart = echarts.init(dailyChartRef.value)
-  if (!weeklyChart) weeklyChart = echarts.init(weeklyChartRef.value)
+  if (!dailyChart) dailyChart = echarts.init(dailyChartRef.value, window.__ECHARTS_THEME__)
+  if (!weeklyChart) weeklyChart = echarts.init(weeklyChartRef.value, window.__ECHARTS_THEME__)
   dailyChart.setOption(buildDailyOption(selectedStyleTrend.value, predictResult.value))
   weeklyChart.setOption(buildWeeklyOption(selectedStyleTrend.value, predictResult.value))
 }
 
 function renderCompareChart() {
   if (!compareData.value || !compareChartRef.value) return
-  if (!compareChart) compareChart = echarts.init(compareChartRef.value)
+  if (!compareChart) compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
   compareChart.setOption(buildCompareOption(compareData.value))
 }
 
@@ -724,36 +724,77 @@ onBeforeUnmount(() => {
   gap: 6px;
 }
 .metric-box span { color: #777; }
-.metric-box strong { font-size: 24px; }
+.metric-box strong {
+  font-size: 24px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  color: #2d1a10;
+  letter-spacing: -0.02em;
+}
+.metric-box span {
+  font-size: 12px;
+  color: rgba(45,26,16,0.45);
+  font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+}
 .list-item {
   gap: 12px;
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(185,120,80,0.10);
   cursor: pointer;
+  transition: background 150ms ease;
+  border-radius: 8px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
+.list-item:hover { background: rgba(201,122,78,0.06); }
+
 .rank {
   width: 26px;
   height: 26px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #ff6b9d;
+  background: linear-gradient(135deg, #c97a4e, #e09a72);
   color: #fff;
+  font-family: 'DM Mono', monospace;
   font-weight: 700;
+  font-size: 12px;
   flex: 0 0 26px;
+  box-shadow: 0 2px 8px rgba(201,122,78,0.3);
 }
+/* 前3名金银铜色 */
+.list-item:nth-child(1) .rank { background: linear-gradient(135deg, #c97a4e, #e8c070); box-shadow: 0 2px 10px rgba(201,122,78,0.45); }
+.list-item:nth-child(2) .rank { background: linear-gradient(135deg, #a0a0a8, #c8c8d0); }
+.list-item:nth-child(3) .rank { background: linear-gradient(135deg, #b87050, #d4986a); }
+
 .thumb,
 .meta-image {
   width: 54px;
   height: 54px;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
 .item-main,
-.meta-copy { display: grid; gap: 4px; }
+.meta-copy { display: grid; gap: 3px; }
+
+.item-main strong {
+  font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #2d1a10;
+  letter-spacing: 0.01em;
+}
+
 .item-main span,
 .meta-copy span,
 .meta-copy p,
-.compare-summary p { color: #777; }
+.compare-summary p {
+  color: rgba(45,26,16,0.45);
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: -0.01em;
+}
 .detail-panel { overflow: hidden; }
 .trend-box { min-height: 420px; }
 .style-meta {

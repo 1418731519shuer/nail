@@ -506,8 +506,8 @@ function buildTrendWeeklyOption() {
 
 function renderTrendCharts() {
   if (!trendStyleMeta.value || !trendDailyChartRef.value || !trendWeeklyChartRef.value) return
-  if (!trendDailyChart) trendDailyChart = echarts.init(trendDailyChartRef.value)
-  if (!trendWeeklyChart) trendWeeklyChart = echarts.init(trendWeeklyChartRef.value)
+  if (!trendDailyChart) trendDailyChart = echarts.init(trendDailyChartRef.value, window.__ECHARTS_THEME__)
+  if (!trendWeeklyChart) trendWeeklyChart = echarts.init(trendWeeklyChartRef.value, window.__ECHARTS_THEME__)
   trendDailyChart.setOption(buildTrendDailyOption())
   trendWeeklyChart.setOption(buildTrendWeeklyOption())
 }

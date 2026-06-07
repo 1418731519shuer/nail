@@ -1,53 +1,53 @@
-﻿<template>
+<template>
   <div class="page">
     <div class="page-header">
-      <h2>娆惧紡绠＄悊</h2>
-      <p>杩欓噷鏀寔鎵嬪姩鏂板娆惧紡锛屼互鍙婁笂鏋躲€佷笅鏋躲€佹仮澶嶄笂鏋跺拰褰掓。銆傞珮椋庨櫓鎿嶄綔浠嶇劧浼氬厛璧伴瑙堝拰纭鍗曘€</p>
+      <h2>款式管理</h2>
+      <p>支持手动新增款式，以及上架、下架、恢复上架和归档。高风险操作仍会先预览和确认单。</p>
     </div>
 
     <el-card shadow="never" class="panel">
       <div class="toolbar">
-        <el-input v-model="keyword" placeholder="鎼滅储娆惧紡鍚?/ 缂栧彿 / 鍒嗙被" clearable style="width: 280px">
+        <el-input v-model="keyword" placeholder="搜索款式名 / 编号 / 分类" clearable style="width: 280px">
           <template #prefix><el-icon><Search /></el-icon></template>
         </el-input>
         <el-select v-model="status" placeholder="状态" clearable style="width: 160px">
-          <el-option label="鍏ㄩ儴" value="" />
+          <el-option label="全部" value="" />
           <el-option label="已上架" value="published" />
-          <el-option label="鑽夌" value="draft" />
+          <el-option label="草稿" value="draft" />
           <el-option label="待审核" value="pending_review" />
           <el-option label="已下架" value="unpublished" />
           <el-option label="已归档" value="archived" />
         </el-select>
-        <el-button @click="refreshStylesFromAgent">鍒锋柊</el-button>
+        <el-button @click="refreshStylesFromAgent">刷新</el-button>
         <el-button @click="openBatchDialog">批量新增</el-button>
-        <el-button type="primary" @click="addDialogVisible = true">鏂板娆惧紡</el-button>
+        <el-button type="primary" @click="addDialogVisible = true">新增款式</el-button>
       </div>
     </el-card>
 
     <el-card shadow="never" class="panel">
       <el-table :data="filteredStyles" style="width: 100%">
-        <el-table-column label="娆惧紡淇℃伅" min-width="300">
+        <el-table-column label="款式信息" min-width="300">
           <template #default="{ row }">
             <div class="style-info">
               <el-image :src="row.image" class="thumb" fit="cover" />
               <div class="style-copy">
                 <strong>{{ row.name }}</strong>
-                <div class="meta">{{ row.styleCode || row.id }} 路 {{ row.category }} 路 {{ row.priceLevel }} 路 锟{ row.price }}</div>
+                <div class="meta">{{ row.styleCode || row.id }} · {{ row.category }} · {{ row.priceLevel }} · ¥{{ row.price }}</div>
               </div>
             </div>
           </template>
         </el-table-column>
 
-        <el-table-column label="鏍囩" width="240">
+        <el-table-column label="标签" width="240">
           <template #default="{ row }">
             <el-tag v-for="tag in row.tags" :key="tag" size="small" class="tag">{{ tag }}</el-tag>
           </template>
         </el-table-column>
 
-        <el-table-column prop="viewCount" label="娴忚" sortable width="100" />
-        <el-table-column prop="tryOnCount" label="璇曟埓" sortable width="100" />
-        <el-table-column prop="wantCount" label="鎯冲仛" sortable width="100" />
-        <el-table-column prop="confirmCount" label="纭" sortable width="100" />
+        <el-table-column prop="viewCount" label="浏览" sortable width="100" />
+        <el-table-column prop="tryOnCount" label="试戴" sortable width="100" />
+        <el-table-column prop="wantCount" label="想做" sortable width="100" />
+        <el-table-column prop="confirmCount" label="确认" sortable width="100" />
         <el-table-column label="确认率" sortable width="110">
           <template #default="{ row }">{{ row.confirmRate }}%</template>
         </el-table-column>
@@ -58,17 +58,17 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="鎿嶄綔" min-width="340" fixed="right">
+        <el-table-column label="操作" min-width="340" fixed="right">
           <template #default="{ row }">
             <div class="row-actions">
-              <el-button text type="primary" @click="detail = row">璇︽儏</el-button>
-              <el-button v-if="canPublish(row)" text type="success" @click="openManualPreview('publish', row)">涓婃灦</el-button>
-              <el-button v-if="canUnpublish(row)" text type="warning" @click="openManualPreview('unpublish', row)">涓嬫灦</el-button>
-              <el-button v-if="canRestore(row)" text type="primary" @click="openManualPreview('restore', row)">鎭㈠涓婃灦</el-button>
-              <el-button v-if="canArchive(row)" text type="danger" @click="openManualPreview('archive', row)">褰掓。</el-button>
-              <el-button text type="primary" @click="detail = row">璧板娍</el-button>
-              <el-button text @click="togglePromote(row)">
-                {{ row.isRecommend ? '鍙栨秷涓绘帹' : '璁句负涓绘帹' }}
+              <el-button text class="btn-warm" @click="detail = row">详情</el-button>
+              <el-button v-if="canPublish(row)" text class="btn-success" @click="openManualPreview('publish', row)">上架</el-button>
+              <el-button v-if="canUnpublish(row)" text class="btn-muted" @click="openManualPreview('unpublish', row)">下架</el-button>
+              <el-button v-if="canRestore(row)" text class="btn-warm" @click="openManualPreview('restore', row)">恢复上架</el-button>
+              <el-button v-if="canArchive(row)" text class="btn-danger" @click="openManualPreview('archive', row)">归档</el-button>
+              <el-button text class="btn-warm" @click="detail = row">走势</el-button>
+              <el-button text class="btn-promote" @click="togglePromote(row)">
+                {{ row.isRecommend ? '取消主推' : '设为主推' }}
               </el-button>
             </div>
           </template>
@@ -76,19 +76,19 @@
       </el-table>
     </el-card>
 
-    <el-drawer v-model="drawerVisible" title="娆惧紡璇︽儏" size="420px">
+    <el-drawer v-model="drawerVisible" title="款式详情" size="420px">
       <div v-if="detail" class="detail">
         <el-image :src="detail.image" class="detail-image" fit="cover" />
         <h3>{{ detail.name }}</h3>
-        <p>{{ detail.styleCode || detail.id }} / {{ detail.category }} / {{ detail.priceLevel }} / 锟{ detail.price }}</p>
+        <p>{{ detail.styleCode || detail.id }} / {{ detail.category }} / {{ detail.priceLevel }} / ¥{{ detail.price }}</p>
         <el-descriptions :column="1" border>
           <el-descriptions-item label="状态">{{ statusLabel(detail.rawStatus) }}</el-descriptions-item>
-          <el-descriptions-item label="娴忚">{{ detail.viewCount }}</el-descriptions-item>
-          <el-descriptions-item label="璇曟埓">{{ detail.tryOnCount }}</el-descriptions-item>
-          <el-descriptions-item label="鎯冲仛">{{ detail.wantCount }}</el-descriptions-item>
-          <el-descriptions-item label="纭">{{ detail.confirmCount }}</el-descriptions-item>
+          <el-descriptions-item label="浏览">{{ detail.viewCount }}</el-descriptions-item>
+          <el-descriptions-item label="试戴">{{ detail.tryOnCount }}</el-descriptions-item>
+          <el-descriptions-item label="想做">{{ detail.wantCount }}</el-descriptions-item>
+          <el-descriptions-item label="确认">{{ detail.confirmCount }}</el-descriptions-item>
           <el-descriptions-item label="热度分">{{ detail.hotIndex }}</el-descriptions-item>
-          <el-descriptions-item label="鍐烽棬椋庨櫓">{{ detail.coldRisk }}</el-descriptions-item>
+          <el-descriptions-item label="冷门风险">{{ detail.coldRisk }}</el-descriptions-item>
         </el-descriptions>
         <div class="preview-block asset-block">
           <h4>图片素材位</h4>
@@ -102,7 +102,7 @@
         <div v-if="detailTrendMeta" class="trend-summary">
           <el-tag type="info">{{ trendRangeText }}</el-tag>
           <el-tag type="success">120 澶</el-tag>
-          <el-tag type="warning">鍛ㄥ害瓒嬪娍</el-tag>
+          <el-tag type="warning">周趋势</el-tag>
         </div>
         <el-radio-group v-if="detailTrendMeta" v-model="detailWindowDays" size="small" class="trend-window-group">
           <el-radio-button v-for="days in trendWindowOptions" :key="days" :label="days">{{ days }} 澶</el-radio-button>
@@ -112,28 +112,28 @@
       </div>
     </el-drawer>
 
-    <el-dialog v-model="addDialogVisible" title="鏂板娆惧紡" width="720px">
+    <el-dialog v-model="addDialogVisible" title="新增款式" width="720px">
       <el-form :model="newStyleForm" label-width="96px">
         <div class="assistant-align-note">
-          <strong>涓庤繍钀ュ姪鎵嬪榻</strong>
-          <span>鏂板娆惧紡鏃剁洿鎺ヨˉ榻愭爣棰樸€佷粙缁嶃€佹爣绛惧拰鍥剧墖绱犳潗浣嶏紝鍚庣画杩愯惀鍔╂墜鍋氫笂鏂板垎鏋愩€佷笂鏋堕瑙堝拰鎵归噺琛ユ鏃跺氨鑳藉鐢ㄨ繖涓€濂楀瓧娈点€</span>
+          <strong>涓庤繍钀ュ姪鎵嬪榻</strong>
+          <span>新增款式鏃剁洿鎺ヨˉ榻愭爣棰樸€佷粙缁嶃€佹爣绛惧拰图片素材位嶏紝鍚庣画运营助手鍋氫笂新增垎鏋愩€佷笂鏋堕瑙堝拰鎵归噺琛ユ鏃跺氨鑳藉鐢ㄨ繖涓€濂楀瓧娈点€</span>
         </div>
         <div class="form-grid">
-          <el-form-item label="娆惧紡缂栧彿">
-            <el-input v-model="newStyleForm.styleCode" placeholder="渚嬪 S0301锛屼笉濉垯鑷姩鐢熸垚" />
+          <el-form-item label="款式编号">
+            <el-input v-model="newStyleForm.styleCode" placeholder="渚嬪 S0301锛屼笉濉垯鑷姩鐢熸垚" />
           </el-form-item>
-          <el-form-item label="鍒嗙被">
-            <el-input v-model="newStyleForm.category" placeholder="渚嬪 鐚溂 / 娉曞紡 / 鎵嬬粯" />
+          <el-form-item label="分类">
+            <el-input v-model="newStyleForm.category" placeholder="渚嬪 鐚溂 / 娉曞紡 / 鎵嬬粯" />
           </el-form-item>
-          <el-form-item label="娆惧紡鍚嶇О">
-            <el-input v-model="newStyleForm.name" placeholder="杈撳叆娆惧紡鍚嶇О" />
+          <el-form-item label="款式名称">
+            <el-input v-model="newStyleForm.name" placeholder="输入款式名称" />
           </el-form-item>
           <el-form-item label="浠锋牸">
             <el-input-number v-model="newStyleForm.price" :min="0" :step="10" style="width: 100%" />
           </el-form-item>
           <el-form-item label="状态">
             <el-select v-model="newStyleForm.status" style="width: 100%">
-              <el-option label="鑽夌" value="draft" />
+              <el-option label="草稿" value="draft" />
               <el-option label="待审核" value="pending_review" />
               <el-option label="已上架" value="published" />
             </el-select>
@@ -143,14 +143,14 @@
           </el-form-item>
         </div>
 
-        <el-form-item label="娆惧紡浠嬬粛">
-          <el-input v-model="newStyleForm.description" type="textarea" :rows="3" placeholder="杈撳叆娆惧紡浠嬬粛" />
+        <el-form-item label="款式介绍">
+          <el-input v-model="newStyleForm.description" type="textarea" :rows="3" placeholder="输入款式介绍" />
         </el-form-item>
 
         <div class="asset-section">
           <div class="asset-section__header">
-            <strong>鍥剧墖绱犳潗浣</strong>
-            <span>杩欓噷鐨勫皝闈€佽鎯呫€佸弬鑰冨浘鍜岃瘯鎴寸礌鏉愪綅锛屼細鍜岃繍钀ュ姪鎵嬩笂鏂板垎鏋愩€佷笂鏋堕瑙堛€佹壒閲忚ˉ娆炬墍鐢ㄧ殑瀛楁淇濇寔涓€鑷淬€</span>
+            <strong>图片素材位</strong>
+            <span>这里的封面、详情、参考图和试戴素材位，会和运营助手上新分析、上架预览、批量补欠所用的字段保持一致。</span>
           </div>
         </div>
 
@@ -160,9 +160,9 @@
           </el-form-item>
           <el-form-item label="鏉ユ簮">
             <el-select v-model="newStyleForm.source" style="width: 100%">
-              <el-option label="鎵嬪姩鏂板" value="manual" />
-              <el-option label="杩愯惀鍔╂墜" value="ai_assistant" />
-              <el-option label="鐖彇瀵煎叆" value="crawled_import" />
+              <el-option label="手动新增" value="manual" />
+              <el-option label="运营助手" value="ai_assistant" />
+              <el-option label="鐖彇导入" value="crawled_import" />
             </el-select>
           </el-form-item>
           <el-form-item label="详情图">
@@ -171,17 +171,17 @@
           <el-form-item label="鍙傝€冨浘">
             <el-input v-model="newStyleForm.referenceImages" type="textarea" :rows="3" placeholder="每行一个图片 URL，作为参考图素材位" />
           </el-form-item>
-          <el-form-item label="璇曟埓绱犳潗">
-            <el-input v-model="newStyleForm.tryonAssets" type="textarea" :rows="3" placeholder="姣忚涓€涓浘鐗?URL锛屼綔涓鸿瘯鎴寸礌鏉愪綅" />
+          <el-form-item label="试戴素材">
+            <el-input v-model="newStyleForm.tryonAssets" type="textarea" :rows="3" placeholder="姣忚涓€涓浘鐗?URL锛屼綔涓鸿瘯鎴寸礌鏉愪綅" />
           </el-form-item>
-          <el-form-item label="鎵规澶囨敞">
+          <el-form-item label="鎵规澶囨敞">
             <el-input v-model="newStyleForm.batchNote" type="textarea" :rows="3" placeholder="方便连续录入多个美甲样式时保留本批次备注" />
           </el-form-item>
         </div>
 
         <div class="asset-preview-panel">
           <div class="asset-preview-card">
-            <div class="asset-preview-card__title">灏侀潰棰勮</div>
+            <div class="asset-preview-card__title">封面预览</div>
             <el-image :src="coverPreview" fit="cover" class="asset-preview-cover">
               <template #error>
                 <div class="asset-preview-empty">寰呰ˉ灏侀潰鍥</div>
@@ -191,9 +191,9 @@
           <div class="asset-preview-card">
             <div class="asset-preview-card__title">褰曞叆妫€鏌</div>
             <ul class="asset-preview-list">
-              <li><strong>璇︽儏鍥撅細</strong>{{ detailPreviewItems.length }} 寮</li>
+              <li><strong>详情图：</strong>{{ detailPreviewItems.length }} 张</li>
               <li><strong>鍙傝€冨浘锛</strong>{{ referencePreviewItems.length }} 寮</li>
-              <li><strong>璇曟埓绱犳潗锛</strong>{{ tryonPreviewItems.length }} 寮</li>
+              <li><strong>试戴素材：</strong>{{ tryonPreviewItems.length }} 寮</li>
               <li><strong>鏉ユ簮锛</strong>{{ sourceLabelMap[newStyleForm.source] }}</li>
               <li><strong>批次备注：</strong>{{ newStyleForm.batchNote?.trim() || '未填写' }}</li>
             </ul>
@@ -201,31 +201,31 @@
         </div>
 
         <div class="form-grid tags-grid">
-          <el-form-item label="棰滆壊鏍囩">
-            <el-input v-model="newStyleForm.colorTags" placeholder="澶氫釜鐢?/ 鍒嗛殧" />
+          <el-form-item label="颜色标签">
+            <el-input v-model="newStyleForm.colorTags" placeholder="多个用 / 分隔" />
           </el-form-item>
-          <el-form-item label="椋庢牸鏍囩">
-            <el-input v-model="newStyleForm.styleTags" placeholder="澶氫釜鐢?/ 鍒嗛殧" />
+          <el-form-item label="风格标签">
+            <el-input v-model="newStyleForm.styleTags" placeholder="多个用 / 分隔" />
           </el-form-item>
-          <el-form-item label="宸ヨ壓鏍囩">
-            <el-input v-model="newStyleForm.craftTags" placeholder="澶氫釜鐢?/ 鍒嗛殧" />
+          <el-form-item label="宸ヨ壓标签">
+            <el-input v-model="newStyleForm.craftTags" placeholder="多个用 / 分隔" />
           </el-form-item>
-          <el-form-item label="鐢查暱鏍囩">
-            <el-input v-model="newStyleForm.lengthTags" placeholder="澶氫釜鐢?/ 鍒嗛殧" />
+          <el-form-item label="甲型标签">
+            <el-input v-model="newStyleForm.lengthTags" placeholder="多个用 / 分隔" />
           </el-form-item>
-          <el-form-item label="鍦烘櫙鏍囩">
-            <el-input v-model="newStyleForm.sceneTags" placeholder="澶氫釜鐢?/ 鍒嗛殧" />
+          <el-form-item label="场景标签">
+            <el-input v-model="newStyleForm.sceneTags" placeholder="多个用 / 分隔" />
           </el-form-item>
-          <el-form-item label="鏁堟灉鏍囩">
-            <el-input v-model="newStyleForm.effectTags" placeholder="澶氫釜鐢?/ 鍒嗛殧" />
+          <el-form-item label="鏁堟灉标签">
+            <el-input v-model="newStyleForm.effectTags" placeholder="多个用 / 分隔" />
           </el-form-item>
         </div>
       </el-form>
 
       <template #footer>
-        <el-button @click="cancelAddStyle">鍙栨秷</el-button>
-        <el-button @click="submitAddStyle(true)">淇濆瓨骞剁户缁柊澧</el-button>
-        <el-button type="primary" @click="submitAddStyle(false)">淇濆瓨鏂板娆惧紡</el-button>
+        <el-button @click="cancelAddStyle">取消</el-button>
+        <el-button @click="submitAddStyle(true)">保存并继续新增</el-button>
+        <el-button type="primary" @click="submitAddStyle(false)">保存新款式</el-button>
       </template>
     </el-dialog>
 
@@ -310,7 +310,7 @@
         <el-button type="primary" @click="submitBatchStyles">批量新增</el-button>
       </template>
     </el-dialog>
-    <el-dialog v-model="previewDialogVisible" :title="previewResult?.preview?.title || '鎿嶄綔棰勮'" width="720px">
+    <el-dialog v-model="previewDialogVisible" :title="previewResult?.preview?.title || '操作预览'" width="720px">
       <div v-if="previewResult?.preview" class="preview-dialog">
         <p class="preview-summary">{{ previewResult.preview.summary }}</p>
         <div class="preview-meta">
@@ -319,7 +319,7 @@
         </div>
 
         <el-descriptions :column="2" border>
-          <el-descriptions-item label="鎿嶄綔">{{ previewResult.preview.operationName }}</el-descriptions-item>
+          <el-descriptions-item label="操作">{{ previewResult.preview.operationName }}</el-descriptions-item>
           <el-descriptions-item label="瀵硅薄">
             {{ previewResult.preview.targets.map((item) => item.targetName || item.targetId).join(' / ') }}
           </el-descriptions-item>
@@ -353,19 +353,19 @@
         <el-input
           v-if="previewResult.preview.secondConfirmRequired && previewResult.approval?.status === 'pending'"
           v-model="confirmText"
-          placeholder="璇疯緭鍏ワ細纭鎵ц"
+          placeholder="请输入：确认执行"
         />
       </div>
 
       <template #footer>
-        <el-button @click="cancelPreview">鍙栨秷</el-button>
+        <el-button @click="cancelPreview">取消</el-button>
         <el-button
           v-if="previewResult?.approval?.status === 'pending'"
           type="primary"
           :loading="approving"
           @click="confirmPreview"
         >
-          {{ previewResult?.preview?.secondConfirmRequired ? '纭鎵ц' : '纭' }}
+          {{ previewResult?.preview?.secondConfirmRequired ? '确认执行' : '确认' }}
         </el-button>
       </template>
     </el-dialog>
@@ -453,9 +453,9 @@ const detailPreviewItems = computed(() => splitLines(newStyleForm.value.detailIm
 const referencePreviewItems = computed(() => splitLines(newStyleForm.value.referenceImages))
 const tryonPreviewItems = computed(() => splitLines(newStyleForm.value.tryonAssets))
 const sourceLabelMap = {
-  manual: '鎵嬪姩鏂板',
-  ai_assistant: '杩愯惀鍔╂墜',
-  crawled_import: '鐖彇瀵煎叆'
+  manual: '手动新增',
+  ai_assistant: '运营助手',
+  crawled_import: '鐖彇导入'
 }
 const batchPreview = computed(() => parseBatchInput(batchForm.value.rawText))
 
@@ -546,15 +546,15 @@ function parseBatchInput(rawText) {
 
 function submitAddStyle(keepOpen = false) {
   if (!newStyleForm.value.name.trim()) {
-    ElMessage.warning('璇峰厛濉啓娆惧紡鍚嶇О')
+    ElMessage.warning('璇峰厛濉啓款式名称')
     return
   }
   if (!newStyleForm.value.category.trim()) {
-    ElMessage.warning('璇峰厛濉啓鍒嗙被')
+    ElMessage.warning('璇峰厛濉啓分类')
     return
   }
   if (!newStyleForm.value.description.trim()) {
-    ElMessage.warning('璇峰厛濉啓娆惧紡浠嬬粛')
+    ElMessage.warning('璇峰厛濉啓款式介绍')
     return
   }
 
@@ -616,7 +616,7 @@ function cancelBatchDialog() {
 
 function submitBatchStyles() {
   if (!batchPreview.value.validRows.length) {
-    ElMessage.warning('璇峰厛绮樿创鍙В鏋愮殑鎵归噺鏂板鍐呭')
+    ElMessage.warning('璇峰厛绮樿创鍙В鏋愮殑批量新增鍐呭')
     return
   }
 
@@ -653,12 +653,12 @@ function submitBatchStyles() {
   batchDialogVisible.value = false
   batchForm.value = initialBatchForm()
   refreshStylesFromAgent()
-  ElMessage.success(`宸叉壒閲忔柊澧? ${createdCount} 娆剧編鐢叉牱寮?`)
+  ElMessage.success(`已批量新增 ${createdCount} 款美甲样式`)
 }
 
 function statusLabel(rawStatus) {
   return {
-    draft: '鑽夌',
+    draft: '草稿',
     pending_review: '待审核',
     published: '已上架',
     unpublished: '已下架',
@@ -692,7 +692,7 @@ function riskLabel(level) {
     low: '低风险',
     medium: '中风险',
     high: '高风险',
-    critical: '鏋侀珮椋庨櫓'
+    critical: '极高风险'
   }[level] || level
 }
 
@@ -815,7 +815,7 @@ async function confirmPreview() {
     confirmText.value = ''
     refreshStylesFromAgent()
   } catch (error) {
-    ElMessage.error(error.message || '鎵ц澶辫触')
+    ElMessage.error(error.message || '执行失败')
   } finally {
     approving.value = false
   }
@@ -844,7 +844,7 @@ async function fetchTrendSnapshot() {
   try {
     const response = await fetch('/api/xhs-trend-snapshot')
     const data = await response.json()
-    if (!response.ok) throw new Error(data.error || '鑾峰彇瓒嬪娍蹇収澶辫触')
+    if (!response.ok) throw new Error(data.error || '鑾峰彇瓒势蹇収澶辫触')
     trendSnapshot.value = data
   } catch (error) {
     console.warn('[styles] trend snapshot unavailable', error)
@@ -861,9 +861,9 @@ function buildDailyOption() {
     xAxis: { type: 'category', data: daily.map((item) => item.date), axisLabel: { color: '#888', showMaxLabel: true, showMinLabel: true } },
     yAxis: { type: 'value', splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } } },
     series: [
-      { name: '娴忚', type: 'line', smooth: true, data: daily.map((item) => item.view_uv) },
-      { name: '璇曟埓鎴愬姛', type: 'line', smooth: true, data: daily.map((item) => item.tryon_result_uv) },
-      { name: '鎯冲仛', type: 'line', smooth: true, data: daily.map((item) => item.want_uv) },
+      { name: '浏览', type: 'line', smooth: true, data: daily.map((item) => item.view_uv) },
+      { name: '试戴鎴愬姛', type: 'line', smooth: true, data: daily.map((item) => item.tryon_result_uv) },
+      { name: '想做', type: 'line', smooth: true, data: daily.map((item) => item.want_uv) },
       { name: '确认做', type: 'line', smooth: true, data: daily.map((item) => item.total_confirm_uv) }
     ]
   }
@@ -888,8 +888,8 @@ function buildWeeklyOption() {
 
 function renderDetailCharts() {
   if (!detailTrendMeta.value || !detailDailyChartRef.value || !detailWeeklyChartRef.value) return
-  if (!detailDailyChart) detailDailyChart = echarts.init(detailDailyChartRef.value)
-  if (!detailWeeklyChart) detailWeeklyChart = echarts.init(detailWeeklyChartRef.value)
+  if (!detailDailyChart) detailDailyChart = echarts.init(detailDailyChartRef.value, window.__ECHARTS_THEME__)
+  if (!detailWeeklyChart) detailWeeklyChart = echarts.init(detailWeeklyChartRef.value, window.__ECHARTS_THEME__)
   detailDailyChart.setOption(buildDailyOption())
   detailWeeklyChart.setOption(buildWeeklyOption())
 }
@@ -992,6 +992,57 @@ onBeforeUnmount(() => {
   align-items: center;
   flex-wrap: wrap;
   gap: 4px 8px;
+}
+
+/* 操作按钮 — 高对比度区分 */
+.row-actions :deep(.el-button) {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+  transition: background 150ms, color 150ms !important;
+}
+
+/* 详情 / 走势 — 中性棕灰 */
+.row-actions :deep(.btn-warm) {
+  color: rgba(45,26,16,0.5) !important;
+}
+.row-actions :deep(.btn-warm:hover) {
+  color: #2d1a10 !important;
+  background: rgba(45,26,16,0.06) !important;
+}
+
+/* 上架 — 鲜绿 */
+.row-actions :deep(.btn-success) {
+  color: #27a869 !important;
+}
+.row-actions :deep(.btn-success:hover) {
+  background: rgba(39,168,105,0.10) !important;
+}
+
+/* 下架 — 品牌粉 */
+.row-actions :deep(.btn-muted) {
+  color: #c05080 !important;
+}
+.row-actions :deep(.btn-muted:hover) {
+  background: rgba(192,80,128,0.10) !important;
+}
+
+/* 归档 — 红色警示 */
+.row-actions :deep(.btn-danger) {
+  color: #d94f3d !important;
+}
+.row-actions :deep(.btn-danger:hover) {
+  background: rgba(217,79,61,0.10) !important;
+}
+
+/* 设为/取消主推 — 暗橙 */
+.row-actions :deep(.btn-promote) {
+  color: #d4781a !important;
+  font-size: 12px !important;
+}
+.row-actions :deep(.btn-promote:hover) {
+  background: rgba(212,120,26,0.09) !important;
 }
 
 .detail-image {

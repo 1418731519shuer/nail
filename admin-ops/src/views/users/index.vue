@@ -145,138 +145,89 @@
       </el-tab-pane>
 
       <el-tab-pane label="用户反馈数据（总体）" name="feedback">
-        <el-alert
-          title="这里展示的是总体问题反馈，不是用户喜好反馈。只有 recommendation 类中的少数反馈可以进入推荐纠偏。"
-          type="warning"
-          :closable="false"
-          class="feedback-alert"
-        />
 
-        <div class="stat-band">
-          <div v-for="(item, index) in feedbackStatCards" :key="item.label" :class="['stat-band-item', `accent-${index}`]">
-            <div class="stat-band-val">{{ item.value }}</div>
-            <div class="stat-band-key">{{ item.label }}</div>
-            <div class="stat-band-sub">{{ item.desc }}</div>
+        <!-- 顶部 4 个核心指标卡 -->
+        <div class="fb-hero-band">
+          <div v-for="(item, i) in feedbackStatCards" :key="item.label" class="fb-hero-card" :style="{ '--accent': fbAccents[i] }">
+            <div class="fb-hero-icon"><el-icon :size="22"><component :is="fbIcons[i]" /></el-icon></div>
+            <div class="fb-hero-val">{{ item.value }}</div>
+            <div class="fb-hero-label">{{ item.label }}</div>
+            <div class="fb-hero-sub">{{ item.desc }}</div>
           </div>
         </div>
 
         <el-row :gutter="16">
-          <el-col :span="14">
+          <!-- 左列 -->
+          <el-col :span="15">
+
+            <!-- 反馈分类环形图 + 版本折线图 并排 -->
             <el-card shadow="never" class="panel">
               <template #header>
                 <div class="card-header">
-                  <span>反馈分类分布</span>
-                  <el-tag type="info">{{ feedbackOverview.total }} 条</el-tag>
+                  <span>反馈分类 &amp; 版本趋势</span>
+                  <el-tag type="info" size="small">共 {{ feedbackOverview.total }} 条</el-tag>
                 </div>
               </template>
-              <div class="category-list">
-                <div v-for="item in feedbackCategoryStats" :key="item.feedbackType" class="category-item">
-                  <div class="category-main">
-                    <strong>{{ item.label }}</strong>
-                    <span>{{ item.count }} 条 / {{ item.percentage }}%</span>
-                  </div>
-                  <el-progress :percentage="item.percentage" :stroke-width="10" />
-                  <div class="category-sub">高优先级 {{ item.highSeverity }} 条</div>
-                </div>
+              <div class="fb-chart-row">
+                <div id="fb-donut-chart" class="fb-donut-chart"></div>
+                <div id="fb-line-chart" class="fb-line-chart"></div>
               </div>
             </el-card>
 
+            <!-- 近期反馈记录（卡片流） -->
             <el-card shadow="never" class="panel">
               <template #header>
-                <span>版本趋势</span>
+                <div class="card-header">
+                  <span>近期问题反馈</span>
+                  <el-tag size="small" type="info">最近 {{ recentFeedbackRecords.length }} 条</el-tag>
+                </div>
               </template>
-              <el-table :data="versionTrendStats" style="width: 100%">
-                <el-table-column prop="appVersion" label="版本" width="90" />
-                <el-table-column prop="total" label="总反馈" width="90" />
-                <el-table-column prop="tryonEffect" label="试戴效果" width="90" />
-                <el-table-column prop="recommendation" label="推荐问题" width="90" />
-                <el-table-column prop="styleContent" label="内容问题" width="90" />
-                <el-table-column prop="performance" label="性能问题" width="90" />
-                <el-table-column label="重点变化" min-width="220">
-                  <template #default="{ row }">
-                    <div class="version-highlights">
-                      <span>位置不准 {{ row.nailPositionWrong }}</span>
-                      <span>生成慢 {{ row.generationTooSlow }}</span>
-                      <span>太重复 {{ row.tooRepetitive }}</span>
-                      <span>错标签 {{ row.wrongTag }}</span>
-                    </div>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </el-card>
-
-            <el-card shadow="never" class="panel">
-              <template #header>
-                <span>近期问题反馈记录</span>
-              </template>
-              <el-table :data="recentFeedbackRecords" style="width: 100%">
-                <el-table-column label="时间" width="160">
-                  <template #default="{ row }">
-                    {{ formatTime(row.createdAt) }}
-                  </template>
-                </el-table-column>
-                <el-table-column label="问题" min-width="180">
-                  <template #default="{ row }">
-                    <div>
-                      <strong>{{ feedbackCodeLabel(row.feedbackCode) }}</strong>
-                      <p class="tiny">{{ feedbackTypeLabel(row.feedbackType) }} / {{ sourcePageLabel(row.sourcePage) }}</p>
-                    </div>
-                  </template>
-                </el-table-column>
-                <el-table-column label="版本" width="90" prop="appVersion" />
-                <el-table-column label="优先级" width="90">
-                  <template #default="{ row }">
-                    <el-tag :type="severityTagType(row.severity)" size="small">{{ severityLabel(row.severity) }}</el-tag>
-                  </template>
-                </el-table-column>
-                <el-table-column label="状态" width="90">
-                  <template #default="{ row }">
-                    <el-tag size="small" effect="plain">{{ statusLabel(row.status) }}</el-tag>
-                  </template>
-                </el-table-column>
-                <el-table-column label="说明" min-width="220" prop="feedbackText" />
-              </el-table>
+              <div class="fb-record-list">
+                <div v-for="row in recentFeedbackRecords.slice(0, 6)" :key="row.id" class="fb-record-item">
+                  <el-tag :type="severityTagType(row.severity)" size="small" effect="dark" class="fb-record-sev">{{ severityLabel(row.severity) }}</el-tag>
+                  <div class="fb-record-body">
+                    <div class="fb-record-title">{{ feedbackCodeLabel(row.feedbackCode) }}</div>
+                    <div class="fb-record-meta">{{ feedbackTypeLabel(row.feedbackType) }} · {{ sourcePageLabel(row.sourcePage) }} · {{ row.appVersion }}</div>
+                    <div class="fb-record-text">{{ row.feedbackText }}</div>
+                  </div>
+                  <el-tag size="small" effect="plain" class="fb-record-status">{{ statusLabel(row.status) }}</el-tag>
+                </div>
+              </div>
             </el-card>
           </el-col>
 
-          <el-col :span="10">
+          <!-- 右列 -->
+          <el-col :span="9">
+
+            <!-- 来源页面饼图 -->
             <el-card shadow="never" class="panel">
-              <template #header>
-                <span>三条反馈流向</span>
-              </template>
-              <div class="pipeline-list">
-                <div v-for="item in pipelineStats" :key="item.key" class="pipeline-item">
-                  <strong>{{ item.label }}</strong>
-                  <div class="pipeline-count">{{ item.count }} 条</div>
-                  <p>{{ item.desc }}</p>
-                </div>
-              </div>
+              <template #header><span>来源页面分布</span></template>
+              <div id="fb-pie-chart" class="fb-pie-chart"></div>
             </el-card>
 
+            <!-- Top 问题码排行 -->
             <el-card shadow="never" class="panel">
-              <template #header>
-                <span>Top 问题码</span>
-              </template>
-              <div class="issue-list">
-                <div v-for="(item, index) in topIssueCodes" :key="item.feedbackCode" class="issue-item">
-                  <div class="issue-rank">{{ index + 1 }}</div>
-                  <div class="issue-main">
-                    <strong>{{ item.label }}</strong>
-                    <p>{{ item.feedbackTypeLabel }} / 平均评分 {{ item.avgRating }}</p>
+              <template #header><span>Top 问题码</span></template>
+              <div class="fb-issue-list">
+                <div v-for="(item, idx) in topIssueCodes" :key="item.feedbackCode" class="fb-issue-item">
+                  <div class="fb-issue-rank" :class="['rank-' + (idx + 1)]">{{ idx + 1 }}</div>
+                  <div class="fb-issue-info">
+                    <div class="fb-issue-name">{{ item.label }}</div>
+                    <div class="fb-issue-sub">{{ item.feedbackTypeLabel }} · 均分 {{ item.avgRating }}</div>
                   </div>
-                  <span>{{ item.count }} 条</span>
+                  <div class="fb-issue-cnt">{{ item.count }} 条</div>
                 </div>
               </div>
             </el-card>
 
+            <!-- 反馈流向 -->
             <el-card shadow="never" class="panel">
-              <template #header>
-                <span>来源页面分布</span>
-              </template>
-              <div class="source-list">
-                <div v-for="item in sourcePageStats" :key="item.sourcePage" class="source-item">
-                  <span>{{ item.label }}</span>
-                  <span>{{ item.count }} 条 / {{ item.percentage }}%</span>
+              <template #header><span>反馈流向</span></template>
+              <div class="fb-pipeline">
+                <div v-for="item in pipelineStats" :key="item.key" class="fb-pipeline-item" :style="{ '--pc': fbPipelineColors[item.key] || '#888' }">
+                  <div class="fb-pipeline-count">{{ item.count }}</div>
+                  <div class="fb-pipeline-label">{{ item.label }}</div>
+                  <div class="fb-pipeline-desc">{{ item.desc }}</div>
                 </div>
               </div>
             </el-card>
@@ -292,7 +243,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts-wordcloud'
 import { ElMessage } from 'element-plus'
-import { View, User, Select, ShoppingCart } from '@element-plus/icons-vue'
+import { View, User, Select, ShoppingCart, Warning, Star, ChatDotRound, Aim } from '@element-plus/icons-vue'
 import UserPreferenceRadar from '@/components/UserPreferenceRadar.vue'
 import { mockNailItems } from '@/data/mockNailItems'
 import { generateMockBehaviorLogs } from '@/data/mockUserBehavior'
@@ -388,7 +339,7 @@ function renderPrefCharts() {
   prefDims.value.forEach(dim => {
     const el = document.getElementById(`pref-donut-${dim.key}`)
     if (!el || !el.clientWidth) return
-    if (!prefDimCharts[dim.key]) prefDimCharts[dim.key] = echarts.init(el)
+    if (!prefDimCharts[dim.key]) prefDimCharts[dim.key] = echarts.init(el, window.__ECHARTS_THEME__)
     prefDimCharts[dim.key].setOption({
       series: [{
         type: 'pie',
@@ -523,7 +474,7 @@ function createCloudMask() {
 function initWordCloud() {
   if (!wordCloudRef.value) return
   if (wcChart) { wcChart.dispose(); wcChart = null }
-  wcChart = echarts.init(wordCloudRef.value)
+  wcChart = echarts.init(wordCloudRef.value, window.__ECHARTS_THEME__)
   wcChart.setOption({
     tooltip: {
       show: true,
@@ -563,6 +514,12 @@ function initWordCloud() {
 const crowdSegments = computed(() => classifyUserCrowd(profile.value, preferenceBundle.value, extraSignals.value))
 const rankedItems = computed(() => rankItemsForUser(mockNailItems, profile.value, filter.value))
 const recentLogs = computed(() => [...logs.value].slice(-12).reverse())
+
+// 反馈 tab 配色
+const fbAccents = ['#ff6b9d', '#faad14', '#36cfc9', '#722ed1']
+const fbIcons = ['Warning', 'Aim', 'ChatDotRound', 'Star']
+const fbCatColors = ['#ff6b9d', '#faad14', '#36cfc9', '#722ed1', '#52c41a', '#fa8c16', '#1677ff']
+const fbPipelineColors = { recommendation: '#ff6b9d', quality: '#faad14', content: '#36cfc9' }
 
 // 今日事件概况
 const todayStats = computed(() => {
@@ -741,6 +698,76 @@ function severityLabel(value) {
   return FEEDBACK_SEVERITY_LABELS[value] || value
 }
 
+// 反馈 ECharts 实例
+let fbDonutChart = null
+let fbLineChart = null
+let fbPieChart = null
+
+function renderFbCharts() {
+  const catEl = document.getElementById('fb-donut-chart')
+  const lineEl = document.getElementById('fb-line-chart')
+  const pieEl = document.getElementById('fb-pie-chart')
+  if (!catEl || !lineEl || !pieEl) return
+
+  // 环形图：反馈分类
+  if (!fbDonutChart) fbDonutChart = echarts.init(catEl, window.__ECHARTS_THEME__)
+  fbDonutChart.setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 条 ({d}%)' },
+    legend: { orient: 'vertical', left: 8, top: 'center', textStyle: { fontSize: 11 } },
+    series: [{
+      type: 'pie', radius: ['42%', '70%'],
+      center: ['65%', '50%'],
+      label: { show: false },
+      emphasis: { label: { show: true, fontSize: 13, fontWeight: 'bold' } },
+      data: feedbackCategoryStats.value.map((item, i) => ({
+        name: item.label, value: item.count,
+        itemStyle: { color: fbCatColors[i % fbCatColors.length] }
+      }))
+    }]
+  })
+
+  // 折线图：各版本问题趋势
+  const versions = versionTrendStats.value.map(v => v.appVersion)
+  if (!fbLineChart) fbLineChart = echarts.init(lineEl, window.__ECHARTS_THEME__)
+  fbLineChart.setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['试戴效果', '推荐匹配', '性能体验'], bottom: 0, textStyle: { fontSize: 11 } },
+    grid: { left: 30, right: 12, top: 20, bottom: 40, containLabel: true },
+    xAxis: { type: 'category', data: versions, axisLabel: { fontSize: 10 } },
+    yAxis: { type: 'value', splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } } },
+    series: [
+      { name: '试戴效果', type: 'line', smooth: true, color: '#ff6b9d', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.tryonEffect) },
+      { name: '推荐匹配', type: 'line', smooth: true, color: '#36cfc9', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.recommendation) },
+      { name: '性能体验', type: 'line', smooth: true, color: '#faad14', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.performance) }
+    ]
+  })
+
+  // 饼图：来源页面
+  if (!fbPieChart) fbPieChart = echarts.init(pieEl, window.__ECHARTS_THEME__)
+  fbPieChart.setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 条 ({d}%)' },
+    legend: { orient: 'vertical', right: 8, top: 'center', textStyle: { fontSize: 11 } },
+    series: [{
+      type: 'pie', radius: ['35%', '62%'],
+      center: ['38%', '50%'],
+      label: { show: false },
+      emphasis: { label: { show: true, fontSize: 12, fontWeight: 'bold' } },
+      data: sourcePageStats.value.map((item, i) => ({
+        name: item.label, value: item.count,
+        itemStyle: { color: fbCatColors[i % fbCatColors.length] }
+      }))
+    }]
+  })
+}
+
+// 切换到 feedback tab 时初始化图表
+watch(activeTab, async (val) => {
+  if (val === 'feedback') {
+    await nextTick()
+    setTimeout(renderFbCharts, 100)
+  }
+})
+
 onMounted(() => {
   setTimeout(() => {
     renderPrefCharts()
@@ -750,6 +777,9 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     wcChart?.resize()
     Object.values(prefDimCharts).forEach(c => c?.resize())
+    fbDonutChart?.resize()
+    fbLineChart?.resize()
+    fbPieChart?.resize()
   })
 })
 
@@ -757,6 +787,9 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', () => wcChart?.resize())
   wcChart?.dispose()
   Object.values(prefDimCharts).forEach(c => c?.dispose())
+  fbDonutChart?.dispose()
+  fbLineChart?.dispose()
+  fbPieChart?.dispose()
 })
 
 function personaEmoji(key) {
@@ -1396,6 +1429,117 @@ function severityTagType(value) {
   height: unset !important;
   min-height: 180px;
 }
+
+/* ── 反馈 Tab ── */
+.fb-hero-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.fb-hero-card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 18px 16px 14px;
+  position: relative;
+  overflow: hidden;
+}
+.fb-hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+}
+.fb-hero-icon {
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.fb-hero-val {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1f2329;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.fb-hero-label { font-size: 13px; color: #444; font-weight: 500; }
+.fb-hero-sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+/* ECharts 容器 */
+.fb-chart-row { display: flex; gap: 8px; }
+.fb-donut-chart { width: 220px; height: 220px; flex-shrink: 0; }
+.fb-line-chart { flex: 1; height: 220px; }
+.fb-pie-chart { width: 100%; height: 200px; }
+
+/* 近期反馈记录 */
+.fb-record-list { display: flex; flex-direction: column; gap: 10px; }
+.fb-record-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f7f8fa;
+  border-radius: 8px;
+}
+.fb-record-sev { flex-shrink: 0; margin-top: 2px; }
+.fb-record-body { flex: 1; min-width: 0; }
+.fb-record-title { font-size: 13px; font-weight: 600; color: #222; }
+.fb-record-meta { font-size: 11px; color: #999; margin: 2px 0; }
+.fb-record-text { font-size: 12px; color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fb-record-status { flex-shrink: 0; margin-top: 2px; }
+
+/* 反馈流向 */
+.fb-pipeline { display: flex; flex-direction: column; gap: 10px; }
+.fb-pipeline-item {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--pc) 10%, #fff);
+  border-left: 4px solid var(--pc);
+}
+.fb-pipeline-count {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--pc);
+  line-height: 1;
+}
+.fb-pipeline-label { font-size: 13px; font-weight: 600; color: #333; margin: 4px 0 2px; }
+.fb-pipeline-desc { font-size: 11px; color: #888; }
+
+/* Top 问题码 */
+.fb-issue-list { display: flex; flex-direction: column; gap: 8px; }
+.fb-issue-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #f7f8fa;
+  border-radius: 8px;
+}
+.fb-issue-rank {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  display: grid; place-items: center;
+  font-size: 12px; font-weight: 700;
+  background: #e8e8e8; color: #666;
+  flex-shrink: 0;
+}
+.fb-issue-rank.rank-1 { background: #fff1b8; color: #d48806; }
+.fb-issue-rank.rank-2 { background: #f0f0f0; color: #595959; }
+.fb-issue-rank.rank-3 { background: #ffe7ba; color: #c05400; }
+.fb-issue-info { flex: 1; min-width: 0; }
+.fb-issue-name { font-size: 13px; font-weight: 500; color: #222; }
+.fb-issue-sub { font-size: 11px; color: #aaa; margin-top: 1px; }
+.fb-issue-cnt { font-size: 13px; font-weight: 700; color: #ff6b9d; flex-shrink: 0; }
+
+/* 来源分布 */
+.fb-source-list { display: flex; flex-direction: column; gap: 8px; }
+.fb-source-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.fb-source-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.fb-source-name { width: 70px; color: #555; flex-shrink: 0; }
+.fb-source-bar-bg { flex: 1; height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+.fb-source-bar { height: 100%; border-radius: 3px; }
+.fb-source-pct { width: 36px; text-align: right; color: #444; font-weight: 600; }
 
 /* 今日事件概况 */
 .today-band {

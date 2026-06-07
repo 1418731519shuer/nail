@@ -3,14 +3,17 @@
     <el-aside width="220px" class="sidebar">
       <div class="logo">
         <span class="logo-icon">NA</span>
-        <span class="logo-text">美甲运营端</span>
+        <div class="logo-title">
+          <span class="logo-text-en">NAIL ART</span>
+          <span class="logo-text-cn">美甲运营端</span>
+        </div>
       </div>
       <el-menu
         :default-active="activeMenu"
         class="sidebar-menu"
-        background-color="#1d1e1f"
-        text-color="#bfcbd9"
-        active-text-color="#ff6b9d"
+        background-color="transparent"
+        text-color="rgba(52,35,28,0.55)"
+        active-text-color="#b86e4a"
         router
       >
         <el-menu-item index="/dashboard">
@@ -66,7 +69,11 @@
       </el-header>
 
       <el-main class="main-content">
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <transition name="page" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </el-main>
     </el-container>
 
@@ -402,167 +409,207 @@ function intentName(intent) {
 <style scoped>
 .layout-container {
   height: 100vh;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
 }
 
+/* ── 路由动效 ── */
+.page-enter-active {
+  animation: pageSlideIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.page-leave-active {
+  animation: pageSlideOut 180ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+@keyframes pageSlideIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pageSlideOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+/* ── 侧边栏 ── */
 .sidebar {
-  background-color: #1d1e1f;
+  /* 侧边栏用渐变起点色，加毛玻璃 */
+  background: rgba(247, 232, 226, 0.45);
+  backdrop-filter: blur(20px) saturate(1.6);
+  border-right: 1px solid rgba(185,120,80,0.14);
   overflow: hidden;
 }
 
 .logo {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-bottom: 1px solid #2d2e2f;
+  height: 62px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  border-bottom: 1px solid rgba(185,120,80,0.10);
 }
 
 .logo-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-size: 12px;
+  width: 32px; height: 32px; border-radius: 10px;
+  display: grid; place-items: center;
+  color: #fff; font-size: 12px; font-weight: 800;
+  background: linear-gradient(135deg, #c97a4e 0%, #e09a72 100%);
+  box-shadow: 0 4px 14px rgba(201,122,78,0.42);
+  letter-spacing: -0.5px;
+  transition: transform 200ms cubic-bezier(0.25,1,0.5,1), box-shadow 200ms;
+}
+.logo:hover .logo-icon {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 6px 20px rgba(201,122,78,0.52);
+}
+
+.logo-title { display: flex; flex-direction: column; gap: 1px; }
+
+/* NAIL ART —— Cinzel 大写，对标 HORSEPOWER 字感 */
+.logo-text-en {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 13px;
   font-weight: 700;
-  background: linear-gradient(135deg, #ff6b9d 0%, #ff8e53 100%);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #2d1a10;
+  line-height: 1.1;
 }
 
-.logo-text {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
+/* 美甲运营端 —— 细体小字副标题 */
+.logo-text-cn {
+  font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(45,26,16,0.42);
+  letter-spacing: 0.1em;
+  line-height: 1.3;
 }
 
-.sidebar-menu {
-  border-right: none;
-}
-
+.sidebar-menu { border-right: none !important; }
 .sidebar-menu .el-menu-item {
-  height: 50px;
+  height: 46px; border-radius: 12px; margin: 2px 10px;
+  font-weight: 600; font-size: 14px;
+  transition: background 180ms cubic-bezier(0.25,1,0.5,1),
+              color 180ms, padding-left 180ms !important;
 }
-
-.sidebar-menu .el-menu-item:hover,
+.sidebar-menu .el-menu-item:hover {
+  background: rgba(201,122,78,0.10) !important;
+  color: #a85e35 !important;
+  padding-left: 26px !important;
+}
 .sidebar-menu .el-menu-item.is-active {
-  background-color: #2d2e2f !important;
+  background: rgba(201,122,78,0.14) !important;
+  color: #a85e35 !important;
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 #c97a4e;
 }
 
+/* ── 顶栏 ── */
 .header {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background: rgba(247, 232, 226, 0.38);
+  backdrop-filter: blur(16px) saturate(1.5);
+  border-bottom: 1px solid rgba(185,120,80,0.10);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 22px;
 }
+.header-left, .header-right, .user-info { display: flex; align-items: center; gap: 12px; }
+.shop-name { font-size: 15px; font-weight: 700; color: #2d1a10; letter-spacing: -0.01em; }
+.notification, .user-info { cursor: pointer; }
+.user-info { transition: opacity 150ms; }
+.user-info:hover { opacity: 0.75; }
 
-.header-left,
-.header-right,
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.shop-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-}
-
-.notification,
-.user-info {
-  cursor: pointer;
-}
-
+/* ── 主内容 ── */
 .main-content {
-  background-color: #f5f7fa;
-  padding: 20px;
+  background: transparent;
+  padding: 22px 24px;
   overflow-y: auto;
 }
 
+/* ── AI FAB ── */
 .assistant-fab {
-  position: fixed;
-  right: 22px;
-  bottom: 24px;
-  z-index: 1000;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  padding: 0 14px;
-  border: 0;
-  border-radius: 8px;
-  color: #fff;
-  background: linear-gradient(135deg, #ff6b9d, #ff8e53);
-  box-shadow: 0 12px 30px rgba(255, 107, 157, 0.34);
-  font-weight: 800;
-  cursor: pointer;
+  position: fixed; right: 22px; bottom: 24px; z-index: 1000;
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 46px; padding: 0 18px;
+  border: 0; border-radius: 14px; color: #fff;
+  background: linear-gradient(135deg, #c97a4e 0%, #e09a72 100%);
+  box-shadow: 0 12px 32px rgba(201,122,78,0.42), 0 0 0 1px rgba(201,122,78,0.2) inset;
+  font-family: inherit; font-weight: 800; cursor: pointer;
+  transition: transform 200ms cubic-bezier(0.25,1,0.5,1),
+              box-shadow 200ms cubic-bezier(0.25,1,0.5,1);
+}
+.assistant-fab:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 18px 40px rgba(201,122,78,0.52), 0 0 0 1px rgba(201,122,78,0.2) inset;
+}
+.assistant-fab:active { transform: scale(0.97); }
+.assistant-fab span { font-size: 13px; }
+
+/* FAB 脉动光环 */
+.assistant-fab::before {
+  content: '';
+  position: absolute; inset: -4px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #c97a4e, #e09a72);
+  opacity: 0;
+  z-index: -1;
+  animation: fabPulse 2.8s cubic-bezier(0.25,1,0.5,1) infinite;
+}
+@keyframes fabPulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50%       { opacity: 0.18; transform: scale(1.12); }
 }
 
-.assistant-fab span {
-  font-size: 13px;
-}
-
-:deep(.assistant-drawer .el-drawer__body) {
-  padding: 0;
+:deep(.assistant-drawer .el-drawer__body) { padding: 0; }
+:deep(.assistant-drawer .el-drawer__header) {
+  background: rgba(255,252,248,0.92);
+  border-bottom: 1px solid rgba(185,120,80,0.10);
+  color: #2d1a10 !important;
+  font-weight: 800 !important;
+  font-size: 16px !important;
+  letter-spacing: -0.01em;
+  padding: 16px 20px;
 }
 
 .drawer-chat {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
+  height: 100%; display: flex; flex-direction: column;
+  background: #fff8f2;
 }
 
-.drawer-chat-body {
-  flex: 1;
-  overflow: auto;
-  padding: 18px;
-}
+.drawer-chat-body { flex: 1; overflow: auto; padding: 16px; }
 
 .drawer-welcome {
-  padding: 18px;
-  border: 1px solid #eef0f4;
-  border-radius: 8px;
-  background: #fff7fb;
+  padding: 16px; border-radius: 16px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(185,120,80,0.12);
+  animation: cardIn 320ms cubic-bezier(0.16,1,0.3,1) both;
 }
-
-.drawer-welcome p {
-  margin: 8px 0 0;
-  color: #777;
-  line-height: 1.6;
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
 }
+.drawer-welcome p { margin: 6px 0 0; color: rgba(45,26,16,0.58); line-height: 1.65; font-size: 13px; }
 
 .drawer-message {
-  display: flex;
-  margin-bottom: 12px;
+  display: flex; margin-bottom: 10px;
+  animation: msgIn 200ms cubic-bezier(0.25,1,0.5,1) both;
 }
-
-.drawer-message.user {
-  justify-content: flex-end;
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
 }
+.drawer-message.user { justify-content: flex-end; }
 
 .drawer-bubble {
-  max-width: 86%;
-  padding: 11px 13px;
-  border-radius: 8px;
-  color: #333;
-  background: #f5f7fa;
-  line-height: 1.7;
-  font-size: 14px;
+  max-width: 86%; padding: 10px 14px; border-radius: 14px;
+  color: #2d1a10; background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(185,120,80,0.10);
+  line-height: 1.7; font-size: 13.5px;
+  box-shadow: 0 2px 10px rgba(180,100,50,0.06);
 }
 
 .drawer-plan-card,
 .drawer-preview-card,
 .drawer-approval-card {
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid #ebeef5;
-  border-radius: 8px;
-  background: #fff;
+  margin-top: 10px; padding: 10px;
+  border: 1px solid rgba(128,75,45,0.12);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.8);
 }
 
 .drawer-plan-head,
@@ -605,9 +652,9 @@ function intentName(intent) {
 
 .drawer-slot-card {
   padding: 10px;
-  border: 1px solid #f4d7e1;
-  border-radius: 8px;
-  background: #fff8fb;
+  border: 1px solid rgba(213,139,104,0.2);
+  border-radius: 10px;
+  background: rgba(255,248,242,0.8);
 }
 
 .drawer-slot-head {
@@ -631,20 +678,19 @@ function intentName(intent) {
 
 .drawer-message.user .drawer-bubble {
   color: #fff;
-  background: #ff6b9d;
+  background: linear-gradient(135deg, #d58b68, #e8a882);
+  border: none;
 }
 
 .drawer-quick-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px 18px 0;
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 10px 16px 0;
 }
 
 .drawer-input-row {
-  display: flex;
-  gap: 10px;
-  padding: 14px 18px 18px;
-  border-top: 1px solid #eef0f4;
+  display: flex; gap: 10px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(128,75,45,0.10);
+  background: rgba(255,255,255,0.6);
 }
 </style>
