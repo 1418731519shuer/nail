@@ -168,12 +168,12 @@
   "rolloutStatus": "fully_live",
   "rolloutUpdatedAt": "2026-06-01T06:49:58.319Z",
   "userActivity": {
-    "sessionId": "recommend_session_mpyw4dtz_1914d53f",
+    "sessionId": "recommend_session_mq2h2frk_f07b1291",
     "sessionOpen": true,
     "hasFocus": false,
-    "documentHidden": false,
-    "currentPage": "catalog",
-    "lastSeenAt": "2026-06-04T02:43:19.699Z"
+    "documentHidden": true,
+    "currentPage": "styleLibrary",
+    "lastSeenAt": "2026-06-07T08:19:22.664Z"
   },
   "history": [
     {
