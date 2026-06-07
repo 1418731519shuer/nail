@@ -25,17 +25,6 @@
         <el-card shadow="never" class="panel">
           <template #header>
             <div class="card-header">
-              <span>试戴与冷热趋势</span>
-              <el-tag type="info" size="small">7 日窗口</el-tag>
-            </div>
-          </template>
-          <p class="range-note">{{ rangeText }}</p>
-          <div ref="trendChartRef" class="chart"></div>
-        </el-card>
-
-        <el-card shadow="never" class="panel">
-          <template #header>
-            <div class="card-header">
               <span>热门款式 TOP 5</span>
               <el-button text type="primary" @click="router.push('/trending')">查看全部</el-button>
             </div>
@@ -80,9 +69,19 @@
             <p>{{ item.content }}</p>
           </div>
         </el-card>
-
       </el-col>
     </el-row>
+
+    <el-card shadow="never" class="panel">
+      <template #header>
+        <div class="card-header">
+          <span>试戴与冷热趋势</span>
+          <el-tag type="info" size="small">7 日窗口</el-tag>
+        </div>
+      </template>
+      <p class="range-note">{{ rangeText }}</p>
+      <div ref="trendChartRef" class="chart"></div>
+    </el-card>
   </div>
 </template>
 
