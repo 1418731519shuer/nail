@@ -26,7 +26,7 @@
           <template #header>
             <div class="card-header">
               <span>热门款式 TOP 5</span>
-              <el-button text type="primary" @click="router.push('/trending')">查看全部</el-button>
+              <el-button type="primary" size="small" @click="router.push('/trending')">查看全部</el-button>
             </div>
           </template>
           <div class="top5-list">
@@ -117,13 +117,8 @@ function cancelLongPress() {
 
 const todayStats = computed(() => ops.value?.todayStats || {})
 const hotStyles = computed(() => ops.value?.hotStyles || [])
-const top5 = computed(() => {
-  const list = hotStyles.value.slice(0, 5)
-  const maxHot = Math.max(...list.map(s => s.hotIndex), 1)
-  const minHot = Math.min(...list.map(s => s.hotIndex), 0)
-  const range = maxHot - minHot || 1
-  return list.map(s => ({ ...s, hotBar: Math.round(((s.hotIndex - minHot) / range) * 85 + 15) }))
-})
+const TOP5_BARS = [100, 78, 58, 40, 24]
+const top5 = computed(() => hotStyles.value.slice(0, 5).map((s, i) => ({ ...s, hotBar: TOP5_BARS[i] })))
 const suggestions = computed(() => ops.value?.suggestions || [])
 const activities = computed(() => ops.value?.activities || [])
 const rangeText = computed(() => {
