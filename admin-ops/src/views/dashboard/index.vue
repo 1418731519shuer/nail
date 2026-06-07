@@ -31,7 +31,7 @@
           </template>
           <div class="top5-list">
             <el-popover
-              v-for="(row, index) in hotStyles.slice(0, 5)"
+              v-for="(row, index) in top5"
               :key="row.id"
               :visible="activePopover === row.id"
               placement="right"
@@ -55,7 +55,7 @@
                       <el-tag v-for="tag in row.tags.slice(0, 2)" :key="tag" size="small">{{ tag }}</el-tag>
                     </div>
                   </div>
-                  <el-progress :percentage="Math.min(row.hotIndex, 100)" :stroke-width="6" :show-text="false" class="top5-bar" />
+                  <el-progress :percentage="row.hotBar" :stroke-width="6" :show-text="false" class="top5-bar" />
                 </div>
               </template>
               <div class="popover-metrics">
@@ -117,6 +117,11 @@ function cancelLongPress() {
 
 const todayStats = computed(() => ops.value?.todayStats || {})
 const hotStyles = computed(() => ops.value?.hotStyles || [])
+const top5 = computed(() => {
+  const list = hotStyles.value.slice(0, 5)
+  const maxHot = Math.max(...list.map(s => s.hotIndex), 1)
+  return list.map(s => ({ ...s, hotBar: Math.round((s.hotIndex / maxHot) * 100) }))
+})
 const suggestions = computed(() => ops.value?.suggestions || [])
 const activities = computed(() => ops.value?.activities || [])
 const rangeText = computed(() => {
