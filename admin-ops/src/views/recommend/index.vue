@@ -103,7 +103,7 @@
           <div class="actions">
             <el-tag :type="item.isAuto ? 'success' : 'warning'" size="small">{{ item.isAuto ? 'AI 推荐' : '手动调整' }}</el-tag>
             <el-button text @click="openTrend(item)">走势</el-button>
-            <el-button text type="primary" @click="openChange(item)">换款</el-button>
+            <el-button type="primary" @click="openChange(item)">换款</el-button>
           </div>
         </div>
       </div>
@@ -506,8 +506,8 @@ function buildTrendWeeklyOption() {
 
 function renderTrendCharts() {
   if (!trendStyleMeta.value || !trendDailyChartRef.value || !trendWeeklyChartRef.value) return
-  if (!trendDailyChart) trendDailyChart = echarts.init(trendDailyChartRef.value)
-  if (!trendWeeklyChart) trendWeeklyChart = echarts.init(trendWeeklyChartRef.value)
+  if (!trendDailyChart) trendDailyChart = echarts.init(trendDailyChartRef.value, window.__ECHARTS_THEME__)
+  if (!trendWeeklyChart) trendWeeklyChart = echarts.init(trendWeeklyChartRef.value, window.__ECHARTS_THEME__)
   trendDailyChart.setOption(buildTrendDailyOption())
   trendWeeklyChart.setOption(buildTrendWeeklyOption())
 }

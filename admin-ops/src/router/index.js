@@ -15,7 +15,13 @@ const routes = [
     path: '/trending',
     name: 'Trending',
     component: () => import('../views/trending/index.vue'),
-    meta: { title: '热门冷门', icon: 'TrendCharts' }
+    meta: { title: '热度榜单', icon: 'TrendCharts' }
+  },
+  {
+    path: '/insights',
+    name: 'Insights',
+    component: () => import('../views/insights/index.vue'),
+    meta: { title: '趋势洞察', icon: 'DataLine' }
   },
   {
     path: '/styles',

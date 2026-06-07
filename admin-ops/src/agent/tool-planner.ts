@@ -1,4 +1,5 @@
 import { checkRisk, extractProtectedConditions } from './risk-checker'
+import { writeState } from './mock-data'
 
 export type IntentType = 'query' | 'analysis' | 'generate' | 'execute' | 'report'
 export type FinalResponseType =
@@ -83,6 +84,13 @@ function extractStyleCode(input: string) {
   return input.match(/\bS\d{3,6}\b/i)?.[0]?.toUpperCase()
 }
 
+function extractStyleId(input: string): string | undefined {
+  const byCode = extractStyleCode(input)
+  if (byCode) return byCode
+  const matched = writeState.styles.find((s) => s.name && input.includes(s.name))
+  return matched?.id || matched?.styleCode
+}
+
 function extractTargetPosition(input: string) {
   const match = input.match(/(?:位置|第)\s*(\d+)|放到\s*(\d+)/)
   return match ? Number(match[1] || match[2]) : undefined
@@ -91,7 +99,7 @@ function extractTargetPosition(input: string) {
 export function planAtomicOperations(userInput: string, context: AgentContext = {}): ToolPlan {
   const input = userInput.trim()
   const lower = input.toLowerCase()
-  const styleCode = extractStyleCode(input)
+  const styleCode = extractStyleId(input)
   const targetPosition = extractTargetPosition(input)
 
   if ((/放到|放在|移到|调整到/.test(input) && targetPosition) || (/位置|推荐位/.test(input) && styleCode)) {

@@ -263,6 +263,165 @@ function decayComboScores(scores, factor) {
   }, {})
 }
 
+/**
+ * 从行为日志派生额外信号：超仿真试戴率、移除率、试戴成单率、价格带偏好
+ * 这些信号是区分大学生 / 职场白领 / 宝妈的关键维度
+ */
+export function deriveExtraSignals(logs = []) {
+  let addTryon = 0, normalTryon = 0, realisticTryon = 0
+  let removeTryon = 0, confirmDo = 0
+  let priceSum = 0, priceCount = 0
+
+  for (const log of logs) {
+    const t = log.behaviorType
+    const price = log.itemSnapshot?.price || 0
+    if (t === 'add_tryon')       addTryon++
+    if (t === 'normal_tryon')    normalTryon++
+    if (t === 'realistic_tryon') realisticTryon++
+    if (t === 'remove_tryon')    removeTryon++
+    if (t === 'confirm_do') {
+      confirmDo++
+      if (price > 0) { priceSum += price; priceCount++ }
+    }
+    if (t === 'want_do' && price > 0) { priceSum += price * 0.5; priceCount += 0.5 }
+  }
+
+  const tryonTotal = normalTryon + realisticTryon
+  return {
+    hyperRealRate:      tryonTotal > 0 ? realisticTryon / tryonTotal : 0,
+    removeRate:         addTryon   > 0 ? removeTryon   / addTryon    : 0,
+    tryonToConfirmRate: addTryon   > 0 ? confirmDo     / addTryon    : 0,
+    avgPrice:           priceCount > 0 ? priceSum      / priceCount  : 0
+  }
+}
+
+export function classifyUserCrowd(profile, preferenceBundle, extraSignals = {}) {
+  const { stylePref = {}, typePref = {}, shapePref = {}, seasonPref = {} } = preferenceBundle
+  const { explorationRate = 0.2, behaviorCount = {}, confidence = {} } = profile
+  const totalBeh = behaviorCount.total || 0
+  const conv  = behaviorCount.conversion || 0
+  const interestBeh = behaviorCount.interest || 0
+  const convRate = totalBeh > 0 ? conv / totalBeh : 0
+
+  // 新增维度：从 logs 算出的行为比率 + 价格带
+  const { hyperRealRate = 0, removeRate = 0, tryonToConfirmRate = 0, avgPrice = 0 } = extraSignals
+  // 价格带分层：低(<110)=学生, 中(110-170)=职场, 高(>170)=宝妈/精品
+  const priceLow  = avgPrice > 0 && avgPrice < 110 ? 1 : 0
+  const priceMid  = avgPrice >= 110 && avgPrice <= 170 ? 1 : 0
+  const priceHigh = avgPrice > 170 ? 1 : 0
+
+  // ── 新增辅助指标 ──────────────────────────────────────────────
+  // 1. 工艺复杂度倾向：视觉炫技系 vs 精致含蓄系 vs 极简系
+  //    视觉系（学生/达人爱）：猫眼/贴饰/极光/晕染/波点
+  //    精致系（宝妈/职场爱）：法式/金线/金箔/渐变
+  //    极简系：纯色/冰透
+  const visualCraft =
+    (typePref['猫眼'] || 0) * 1.0 +
+    (typePref['贴饰/珍珠'] || 0) * 0.9 +
+    (typePref['极光'] || 0) * 0.9 +
+    (typePref['晕染'] || 0) * 0.7 +
+    (typePref['波点'] || 0) * 0.7 +
+    (typePref['手绘'] || 0) * 0.8
+  const refinedCraft =
+    (typePref['法式'] || 0) * 1.0 +
+    (typePref['金线'] || 0) * 0.9 +
+    (typePref['金箔'] || 0) * 0.8 +
+    (typePref['渐变'] || 0) * 0.6 +
+    (typePref['撞色'] || 0) * 0.5
+  const simpleCraft =
+    (typePref['纯色'] || 0) * 1.0 +
+    (typePref['冰透'] || 0) * 0.9
+
+  // 2. 决策效率：confirm / (interest + confirm)，越高越果断（宝妈职场）
+  const decisionEfficiency = (interestBeh + conv) > 0 ? conv / (interestBeh + conv) : 0
+
+  // 3. 忠诚度信号：confirm 次数分层
+  const loyaltyTier = conv >= 10 ? 1.0 : conv >= 5 ? 0.6 : conv >= 2 ? 0.3 : 0
+
+  // 4. 甲型功能倾向
+  //    实用型（短甲/穿戴甲）偏学生/职场；打理型（延长甲）偏宝妈/时尚
+  const practicalShape = (shapePref['短甲'] || 0) + (shapePref['穿戴甲'] || 0)
+  const fashionShape   = (shapePref['延长甲'] || 0)
+
+  // 5. 季节多样性：偏好均匀分布 → 全年稳定（宝妈/职场）；
+  //                集中在夏季 → 年轻/流行驱动（学生）
+  const summerBias = (seasonPref['夏日'] || 0) - 0.33   // 超过均值则偏夏
+  const seasonFocus = Math.max(...Object.values(seasonPref).map(v => v || 0), 0)
+
+  // ── 人群评分（仅三类）────────────────────────────────────────
+  const crowds = [
+    {
+      key: 'career',
+      label: '职场女性',
+      desc: '通勤 / 高级感，短甲实用，果断成单',
+      color: '#a8cc90',
+      score:
+        (stylePref['高级感'] || 0) * 0.50 +
+        (stylePref['优雅']   || 0) * 0.30 +
+        (stylePref['通勤']   || 0) * 0.30 +
+        (stylePref['极简']   || 0) * 0.15 +
+        practicalShape * 0.30 +
+        refinedCraft   * 0.25 +
+        simpleCraft    * 0.20 +
+        decisionEfficiency * 0.35 +
+        (explorationRate < 0.15 ? 0.15 : 0) +
+        priceMid * 0.25 +
+        tryonToConfirmRate * 0.30 +
+        (removeRate < 0.10 ? 0.15 : 0) +
+        hyperRealRate * 0.10 +
+        loyaltyTier * 0.15
+    },
+    {
+      key: 'mom',
+      label: '宝妈',
+      desc: '精致工艺 / 延长甲，稳定复购，在意效果',
+      color: '#f0a0bc',
+      score:
+        (stylePref['温柔感'] || 0) * 0.45 +
+        (stylePref['优雅']   || 0) * 0.30 +
+        (stylePref['甜美']   || 0) * 0.10 +
+        refinedCraft * 0.50 +
+        fashionShape * 0.45 +
+        decisionEfficiency * 0.25 +
+        loyaltyTier  * 0.30 +
+        (explorationRate < 0.18 ? 0.20 : 0) +
+        ((confidence.overall || 0) > 0.7 ? 0.10 : 0) +
+        (visualCraft < 0.30 ? 0.10 : -0.08) +
+        priceHigh * 0.30 +
+        hyperRealRate * 0.25 +
+        (removeRate < 0.08 ? 0.15 : 0)
+    },
+    {
+      key: 'student',
+      label: '大学生',
+      desc: '视觉系工艺 / 短甲，探索多成单少，价格敏感',
+      color: '#60c8b4',
+      score:
+        (stylePref['甜美'] || 0) * 0.35 +
+        (stylePref['少女'] || 0) * 0.40 +
+        (stylePref['清透'] || 0) * 0.20 +
+        (stylePref['ins风']|| 0) * 0.25 +
+        visualCraft * 0.45 +
+        practicalShape * 0.20 +
+        (fashionShape < 0.15 ? 0.10 : -0.10) +
+        (explorationRate > 0.20 ? 0.35 : explorationRate > 0.15 ? 0.15 : 0) +
+        (convRate < 0.15 ? 0.20 : 0) +
+        (decisionEfficiency < 0.15 ? 0.20 : 0) +
+        (summerBias > 0 ? 0.10 : 0) +
+        (loyaltyTier < 0.30 ? 0.15 : 0) +
+        priceLow * 0.35 +
+        removeRate * 0.30 +
+        (tryonToConfirmRate < 0.12 ? 0.20 : 0) +
+        (hyperRealRate < 0.30 ? 0.10 : 0)
+    }
+  ]
+
+  const total = crowds.reduce((sum, c) => sum + Math.max(c.score, 0.001), 0)
+  return crowds
+    .map(c => ({ ...c, pct: Math.round(Math.max(c.score, 0.001) / total * 100) }))
+    .sort((a, b) => b.pct - a.pct)
+}
+
 function cloneComboScores(scores) {
   return Object.keys(scores).reduce((acc, comboKey) => {
     acc[comboKey] = { ...scores[comboKey] }

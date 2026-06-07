@@ -20,79 +20,77 @@
       </el-col>
     </el-row>
 
-    <el-row :gutter="16">
-      <el-col :span="16">
-        <el-card shadow="never" class="panel">
+    <el-row :gutter="16" style="align-items: stretch">
+      <el-col :span="16" style="display:flex; flex-direction:column">
+        <el-card shadow="never" class="panel" style="flex:1">
           <template #header>
             <div class="card-header">
-              <span>试戴与冷热趋势</span>
-              <el-tag type="info" size="small">7 日窗口</el-tag>
+              <span>热门款式 TOP 8</span>
+              <el-button type="primary" size="small" @click="router.push('/trending')">查看全部</el-button>
             </div>
           </template>
-          <p class="range-note">{{ rangeText }}</p>
-          <div ref="trendChartRef" class="chart"></div>
-        </el-card>
-
-        <el-card shadow="never" class="panel">
-          <template #header>
-            <div class="card-header">
-              <span>热门款式 TOP 5</span>
-              <el-button text type="primary" @click="router.push('/trending')">查看全部</el-button>
-            </div>
-          </template>
-          <el-table :data="hotStyles.slice(0, 5)" style="width: 100%">
-            <el-table-column label="排名" width="70">
-              <template #default="{ $index }">
-                <span class="rank">{{ $index + 1 }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="款式">
-              <template #default="{ row }">
-                <div class="style-info">
-                  <el-image :src="row.image" class="style-image" fit="cover" />
-                  <div>
-                    <div class="style-name">{{ row.name }}</div>
-                    <el-tag v-for="tag in row.tags.slice(0, 2)" :key="tag" size="small">{{ tag }}</el-tag>
+          <div class="top5-list">
+            <el-popover
+              v-for="(row, index) in top5"
+              :key="row.id"
+              :visible="activePopover === row.id"
+              placement="right"
+              :width="220"
+              trigger="manual"
+            >
+              <template #reference>
+                <div
+                  class="top5-item"
+                  @mousedown="startLongPress(row.id)"
+                  @mouseup="cancelLongPress"
+                  @mouseleave="cancelLongPress"
+                  @touchstart.prevent="startLongPress(row.id)"
+                  @touchend="cancelLongPress"
+                >
+                  <span class="top5-rank" :class="index < 3 ? 'top3' : ''">{{ index + 1 }}</span>
+                  <el-image :src="row.image" class="top5-img" fit="cover" />
+                  <div class="top5-info">
+                    <div class="top5-name">{{ row.name }}</div>
+                    <div class="top5-tags">
+                      <el-tag v-for="tag in row.tags.slice(0, 2)" :key="tag" size="small">{{ tag }}</el-tag>
+                    </div>
                   </div>
+                  <el-progress :percentage="row.hotBar" :stroke-width="6" :show-text="false" class="top5-bar" />
                 </div>
               </template>
-            </el-table-column>
-            <el-table-column prop="tryOnCount" label="试戴" sortable />
-            <el-table-column prop="wantCount" label="想要做" sortable />
-            <el-table-column prop="confirmCount" label="确认要做" sortable />
-            <el-table-column prop="confirmRate" label="总确认率" sortable>
-              <template #default="{ row }">{{ row.confirmRate }}%</template>
-            </el-table-column>
-            <el-table-column prop="hotIndex" label="热门分">
-              <template #default="{ row }">
-                <el-progress :percentage="Math.min(row.hotIndex, 100)" :stroke-width="8" :show-text="false" />
-              </template>
-            </el-table-column>
-          </el-table>
+              <div class="popover-metrics">
+                <div class="popover-row"><span>试戴次数</span><strong>{{ row.tryOnCount }}</strong></div>
+                <div class="popover-row"><span>想要做</span><strong>{{ row.wantCount }}</strong></div>
+                <div class="popover-row"><span>确认要做</span><strong>{{ row.confirmCount }}</strong></div>
+                <div class="popover-row"><span>确认率</span><strong>{{ row.confirmRate }}%</strong></div>
+                <div class="popover-row"><span>热门分</span><strong>{{ row.hotIndex }}</strong></div>
+              </div>
+            </el-popover>
+          </div>
         </el-card>
       </el-col>
 
-      <el-col :span="8">
-        <el-card shadow="never" class="panel">
+      <el-col :span="8" style="display:flex; flex-direction:column">
+        <el-card shadow="never" class="panel" style="flex:1">
           <template #header>运营建议</template>
           <div v-for="item in suggestions" :key="item.title" class="suggestion" :class="item.priority">
             <strong>{{ item.title }}</strong>
             <p>{{ item.content }}</p>
           </div>
         </el-card>
-
-        <el-card shadow="never" class="panel">
-          <template #header>实时行为</template>
-          <div v-for="item in activities" :key="item.id" class="activity">
-            <el-tag size="small">{{ item.type }}</el-tag>
-            <div>
-              <div>{{ item.content }}</div>
-              <span>{{ item.user }} · {{ item.time }}</span>
-            </div>
-          </div>
-        </el-card>
       </el-col>
     </el-row>
+
+    <el-card shadow="never" class="panel">
+      <template #header>
+        <div class="card-header">
+          <span>试戴与冷热趋势</span>
+          <el-tag type="info" size="small">7 日窗口</el-tag>
+        </div>
+      </template>
+      <p class="range-note">{{ rangeText }}</p>
+      <div ref="trendChartRef" class="chart"></div>
+    </el-card>
   </div>
 </template>
 
@@ -106,9 +104,21 @@ const router = useRouter()
 const trendChartRef = ref(null)
 const ops = ref(null)
 let chart = null
+const activePopover = ref(null)
+let longPressTimer = null
+
+function startLongPress(id) {
+  longPressTimer = setTimeout(() => { activePopover.value = id }, 500)
+}
+function cancelLongPress() {
+  clearTimeout(longPressTimer)
+  setTimeout(() => { activePopover.value = null }, 200)
+}
 
 const todayStats = computed(() => ops.value?.todayStats || {})
 const hotStyles = computed(() => ops.value?.hotStyles || [])
+const TOP8_BARS = [100, 84, 70, 58, 46, 36, 26, 18]
+const top5 = computed(() => hotStyles.value.slice(0, 8).map((s, i) => ({ ...s, hotBar: TOP8_BARS[i] })))
 const suggestions = computed(() => ops.value?.suggestions || [])
 const activities = computed(() => ops.value?.activities || [])
 const rangeText = computed(() => {
@@ -128,7 +138,7 @@ function initChart() {
   if (chart) chart.dispose()
 
   const data = ops.value.trendData || { dates: [], hotTrend: [], coldTrend: [] }
-  chart = echarts.init(trendChartRef.value)
+  chart = echarts.init(trendChartRef.value, window.__ECHARTS_THEME__)
   chart.setOption({
     color: ['#ff6b9d', '#1890ff'],
     tooltip: {
@@ -273,6 +283,81 @@ onBeforeUnmount(() => {
 }
 .chart {
   height: 300px;
+}
+.top5-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.top5-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.top5-rank {
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eee;
+  color: #888;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.top5-rank.top3 {
+  background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+  color: #fff;
+}
+.top5-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.top5-info {
+  flex: 1;
+  min-width: 0;
+}
+.top5-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top5-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.top5-item {
+  cursor: pointer;
+  user-select: none;
+}
+.top5-item:active {
+  opacity: 0.75;
+}
+.popover-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.popover-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #555;
+}
+.popover-row strong {
+  color: #2d1a10;
+  font-weight: 700;
+}
+.top5-bar {
+  width: 80px;
+  flex-shrink: 0;
 }
 .range-note {
   margin: 0 0 12px;

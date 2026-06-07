@@ -1,206 +1,199 @@
 <template>
-  <div class="ops-agent-page">
-    <div class="page-header">
-      <h2>AI 运营助手原子操作系统</h2>
-      <p>自然语言会被拆成已注册原子操作。写操作先预览，再确认，再执行并写审计日志。</p>
+  <div class="ai-chat-page">
+
+    <!-- ── 滚动消息区 ── -->
+    <div ref="chatBodyRef" class="chat-body">
+
+      <!-- 欢迎态（无消息时） -->
+      <div v-if="!messages.length && !loading" class="chat-welcome">
+        <div class="welcome-badge">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L9.09 8.26L2 9.27L7 14.14L5.82 21.02L12 17.77L18.18 21.02L17 14.14L22 9.27L14.91 8.26L12 2Z"
+              fill="currentColor" opacity="0.9"/>
+          </svg>
+        </div>
+        <h2 class="welcome-title">今天想做什么？</h2>
+        <p class="welcome-sub">描述你的运营目标，我来拆解执行计划。</p>
+        <div class="welcome-chips">
+          <button v-for="item in quickQuestions" :key="item" class="welcome-chip" @click="ask(item)">
+            {{ item }}
+          </button>
+        </div>
+      </div>
+
+      <!-- 历史消息：所有轮次累积显示 -->
+      <template v-for="msg in messages" :key="msg.id">
+        <!-- 用户气泡 -->
+        <div v-if="msg.role === 'user'" class="msg-row user">
+          <div class="msg-bubble user">{{ msg.text }}</div>
+        </div>
+
+        <!-- AI 回复 -->
+        <div v-else class="msg-row assistant">
+          <div class="msg-avatar">AI</div>
+          <div class="msg-content">
+
+            <!-- 纯文本回复（advisor 模式直接返回 reply） -->
+            <div v-if="msg.reply" class="result-card reply-card">
+              <p class="reply-text" v-html="formatReply(msg.reply)"></p>
+            </div>
+
+            <!-- 任务计划 -->
+            <div v-if="msg.result?.plan" class="result-card">
+              <div class="result-card-head">
+                <span class="result-card-title">任务计划</span>
+                <el-tag :type="riskType(msg.result.plan.riskLevel)" size="small">{{ riskName(msg.result.plan.riskLevel) }}</el-tag>
+                <el-tag size="small">{{ intentName(msg.result.plan.intentType) }}</el-tag>
+              </div>
+              <div class="plan-meta-row">
+                <span>需要确认：{{ msg.result.plan.needConfirm ? '是' : '否' }}</span>
+                <span>二次确认：{{ msg.result.plan.needSecondConfirm ? '是' : '否' }}</span>
+              </div>
+              <div v-if="msg.result.plan.objects?.protectedConditions?.length" class="protected-box">
+                🔒 保护条件：{{ msg.result.plan.objects.protectedConditions.join('、') }}
+              </div>
+              <ol class="operation-list">
+                <li v-for="item in msg.result.plan.plan" :key="item.step">
+                  <strong>{{ item.operation }}</strong>
+                  <span>{{ item.reason }}</span>
+                </li>
+              </ol>
+            </div>
+
+            <!-- 分析报告 -->
+            <div v-if="msg.result?.analysis" class="result-card">
+              <div class="result-card-head">
+                <span class="result-card-title">{{ msg.result.analysis.title }}</span>
+                <el-tag size="small">{{ responseName(msg.result.plan?.finalResponseType) }}</el-tag>
+              </div>
+              <p class="conclusion">{{ msg.result.analysis.conclusion }}</p>
+              <div class="info-columns">
+                <div class="info-col">
+                  <h4>数据依据</h4>
+                  <ul><li v-for="item in msg.result.analysis.evidence" :key="item">{{ item }}</li></ul>
+                </div>
+                <div class="info-col">
+                  <h4>推荐动作</h4>
+                  <ul><li v-for="item in msg.result.analysis.actions" :key="item">{{ item }}</li></ul>
+                </div>
+              </div>
+              <div class="sample-note">
+                <span>样本：{{ msg.result.analysis.sampleStatus }}</span>
+                <span>下一步：{{ msg.result.analysis.nextStep }}</span>
+              </div>
+            </div>
+
+            <!-- 操作预览 -->
+            <div v-if="msg.result?.preview" class="result-card">
+              <div class="result-card-head">
+                <span class="result-card-title">操作预览</span>
+                <el-button size="small" text @click="openPreview(msg)">查看详情</el-button>
+              </div>
+              <h4>{{ msg.result.preview.title }}</h4>
+              <p class="preview-summary">{{ msg.result.preview.summary }}</p>
+              <div class="target-list">
+                <el-tag v-for="target in msg.result.preview.targets" :key="target.targetId" type="warning" size="small">
+                  {{ target.targetName || target.targetId }}
+                </el-tag>
+              </div>
+              <div v-if="msg.result.approval" class="approval-box">
+                <div class="approval-meta">
+                  <span>确认单 {{ msg.result.approval.approvalId }}</span>
+                  <strong>{{ approvalStatusName(msg.result.approval.status) }}</strong>
+                </div>
+                <div class="approval-actions">
+                  <el-input
+                    v-if="msg.result.preview.secondConfirmRequired"
+                    v-model="confirmText"
+                    size="small"
+                    placeholder="请输入：确认执行"
+                    class="confirm-input"
+                  />
+                  <el-button @click="rejectMsg(msg)">取消</el-button>
+                  <el-button type="danger" @click="approveMsg(msg)">
+                    {{ msg.result.preview.secondConfirmRequired ? '确认执行' : '确认' }}
+                  </el-button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 报告分段 -->
+            <div v-if="msg.result?.analysis?.reportSections?.length" class="result-card">
+              <div class="result-card-head">
+                <span class="result-card-title">报告分段</span>
+                <el-tag type="success" size="small">建议不会自动执行</el-tag>
+              </div>
+              <div class="report-grid">
+                <article v-for="section in msg.result.analysis.reportSections" :key="section.title" class="report-section">
+                  <h4>{{ section.title }}</h4>
+                  <ul><li v-for="item in section.items" :key="item">{{ item }}</li></ul>
+                </article>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </template>
+
+      <!-- 加载态（追加在消息列末尾） -->
+      <div v-if="loading" class="chat-loading">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+        <p>正在生成回复…</p>
+      </div>
     </div>
 
-    <section class="agent-workbench">
-      <div class="agent-input-panel">
-        <div class="section-title">
-          <span>运营输入</span>
-          <el-tag type="info">Mock 数据模式</el-tag>
-        </div>
-
-        <div class="data-window">
-          <el-tag type="info">{{ trendRangeText }}</el-tag>
-          <el-tag type="success">{{ styleOptions.length }} 款同源样本</el-tag>
-          <el-tag v-if="trendStyleMeta" type="warning">
-            {{ trendStyleMeta.styleName }} · {{ latestTrendLabel }}
-          </el-tag>
-        </div>
-
-        <el-input
-          v-model="input"
-          type="textarea"
-          :rows="4"
-          placeholder="例如：把最近冷掉的款下架，但猫眼不要动。"
-          @keyup.ctrl.enter="run"
-        />
-
-        <div class="quick-list">
-          <el-button v-for="item in quickQuestions" :key="item" round size="small" @click="ask(item)">
-            {{ item }}
+    <!-- ── 底部输入栏 ── -->
+    <div class="chat-input-bar">
+      <div class="input-wrap">
+        <div class="input-box">
+          <el-input
+            v-model="input"
+            type="textarea"
+            :autosize="{ minRows: 1, maxRows: 5 }"
+            placeholder="描述你的运营目标，Ctrl+Enter 发送"
+            class="ai-textarea"
+            @keydown.ctrl.enter="run"
+          />
+          <el-button type="primary" :loading="loading" class="send-btn" @click="run">
+            <svg v-if="!loading" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </el-button>
         </div>
-
-        <div class="toolbar">
-          <el-select v-model="selectedStyleId" placeholder="分析款式" size="small" filterable>
-            <el-option
-              v-for="item in styleOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            />
-          </el-select>
-          <el-button type="primary" :loading="loading" @click="run">生成计划</el-button>
+        <div class="input-meta">
+          <span class="input-hint">Ctrl + Enter 发送</span>
         </div>
       </div>
+    </div>
 
-      <div v-if="result" class="plan-panel">
-        <div class="section-title">
-          <span>任务计划</span>
-          <el-tag :type="riskType(result.plan.riskLevel)">{{ riskName(result.plan.riskLevel) }}</el-tag>
-        </div>
-
-        <div class="plan-meta">
-          <span>意图：{{ intentName(result.plan.intentType) }}</span>
-          <span>需要确认：{{ result.plan.needConfirm ? '是' : '否' }}</span>
-          <span>二次确认：{{ result.plan.needSecondConfirm ? '是' : '否' }}</span>
-        </div>
-
-        <div v-if="protectedConditions.length" class="protected-box">
-          保护条件：{{ protectedConditions.join('、') }}
-        </div>
-
-        <ol class="operation-list">
-          <li v-for="item in result.plan.plan" :key="item.step">
-            <strong>{{ item.operation }}</strong>
-            <span>{{ item.reason }}</span>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section v-if="result" class="analysis-grid">
-      <div class="analysis-main">
-        <div class="section-title">
-          <span>{{ result.analysis.title }}</span>
-          <el-tag>{{ responseName(result.plan.finalResponseType) }}</el-tag>
-        </div>
-
-        <p class="conclusion">{{ result.analysis.conclusion }}</p>
-
-        <div class="info-columns">
-          <div>
-            <h3>数据依据</h3>
-            <ul>
-              <li v-for="item in result.analysis.evidence" :key="item">{{ item }}</li>
-            </ul>
-          </div>
-          <div>
-            <h3>推荐动作</h3>
-            <ul>
-              <li v-for="item in result.analysis.actions" :key="item">{{ item }}</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="sample-note">
-          <span>样本判断：{{ result.analysis.sampleStatus }}</span>
-          <span>下一步：{{ result.analysis.nextStep }}</span>
-        </div>
-      </div>
-
-      <div class="side-panel">
-        <div class="section-title">
-          <span>操作预览</span>
-          <el-button v-if="result.preview" size="small" @click="previewDialog = true">查看详情</el-button>
-        </div>
-
-        <template v-if="result.preview">
-          <h3>{{ result.preview.title }}</h3>
-          <p>{{ result.preview.summary }}</p>
-
-          <div class="target-list">
-            <el-tag v-for="target in result.preview.targets" :key="target.targetId" type="warning">
-              {{ target.targetName || target.targetId }}
-            </el-tag>
-          </div>
-
-          <div v-if="result.approval" class="approval-box">
-            <span>确认单：{{ result.approval.approvalId }}</span>
-            <strong>{{ approvalStatusName(result.approval.status) }}</strong>
-          </div>
-
-          <div v-if="result.approval" class="approval-actions">
-            <el-input
-              v-if="result.preview.secondConfirmRequired"
-              v-model="confirmText"
-              size="small"
-              placeholder="请输入：确认执行"
-            />
-            <el-button @click="rejectCurrent">取消</el-button>
-            <el-button type="danger" @click="approveCurrent">
-              {{ result.preview.secondConfirmRequired ? '确认执行' : '确认' }}
-            </el-button>
-          </div>
-        </template>
-
-        <el-empty v-else description="当前任务没有写操作预览" />
-      </div>
-    </section>
-
-    <section v-if="reportSections.length" class="report-panel">
-      <div class="section-title">
-        <span>报告分段</span>
-        <el-tag type="success">建议不会自动执行</el-tag>
-      </div>
-
-      <div class="report-grid">
-        <article v-for="section in reportSections" :key="section.title" class="report-section">
-          <h3>{{ section.title }}</h3>
-          <ul>
-            <li v-for="item in section.items" :key="item">{{ item }}</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="log-panel">
-      <div class="section-title">
-        <span>最近 AI 操作日志</span>
-        <el-button text @click="refreshLogs">刷新</el-button>
-      </div>
-
-      <el-table :data="logs" empty-text="暂无执行日志" size="small">
-        <el-table-column prop="createdAt" label="时间" min-width="170" />
-        <el-table-column prop="operationName" label="操作" min-width="150" />
-        <el-table-column prop="riskLevel" label="风险" width="100" />
-        <el-table-column prop="result" label="结果" width="100" />
-        <el-table-column label="对象" min-width="220">
-          <template #default="{ row }">
-            {{ row.targets.map((item) => item.targetName || item.targetId).join('、') }}
-          </template>
-        </el-table-column>
-      </el-table>
-    </section>
-
+    <!-- 预览弹窗 -->
     <el-dialog v-model="previewDialog" title="操作预览详情" width="760px">
-      <template v-if="result?.preview">
+      <template v-if="previewTarget?.result?.preview">
         <div class="preview-detail">
-          <p><strong>操作：</strong>{{ result.preview.operationName }}</p>
-          <p><strong>风险：</strong>{{ riskName(result.preview.riskLevel) }}</p>
-          <p><strong>影响：</strong>{{ result.preview.impact.join('；') }}</p>
-          <h3>Before</h3>
-          <pre>{{ JSON.stringify(result.preview.before, null, 2) }}</pre>
-          <h3>After</h3>
-          <pre>{{ JSON.stringify(result.preview.after, null, 2) }}</pre>
-          <h3>原因</h3>
+          <p><strong>操作：</strong>{{ previewTarget.result.preview.operationName }}</p>
+          <p><strong>风险：</strong>{{ riskName(previewTarget.result.preview.riskLevel) }}</p>
+          <p><strong>影响：</strong>{{ previewTarget.result.preview.impact?.join('；') }}</p>
+          <h4>Before</h4>
+          <pre>{{ JSON.stringify(previewTarget.result.preview.before, null, 2) }}</pre>
+          <h4>After</h4>
+          <pre>{{ JSON.stringify(previewTarget.result.preview.after, null, 2) }}</pre>
+          <h4>原因</h4>
           <ul>
-            <li v-for="item in result.preview.reasons" :key="item">{{ item }}</li>
+            <li v-for="item in previewTarget.result.preview.reasons" :key="item">{{ item }}</li>
           </ul>
         </div>
       </template>
     </el-dialog>
+
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { approveAndExecuteOperation, executeAgentRequest, getAuditLogs, rejectApproval } from '@/agent/agent-executor'
-import { getStyleManagementRows } from '@/agent/mock-data'
+import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
+import { useOpsData } from '@/composables/useOpsData'
 
 const quickQuestions = [
   '这个款热门不热门？',
@@ -216,50 +209,21 @@ const quickQuestions = [
   '按今日报告建议执行。'
 ]
 
-const input = ref('生成今日运营报告。')
-const selectedStyleId = ref('')
+const input = ref('')
 const loading = ref(false)
-const result = ref(null)
-const logs = ref(getAuditLogs())
+// 消息数组：所有对话轮次累积存储
+const messages = ref([])
+// 传给后端的上下文历史（精简版）
+const chatHistory = ref([])
 const previewDialog = ref(false)
+const previewTarget = ref(null)
 const confirmText = ref('')
-const styleOptions = ref([])
-const trendOverview = ref({ dateRange: {}, hotStyles: [], coldStyles: [], potentialStyles: [] })
+const chatBodyRef = ref(null)
+const { ensureOpsData, refreshOpsData } = useOpsData()
 
-const protectedConditions = computed(() => result.value?.plan.objects.protectedConditions || [])
-const reportSections = computed(() => result.value?.analysis.reportSections || [])
-const trendRangeText = computed(() => {
-  const range = trendOverview.value?.dateRange || {}
-  if (!range.startDate || !range.endDate) return '120 天同源模拟窗口准备中...'
-  return `${range.startDate} ~ ${range.endDate} · ${range.days || 120} 天`
-})
-
-const trendStyleMeta = computed(() => {
-  const rows = [
-    ...(trendOverview.value?.hotStyles || []),
-    ...(trendOverview.value?.coldStyles || []),
-    ...(trendOverview.value?.potentialStyles || [])
-  ]
-  return rows.find((item) => item.id === selectedStyleId.value) || null
-})
-
-const latestTrendLabel = computed(() => trendStyleMeta.value?.label || '趋势待观察')
-
-async function bootstrapOptions() {
-  styleOptions.value = getStyleManagementRows().slice(0, 80).map((item) => ({ id: item.id, name: item.name }))
-  if (!selectedStyleId.value && styleOptions.value.length) {
-    selectedStyleId.value = styleOptions.value[0].id
-  }
-
-  try {
-    const response = await fetch('/api/xhs-trend-overview')
-    const data = await response.json()
-    if (response.ok) {
-      trendOverview.value = data
-    }
-  } catch (error) {
-    console.warn('[ai-assistant] trend overview unavailable', error)
-  }
+let msgId = 0
+function pushMsg(obj) {
+  messages.value.push({ id: ++msgId, ...obj })
 }
 
 function ask(text) {
@@ -267,274 +231,450 @@ function ask(text) {
   run()
 }
 
-function run() {
-  const text = input.value.trim()
-  if (!text) return
+async function scrollBottom() {
+  await nextTick()
+  if (chatBodyRef.value) chatBodyRef.value.scrollTop = chatBodyRef.value.scrollHeight
+}
 
+async function run() {
+  const text = input.value.trim()
+  if (!text || loading.value) return
+
+  // 立即清空输入框、展示用户气泡
+  input.value = ''
+  pushMsg({ role: 'user', text })
   loading.value = true
+  await scrollBottom()
+
+  const context = { storeId: 'store-001', today: new Date().toISOString().slice(0, 10) }
   try {
-    result.value = executeAgentRequest(text, {
-      selectedStyleId: selectedStyleId.value,
-      today: '2026-05-29'
-    })
+    const dsData = await callDeepSeek(text)
+    if (dsData?.reply) {
+      // 1. 先展示 AI 分析文字
+      pushMsg({ role: 'assistant', reply: dsData.reply })
+      // 2. 写操作意图 → 追加真实原子操作 + 确认单（与侧边栏逻辑对齐）
+      if (isWriteIntent(text)) {
+        const r = executeAgentRequest(text, context, null)
+        if (r.preview || r.approval) {
+          pushMsg({ role: 'assistant', result: r })
+        }
+      }
+    } else {
+      // 本地规则 fallback
+      const r = executeAgentRequest(text, context, dsData)
+      pushMsg({ role: 'assistant', result: r })
+    }
     confirmText.value = ''
-    logs.value = result.value.auditLogs
-  } catch (error) {
-    ElMessage.error(error.message)
+  } catch (err) {
+    ElMessage.error(err.message)
+    pushMsg({ role: 'assistant', reply: '请求失败，请稍后重试。' })
   } finally {
     loading.value = false
+    await scrollBottom()
   }
 }
 
-function approveCurrent() {
-  if (!result.value?.approval) return
+function isWriteIntent(text) {
+  return /下架|上架|归档|恢复|改价|调价|替换|推荐位|执行/.test(text)
+}
 
+async function callDeepSeek(text) {
   try {
-    const executed = approveAndExecuteOperation(result.value.approval.approvalId, confirmText.value)
-    result.value.approval = executed.approval
-    logs.value = executed.logs
+    const opsData = await ensureOpsData()
+    const res = await fetch('/api/ops-deepseek-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        history: chatHistory.value.slice(-6),
+        plannerMode: false,
+        opsContext: {
+          currentPage: '/ai-assistant',
+          currentStoreId: 'store-001',
+          totals: opsData?.metrics?.totals || {},
+          todayStats: opsData?.todayStats || {},
+          hotStyles: (opsData?.hotStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, hotIndex: s.hotIndex, confirmRate: s.confirmRate, trend: s.trend })),
+          coldStyles: (opsData?.coldStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, coldRisk: s.coldRisk, trend: s.trend })),
+          potentialStyles: (opsData?.potentialStyles || []).slice(0, 6).map(s => ({ id: s.id, name: s.name, growthScore: s.growthScore })),
+          recommendList: (opsData?.recommendList || []).slice(0, 8).map(s => ({ position: s.position, styleName: s.style?.name, slotType: s.slotType })),
+          modelReport: opsData?.modelReport || null
+        }
+      })
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    if (data.error) { ElMessage.warning('DeepSeek：' + data.error); return null }
+    // 更新上下文历史
+    chatHistory.value = [
+      ...chatHistory.value.slice(-6),
+      { role: 'user', content: text },
+      { role: 'assistant', content: typeof data.reply === 'string' ? data.reply : JSON.stringify(data) }
+    ]
+    return data
+  } catch (e) {
+    console.error('[DeepSeek] 调用失败:', e?.message || e)
+    return null
+  }
+}
+
+function openPreview(msg) {
+  previewTarget.value = msg
+  previewDialog.value = true
+}
+
+function approveMsg(msg) {
+  if (!msg.result?.approval) return
+  try {
+    const executed = approveAndExecuteOperation(msg.result.approval.approvalId, confirmText.value)
+    msg.result.approval = executed.approval
     ElMessage.success('已执行，并写入审计日志')
-  } catch (error) {
-    ElMessage.error(error.message)
+    refreshOpsData() // 执行后刷新缓存，下次问 AI 能拿到最新状态
+  } catch (err) {
+    ElMessage.error(err.message)
   }
 }
 
-function rejectCurrent() {
-  if (!result.value?.approval) return
-
+function rejectMsg(msg) {
+  if (!msg.result?.approval) return
   try {
-    result.value.approval = rejectApproval(result.value.approval.approvalId)
+    msg.result.approval = rejectApproval(msg.result.approval.approvalId)
     ElMessage.info('已取消该确认单')
-  } catch (error) {
-    ElMessage.error(error.message)
+  } catch (err) {
+    ElMessage.error(err.message)
   }
 }
 
-function refreshLogs() {
-  logs.value = getAuditLogs()
+function formatReply(text) {
+  return String(text || '')
+    .replace(/\n/g, '<br>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
 }
 
 function riskType(level) {
   return { low: 'success', medium: 'warning', high: 'danger', critical: 'danger' }[level] || 'info'
 }
-
 function riskName(level) {
   return { low: '低风险', medium: '中风险', high: '高风险', critical: '极高风险' }[level] || level
 }
-
 function intentName(intent) {
   return { query: '查询', analysis: '分析', generate: '生成', execute: '执行', report: '报告' }[intent] || intent
 }
-
 function responseName(type) {
   return {
-    data_answer: '数据回答',
-    analysis_report: '分析报告',
-    generation_result: '生成结果',
-    operation_preview: '操作预览',
-    approval_required: '需要确认',
-    daily_report: '今日报告',
-    weekly_report: '周报',
-    anomaly_report: '异常报告',
-    feed_report: '推荐位报告',
+    data_answer: '数据回答', analysis_report: '分析报告', generation_result: '生成结果',
+    operation_preview: '操作预览', approval_required: '需要确认', daily_report: '今日报告',
+    weekly_report: '周报', anomaly_report: '异常报告', feed_report: '推荐位报告',
     selection_report: '选品报告'
   }[type] || type
 }
-
 function approvalStatusName(status) {
-  return {
-    pending: '待确认',
-    approved: '已批准',
-    rejected: '已拒绝',
-    executed: '已执行',
-    expired: '已过期'
-  }[status] || status
+  return { pending: '待确认', approved: '已批准', rejected: '已拒绝', executed: '已执行', expired: '已过期' }[status] || status
 }
-
-onMounted(async () => {
-  await bootstrapOptions()
-})
 </script>
 
 <style scoped>
-.ops-agent-page {
+.ai-chat-page {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  height: calc(100vh - 62px);
+  margin: -22px -24px;
+  overflow: hidden;
 }
 
-.agent-workbench,
-.analysis-grid {
-  display: grid;
-  grid-template-columns: minmax(320px, 0.88fr) minmax(360px, 1.12fr);
-  gap: 16px;
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 24px 24px;
+  scroll-behavior: smooth;
 }
 
-.agent-input-panel,
-.plan-panel,
-.analysis-main,
-.side-panel,
-.report-panel,
-.log-panel {
-  padding: 18px;
-  border: 1px solid #ebeef5;
-  border-radius: 8px;
-  background: #fff;
+/* ── 欢迎态 ── */
+.chat-welcome {
+  max-width: 680px;
+  margin: 60px auto 0;
+  text-align: center;
+  animation: fadeUp 380ms cubic-bezier(0.16,1,0.3,1) both;
 }
-
-.section-title,
-.toolbar,
-.plan-meta,
-.sample-note,
-.approval-box,
-.approval-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
 }
-
-.section-title {
-  justify-content: space-between;
-  margin-bottom: 12px;
-  font-weight: 700;
-  color: #303133;
+.welcome-badge {
+  width: 52px; height: 52px; border-radius: 16px;
+  background: linear-gradient(135deg, #c97a4e, #e09a72);
+  color: #fff;
+  display: grid; place-items: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 24px rgba(201,122,78,0.35);
 }
-
-.quick-list,
-.target-list {
+.welcome-title {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  text-wrap: balance;
+}
+.welcome-sub {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  margin: 0 0 36px;
+}
+.welcome-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 12px;
+  justify-content: center;
+}
+.welcome-chip {
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.75);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart),
+    color var(--dur-fast) var(--ease-out-quart),
+    transform var(--dur-fast) var(--ease-out-quart);
+}
+.welcome-chip:hover {
+  background: var(--accent-light);
+  border-color: rgba(201,122,78,0.35);
+  color: var(--accent-dark);
+  transform: translateY(-1px);
 }
 
-.toolbar {
-  justify-content: space-between;
-  margin-top: 14px;
+/* ── 加载动画 ── */
+.chat-loading {
+  max-width: 760px;
+  margin: 8px auto 20px 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+.loading-dots { display: flex; gap: 5px; }
+.loading-dots span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.15s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dotBounce {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40%           { opacity: 1;   transform: scale(1.15); }
 }
 
-.plan-meta {
-  flex-wrap: wrap;
-  color: #606266;
-  font-size: 13px;
+/* ── 消息行 ── */
+.msg-row {
+  display: flex;
+  gap: 12px;
+  max-width: 760px;
+  margin: 0 auto 20px;
+  animation: msgIn 220ms var(--ease-out-quart) both;
 }
-
-.protected-box {
-  margin-top: 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  color: #8a5a00;
-  background: #fff7e6;
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
 }
+.msg-row.user { justify-content: flex-end; }
+.msg-row.assistant { align-items: flex-start; }
 
-.operation-list {
-  margin: 14px 0 0;
-  padding-left: 20px;
+.msg-bubble.user {
+  max-width: 72%;
+  padding: 11px 16px;
+  border-radius: 18px 18px 4px 18px;
+  background: linear-gradient(135deg, #c97a4e, #d4906a);
+  color: #fff;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  box-shadow: 0 4px 16px rgba(201,122,78,0.28);
 }
-
-.operation-list li {
-  margin-bottom: 8px;
-  line-height: 1.5;
+.msg-avatar {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: linear-gradient(135deg, #c97a4e, #e09a72);
+  color: #fff;
+  font-size: 11px; font-weight: 800;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 4px 12px rgba(201,122,78,0.3);
 }
-
-.operation-list strong {
-  display: block;
-  color: #303133;
-}
-
-.operation-list span,
-.conclusion,
-.side-panel p,
-.sample-note {
-  color: #606266;
-  line-height: 1.7;
-}
-
-.info-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-top: 16px;
-}
-
-.info-columns h3,
-.side-panel h3,
-.report-section h3,
-.preview-detail h3 {
-  margin: 0 0 8px;
-  font-size: 15px;
-  color: #303133;
-}
-
-ul {
-  margin: 0;
-  padding-left: 18px;
-}
-
-li {
-  margin-bottom: 6px;
-  line-height: 1.55;
-}
-
-.sample-note {
+.msg-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 8px;
-  background: #f7f8fa;
-}
-
-.approval-box {
-  justify-content: space-between;
-  margin-top: 14px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: #f5f7fa;
-}
-
-.approval-actions {
-  justify-content: flex-end;
-  margin-top: 12px;
-}
-
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
-.report-section {
-  min-height: 130px;
-  padding: 14px;
-  border: 1px solid #edf0f5;
-  border-radius: 8px;
-  background: #fbfcfe;
+/* ── 结果卡片 ── */
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
 }
-
-.preview-detail pre {
-  max-height: 220px;
-  overflow: auto;
-  padding: 12px;
-  border-radius: 8px;
-  background: #f6f8fa;
-  font-size: 12px;
+.reply-card { padding: 14px 18px; }
+.reply-text {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  line-height: 1.8;
+  margin: 0;
 }
-
-.data-window {
+.result-card-head {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
-  margin-top: 12px;
   margin-bottom: 12px;
 }
-
-@media (max-width: 1080px) {
-  .agent-workbench,
-  .analysis-grid,
-  .info-columns,
-  .report-grid {
-    grid-template-columns: 1fr;
-  }
+.result-card-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--ink);
+  flex: 1;
 }
+.plan-meta-row {
+  display: flex;
+  gap: 20px;
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+  margin-bottom: 10px;
+}
+.protected-box {
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+  background: rgba(212,168,67,0.10);
+  border: 1px solid rgba(212,168,67,0.25);
+  color: #7a5200;
+  font-size: var(--text-xs);
+  margin-bottom: 10px;
+}
+.operation-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.operation-list li {
+  padding: 10px 14px;
+  background: rgba(201,122,78,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.operation-list strong { display: block; color: var(--ink); font-size: var(--text-sm); margin-bottom: 3px; }
+.operation-list span { color: var(--ink-3); font-size: var(--text-xs); line-height: 1.5; }
+.conclusion { color: var(--ink-2); font-size: var(--text-sm); line-height: 1.7; margin-bottom: 12px; }
+.info-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.info-col h4 { font-size: var(--text-sm); font-weight: 700; color: var(--ink); margin: 0 0 8px; }
+.info-col ul { margin: 0; padding-left: 16px; }
+.info-col li { color: var(--ink-2); font-size: var(--text-xs); line-height: 1.6; margin-bottom: 5px; }
+.sample-note {
+  display: flex; gap: 20px; margin-top: 12px;
+  padding: 8px 12px;
+  background: rgba(201,122,78,0.05);
+  border-radius: var(--r-sm);
+  color: var(--ink-3); font-size: var(--text-xs);
+}
+.preview-summary { color: var(--ink-2); font-size: var(--text-sm); margin: 6px 0 10px; line-height: 1.6; }
+.target-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.approval-box {
+  margin-top: 14px; padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: rgba(201,122,78,0.05);
+  border: 1px solid var(--border);
+}
+.approval-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: var(--text-sm); color: var(--ink-2); margin-bottom: 10px;
+}
+.approval-meta strong { color: var(--accent); font-weight: 700; }
+.approval-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.confirm-input { max-width: 180px; }
+.report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 4px; }
+.report-section {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: rgba(253,245,238,0.5);
+}
+.report-section h4 {
+  font-size: var(--text-sm); font-weight: 700; color: var(--ink);
+  margin: 0 0 8px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.report-section ul { margin: 0; padding-left: 14px; }
+.report-section li { font-size: var(--text-xs); color: var(--ink-2); margin-bottom: 5px; line-height: 1.5; }
+
+/* ── 底部输入栏 ── */
+.chat-input-bar {
+  border-top: 1px solid var(--border);
+  background: rgba(253,245,238,0.72);
+  backdrop-filter: blur(16px) saturate(1.4);
+  padding: 14px 24px 18px;
+}
+.input-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 8px 8px 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  background: rgba(255,255,255,0.88);
+  transition: border-color var(--dur-base) var(--ease-out-quart), box-shadow var(--dur-base) var(--ease-out-quart);
+}
+.input-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201,122,78,0.14);
+  background: #fff;
+}
+.ai-textarea { flex: 1; }
+.ai-textarea :deep(.el-textarea__inner) {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none !important;
+  font-size: var(--text-sm);
+  color: var(--ink);
+  line-height: 1.6;
+  padding: 6px 4px;
+  resize: none;
+}
+.send-btn {
+  width: 42px !important; height: 42px !important;
+  padding: 0 !important;
+  border-radius: var(--r-md) !important;
+  flex-shrink: 0;
+  display: grid !important;
+  place-items: center;
+}
+.input-meta { display: flex; align-items: center; gap: 6px; }
+.input-hint { font-size: 11px; color: var(--ink-3); margin-left: auto; }
+
+/* ── 预览弹窗 ── */
+.preview-detail h4 { margin: 14px 0 6px; font-size: var(--text-sm); color: var(--ink); }
+.preview-detail p { font-size: var(--text-sm); color: var(--ink-2); margin: 4px 0; }
+.preview-detail pre {
+  max-height: 220px; overflow: auto; padding: 12px;
+  border-radius: var(--r-md);
+  background: rgba(201,122,78,0.05);
+  border: 1px solid var(--border);
+  font-size: 12px; color: var(--ink-2);
+}
+.preview-detail ul { padding-left: 16px; margin: 0; }
+.preview-detail li { font-size: var(--text-sm); color: var(--ink-2); margin-bottom: 5px; }
 </style>
