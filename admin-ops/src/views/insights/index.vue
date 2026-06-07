@@ -57,7 +57,7 @@
             </el-radio-group>
           </div>
 
-          <div v-loading="compareLoading" class="trend-box compare-box">
+          <div v-loading="compareLoading" class="compare-box">
             <div class="compare-summary">
               <div>
                 <strong>{{ currentCompareMetricLabel }}</strong>
@@ -72,7 +72,7 @@
               />
             </div>
             <el-empty v-if="!compareReady && !compareLoading" description="至少选择 2 个款式进行对比" />
-            <div ref="compareChartRef" class="chart large"></div>
+            <div ref="compareChartRef" class="chart compare-chart"></div>
           </div>
         </el-tab-pane>
 
@@ -390,6 +390,8 @@ function renderCompareChart() {
   if (!compareData.value || !compareChartRef.value) return
   if (!compareChart) compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
   compareChart.setOption(buildCompareOption(compareData.value))
+  // flex 布局高度确定后需要 resize 一次以填满容器
+  nextTick(() => compareChart?.resize())
 }
 
 function clearCompareChart() {
@@ -490,46 +492,64 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.page-header { margin-bottom: 18px; }
+/* ── 页面整体撑满高度 ── */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 120px);
+}
+.page-header { margin-bottom: 18px; flex-shrink: 0; }
 .page-header h2 { margin: 0 0 6px; font-size: 22px; }
 .page-header p { margin: 0; color: #777; }
+
+/* tab-card 撑满剩余空间 */
 .panel { margin-bottom: 16px; border-radius: 8px; }
-.tab-card :deep(.el-card__body) { padding-top: 0; }
+.tab-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.tab-card :deep(.el-card__body) {
+  padding-top: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.insight-tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.insight-tabs :deep(.el-tabs__content) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.insight-tabs :deep(.el-tab-pane) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
 /* Tab 样式跟 users 页保持一致 */
-.insight-tabs :deep(.el-tabs__header) {
-  margin-bottom: 20px;
-}
-.insight-tabs :deep(.el-tabs__item) {
-  font-size: 14px;
-  font-weight: 500;
-  color: #999;
-}
-.insight-tabs :deep(.el-tabs__item.is-active) {
-  color: #b86e4a;
-  font-weight: 600;
-}
-.insight-tabs :deep(.el-tabs__active-bar) {
-  background-color: #b86e4a;
-}
-.insight-tabs :deep(.el-tabs__nav-wrap::after) {
-  height: 1px;
-  background-color: #f0ece8;
-}
+.insight-tabs :deep(.el-tabs__header) { margin-bottom: 20px; }
+.insight-tabs :deep(.el-tabs__item) { font-size: 14px; font-weight: 500; color: #999; }
+.insight-tabs :deep(.el-tabs__item.is-active) { color: #b86e4a; font-weight: 600; }
+.insight-tabs :deep(.el-tabs__active-bar) { background-color: #b86e4a; }
+.insight-tabs :deep(.el-tabs__nav-wrap::after) { height: 1px; background-color: #f0ece8; }
 
-/* toolbar: 控件行 */
+/* toolbar 控件行 */
 .tab-toolbar {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
-.compare-toolbar { justify-content: flex-start; }
 
+/* 单款走势 */
 .trend-box { min-height: 420px; }
-.compare-box { min-height: 360px; }
-
 .style-meta {
   display: flex;
   align-items: center;
@@ -538,13 +558,9 @@ onBeforeUnmount(() => {
   padding: 14px;
   border-radius: 8px;
   background: #faf7f8;
+  flex-shrink: 0;
 }
-.meta-image {
-  width: 54px;
-  height: 54px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
+.meta-image { width: 54px; height: 54px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 .meta-copy { display: grid; gap: 3px; }
 .meta-copy strong { font-weight: 600; font-size: 14px; color: #2d1a10; }
 .meta-copy span,
@@ -561,11 +577,23 @@ onBeforeUnmount(() => {
 .chart { height: 280px; }
 .chart.large { height: 360px; margin-bottom: 16px; }
 
+/* 多款对比：box 撑满 tab-pane 剩余，chart 也撑满 box */
+.compare-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
 .compare-summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.compare-chart {
+  flex: 1;
+  min-height: 400px;
 }
 </style>
