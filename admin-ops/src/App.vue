@@ -77,7 +77,7 @@
       </el-main>
     </el-container>
 
-    <button class="assistant-fab" type="button" @click="assistantOpen = true" aria-label="打开 AI 运营助手">
+    <button class="assistant-fab" type="button" @click="assistantOpen = true; ensureOpsData()" aria-label="打开 AI 运营助手">
       <el-icon><ChatDotRound /></el-icon>
       <span>AI</span>
     </button>
@@ -203,10 +203,19 @@ import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
 import { buildDeepSeekToolContract } from '@/agent/deepseek-tool-contract'
+import { fetchOpsData } from '@/api/opsData'
 
 const route = useRoute()
 const activeMenu = computed(() => route.path)
 const assistantOpen = ref(false)
+const opsDataCache = ref(null)
+
+async function ensureOpsData() {
+  if (!opsDataCache.value) {
+    opsDataCache.value = await fetchOpsData().catch(() => null)
+  }
+  return opsDataCache.value
+}
 const drawerMessages = ref([])
 const drawerInput = ref('')
 const drawerLoading = ref(false)
@@ -250,19 +259,28 @@ async function sendDrawer() {
   drawerLoading.value = true
   await scrollDrawerBottom()
   try {
-    const context = {
-      selectedStyleId: 'style-gradient-003',
-      storeId: 'store-001',
-      today: '2026-05-29'
+    // 优先用 DeepSeek advisor 回复
+    const context = { selectedStyleId: 'style-gradient-003', storeId: 'store-001', today: new Date().toISOString().slice(0,10) }
+    const aiData = await requestDeepSeekToolPlan(text).catch(() => null)
+    if (aiData?.reply) {
+      // DeepSeek 正常回复：先展示 AI 分析文字
+      const replyText = [
+        aiData.reply,
+        aiData.actions?.length ? '\n\n**建议动作：**\n' + aiData.actions.map((a, i) => `${i+1}. ${a}`).join('\n') : ''
+      ].join('')
+      drawerMessages.value.push({ id: Date.now() + 1, role: 'assistant', content: replyText })
+      // 如果是写操作意图，再追加本地原子操作 + approval card
+      if (isWriteIntent(text)) {
+        const result = executeAgentRequest(text, context, null)
+        if (result.preview || result.approval) {
+          drawerMessages.value.push({ id: Date.now() + 2, role: 'assistant', content: buildAgentDrawerText(result), result })
+        }
+      }
+    } else {
+      // 降级：本地规则
+      const result = executeAgentRequest(text, context, null)
+      drawerMessages.value.push({ id: Date.now() + 1, role: 'assistant', content: buildAgentDrawerText(result), result })
     }
-    const deepSeekPlan = await requestDeepSeekToolPlan(text).catch(() => null)
-    const result = executeAgentRequest(text, context, deepSeekPlan)
-    drawerMessages.value.push({
-      id: Date.now() + 1,
-      role: 'assistant',
-      content: buildAgentDrawerText(result),
-      result
-    })
     drawerConfirmText.value = ''
   } catch (error) {
     drawerMessages.value.push({ id: Date.now() + 1, role: 'assistant', content: `执行失败：${error.message}` })
@@ -273,26 +291,33 @@ async function sendDrawer() {
 }
 
 async function requestDeepSeekToolPlan(text) {
+  const opsData = await ensureOpsData()
   const controller = new AbortController()
-  const timeoutId = window.setTimeout(() => controller.abort(), 10000)
+  const timeoutId = window.setTimeout(() => controller.abort(), 30000) // 延长到 30s
   const response = await fetch('/api/ops-deepseek-chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     signal: controller.signal,
     body: JSON.stringify({
-      plannerMode: true,
+      plannerMode: false,
       message: text,
-      operationCatalog: buildDeepSeekToolContract(),
+      history: drawerMessages.value.slice(-6).map(m => ({ role: m.role, content: m.content })),
       opsContext: {
         currentPage: route.path,
-        currentStoreId: 'store-001'
+        currentStoreId: 'store-001',
+        totals: opsData?.metrics?.totals || {},
+        todayStats: opsData?.todayStats || {},
+        hotStyles: (opsData?.hotStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, hotIndex: s.hotIndex, confirmRate: s.confirmRate, trend: s.trend })),
+        coldStyles: (opsData?.coldStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, coldRisk: s.coldRisk, trend: s.trend })),
+        potentialStyles: (opsData?.potentialStyles || []).slice(0, 6).map(s => ({ id: s.id, name: s.name, growthScore: s.growthScore })),
+        recommendList: (opsData?.recommendList || []).slice(0, 8).map(s => ({ position: s.position, styleName: s.style?.name, slotType: s.slotType })),
+        modelReport: opsData?.modelReport || null
       }
     })
   }).finally(() => window.clearTimeout(timeoutId))
   const data = await response.json()
-  if (!response.ok) throw new Error(data.error || 'DeepSeek planner failed')
-  if (!data.toolPlan) throw new Error('DeepSeek 没有返回 ToolPlan')
-  return data.toolPlan
+  if (!response.ok) throw new Error(data.error || 'DeepSeek 请求失败')
+  return data  // advisor 模式直接返回 { reply, actions, ... }
 }
 
 function askDrawer(text) {
@@ -391,6 +416,10 @@ function rejectDrawerApproval(message) {
   } catch (error) {
     ElMessage.error(error.message)
   }
+}
+
+function isWriteIntent(text) {
+  return /下架|上架|归档|恢复|改价|调价|替换|推荐位|执行/.test(text)
 }
 
 function riskName(level) {

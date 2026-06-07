@@ -274,12 +274,12 @@ async function run() {
 
   loading.value = true
   try {
-    // 先尝试调用 DeepSeek 真实 API
     const dsResult = await callDeepSeek(text)
     if (dsResult) {
+      ElMessage.success('DeepSeek AI 已响应')
       result.value = dsResult
     } else {
-      // 降级：本地规则引擎
+      ElMessage.info('DeepSeek 未响应，使用本地规则')
       result.value = executeAgentRequest(text, {
         selectedStyleId: selectedStyleId.value,
         today: new Date().toISOString().slice(0, 10)
@@ -316,19 +316,25 @@ async function callDeepSeek(text) {
     const data = await res.json()
     if (data.error) { ElMessage.warning('DeepSeek：' + data.error); return null }
 
+    // 服务端 plannerMode=true 时返回 { toolPlan: {...} }
+    const toolPlan = data.toolPlan || data
+    if (!toolPlan?.intentType) return null   // 格式不对则降级
+
     // 把 AI 回复加入对话历史
     chatHistory.value = [
       ...chatHistory.value.slice(-6),
       { role: 'user', content: text },
-      { role: 'assistant', content: JSON.stringify(data) }
+      { role: 'assistant', content: JSON.stringify(toolPlan) }
     ]
 
-    // 用 AI 返回的 plan 包装成 agentResult 格式
+    // 用 toolPlan 驱动 agentResult
     return executeAgentRequest(text, {
       selectedStyleId: selectedStyleId.value,
       today: new Date().toISOString().slice(0, 10)
-    }, data)
-  } catch {
+    }, toolPlan)
+  } catch (e) {
+    console.error('[DeepSeek] 调用失败:', e?.message || e)
+    ElMessage.warning('[DeepSeek] ' + (e?.message || '请求失败，已降级'))
     return null
   }
 }
