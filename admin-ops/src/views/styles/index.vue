@@ -25,8 +25,8 @@
     </el-card>
 
     <el-card shadow="never" class="panel">
-      <el-table :data="filteredStyles" style="width: 100%">
-        <el-table-column label="款式信息" min-width="300">
+      <el-table :data="filteredStyles" style="width: 100%" :scroll-x="true">
+        <el-table-column label="款式信息" width="280" fixed="left">
           <template #default="{ row }">
             <div class="style-info">
               <el-image :src="row.image" class="thumb" fit="cover" />
@@ -38,22 +38,22 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="标签" width="240">
+        <el-table-column label="标签" width="260">
           <template #default="{ row }">
             <el-tag v-for="tag in row.tags" :key="tag" size="small" class="tag">{{ tag }}</el-tag>
           </template>
         </el-table-column>
 
-        <el-table-column prop="viewCount" label="浏览" sortable width="100" />
-        <el-table-column prop="tryOnCount" label="试戴" sortable width="100" />
-        <el-table-column prop="wantCount" label="想做" sortable width="100" />
+        <el-table-column prop="viewCount" label="浏览" sortable width="90" />
+        <el-table-column prop="tryOnCount" label="试戴" sortable width="90" />
+        <el-table-column prop="wantCount" label="想做" sortable width="90" />
         <el-table-column label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="statusTagType(row.rawStatus)" effect="light">{{ statusLabel(row.rawStatus) }}</el-tag>
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" min-width="320">
+        <el-table-column label="操作" width="300" fixed="right">
           <template #default="{ row }">
             <div class="row-actions">
               <el-button text class="btn-warm" @click="detail = row">详情</el-button>
