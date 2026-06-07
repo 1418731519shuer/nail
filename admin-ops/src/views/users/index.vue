@@ -87,8 +87,10 @@
 
               <!-- 主要人群大标识 -->
               <div class="persona-primary">
-                <div class="persona-icon" :style="{ background: crowdSegments[0]?.color + '18', borderColor: crowdSegments[0]?.color }">
-                  <span class="persona-emoji">{{ personaEmoji(crowdSegments[0]?.key) }}</span>
+                <div class="persona-icon" :style="{ background: crowdSegments[0]?.color + '20', borderColor: crowdSegments[0]?.color + '60' }">
+                  <el-icon :size="18" :style="{ color: crowdSegments[0]?.color }">
+                    <component :is="personaIcon(crowdSegments[0]?.key)" />
+                  </el-icon>
                 </div>
                 <div>
                   <div class="persona-name" :style="{ color: crowdSegments[0]?.color }">{{ crowdSegments[0]?.label }}</div>
@@ -246,7 +248,7 @@ import 'echarts-wordcloud'
 // 统一图表字体（与运营端主字体栈一致）
 const CHART_FONT = "'DM Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
 import { ElMessage } from 'element-plus'
-import { View, User, Select, ShoppingCart, Warning, Star, ChatDotRound, Aim } from '@element-plus/icons-vue'
+import { View, User, Select, ShoppingCart, Warning, Star, ChatDotRound, Aim, OfficeBuilding, HomeFilled, Memo } from '@element-plus/icons-vue'
 import UserPreferenceRadar from '@/components/UserPreferenceRadar.vue'
 import { mockNailItems } from '@/data/mockNailItems'
 import { generateMockBehaviorLogs } from '@/data/mockUserBehavior'
@@ -820,9 +822,9 @@ onBeforeUnmount(() => {
   fbPieChart?.dispose()
 })
 
-function personaEmoji(key) {
-  const map = { career: '💼', mom: '🌸', student: '🎓' }
-  return map[key] || '👤'
+function personaIcon(key) {
+  const map = { career: OfficeBuilding, mom: HomeFilled, student: Memo }
+  return map[key] || User
 }
 
 function severityTagType(value) {
@@ -1279,16 +1281,17 @@ function severityTagType(value) {
 }
 
 .persona-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--r-sm);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
   border: 1.5px solid;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   flex-shrink: 0;
+  transition: transform var(--dur-base) var(--ease-out-quart);
 }
+.persona-icon:hover { transform: scale(1.08); }
 
 .persona-name {
   font-size: var(--text-md);
