@@ -352,9 +352,6 @@ function buildCompareOption(data) {
 
   const valFmt = (v) => isRate ? `${(Number(v || 0) * 100).toFixed(1)}%` : `${Number(v || 0)}`
   return {
-    animation: true,
-    animationDuration: 800,
-    animationEasing: 'cubicOut',
     tooltip: { trigger: 'axis', valueFormatter: valFmt },
     legend: { data: series.map(s => s.styleName), bottom: 0 },
     grid: { left: 36, right: 24, top: 28, bottom: 48, containLabel: true },
@@ -395,8 +392,8 @@ async function renderCompareChart() {
   // 先等 flex 布局稳定，让容器获得真实高度
   await nextTick()
   if (!compareChart) compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
-  compareChart.resize()                                   // 以真实高度为准
-  compareChart.setOption(buildCompareOption(compareData.value), true)  // notMerge=true 重播动画
+  compareChart.resize()
+  compareChart.setOption(buildCompareOption(compareData.value))
 }
 
 function clearCompareChart() {
