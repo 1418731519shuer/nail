@@ -211,7 +211,7 @@
 import { computed, nextTick, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
-import { fetchOpsData } from '@/api/opsData'
+import { useOpsData } from '@/composables/useOpsData'
 
 const quickQuestions = [
   '这个款热门不热门？',
@@ -235,15 +235,11 @@ const chatHistory = ref([])
 const previewDialog = ref(false)
 const confirmText = ref('')
 const chatBodyRef = ref(null)
-let opsDataCache = null
+const { ensureOpsData } = useOpsData()
 
 const protectedConditions = computed(() => result.value?.plan.objects.protectedConditions || [])
 const reportSections = computed(() => result.value?.analysis.reportSections || [])
 
-async function ensureOpsData() {
-  if (!opsDataCache) opsDataCache = await fetchOpsData().catch(() => null)
-  return opsDataCache
-}
 
 function ask(text) {
   input.value = text

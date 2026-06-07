@@ -207,19 +207,12 @@ import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
 import { buildDeepSeekToolContract } from '@/agent/deepseek-tool-contract'
-import { fetchOpsData } from '@/api/opsData'
+import { useOpsData } from '@/composables/useOpsData'
 
 const route = useRoute()
 const activeMenu = computed(() => route.path)
 const assistantOpen = ref(false)
-const opsDataCache = ref(null)
-
-async function ensureOpsData() {
-  if (!opsDataCache.value) {
-    opsDataCache.value = await fetchOpsData().catch(() => null)
-  }
-  return opsDataCache.value
-}
+const { ensureOpsData } = useOpsData()
 const drawerMessages = ref([])
 const drawerInput = ref('')
 const drawerLoading = ref(false)
