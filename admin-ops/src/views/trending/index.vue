@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="page-header">
-      <h2>热门冷门</h2>
+      <h2>热度榜单</h2>
       <p>首屏只加载轻量榜单摘要，点击后再读取单款或多款趋势，兼顾速度和分析深度。</p>
     </div>
 

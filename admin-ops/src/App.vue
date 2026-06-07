@@ -22,7 +22,7 @@
         </el-menu-item>
         <el-menu-item index="/trending">
           <el-icon><TrendCharts /></el-icon>
-          <span>热门冷门</span>
+          <span>热度榜单</span>
         </el-menu-item>
         <el-menu-item index="/styles">
           <el-icon><Grid /></el-icon>
