@@ -227,7 +227,7 @@ const quickQuestions = [
   '按今日报告建议执行。'
 ]
 
-const input = ref('生成今日运营报告。')
+const input = ref('')
 const lastInput = ref('')
 const selectedStyleId = ref('')
 const loading = ref(false)
