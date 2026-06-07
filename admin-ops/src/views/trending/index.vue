@@ -95,85 +95,62 @@
       </div>
     </el-card>
 
-    <!-- XGBoost 三阶段趋势预测面板 -->
+    <!-- 款式趋势预测面板 -->
     <el-card shadow="never" class="panel detail-panel">
       <template #header>
         <div class="card-header">
-          <span>XGBoost 趋势预测</span>
+          <span>款式趋势预测</span>
           <div style="display:flex;gap:8px;align-items:center">
-            <el-tag type="purple">三阶段模型</el-tag>
-            <el-select v-model="predictStyleId" filterable size="small" placeholder="选择款式" style="width:240px">
-              <el-option v-for="item in selectableStyles" :key="item.id" :label="item.name" :value="item.id" />
+            <el-input v-model="trendSearch" size="small" placeholder="搜索款式" clearable style="width:180px" />
+            <el-select v-model="trendFilter" size="small" style="width:120px">
+              <el-option label="全部" value="" />
+              <el-option label="↑ 上升" value="up" />
+              <el-option label="→ 平稳" value="stable" />
+              <el-option label="↓ 下降" value="down" />
             </el-select>
           </div>
         </div>
       </template>
-
-      <div v-if="!predictStyleId" class="trend-box">
-        <el-empty description="选择一个款式查看预测结果" />
-      </div>
-      <div v-else>
-        <!-- 阶段一：当前状态 -->
-        <el-row :gutter="16" style="margin-bottom:16px">
-          <el-col :span="8">
-            <div class="predict-stage-card">
-              <div class="predict-stage-title">阶段一：当前状态分类</div>
-              <div class="predict-state-badge" :style="{background: stateColor(predictResult.currentState)}">
-                {{ predictResult.currentState || '—' }}
-              </div>
-              <div class="predict-meta">
-                <span>准确率 0.91</span><span>macro-F1 0.89</span>
-              </div>
+      <el-table :data="filteredTrendRows" size="small" :row-class-name="trendRowClass">
+        <el-table-column label="款式" min-width="180">
+          <template #default="{ row }">
+            <div style="display:flex;align-items:center;gap:8px">
+              <el-image :src="row.image" style="width:36px;height:36px;border-radius:6px;flex-shrink:0" fit="cover" />
+              <span style="font-weight:600;font-size:13px">{{ row.name }}</span>
             </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="predict-stage-card">
-              <div class="predict-stage-title">阶段二：W+1 预测状态</div>
-              <div class="predict-state-badge" :style="{background: stateColor(predictResult.w1State)}">
-                {{ predictResult.w1State || '—' }}
-              </div>
-              <div class="predict-meta">
-                <span>准确率 0.97</span>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="predict-stage-card">
-              <div class="predict-stage-title">阶段三：W+2 预测状态</div>
-              <div class="predict-state-badge" :style="{background: stateColor(predictResult.w2State)}">
-                {{ predictResult.w2State || '—' }}
-              </div>
-              <div class="predict-meta">
-                <span>准确率 0.98</span>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-
-        <!-- 状态概率分布 -->
-        <el-row :gutter="16" style="margin-bottom:16px">
-          <el-col :span="12">
-            <div class="predict-sub-title">W+1 状态概率分布</div>
-            <div v-for="(prob, label) in predictResult.w1Probs" :key="label" class="prob-row">
-              <span class="prob-label">{{ label }}</span>
-              <el-progress :percentage="Math.round(prob * 100)" :color="stateColor(label)" :stroke-width="10" style="flex:1" />
-              <span class="prob-val">{{ (prob * 100).toFixed(1) }}%</span>
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <div class="predict-sub-title">W+2 状态概率分布</div>
-            <div v-for="(prob, label) in predictResult.w2Probs" :key="label" class="prob-row">
-              <span class="prob-label">{{ label }}</span>
-              <el-progress :percentage="Math.round(prob * 100)" :color="stateColor(label)" :stroke-width="10" style="flex:1" />
-              <span class="prob-val">{{ (prob * 100).toFixed(1) }}%</span>
-            </div>
-          </el-col>
-        </el-row>
-
-        <!-- 阶段三：指标预测值图表 -->
-        <div class="predict-sub-title">指标预测值（W+1 / W+2）</div>
-        <div ref="predictChartRef" class="chart large"></div>
-      </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="当前" width="110" align="center">
+          <template #default="{ row }">
+            <el-tag :color="stateColor(row.current)" effect="dark" size="small" style="border:none">{{ stateLabel(row.current) }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="→" width="30" align="center">
+          <template #default="{ row }">
+            <span :style="{color: trendArrowColor(row.current, row.w1), fontWeight:700}">{{ trendArrow(row.current, row.w1) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="下周 W+1" width="110" align="center">
+          <template #default="{ row }">
+            <el-tag :color="stateColor(row.w1)" effect="dark" size="small" style="border:none">{{ stateLabel(row.w1) }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="→" width="30" align="center">
+          <template #default="{ row }">
+            <span :style="{color: trendArrowColor(row.w1, row.w2), fontWeight:700}">{{ trendArrow(row.w1, row.w2) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="两周后 W+2" width="110" align="center">
+          <template #default="{ row }">
+            <el-tag :color="stateColor(row.w2)" effect="dark" size="small" style="border:none">{{ stateLabel(row.w2) }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="趋势" width="80" align="center">
+          <template #default="{ row }">
+            <span :style="{color: dirColor(row.dir), fontWeight:700, fontSize:'15px'}">{{ dirIcon(row.dir) }}</span>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-card>
 
     <el-card shadow="never" class="panel detail-panel">
@@ -261,15 +238,52 @@ let weeklyChart = null
 let compareChart = null
 let predictChart = null
 
-const predictStyleId = ref('')
-const predictResult = ref({
-  currentState: '',
-  w1State: '',
-  w2State: '',
-  w1Probs: {},
-  w2Probs: {},
-  metrics: {}
+const trendSearch = ref('')
+const trendFilter = ref('')
+
+const STATE_ORDER = ['HotUp', 'HotStable', 'Potential', 'Stable', 'HotDown', 'ColdDown', 'ColdOut']
+function stateRank(s) { return STATE_ORDER.indexOf(s) === -1 ? 99 : STATE_ORDER.indexOf(s) }
+
+function nextState(current) {
+  const map = {
+    HotUp: ['HotUp', 'HotStable'],
+    HotStable: ['HotStable', 'HotDown'],
+    HotDown: ['HotDown', 'ColdDown'],
+    Potential: ['HotUp', 'HotStable'],
+    Stable: ['Stable', 'HotDown'],
+    ColdDown: ['ColdDown', 'ColdOut'],
+    ColdOut: ['ColdOut', 'ColdOut'],
+  }
+  return map[current] || ['Stable', 'Stable']
+}
+
+function styleDir(current, w1, w2) {
+  const r0 = stateRank(current), r1 = stateRank(w1), r2 = stateRank(w2)
+  if (r2 < r0) return 'up'
+  if (r2 > r0) return 'down'
+  return 'stable'
+}
+
+const allTrendRows = computed(() => {
+  const all = [...hotStyles.value, ...potentialStyles.value, ...coldStyles.value]
+    .filter((item, i, arr) => arr.findIndex(x => x.id === item.id) === i)
+  return all.map(s => {
+    const current = s.label || (hotStyles.value.some(h => h.id === s.id) ? 'HotStable'
+      : potentialStyles.value.some(p => p.id === s.id) ? 'Potential' : 'ColdDown')
+    const [w1, w2] = [nextState(current)[0], nextState(nextState(current)[0])[0]]
+    return { id: s.id, name: s.name, image: s.image, current, w1, w2, dir: styleDir(current, w1, w2) }
+  })
 })
+
+const filteredTrendRows = computed(() => {
+  let rows = allTrendRows.value
+  if (trendSearch.value) rows = rows.filter(r => r.name.includes(trendSearch.value))
+  if (trendFilter.value) rows = rows.filter(r => r.dir === trendFilter.value)
+  return rows
+})
+
+const predictStyleId = ref('')
+const predictResult = ref({ currentState: '', w1State: '', w2State: '', w1Probs: {}, w2Probs: {}, metrics: {} })
 
 const STATE_COLORS = {
   'HotUp': '#f5222d',
@@ -285,6 +299,26 @@ const STATE_COLORS = {
 
 function stateColor(state) {
   return STATE_COLORS[state] || '#d9d9d9'
+}
+
+const STATE_LABELS = {
+  HotUp: '🔥 热门上升', HotStable: '✅ 热门稳定', HotDown: '📉 热度下滑',
+  Potential: '🌱 潜力', Stable: '➡️ 平稳', ColdDown: '❄️ 冷门', ColdOut: '⚫ 已冷'
+}
+function stateLabel(s) { return STATE_LABELS[s] || s }
+
+function trendArrow(a, b) {
+  const d = stateRank(a) - stateRank(b)
+  return d > 0 ? '↑' : d < 0 ? '↓' : '→'
+}
+function trendArrowColor(a, b) {
+  const d = stateRank(a) - stateRank(b)
+  return d > 0 ? '#52c41a' : d < 0 ? '#f5222d' : '#aaa'
+}
+function dirIcon(dir) { return dir === 'up' ? '↑' : dir === 'down' ? '↓' : '→' }
+function dirColor(dir) { return dir === 'up' ? '#52c41a' : dir === 'down' ? '#f5222d' : '#aaa' }
+function trendRowClass({ row }) {
+  return row.dir === 'up' ? 'row-up' : row.dir === 'down' ? 'row-down' : ''
 }
 
 function buildMockPrediction(styleId) {
@@ -854,4 +888,6 @@ onBeforeUnmount(() => {
   font-size: 12px;
   color: #444;
 }
+:deep(.row-up) { background: rgba(82,196,26,0.05); }
+:deep(.row-down) { background: rgba(245,34,45,0.04); }
 </style>
