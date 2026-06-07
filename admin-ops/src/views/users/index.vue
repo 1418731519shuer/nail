@@ -242,6 +242,9 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts-wordcloud'
+
+// 统一图表字体（与运营端主字体栈一致）
+const CHART_FONT = "'DM Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
 import { ElMessage } from 'element-plus'
 import { View, User, Select, ShoppingCart, Warning, Star, ChatDotRound, Aim } from '@element-plus/icons-vue'
 import UserPreferenceRadar from '@/components/UserPreferenceRadar.vue'
@@ -341,11 +344,18 @@ function renderPrefCharts() {
     if (!el || !el.clientWidth) return
     if (!prefDimCharts[dim.key]) prefDimCharts[dim.key] = echarts.init(el, window.__ECHARTS_THEME__)
     prefDimCharts[dim.key].setOption({
+      textStyle: { fontFamily: CHART_FONT },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {d}%',
+        textStyle: { fontFamily: CHART_FONT, fontSize: 12 }
+      },
       series: [{
         type: 'pie',
         radius: ['52%', '80%'],
         center: ['50%', '50%'],
         label: { show: false },
+        emphasis: { label: { show: false } },
         data: dim.items.map(item => ({
           name: item.label,
           value: Math.round(item.value * 100),
@@ -476,8 +486,13 @@ function initWordCloud() {
   if (wcChart) { wcChart.dispose(); wcChart = null }
   wcChart = echarts.init(wordCloudRef.value, window.__ECHARTS_THEME__)
   wcChart.setOption({
+    textStyle: { fontFamily: CHART_FONT },
     tooltip: {
       show: true,
+      backgroundColor: 'rgba(255,255,255,0.96)',
+      borderColor: 'rgba(185,120,80,0.14)',
+      borderWidth: 1,
+      textStyle: { fontFamily: CHART_FONT, fontSize: 12, color: '#2d1a10' },
       formatter: (params) => `${params.name}<br/>热度：${params.value}`
     },
     series: [{
@@ -494,7 +509,7 @@ function initWordCloud() {
       drawOutOfBound: false,
       shrinkToFit: true,
       textStyle: {
-        fontFamily: '-apple-system, BlinkMacSystemFont, PingFang SC, sans-serif',
+        fontFamily: CHART_FONT,
         fontWeight: 'bold',
         color: (params) => WC_COLOR_MAP[params.name] || WC_PALETTE[params.dataIndex % WC_PALETTE.length]
       },
@@ -709,16 +724,26 @@ function renderFbCharts() {
   const pieEl = document.getElementById('fb-pie-chart')
   if (!catEl || !lineEl || !pieEl) return
 
+  const sharedTextStyle = { fontFamily: CHART_FONT, fontSize: 12, color: 'rgba(45,26,16,0.62)' }
+  const sharedTooltip = (fmt) => ({
+    trigger: 'item', formatter: fmt,
+    backgroundColor: 'rgba(255,255,255,0.96)',
+    borderColor: 'rgba(185,120,80,0.14)',
+    borderWidth: 1,
+    textStyle: { fontFamily: CHART_FONT, fontSize: 12, color: '#2d1a10' }
+  })
+
   // 环形图：反馈分类
   if (!fbDonutChart) fbDonutChart = echarts.init(catEl, window.__ECHARTS_THEME__)
   fbDonutChart.setOption({
-    tooltip: { trigger: 'item', formatter: '{b}: {c} 条 ({d}%)' },
-    legend: { orient: 'vertical', left: 8, top: 'center', textStyle: { fontSize: 11 } },
+    textStyle: { fontFamily: CHART_FONT },
+    tooltip: sharedTooltip('{b}: {c} 条 ({d}%)'),
+    legend: { orient: 'vertical', left: 8, top: 'center', textStyle: { ...sharedTextStyle, fontSize: 11 } },
     series: [{
       type: 'pie', radius: ['42%', '70%'],
       center: ['65%', '50%'],
       label: { show: false },
-      emphasis: { label: { show: true, fontSize: 13, fontWeight: 'bold' } },
+      emphasis: { label: { show: true, fontSize: 13, fontWeight: 'bold', fontFamily: CHART_FONT } },
       data: feedbackCategoryStats.value.map((item, i) => ({
         name: item.label, value: item.count,
         itemStyle: { color: fbCatColors[i % fbCatColors.length] }
@@ -730,11 +755,12 @@ function renderFbCharts() {
   const versions = versionTrendStats.value.map(v => v.appVersion)
   if (!fbLineChart) fbLineChart = echarts.init(lineEl, window.__ECHARTS_THEME__)
   fbLineChart.setOption({
-    tooltip: { trigger: 'axis' },
-    legend: { data: ['试戴效果', '推荐匹配', '性能体验'], bottom: 0, textStyle: { fontSize: 11 } },
+    textStyle: { fontFamily: CHART_FONT },
+    tooltip: { trigger: 'axis', backgroundColor: 'rgba(255,255,255,0.96)', borderColor: 'rgba(185,120,80,0.14)', borderWidth: 1, textStyle: { fontFamily: CHART_FONT, fontSize: 12 } },
+    legend: { data: ['试戴效果', '推荐匹配', '性能体验'], bottom: 0, textStyle: { ...sharedTextStyle, fontSize: 11 } },
     grid: { left: 30, right: 12, top: 20, bottom: 40, containLabel: true },
-    xAxis: { type: 'category', data: versions, axisLabel: { fontSize: 10 } },
-    yAxis: { type: 'value', splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } } },
+    xAxis: { type: 'category', data: versions, axisLabel: { ...sharedTextStyle, fontSize: 11 } },
+    yAxis: { type: 'value', axisLabel: sharedTextStyle, splitLine: { lineStyle: { color: 'rgba(185,120,80,0.10)', type: 'dashed' } } },
     series: [
       { name: '试戴效果', type: 'line', smooth: true, color: '#ff6b9d', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.tryonEffect) },
       { name: '推荐匹配', type: 'line', smooth: true, color: '#36cfc9', symbol: 'circle', symbolSize: 6, data: versionTrendStats.value.map(v => v.recommendation) },
@@ -745,13 +771,14 @@ function renderFbCharts() {
   // 饼图：来源页面
   if (!fbPieChart) fbPieChart = echarts.init(pieEl, window.__ECHARTS_THEME__)
   fbPieChart.setOption({
-    tooltip: { trigger: 'item', formatter: '{b}: {c} 条 ({d}%)' },
-    legend: { orient: 'vertical', right: 8, top: 'center', textStyle: { fontSize: 11 } },
+    textStyle: { fontFamily: CHART_FONT },
+    tooltip: sharedTooltip('{b}: {c} 条 ({d}%)'),
+    legend: { orient: 'vertical', right: 8, top: 'center', textStyle: { ...sharedTextStyle, fontSize: 11 } },
     series: [{
       type: 'pie', radius: ['35%', '62%'],
       center: ['38%', '50%'],
       label: { show: false },
-      emphasis: { label: { show: true, fontSize: 12, fontWeight: 'bold' } },
+      emphasis: { label: { show: true, fontSize: 12, fontWeight: 'bold', fontFamily: CHART_FONT } },
       data: sourcePageStats.value.map((item, i) => ({
         name: item.label, value: item.count,
         itemStyle: { color: fbCatColors[i % fbCatColors.length] }
@@ -1245,7 +1272,7 @@ function severityTagType(value) {
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  background: var(--accent-light);
+  background: rgba(201,122,78,0.08);
   border-radius: var(--r-md);
   margin-bottom: 8px;
 }
@@ -1321,7 +1348,7 @@ function severityTagType(value) {
 
 .pdist-row:last-child { border-bottom: none; }
 
-.pdist-row.primary { background: var(--accent-light); margin: 0 -16px; padding: 8px 16px; }
+.pdist-row.primary { background: rgba(201,122,78,0.07); margin: 0 -16px; padding: 8px 16px; }
 
 .pdist-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
@@ -1349,7 +1376,7 @@ function severityTagType(value) {
 
 .crowd-row:last-child { border-bottom: none; }
 
-.crowd-row.primary { background: var(--accent-light); margin: 0 -16px; padding: 10px 16px; border-radius: var(--r-sm); }
+.crowd-row.primary { background: rgba(201,122,78,0.07); margin: 0 -16px; padding: 10px 16px; border-radius: var(--r-sm); }
 
 .crowd-dot {
   width: 9px;
@@ -1477,7 +1504,7 @@ function severityTagType(value) {
   align-items: flex-start;
   gap: 10px;
   padding: 10px 12px;
-  background: var(--accent-light);
+  background: rgba(255,255,255,0.68);
   border-radius: var(--r-md);
   border: 1px solid var(--border);
 }
@@ -1513,7 +1540,7 @@ function severityTagType(value) {
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  background: var(--accent-light);
+  background: rgba(255,255,255,0.68);
   border-radius: var(--r-md);
   border: 1px solid var(--border);
 }
@@ -1554,7 +1581,7 @@ function severityTagType(value) {
   align-items: flex-start;
   gap: 4px;
   padding: 14px;
-  background: var(--accent-light);
+  background: rgba(255,255,255,0.72);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
 }
@@ -1630,7 +1657,7 @@ function severityTagType(value) {
 
 /* 偏好环形图 */
 .pref-dim-card {
-  background: var(--accent-light);
+  background: rgba(201,122,78,0.05);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 14px 16px;
