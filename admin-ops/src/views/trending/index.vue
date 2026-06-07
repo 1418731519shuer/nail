@@ -621,29 +621,101 @@ function buildWeeklyOption(styleMeta, pred) {
 function buildCompareOption(data) {
   const series = data?.series || []
   const dates = series[0]?.dates || []
+  const histLen = dates.length
+  const xData = [...dates, 'W+1 预测', 'W+2 预测']
+  const COLORS = ['#ff6b9d', '#36cfc9', '#722ed1', '#fa8c16']
+
+  const metricKey = compareMetric.value
+  const isRate = compareIsRate.value
+
+  const allSeries = series.flatMap((item, i) => {
+    const color = COLORS[i % COLORS.length]
+    const localStyle = selectableStyles.value.find(s => s.id === item.styleId || s.styleCode === item.styleId)
+    const pred = buildMockPrediction(localStyle?.id || item.styleId)
+    const predM = pred?.metrics || {}
+
+    // 预测值：如果是比率指标取近似，否则取绝对值
+    const lastVal = item.values[histLen - 1] ?? null
+    let w1Val = null, w2Val = null
+    if (metricKey.includes('_per_')) {
+      // 比率型：用末值做微小趋势延伸
+      const factor = pred.w1State === 'HotUp' ? 1.08 : pred.w1State === 'ColdDown' ? 0.92 : 1.0
+      w1Val = lastVal != null ? +(lastVal * factor).toFixed(4) : null
+      w2Val = lastVal != null ? +(lastVal * factor * factor).toFixed(4) : null
+    } else {
+      const rawM = predM[metricKey]
+      w1Val = rawM?.w1 ?? null
+      w2Val = rawM?.w2 ?? null
+    }
+
+    return [
+      // 历史实线
+      {
+        name: item.styleName,
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        color,
+        data: [...item.values, null, null],
+        z: 2
+      },
+      // 预测虚线：从历史最后一点延伸
+      {
+        name: `${item.styleName}(预测)`,
+        type: 'line',
+        smooth: false,
+        showSymbol: true,
+        symbol: 'emptyCircle',
+        symbolSize: 6,
+        color,
+        lineStyle: { type: 'dashed', width: 2, opacity: 0.7 },
+        data: [
+          ...Array(histLen - 1).fill(null),
+          lastVal,
+          w1Val,
+          w2Val
+        ],
+        z: 1,
+        tooltip: { show: true }
+      }
+    ]
+  })
+
+  const valFmt = (v) => isRate ? `${(Number(v || 0) * 100).toFixed(1)}%` : `${Number(v || 0)}`
+
   return {
-    color: ['#ff6b9d', '#36cfc9', '#722ed1', '#fa8c16'],
     tooltip: {
       trigger: 'axis',
-      valueFormatter: (value) => compareIsRate.value ? `${(Number(value || 0) * 100).toFixed(1)}%` : `${Number(value || 0)}`
+      valueFormatter: valFmt
     },
-    legend: { data: series.map((item) => item.styleName), bottom: 0 },
+    legend: {
+      data: series.map(s => s.styleName),
+      bottom: 0
+    },
     grid: { left: 36, right: 24, top: 28, bottom: 48, containLabel: true },
-    xAxis: { type: 'category', data: dates, axisLabel: { color: '#888', showMaxLabel: true, showMinLabel: true } },
+    xAxis: {
+      type: 'category',
+      data: xData,
+      axisLabel: { color: '#888', showMaxLabel: true, showMinLabel: true },
+      // 预测区用浅色背景标注
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: [
+            'transparent',
+            ...Array(histLen - 1).fill('transparent'),
+            'rgba(250,219,20,0.06)',
+            'rgba(250,219,20,0.10)'
+          ]
+        }
+      }
+    },
     yAxis: {
       type: 'value',
-      axisLabel: {
-        formatter: (value) => compareIsRate.value ? `${Math.round(value * 100)}%` : `${value}`
-      },
+      axisLabel: { formatter: (v) => isRate ? `${Math.round(v * 100)}%` : `${v}` },
       splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } }
     },
-    series: series.map((item) => ({
-      name: item.styleName,
-      type: 'line',
-      smooth: true,
-      showSymbol: false,
-      data: item.values
-    }))
+    series: allSeries
   }
 }
 
