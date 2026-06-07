@@ -81,16 +81,6 @@
           </div>
         </el-card>
 
-        <el-card shadow="never" class="panel">
-          <template #header>实时行为</template>
-          <div v-for="item in activities" :key="item.id" class="activity">
-            <el-tag size="small">{{ item.type }}</el-tag>
-            <div>
-              <div>{{ item.content }}</div>
-              <span>{{ item.user }} · {{ item.time }}</span>
-            </div>
-          </div>
-        </el-card>
       </el-col>
     </el-row>
   </div>
