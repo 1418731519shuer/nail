@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>美甲 AI 试戴</title>
+    <link rel="stylesheet" href="./client/styles/main.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="美甲 AI 试戴首页">
+        <span class="brand-mark"></span>
+        <span>指尖灵感</span>
+      </a>
+      <nav class="tabs" aria-label="页面导航">
+        <button class="tab active" data-page="catalog">款式概览</button>
+        <button class="tab" data-page="recommend">智能推荐</button>
+        <button class="tab" data-page="batchResults">一键试戴结果</button>
+        <button class="tab" data-page="wantList">我想做/确认做</button>
+      </nav>
+      <div class="user-chip" aria-label="当前用户身份">
+        <span id="userLoginState">匿名用户</span>
+        <strong id="currentUserId">生成中</strong>
+        <button id="mockLoginBtn" type="button">模拟登录</button>
+      </div>
+    </header>
+
+    <div class="toast" id="resultToast" role="status" aria-live="polite">
+      <span id="toastText">一键试戴已生成</span>
+      <button data-page-target="batchResults">查看结果</button>
+    </div>
+
+    <main>
+      <section class="page active" id="catalog" aria-labelledby="catalog-title">
+        <div class="hero">
+          <img src="./assets/nail-hero.png" alt="现代美甲试戴视觉图" />
+          <div class="hero-copy">
+            <p class="eyebrow">Style Gallery</p>
+            <h1 id="catalog-title">先看款式，再点图试戴</h1>
+            <p>浏览店内真实款式笔记、自然评分、点赞和用户反馈。点击任意美甲图片，即可进入试戴预览。</p>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Popular Nails</p>
+            <h2>店内款式笔记</h2>
+          </div>
+          <div class="filter-area" aria-label="美甲筛选">
+            <div class="filter-groups-row" id="primaryFilters" aria-label="季节与风格"></div>
+            <div class="filter-groups-row sub-filters" id="secondaryFilters" aria-label="款式与甲型"></div>
+          </div>
+        </div>
+
+        <p class="filter-status" id="filterStatus">当前展示全部店内款式</p>
+        <div class="tryon-basket" id="tryonBasket">
+          <div>
+            <strong>已加入试戴 0 款</strong>
+            <span>可多选款式后批量生成试戴结果</span>
+          </div>
+          <label class="basket-upload">
+            <input id="batchHandUpload" type="file" accept="image/*" capture="environment" />
+            <span id="batchHandLabel">上传手图</span>
+          </label>
+          <button class="primary-action" id="batchTryonBtn" disabled>一键试戴</button>
+          <button class="secondary-action" id="batchHyperrealTryonBtn" disabled>超仿真试戴</button>
+          <div class="batch-progress" id="batchProgress">
+            <div class="progress-track"><i id="batchProgressBar"></i></div>
+            <span id="batchProgressText">等待生成</span>
+          </div>
+        </div>
+        <div class="nail-grid" id="nailGrid"></div>
+      </section>
+
+      <section class="page" id="recommend" aria-labelledby="recommend-title">
+        <div class="ai-shell">
+          <section class="ai-chat-panel" aria-label="AI 美甲顾问对话">
+            <p class="eyebrow">AI Nail Advisor</p>
+            <h1 id="recommend-title">和 AI 美甲顾问聊需求</h1>
+            <p>上传或拍摄手部照片，再像聊天一样告诉它预算、场景、风格、顾虑和喜好。后续可接完整 prompt、知识库召回和用户记忆。</p>
+
+            <div class="chat-window" id="chatWindow" aria-live="polite">
+              <div class="message ai">
+                <div class="avatar">AI</div>
+                <div class="bubble">
+                  我会根据你的手部照片、肤色倾向、甲床长度、使用场景和店内款式库来推荐。你可以直接说：“想要显白、不要太夸张、预算 200 左右”。
+                </div>
+              </div>
+            </div>
+
+            <div class="quick-prompts" aria-label="快捷需求">
+              <button data-prompt="我想要日常通勤、显白、不要太夸张，短甲也好看的款式。">通勤显白</button>
+              <button data-prompt="我喜欢可爱一点的，但担心手绘翻车，帮我推荐店里更稳的款。">可爱但稳</button>
+              <button data-prompt="我想做猫眼，预算 200-300，希望 3 周后长出来也别太明显。">猫眼预算</button>
+              <button data-prompt="我手偏黄，想要冰透感，帮我避开容易显黑的颜色。">黄皮冰透</button>
+            </div>
+
+            <form class="chat-composer" id="chatForm">
+              <label class="photo-chip">
+                <input id="recommendUpload" type="file" accept="image/*" capture="environment" />
+                <span class="align-guide" id="recommendPreview">
+                  <img class="hand-guide-overlay" src="./assets/hand-guide-outline.png" alt="" />
+                  <small>手掌对准线框拍摄</small>
+                </span>
+              </label>
+              <textarea id="chatInput" rows="2" placeholder="告诉 AI：场景、预算、喜欢/不喜欢、甲型、肤色顾虑..."></textarea>
+              <button class="primary-action" type="submit">发送</button>
+            </form>
+          </section>
+
+          <aside class="ai-side-panel">
+            <div class="memory-card">
+              <p class="eyebrow">Memory Draft</p>
+              <h2>本次对话记忆</h2>
+              <div class="memory-list" id="memoryList">
+                <span>待提取：肤色倾向</span>
+                <span>待提取：甲型/甲床</span>
+                <span>待提取：预算</span>
+                <span>待提取：禁忌偏好</span>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <p class="eyebrow">Knowledge Base</p>
+              <h2>可调用知识</h2>
+              <ul>
+                <li><strong>店内款式：</strong>可爱、猫眼、冰透·渐变、冰透</li>
+                <li><strong>适配规则：</strong>黄皮显白、短甲友好、深甲床打底</li>
+                <li><strong>风险提醒：</strong>手绘翻车、猫眼持久度、渐变长出分层</li>
+                <li><strong>后续接口：</strong>prompt 编排、RAG 召回、用户长期记忆</li>
+              </ul>
+            </div>
+
+            <div class="memory-card">
+              <p class="eyebrow">Shop Picks</p>
+              <h2>当前可推荐（可下滑查看）</h2>
+              <div class="mini-picks" id="recommendResults"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page" id="batchResults" aria-labelledby="batch-results-title">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">Batch Try-On</p>
+            <h1 id="batch-results-title">一键试戴结果</h1>
+            <p>这里展示从款式概览中批量选择后生成的试戴结果。每个款式会独立请求生成，返回一张就展示一张。</p>
+            <p class="build-note">当前构建：豆包新增图片绑定版 2026-05-08</p>
+          </div>
+          <button class="primary-action" data-page-target="catalog">继续选款</button>
+        </div>
+
+        <div class="batch-empty" id="batchEmpty">
+          还没有生成结果。先去“款式概览”加入多个款式，再点击“一键试戴”。
+        </div>
+        <div class="batch-grid" id="batchResultGrid"></div>
+      </section>
+
+      <section class="page" id="wantList" aria-labelledby="want-list-title">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">Want To Do</p>
+            <h1 id="want-list-title">我想做 / 确认做</h1>
+            <p>这里是候选意向池和预约成交池。用户也可以从款式卡片、详情页或试戴结果页直接确认要做，减少决策步骤。</p>
+          </div>
+          <div class="page-actions">
+            <button class="secondary-action" id="refreshWantListBtn" type="button">刷新</button>
+            <button class="primary-action" data-page-target="batchResults">看试戴结果</button>
+          </div>
+        </div>
+        <div class="intent-columns">
+          <section>
+            <h2>我想做</h2>
+            <p>已加入候选，适合稍后比较后再确认。</p>
+            <div class="batch-empty" id="wantEmpty">还没有“我想做”的款式。可以从款式概览、详情或一键试戴结果加入，也可以直接确认要做。</div>
+            <div class="batch-grid" id="wantListGrid"></div>
+          </section>
+          <section>
+            <h2>已确认做</h2>
+            <p>MVP 阶段默认代表预约成交。</p>
+            <div class="batch-empty" id="orderEmpty">还没有确认做的预约成交。</div>
+            <div class="batch-grid" id="orderListGrid"></div>
+          </section>
+        </div>
+      </section>
+
+    </main>
+
+    <dialog class="tryon-dialog" id="tryonDialog">
+      <button class="dialog-close" id="closeDialog" aria-label="关闭">x</button>
+      <div class="dialog-body">
+        <div class="dialog-art" id="dialogArt"></div>
+        <div>
+          <p class="eyebrow">Instant Try-On</p>
+          <h2 id="dialogTitle">试戴预览</h2>
+          <p id="dialogDesc"></p>
+          <div class="result-actions">
+            <button class="select-action" id="dialogIntentBtn" type="button">加入我想做</button>
+            <button class="primary-action" id="dialogConfirmBtn" type="button">确认要做</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="./client/main.js"></script>
+  </body>
+</html>
+
+
+
+

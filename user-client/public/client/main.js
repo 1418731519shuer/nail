@@ -221,7 +221,7 @@ function renderCurrentUser() {
   const isLoggedIn = currentUser.identityType === "logged_in";
   userLoginState.textContent = isLoggedIn ? "已登录用户" : "匿名用户";
   currentUserId.textContent = currentUser.userId;
-  dataPageUserId.textContent = currentUser.userId;
+  if (dataPageUserId) dataPageUserId.textContent = currentUser.userId;
   mockLoginBtn.textContent = isLoggedIn ? "已绑定" : "模拟登录";
   mockLoginBtn.disabled = isLoggedIn;
 }
@@ -1379,7 +1379,7 @@ async function respondToNeed(text) {
 }
 
 tabs.forEach((tab) => {
-  tab.addEventListener("click", () => switchPage(tab.dataset.page));
+  if (tab.dataset.page) tab.addEventListener("click", () => switchPage(tab.dataset.page));
 });
 
 document.addEventListener("click", (event) => {
@@ -1423,7 +1423,6 @@ document.addEventListener("click", (event) => {
     if (dialog.open) dialog.close();
     resultToast.classList.remove("show");
     switchPage(pageTarget.dataset.pageTarget);
-    if (pageTarget.dataset.pageTarget === "dataDesign") loadMetricsSummary();
     if (pageTarget.dataset.pageTarget === "wantList") loadMockRecords();
   }
 });
@@ -1451,33 +1450,33 @@ document.addEventListener("click", async (event) => {
   }
 });
 
-document.querySelector("#closeDialog").addEventListener("click", () => dialog.close());
-mockLoginBtn.addEventListener("click", mockLogin);
-styleUpload.addEventListener("change", () => previewFile(styleUpload, stylePreview));
-handUpload.addEventListener("change", () => {
+document.querySelector("#closeDialog")?.addEventListener("click", () => dialog.close());
+mockLoginBtn?.addEventListener("click", mockLogin);
+styleUpload?.addEventListener("change", () => previewFile(styleUpload, stylePreview));
+handUpload?.addEventListener("change", () => {
   previewFile(handUpload, handPreview);
   if (handModelPreviewUrl) URL.revokeObjectURL(handModelPreviewUrl);
   handModelPreviewUrl = "";
   handModelResult.innerHTML = `<p>已上传手图，可以生成关键点和 3D 网格叠加图。</p>`;
   nailSegmentResult.innerHTML = `<p>已上传手图，可以识别指甲区域、横框和对应手指。</p>`;
 });
-recommendUpload.addEventListener("change", previewRecommendPhoto);
-batchHandUpload.addEventListener("change", () => {
+recommendUpload?.addEventListener("change", previewRecommendPhoto);
+batchHandUpload?.addEventListener("change", () => {
   const file = batchHandUpload.files?.[0];
   batchHandLabel.textContent = file ? `手图：${file.name.slice(0, 10)}` : "上传手图";
   batchHandUpload.closest(".basket-upload").classList.toggle("has-file", Boolean(file));
   updateTryOnBasket();
 });
-document.querySelector("#composeBtn").addEventListener("click", generateTryOn);
-hyperrealComposeBtn.addEventListener("click", () => generateTryOn("hyperreal"));
-handModelBtn.addEventListener("click", generateHandModel);
-nailSegmentBtn.addEventListener("click", generateNailSegmentation);
-batchTryonBtn.addEventListener("click", generateBatchTryOn);
-batchHyperrealTryonBtn.addEventListener("click", () => generateBatchTryOn("hyperreal"));
+document.querySelector("#composeBtn")?.addEventListener("click", generateTryOn);
+hyperrealComposeBtn?.addEventListener("click", () => generateTryOn("hyperreal"));
+handModelBtn?.addEventListener("click", generateHandModel);
+nailSegmentBtn?.addEventListener("click", generateNailSegmentation);
+batchTryonBtn?.addEventListener("click", generateBatchTryOn);
+batchHyperrealTryonBtn?.addEventListener("click", () => generateBatchTryOn("hyperreal"));
 refreshMetricsBtn?.addEventListener("click", loadMetricsSummary);
 refreshSimulationBtn?.addEventListener("click", loadSimulationSummary);
 refreshWantListBtn?.addEventListener("click", loadMockRecords);
-chatForm.addEventListener("submit", (event) => {
+chatForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const text = chatInput.value.trim();
   if (!text) return;
