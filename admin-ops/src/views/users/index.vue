@@ -304,12 +304,13 @@ const preferenceGroups = computed(() => ({
 const summaryText = computed(() => buildSummaryText(profile.value))
 const extraSignals  = computed(() => deriveExtraSignals(logs.value))
 
-// ── 偏好环形图 ──────────────────────────────────────────────
+// ── 偏好环形图 —— 暖品牌色系 ──────────────────────────────────
+// 主色：赤陶 → 粉茶 → 暖金 → 蔷薇 → 暖茶 → 淡粉
 const DIM_COLORS = {
-  season: ['#ff6b9d','#faad14','#36cfc9','#9254de'],
-  style:  ['#1664ff','#f97316','#ff6b9d','#36cfc9','#9254de'],
-  type:   ['#ff6b9d','#1664ff','#36cfc9','#9254de','#52c41a','#faad14'],
-  shape:  ['#ff6b9d','#36cfc9','#1664ff','#faad14']
+  season: ['#c97a4e', '#e87899', '#d4a843', '#4ab8b0'],
+  style:  ['#c97a4e', '#e87899', '#d4a843', '#a85e35', '#4ab8b0'],
+  type:   ['#c97a4e', '#e87899', '#d4a843', '#a85e35', '#4ab8b0', '#e0b898'],
+  shape:  ['#c97a4e', '#e87899', '#d4a843', '#4ab8b0']
 }
 
 const prefDimCharts = {}
@@ -1290,16 +1291,16 @@ function severityTagType(value) {
 }
 
 .persona-name {
-  font-size: 15px;
+  font-size: var(--text-md);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.3px;
 }
 
 .persona-desc {
-  font-size: 11px;
+  font-size: var(--text-sm);
   color: var(--ink-3);
-  margin-top: 2px;
+  margin-top: 3px;
   line-height: 1.4;
 }
 
@@ -1324,12 +1325,12 @@ function severityTagType(value) {
 }
 
 .signal-key {
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: var(--ink-3);
 }
 
 .signal-val {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 700;
   color: var(--ink);
 }
@@ -1341,9 +1342,9 @@ function severityTagType(value) {
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 5px 0;
+  padding: 6px 0;
   border-bottom: 1px solid var(--border);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
 }
 
 .pdist-row:last-child { border-bottom: none; }
@@ -1352,15 +1353,15 @@ function severityTagType(value) {
 
 .pdist-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-.pdist-label { width: 56px; flex-shrink: 0; color: var(--ink); font-weight: 500; }
+.pdist-label { width: 60px; flex-shrink: 0; color: var(--ink); font-weight: 500; }
 
 .pdist-row.primary .pdist-label { font-weight: 700; }
 
-.pdist-track { flex: 1; height: 5px; background: var(--accent-light); border-radius: 3px; overflow: hidden; }
+.pdist-track { flex: 1; height: 6px; background: rgba(201,122,78,0.12); border-radius: 3px; overflow: hidden; }
 
 .pdist-bar { height: 100%; border-radius: 3px; transition: width var(--dur-slow) var(--ease-out-quart); }
 
-.pdist-pct { width: 30px; text-align: right; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+.pdist-pct { width: 34px; text-align: right; font-size: var(--text-sm); font-weight: 700; flex-shrink: 0; }
 
 /* === 人群标签识别 === */
 .crowd-body { display: flex; flex-direction: column; gap: 0; }
@@ -1670,12 +1671,12 @@ function severityTagType(value) {
   margin-bottom: 8px;
 }
 .pref-dim-title {
-  font-weight: 600;
-  font-size: var(--text-sm);
+  font-weight: 700;
+  font-size: var(--text-base);
   color: var(--ink);
 }
 .pref-dim-top {
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink-3);
 }
 .pref-dim-body {
@@ -1686,13 +1687,13 @@ function severityTagType(value) {
 .pref-dim-list {
   flex: 1;
   display: grid;
-  gap: 4px;
+  gap: 5px;
 }
 .pref-dim-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: var(--text-xs);
+  gap: 7px;
+  font-size: var(--text-sm);
 }
 .pref-dot {
   width: 8px;
@@ -1706,7 +1707,7 @@ function severityTagType(value) {
 }
 .pref-item-pct {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 .pref-donut {
   width: 130px;
