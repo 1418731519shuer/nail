@@ -354,7 +354,7 @@ export function classifyUserCrowd(profile, preferenceBundle, extraSignals = {}) 
       key: 'career',
       label: '职场女性',
       desc: '通勤 / 高级感，短甲实用，果断成单',
-      color: '#e0906a',
+      color: '#a8cc90',
       score:
         (stylePref['高级感'] || 0) * 0.50 +
         (stylePref['优雅']   || 0) * 0.30 +

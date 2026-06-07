@@ -281,7 +281,7 @@ const extraSignals  = computed(() => deriveExtraSignals(logs.value))
 // 主色：赤陶 → 粉茶 → 暖金 → 蔷薇 → 暖茶 → 淡粉
 // 色相均匀分布：赤陶(20°) · 玫粉(340°) · 琥珀(48°) · 薄荷(168°) · 矢车菊(215°) · 薰衣草(270°)
 // 整体高明度、低饱和，确保区分度鲜明
-const PALETTE = ['#e0906a', '#f0a0bc', '#f0c860', '#60c8b4', '#80aad8', '#b094d4']
+const PALETTE = ['#a8cc90', '#f0a0bc', '#f0c860', '#60c8b4', '#80aad8', '#b094d4']
 
 const DIM_COLORS = {
   season: [PALETTE[0], PALETTE[1], PALETTE[2], PALETTE[3]],
