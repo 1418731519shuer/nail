@@ -23,7 +23,7 @@
                   </div>
                 </div>
               </template>
-              <p style="color:#888;margin:0 0 14px;font-size:13px">{{ summaryText }}</p>
+              <p class="summary-text">{{ summaryText }}</p>
               <el-row :gutter="12">
                 <el-col :span="12" v-for="dim in prefDims" :key="dim.key">
                   <div class="pref-dim-card">
@@ -810,7 +810,6 @@ function severityTagType(value) {
    ============================ */
 .page {
   padding: 16px 20px;
-  background: #f5f6f7;
   min-height: 100%;
 }
 
@@ -821,20 +820,11 @@ function severityTagType(value) {
   margin-bottom: 12px;
 }
 
-.page-header h2 {
-  margin: 0 0 4px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1f2329;
-}
-
-.page-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #646a73;
-}
-
 .user-tabs { margin-top: 8px; }
+
+/* Tab 激活条：暖棕色与其他页一致 */
+.user-tabs :deep(.el-tabs__active-bar) { background-color: #b86e4a; }
+.user-tabs :deep(.el-tabs__item.is-active) { color: #b86e4a !important; }
 
 /* ============================
    Stat band（替换原来 4 张卡片）
@@ -842,8 +832,8 @@ function severityTagType(value) {
 .stat-band {
   display: flex;
   gap: 1px;
-  background: #e4e7ed;
-  border-radius: 8px;
+  background: var(--border);
+  border-radius: var(--r-md);
   overflow: hidden;
   margin-bottom: 14px;
 }
@@ -851,7 +841,7 @@ function severityTagType(value) {
 .stat-band-item {
   flex: 1;
   padding: 14px 18px;
-  background: #fff;
+  background: var(--surface);
   position: relative;
 }
 
@@ -865,28 +855,28 @@ function severityTagType(value) {
   border-radius: 0 2px 2px 0;
 }
 
-.accent-0::after { background: #f43f5e; }
-.accent-1::after { background: #1664ff; }
-.accent-2::after { background: #faad14; }
-.accent-3::after { background: #8b5cf6; }
+.accent-0::after { background: var(--danger-color); }
+.accent-1::after { background: var(--accent); }
+.accent-2::after { background: var(--warning-color); }
+.accent-3::after { background: var(--pink); }
 
 .stat-band-val {
   font-size: 26px;
   font-weight: 700;
-  color: #1f2329;
+  color: var(--ink);
   letter-spacing: -0.5px;
   line-height: 1.2;
 }
 
 .stat-band-key {
-  font-size: 12px;
-  color: #646a73;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
   margin-top: 4px;
 }
 
 .stat-band-sub {
   font-size: 11px;
-  color: #8c8c8c;
+  color: var(--ink-3);
   margin-top: 2px;
   line-height: 1.4;
 }
@@ -895,7 +885,6 @@ function severityTagType(value) {
    Panel cards（通用）
    ============================ */
 .panel {
-  border-radius: 6px;
   margin-bottom: 12px;
 }
 
@@ -904,9 +893,16 @@ function severityTagType(value) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: #1f2329;
+  color: var(--ink);
+}
+
+/* summary 文本 */
+.summary-text {
+  color: var(--ink-3);
+  margin: 0 0 14px;
+  font-size: var(--text-sm);
 }
 
 /* ============================
@@ -923,17 +919,17 @@ function severityTagType(value) {
   align-items: flex-start;
   gap: 12px;
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-sm);
 }
 
 .field-row:last-child { border-bottom: none; }
 
 .field-key {
-  color: #8c8c8c;
+  color: var(--ink-3);
   width: 84px;
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: var(--text-xs);
   padding-top: 1px;
 }
 
@@ -945,14 +941,14 @@ function severityTagType(value) {
 }
 
 .field-val {
-  color: #1f2329;
+  color: var(--ink);
   font-weight: 500;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .field-sub {
-  color: #8c8c8c;
-  font-size: 11px;
+  color: var(--ink-3);
+  font-size: var(--text-xs);
   line-height: 1.4;
 }
 
@@ -963,8 +959,8 @@ function severityTagType(value) {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
-  background: #f0f0f0;
-  border-radius: 4px;
+  background: var(--border);
+  border-radius: var(--r-sm);
   overflow: hidden;
 }
 
@@ -973,18 +969,18 @@ function severityTagType(value) {
   flex-direction: column;
   gap: 4px;
   padding: 10px 12px;
-  background: #fff;
+  background: var(--surface);
 }
 
 .session-key {
-  font-size: 11px;
-  color: #8c8c8c;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
 }
 
 .session-val {
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 500;
-  color: #1f2329;
+  color: var(--ink);
 }
 
 /* ============================
@@ -1001,16 +997,16 @@ function severityTagType(value) {
   align-items: center;
   gap: 8px;
   padding: 8px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-xs);
 }
 
 .log-row:last-child { border-bottom: none; }
 
-.log-row--danger  { border-left: 2px solid #f43f5e; padding-left: 8px; }
-.log-row--warning { border-left: 2px solid #f97316; padding-left: 8px; }
-.log-row--primary { border-left: 2px solid #1664ff; padding-left: 8px; }
-.log-row--info    { border-left: 2px solid #d1d5db; padding-left: 8px; }
+.log-row--danger  { border-left: 2px solid var(--danger-color); padding-left: 8px; }
+.log-row--warning { border-left: 2px solid var(--warning-color); padding-left: 8px; }
+.log-row--primary { border-left: 2px solid var(--accent); padding-left: 8px; }
+.log-row--info    { border-left: 2px solid var(--border); padding-left: 8px; }
 
 .log-tag { flex-shrink: 0; }
 
@@ -1023,21 +1019,21 @@ function severityTagType(value) {
 }
 
 .log-name {
-  color: #1f2329;
+  color: var(--ink);
   font-weight: 500;
-  font-size: 12px;
+  font-size: var(--text-xs);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .log-meta {
-  color: #8c8c8c;
+  color: var(--ink-3);
   font-size: 11px;
 }
 
 .log-time {
-  color: #8c8c8c;
+  color: var(--ink-3);
   font-size: 11px;
   flex-shrink: 0;
 }
@@ -1056,8 +1052,8 @@ function severityTagType(value) {
   align-items: center;
   gap: 10px;
   padding: 9px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-xs);
 }
 
 .rank-row:last-child { border-bottom: none; }
@@ -1066,8 +1062,8 @@ function severityTagType(value) {
   width: 18px;
   height: 18px;
   border-radius: 3px;
-  background: #f0f0f0;
-  color: #646a73;
+  background: var(--accent-light);
+  color: var(--ink-2);
   font-size: 11px;
   font-weight: 700;
   display: flex;
@@ -1076,9 +1072,9 @@ function severityTagType(value) {
   flex-shrink: 0;
 }
 
-.rank-row:nth-child(1) .rank-idx { background: #1664ff; color: #fff; }
-.rank-row:nth-child(2) .rank-idx { background: #36cfc9; color: #fff; }
-.rank-row:nth-child(3) .rank-idx { background: #ff6b9d; color: #fff; }
+.rank-row:nth-child(1) .rank-idx { background: var(--accent); color: #fff; }
+.rank-row:nth-child(2) .rank-idx { background: var(--teal); color: #fff; }
+.rank-row:nth-child(3) .rank-idx { background: var(--pink); color: #fff; }
 
 .rank-info {
   flex: 1;
@@ -1089,15 +1085,15 @@ function severityTagType(value) {
 }
 
 .rank-name {
-  color: #1f2329;
+  color: var(--ink);
   font-weight: 500;
-  font-size: 12px;
+  font-size: var(--text-xs);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.rank-meta { color: #8c8c8c; font-size: 11px; }
+.rank-meta { color: var(--ink-3); font-size: 11px; }
 
 .rank-score-wrap {
   display: flex;
@@ -1109,14 +1105,14 @@ function severityTagType(value) {
 
 .rank-bar {
   height: 5px;
-  background: #1664ff;
+  background: var(--accent);
   border-radius: 3px;
   flex-shrink: 0;
 }
 
 .rank-score {
-  color: #1664ff;
-  font-size: 12px;
+  color: var(--accent);
+  font-size: var(--text-xs);
   font-weight: 600;
   width: 24px;
   text-align: right;
@@ -1156,19 +1152,20 @@ function severityTagType(value) {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 8px;
+  color: var(--ink);
 }
 
 .category-item {
   padding: 10px 12px;
-  border: 1px solid #ebeef5;
-  border-radius: 6px;
-  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--accent-light);
   margin-bottom: 8px;
 }
 
 .category-sub {
   margin-top: 6px;
-  color: #909399;
+  color: var(--ink-3);
   font-size: 11px;
 }
 
@@ -1184,17 +1181,17 @@ function severityTagType(value) {
   justify-content: space-between;
   gap: 10px;
   padding: 9px 12px;
-  border: 1px solid #ebeef5;
-  border-radius: 6px;
-  background: #fff;
-  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  font-size: var(--text-xs);
 }
 
 .issue-rank {
   width: 24px;
   height: 24px;
-  border-radius: 4px;
-  background: #1f2329;
+  border-radius: var(--r-sm);
+  background: var(--accent);
   color: #fff;
   display: flex;
   align-items: center;
@@ -1208,28 +1205,28 @@ function severityTagType(value) {
 
 .pipeline-item {
   padding: 12px 14px;
-  border: 1px solid #ebeef5;
-  border-radius: 6px;
-  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
 }
 
 .pipeline-count {
   margin-top: 6px;
   font-size: 24px;
   font-weight: 700;
-  color: #1f2329;
+  color: var(--ink);
 }
 
 .version-highlights {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 12px;
-  color: #606266;
-  font-size: 12px;
+  color: var(--ink-2);
+  font-size: var(--text-xs);
 }
 
 .tiny {
-  color: #8c8c8c;
+  color: var(--ink-3);
   font-size: 11px;
   margin: 3px 0 0;
 }
@@ -1248,15 +1245,15 @@ function severityTagType(value) {
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  background: #fafbff;
-  border-radius: 8px;
+  background: var(--accent-light);
+  border-radius: var(--r-md);
   margin-bottom: 8px;
 }
 
 .persona-icon {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   border: 1.5px solid;
   display: flex;
   align-items: center;
@@ -1274,7 +1271,7 @@ function severityTagType(value) {
 
 .persona-desc {
   font-size: 11px;
-  color: #8c8c8c;
+  color: var(--ink-3);
   margin-top: 2px;
   line-height: 1.4;
 }
@@ -1284,8 +1281,8 @@ function severityTagType(value) {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background: #f0f0f0;
-  border-radius: 6px;
+  background: var(--border);
+  border-radius: var(--r-sm);
   overflow: hidden;
   margin-bottom: 8px;
 }
@@ -1296,18 +1293,18 @@ function severityTagType(value) {
   align-items: center;
   gap: 1px;
   padding: 6px 4px;
-  background: #fff;
+  background: var(--surface);
 }
 
 .signal-key {
   font-size: 10px;
-  color: #8c8c8c;
+  color: var(--ink-3);
 }
 
 .signal-val {
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 700;
-  color: #1f2329;
+  color: var(--ink);
 }
 
 /* 人群分布条 */
@@ -1318,23 +1315,23 @@ function severityTagType(value) {
   align-items: center;
   gap: 7px;
   padding: 5px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-xs);
 }
 
 .pdist-row:last-child { border-bottom: none; }
 
-.pdist-row.primary { background: #fafcff; margin: 0 -16px; padding: 8px 16px; }
+.pdist-row.primary { background: var(--accent-light); margin: 0 -16px; padding: 8px 16px; }
 
 .pdist-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-.pdist-label { width: 56px; flex-shrink: 0; color: #1f2329; font-weight: 500; }
+.pdist-label { width: 56px; flex-shrink: 0; color: var(--ink); font-weight: 500; }
 
 .pdist-row.primary .pdist-label { font-weight: 700; }
 
-.pdist-track { flex: 1; height: 5px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+.pdist-track { flex: 1; height: 5px; background: var(--accent-light); border-radius: 3px; overflow: hidden; }
 
-.pdist-bar { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+.pdist-bar { height: 100%; border-radius: 3px; transition: width var(--dur-slow) var(--ease-out-quart); }
 
 .pdist-pct { width: 30px; text-align: right; font-size: 11px; font-weight: 600; flex-shrink: 0; }
 
@@ -1346,13 +1343,13 @@ function severityTagType(value) {
   align-items: center;
   gap: 8px;
   padding: 9px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-xs);
 }
 
 .crowd-row:last-child { border-bottom: none; }
 
-.crowd-row.primary { background: #fafcff; margin: 0 -16px; padding: 10px 16px; border-radius: 4px; }
+.crowd-row.primary { background: var(--accent-light); margin: 0 -16px; padding: 10px 16px; border-radius: var(--r-sm); }
 
 .crowd-dot {
   width: 9px;
@@ -1370,23 +1367,23 @@ function severityTagType(value) {
 }
 
 .crowd-label {
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 600;
-  color: #1f2329;
+  color: var(--ink);
 }
 
-.crowd-row.primary .crowd-label { font-size: 13px; }
+.crowd-row.primary .crowd-label { font-size: var(--text-sm); }
 
 .crowd-desc {
   font-size: 11px;
-  color: #8c8c8c;
+  color: var(--ink-3);
   line-height: 1.3;
 }
 
 .crowd-bar-wrap {
   flex: 1;
   height: 5px;
-  background: #f0f0f0;
+  background: var(--accent-light);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -1394,11 +1391,11 @@ function severityTagType(value) {
 .crowd-bar {
   height: 100%;
   border-radius: 3px;
-  transition: width 0.4s ease;
+  transition: width var(--dur-slow) var(--ease-out-quart);
 }
 
 .crowd-pct {
-  font-size: 12px;
+  font-size: var(--text-xs);
   font-weight: 600;
   width: 32px;
   text-align: right;
@@ -1438,12 +1435,13 @@ function severityTagType(value) {
   margin-bottom: 16px;
 }
 .fb-hero-card {
-  background: #fff;
-  border: 1px solid #f0f0f0;
-  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
   padding: 18px 16px 14px;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(8px);
 }
 .fb-hero-card::before {
   content: '';
@@ -1459,12 +1457,12 @@ function severityTagType(value) {
 .fb-hero-val {
   font-size: 28px;
   font-weight: 800;
-  color: #1f2329;
+  color: var(--ink);
   line-height: 1;
   margin-bottom: 4px;
 }
-.fb-hero-label { font-size: 13px; color: #444; font-weight: 500; }
-.fb-hero-sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+.fb-hero-label { font-size: var(--text-sm); color: var(--ink-2); font-weight: 500; }
+.fb-hero-sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; }
 
 /* ECharts 容器 */
 .fb-chart-row { display: flex; gap: 8px; }
@@ -1479,23 +1477,25 @@ function severityTagType(value) {
   align-items: flex-start;
   gap: 10px;
   padding: 10px 12px;
-  background: #f7f8fa;
-  border-radius: 8px;
+  background: var(--accent-light);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
 }
 .fb-record-sev { flex-shrink: 0; margin-top: 2px; }
 .fb-record-body { flex: 1; min-width: 0; }
-.fb-record-title { font-size: 13px; font-weight: 600; color: #222; }
-.fb-record-meta { font-size: 11px; color: #999; margin: 2px 0; }
-.fb-record-text { font-size: 12px; color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fb-record-title { font-size: var(--text-sm); font-weight: 600; color: var(--ink); }
+.fb-record-meta { font-size: 11px; color: var(--ink-3); margin: 2px 0; }
+.fb-record-text { font-size: var(--text-xs); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .fb-record-status { flex-shrink: 0; margin-top: 2px; }
 
 /* 反馈流向 */
 .fb-pipeline { display: flex; flex-direction: column; gap: 10px; }
 .fb-pipeline-item {
   padding: 14px 16px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--pc) 10%, #fff);
-  border-left: 4px solid var(--pc);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--pc) 10%, var(--cream));
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--pc);
 }
 .fb-pipeline-count {
   font-size: 26px;
@@ -1503,8 +1503,8 @@ function severityTagType(value) {
   color: var(--pc);
   line-height: 1;
 }
-.fb-pipeline-label { font-size: 13px; font-weight: 600; color: #333; margin: 4px 0 2px; }
-.fb-pipeline-desc { font-size: 11px; color: #888; }
+.fb-pipeline-label { font-size: var(--text-sm); font-weight: 600; color: var(--ink); margin: 4px 0 2px; }
+.fb-pipeline-desc { font-size: 11px; color: var(--ink-3); }
 
 /* Top 问题码 */
 .fb-issue-list { display: flex; flex-direction: column; gap: 8px; }
@@ -1513,33 +1513,34 @@ function severityTagType(value) {
   align-items: center;
   gap: 10px;
   padding: 8px 10px;
-  background: #f7f8fa;
-  border-radius: 8px;
+  background: var(--accent-light);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
 }
 .fb-issue-rank {
   width: 24px; height: 24px;
-  border-radius: 6px;
+  border-radius: var(--r-sm);
   display: grid; place-items: center;
-  font-size: 12px; font-weight: 700;
-  background: #e8e8e8; color: #666;
+  font-size: var(--text-xs); font-weight: 700;
+  background: rgba(201,122,78,0.12); color: var(--accent-dark);
   flex-shrink: 0;
 }
 .fb-issue-rank.rank-1 { background: #fff1b8; color: #d48806; }
-.fb-issue-rank.rank-2 { background: #f0f0f0; color: #595959; }
+.fb-issue-rank.rank-2 { background: var(--accent-light); color: var(--accent); }
 .fb-issue-rank.rank-3 { background: #ffe7ba; color: #c05400; }
 .fb-issue-info { flex: 1; min-width: 0; }
-.fb-issue-name { font-size: 13px; font-weight: 500; color: #222; }
-.fb-issue-sub { font-size: 11px; color: #aaa; margin-top: 1px; }
-.fb-issue-cnt { font-size: 13px; font-weight: 700; color: #ff6b9d; flex-shrink: 0; }
+.fb-issue-name { font-size: var(--text-sm); font-weight: 500; color: var(--ink); }
+.fb-issue-sub { font-size: 11px; color: var(--ink-3); margin-top: 1px; }
+.fb-issue-cnt { font-size: var(--text-sm); font-weight: 700; color: var(--pink); flex-shrink: 0; }
 
 /* 来源分布 */
 .fb-source-list { display: flex; flex-direction: column; gap: 8px; }
-.fb-source-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.fb-source-item { display: flex; align-items: center; gap: 8px; font-size: var(--text-xs); }
 .fb-source-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.fb-source-name { width: 70px; color: #555; flex-shrink: 0; }
-.fb-source-bar-bg { flex: 1; height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+.fb-source-name { width: 70px; color: var(--ink-2); flex-shrink: 0; }
+.fb-source-bar-bg { flex: 1; height: 6px; background: var(--accent-light); border-radius: 3px; overflow: hidden; }
 .fb-source-bar { height: 100%; border-radius: 3px; }
-.fb-source-pct { width: 36px; text-align: right; color: #444; font-weight: 600; }
+.fb-source-pct { width: 36px; text-align: right; color: var(--ink); font-weight: 600; }
 
 /* 今日事件概况 */
 .today-band {
@@ -1553,8 +1554,9 @@ function severityTagType(value) {
   align-items: flex-start;
   gap: 4px;
   padding: 14px;
-  background: #f7f8fa;
-  border-radius: 10px;
+  background: var(--accent-light);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
 }
 .today-icon {
   width: 36px;
@@ -1576,12 +1578,12 @@ function severityTagType(value) {
 .today-val {
   font-size: 24px;
   font-weight: 700;
-  color: #1f2329;
+  color: var(--ink);
   line-height: 1.1;
 }
 .today-label {
-  font-size: 12px;
-  color: #8c8c8c;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
 }
 
 /* 近期行为 & 推荐 */
@@ -1594,28 +1596,28 @@ function severityTagType(value) {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--text-xs);
 }
 .behavior-tag { flex-shrink: 0; }
 .behavior-name {
-  color: #444;
+  color: var(--ink-2);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.behavior-empty { color: #bbb; font-size: 12px; }
+.behavior-empty { color: var(--ink-3); font-size: var(--text-xs); }
 .rec-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--text-xs);
 }
 .rec-score {
   width: 28px;
   height: 28px;
-  border-radius: 6px;
-  background: #fff0f6;
-  color: #ff6b9d;
+  border-radius: var(--r-sm);
+  background: var(--pink-light);
+  color: var(--pink);
   font-weight: 700;
   font-size: 11px;
   display: grid;
@@ -1623,13 +1625,14 @@ function severityTagType(value) {
   flex-shrink: 0;
 }
 .rec-info { display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
-.rec-name { color: #333; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.rec-tags { color: #999; font-size: 11px; }
+.rec-name { color: var(--ink); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rec-tags { color: var(--ink-3); font-size: 11px; }
 
 /* 偏好环形图 */
 .pref-dim-card {
-  background: #f7f8fa;
-  border-radius: 10px;
+  background: var(--accent-light);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
   padding: 14px 16px;
   margin-bottom: 12px;
 }
@@ -1641,12 +1644,12 @@ function severityTagType(value) {
 }
 .pref-dim-title {
   font-weight: 600;
-  font-size: 13px;
-  color: #333;
+  font-size: var(--text-sm);
+  color: var(--ink);
 }
 .pref-dim-top {
   font-size: 11px;
-  color: #888;
+  color: var(--ink-3);
 }
 .pref-dim-body {
   display: flex;
@@ -1662,7 +1665,7 @@ function severityTagType(value) {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: var(--text-xs);
 }
 .pref-dot {
   width: 8px;
@@ -1672,10 +1675,10 @@ function severityTagType(value) {
 }
 .pref-item-label {
   flex: 1;
-  color: #555;
+  color: var(--ink-2);
 }
 .pref-item-pct {
-  color: #333;
+  color: var(--ink);
   font-weight: 600;
 }
 .pref-donut {
