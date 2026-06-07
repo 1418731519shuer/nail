@@ -158,61 +158,7 @@
     <!-- ── 底部输入栏 ── -->
     <div class="chat-input-bar">
       <div class="input-wrap">
-        <!-- 输入框容器：图标按钮嵌在左侧 -->
         <div class="input-box">
-          <!-- 左侧：款式选择图标按钮 -->
-          <el-popover
-            v-model:visible="stylePopoverVisible"
-            placement="top-start"
-            :width="320"
-            trigger="click"
-            popper-class="style-popover"
-          >
-            <template #reference>
-              <button
-                class="style-icon-btn"
-                :class="{ active: selectedStyleId }"
-                :title="selectedStyleName || '选择款式'"
-              >
-                <!-- 衣架 / 款式图标 -->
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 3C10.34 3 9 4.34 9 6C9 7.03 9.53 7.94 10.35 8.47L3 13H21L13.65 8.47C14.47 7.94 15 7.03 15 6C15 4.34 13.66 3 12 3Z"
-                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-                  <path d="M3 13V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13"
-                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-                <span v-if="selectedStyleName" class="style-icon-label">{{ selectedStyleName }}</span>
-              </button>
-            </template>
-
-            <!-- popover 内容：可搜索款式列表 -->
-            <div class="style-popover-inner">
-              <div class="style-popover-head">
-                <span>指定款式</span>
-                <button v-if="selectedStyleId" class="style-clear-btn" @click="selectedStyleId = ''; stylePopoverVisible = false">清除</button>
-              </div>
-              <el-input
-                v-model="styleSearch"
-                placeholder="搜索款式名…"
-                size="small"
-                clearable
-                class="style-search"
-              />
-              <ul class="style-list">
-                <li
-                  v-for="item in filteredStyleOptions"
-                  :key="item.id"
-                  class="style-list-item"
-                  :class="{ selected: item.id === selectedStyleId }"
-                  @click="selectedStyleId = item.id; stylePopoverVisible = false"
-                >
-                  {{ item.name }}
-                </li>
-                <li v-if="!filteredStyleOptions.length" class="style-list-empty">无匹配款式</li>
-              </ul>
-            </div>
-          </el-popover>
-
           <!-- textarea -->
           <el-input
             v-model="input"
@@ -234,8 +180,6 @@
 
         <div class="input-meta">
           <span class="data-chip">{{ trendRangeText }}</span>
-          <span class="data-chip accent">{{ styleOptions.length }} 款样本</span>
-          <span v-if="trendStyleMeta" class="data-chip warm">{{ trendStyleMeta.styleName }} · {{ latestTrendLabel }}</span>
           <span class="input-hint">Ctrl + Enter 发送</span>
         </div>
       </div>
@@ -286,8 +230,6 @@ const quickQuestions = [
 const input = ref('生成今日运营报告。')
 const lastInput = ref('')
 const selectedStyleId = ref('')
-const stylePopoverVisible = ref(false)
-const styleSearch = ref('')
 const loading = ref(false)
 const result = ref(null)
 const chatHistory = ref([])
@@ -297,14 +239,6 @@ const styleOptions = ref([])
 const trendOverview = ref({ dateRange: {}, hotStyles: [], coldStyles: [], potentialStyles: [] })
 const chatBodyRef = ref(null)
 
-const selectedStyleName = computed(() =>
-  styleOptions.value.find(s => s.id === selectedStyleId.value)?.name || ''
-)
-const filteredStyleOptions = computed(() => {
-  const q = styleSearch.value.trim().toLowerCase()
-  if (!q) return styleOptions.value.slice(0, 60)
-  return styleOptions.value.filter(s => s.name.toLowerCase().includes(q)).slice(0, 60)
-})
 
 const protectedConditions = computed(() => result.value?.plan.objects.protectedConditions || [])
 const reportSections = computed(() => result.value?.analysis.reportSections || [])
@@ -813,41 +747,6 @@ onMounted(async () => { await bootstrapOptions() })
   background: #fff;
 }
 
-/* 款式图标按钮 */
-.style-icon-btn {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 8px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--border);
-  background: rgba(201,122,78,0.06);
-  color: var(--ink-3);
-  font-size: var(--text-xs);
-  font-family: inherit;
-  cursor: pointer;
-  transition:
-    background var(--dur-fast) var(--ease-out-quart),
-    border-color var(--dur-fast) var(--ease-out-quart),
-    color var(--dur-fast) var(--ease-out-quart);
-  white-space: nowrap;
-  max-width: 140px;
-  overflow: hidden;
-}
-.style-icon-btn:hover,
-.style-icon-btn.active {
-  background: var(--accent-light);
-  border-color: rgba(201,122,78,0.35);
-  color: var(--accent-dark);
-}
-.style-icon-label {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100px;
-}
-
-/* popover 内部样式（全局，不 scoped） */
 .ai-textarea { flex: 1; }
 .ai-textarea :deep(.el-textarea__inner) {
   border: none;
@@ -915,56 +814,3 @@ onMounted(async () => { await bootstrapOptions() })
 .preview-detail li { font-size: var(--text-sm); color: var(--ink-2); margin-bottom: 5px; }
 </style>
 
-<!-- popover 内部样式：el-popover 渲染到 body，需要全局 -->
-<style>
-.style-popover .el-popover__title { display: none; }
-.style-popover-inner { display: flex; flex-direction: column; gap: 8px; }
-.style-popover-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  padding-bottom: 2px;
-}
-.style-clear-btn {
-  font-size: 12px;
-  color: var(--accent);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
-}
-.style-clear-btn:hover { text-decoration: underline; }
-.style-search { width: 100%; }
-.style-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-height: 240px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.style-list-item {
-  padding: 7px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: background 120ms ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.style-list-item:hover { background: var(--accent-light); color: var(--accent-dark); }
-.style-list-item.selected {
-  background: rgba(201,122,78,0.14);
-  color: var(--accent-dark);
-  font-weight: 600;
-}
-.style-list-empty { padding: 10px; font-size: 13px; color: var(--ink-3); text-align: center; }
-</style>
