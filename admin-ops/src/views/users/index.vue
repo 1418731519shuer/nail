@@ -10,8 +10,8 @@
 
     <el-tabs v-model="activeTab" class="user-tabs">
       <el-tab-pane label="个人与群体数据" name="profile">
-        <el-row :gutter="16">
-          <el-col :span="15">
+        <el-row :gutter="16" style="align-items:stretch">
+          <el-col :span="15" style="display:flex;flex-direction:column">
             <!-- 用户偏好画像（四维环形图） -->
             <el-card shadow="never" class="panel">
               <template #header>
@@ -46,7 +46,7 @@
             </el-card>
 
             <!-- 今日事件概况 -->
-            <el-card shadow="never" class="panel today-band-card">
+            <el-card shadow="never" class="panel today-band-card" style="flex:1">
               <template #header>
                 <div class="card-header">
                   <span>今日事件概况</span>
@@ -85,10 +85,9 @@
               </template>
 
               <!-- 主要人群大标识 -->
-              <div class="persona-primary">
-                <div>
-                  <div class="persona-name" :style="{ color: crowdSegments[0]?.color }">{{ crowdSegments[0]?.label }}</div>
-                </div>
+              <div class="persona-primary" :style="{ borderLeftColor: crowdSegments[0]?.color }">
+                <div class="persona-name" :style="{ color: crowdSegments[0]?.color }">{{ crowdSegments[0]?.label }}</div>
+                <div class="persona-tag">主要人群</div>
               </div>
 
               <!-- 关键信号行 -->
@@ -1261,12 +1260,11 @@ function severityTagType(value) {
 
 .persona-primary {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
-  padding: 8px 10px;
-  background: rgba(201,122,78,0.08);
-  border-radius: var(--r-md);
-  margin-bottom: 8px;
+  padding: 4px 0 10px 12px;
+  border-left: 3px solid;
+  margin-bottom: 10px;
 }
 
 .persona-icon {
@@ -1294,6 +1292,13 @@ function severityTagType(value) {
   color: var(--ink-3);
   margin-top: 3px;
   line-height: 1.4;
+}
+
+.persona-tag {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* 关键信号 4 格 */
