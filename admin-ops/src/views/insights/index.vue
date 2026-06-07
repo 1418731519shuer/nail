@@ -389,11 +389,31 @@ function renderTrendCharts() {
 
 async function renderCompareChart() {
   if (!compareData.value || !compareChartRef.value) return
-  // 先等 flex 布局稳定，让容器获得真实高度
   await nextTick()
   if (!compareChart) compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
   compareChart.resize()
-  compareChart.setOption(buildCompareOption(compareData.value))
+
+  const option = buildCompareOption(compareData.value)
+
+  // 第一帧：所有值归零（关闭动画），建立"底部基准"
+  compareChart.setOption({
+    ...option,
+    animation: false,
+    series: option.series.map(s => ({
+      ...s,
+      data: s.data.map(v => (v !== null ? 0 : null))
+    }))
+  }, true)
+
+  // 第二帧：立刻切换成真实数据，ECharts 做纵向差值动画 → 从底部弹起
+  requestAnimationFrame(() => {
+    compareChart?.setOption({
+      animation: true,
+      animationDuration: 900,
+      animationEasing: 'cubicOut',
+      series: option.series
+    })
+  })
 }
 
 function clearCompareChart() {
