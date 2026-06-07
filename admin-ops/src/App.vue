@@ -24,6 +24,10 @@
           <el-icon><TrendCharts /></el-icon>
           <span>热度榜单</span>
         </el-menu-item>
+        <el-menu-item index="/insights">
+          <el-icon><DataLine /></el-icon>
+          <span>趋势洞察</span>
+        </el-menu-item>
         <el-menu-item index="/styles">
           <el-icon><Grid /></el-icon>
           <span>款式管理</span>

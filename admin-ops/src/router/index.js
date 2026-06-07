@@ -18,6 +18,12 @@ const routes = [
     meta: { title: '热度榜单', icon: 'TrendCharts' }
   },
   {
+    path: '/insights',
+    name: 'Insights',
+    component: () => import('../views/insights/index.vue'),
+    meta: { title: '趋势洞察', icon: 'DataLine' }
+  },
+  {
     path: '/styles',
     name: 'Styles',
     component: () => import('../views/styles/index.vue'),
