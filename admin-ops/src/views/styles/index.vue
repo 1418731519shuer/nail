@@ -47,18 +47,13 @@
         <el-table-column prop="viewCount" label="浏览" sortable width="100" />
         <el-table-column prop="tryOnCount" label="试戴" sortable width="100" />
         <el-table-column prop="wantCount" label="想做" sortable width="100" />
-        <el-table-column prop="confirmCount" label="确认" sortable width="100" />
-        <el-table-column label="确认率" sortable width="110">
-          <template #default="{ row }">{{ row.confirmRate }}%</template>
-        </el-table-column>
-
-        <el-table-column label="状态" width="120">
+        <el-table-column label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="statusTagType(row.rawStatus)" effect="light">{{ statusLabel(row.rawStatus) }}</el-tag>
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" min-width="340" fixed="right">
+        <el-table-column label="操作" min-width="320">
           <template #default="{ row }">
             <div class="row-actions">
               <el-button text class="btn-warm" @click="detail = row">详情</el-button>
