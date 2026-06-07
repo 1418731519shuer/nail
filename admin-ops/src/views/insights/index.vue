@@ -394,24 +394,35 @@ async function renderCompareChart() {
   compareChart.resize()
 
   const option = buildCompareOption(compareData.value)
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // 第一帧：所有值归零（关闭动画），建立"底部基准"
+  if (reducedMotion) {
+    compareChart.setOption(option, true)
+    return
+  }
+
+  // 第一帧：全部数据归零，无动画（建立底部基准线）
   compareChart.setOption({
     ...option,
     animation: false,
     series: option.series.map(s => ({
       ...s,
-      data: s.data.map(v => (v !== null ? 0 : null))
+      data: s.data.map(v => v !== null ? 0 : null)
     }))
   }, true)
 
-  // 第二帧：立刻切换成真实数据，ECharts 做纵向差值动画 → 从底部弹起
+  // 第二帧（rAF）：更新为真实数据
+  // ECharts 对 update 做纵向插值 → 曲线从底部升起
+  // 用 quarticOut（对应项目的 ease-out-quart）+ 700ms，各系列交错 80ms
   requestAnimationFrame(() => {
+    const STAGGER = 80 // ms per style group
     compareChart?.setOption({
-      animation: true,
-      animationDuration: 900,
-      animationEasing: 'cubicOut',
-      series: option.series
+      animationDurationUpdate: 700,
+      animationEasingUpdate: 'quarticOut',
+      series: option.series.map((s, i) => ({
+        ...s,
+        animationDelay: Math.floor(i / 2) * STAGGER  // 每对实线/虚线同组错开
+      }))
     })
   })
 }
