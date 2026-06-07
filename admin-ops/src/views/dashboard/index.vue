@@ -29,7 +29,24 @@
               <el-button text type="primary" @click="router.push('/trending')">查看全部</el-button>
             </div>
           </template>
-          <div ref="top5ChartRef" class="chart-top5"></div>
+          <div class="top5-list">
+            <div v-for="(row, index) in hotStyles.slice(0, 5)" :key="row.id" class="top5-item">
+              <span class="top5-rank" :class="index < 3 ? 'top3' : ''">{{ index + 1 }}</span>
+              <el-image :src="row.image" class="top5-img" fit="cover" />
+              <div class="top5-info">
+                <div class="top5-name">{{ row.name }}</div>
+                <div class="top5-tags">
+                  <el-tag v-for="tag in row.tags.slice(0, 2)" :key="tag" size="small">{{ tag }}</el-tag>
+                </div>
+              </div>
+              <div class="top5-metrics">
+                <div class="top5-metric"><span class="metric-val">{{ row.tryOnCount }}</span><span class="metric-label">试戴</span></div>
+                <div class="top5-metric"><span class="metric-val">{{ row.confirmCount }}</span><span class="metric-label">确认</span></div>
+                <div class="top5-metric"><span class="metric-val">{{ row.confirmRate }}%</span><span class="metric-label">确认率</span></div>
+              </div>
+              <el-progress :percentage="Math.min(row.hotIndex, 100)" :stroke-width="6" :show-text="false" class="top5-bar" />
+            </div>
+          </div>
         </el-card>
       </el-col>
 
@@ -65,10 +82,8 @@ import { fetchOpsData } from '@/api/opsData'
 
 const router = useRouter()
 const trendChartRef = ref(null)
-const top5ChartRef = ref(null)
 const ops = ref(null)
 let chart = null
-let top5Chart = null
 
 const todayStats = computed(() => ops.value?.todayStats || {})
 const hotStyles = computed(() => ops.value?.hotStyles || [])
@@ -163,89 +178,20 @@ function initChart() {
   })
 }
 
-function initTop5Chart() {
-  if (!top5ChartRef.value || !ops.value) return
-  if (top5Chart) top5Chart.dispose()
-
-  const top5 = (ops.value.hotStyles || []).slice(0, 5).reverse()
-  const names = top5.map((s) => s.name.length > 8 ? s.name.slice(0, 8) + '…' : s.name)
-
-  top5Chart = echarts.init(top5ChartRef.value, window.__ECHARTS_THEME__)
-  top5Chart.setOption({
-    color: ['#ff6b9d', '#fa8c16', '#52c41a'],
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'shadow' },
-      backgroundColor: 'rgba(255,255,255,0.96)',
-      borderColor: '#eef0f4',
-      borderWidth: 1,
-      textStyle: { color: '#333' }
-    },
-    legend: {
-      data: ['试戴', '想要做', '确认要做'],
-      top: 0,
-      right: 0,
-      icon: 'roundRect',
-      itemWidth: 12,
-      itemHeight: 8,
-      textStyle: { color: '#666', fontSize: 12 }
-    },
-    grid: { left: 16, right: 24, top: 36, bottom: 8, containLabel: true },
-    xAxis: {
-      type: 'value',
-      splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } },
-      axisLabel: { color: '#aaa', fontSize: 11 }
-    },
-    yAxis: {
-      type: 'category',
-      data: names,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { color: '#444', fontSize: 13, fontWeight: 600 }
-    },
-    series: [
-      {
-        name: '试戴',
-        type: 'bar',
-        barMaxWidth: 14,
-        borderRadius: [0, 6, 6, 0],
-        data: top5.map((s) => s.tryOnCount)
-      },
-      {
-        name: '想要做',
-        type: 'bar',
-        barMaxWidth: 14,
-        borderRadius: [0, 6, 6, 0],
-        data: top5.map((s) => s.wantCount)
-      },
-      {
-        name: '确认要做',
-        type: 'bar',
-        barMaxWidth: 14,
-        borderRadius: [0, 6, 6, 0],
-        data: top5.map((s) => s.confirmCount)
-      }
-    ]
-  })
-}
-
 function resizeChart() {
   chart?.resize()
-  top5Chart?.resize()
 }
 
 onMounted(async () => {
   ops.value = await fetchOpsData()
   await nextTick()
   initChart()
-  initTop5Chart()
   window.addEventListener('resize', resizeChart)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', resizeChart)
   chart?.dispose()
-  top5Chart?.dispose()
 })
 </script>
 
@@ -306,8 +252,78 @@ onBeforeUnmount(() => {
 .chart {
   height: 300px;
 }
-.chart-top5 {
-  height: 280px;
+.top5-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.top5-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.top5-rank {
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eee;
+  color: #888;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.top5-rank.top3 {
+  background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+  color: #fff;
+}
+.top5-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.top5-info {
+  flex: 1;
+  min-width: 0;
+}
+.top5-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top5-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.top5-metrics {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.top5-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.metric-val {
+  font-weight: 700;
+  font-size: 15px;
+  color: #2d1a10;
+}
+.metric-label {
+  font-size: 11px;
+  color: #aaa;
+}
+.top5-bar {
+  width: 80px;
+  flex-shrink: 0;
 }
 .range-note {
   margin: 0 0 12px;
