@@ -25,7 +25,7 @@
         <el-card shadow="never" class="panel" style="flex:1">
           <template #header>
             <div class="card-header">
-              <span>热门款式 TOP 5</span>
+              <span>热门款式 TOP 8</span>
               <el-button type="primary" size="small" @click="router.push('/trending')">查看全部</el-button>
             </div>
           </template>
@@ -117,8 +117,8 @@ function cancelLongPress() {
 
 const todayStats = computed(() => ops.value?.todayStats || {})
 const hotStyles = computed(() => ops.value?.hotStyles || [])
-const TOP5_BARS = [100, 78, 58, 40, 24]
-const top5 = computed(() => hotStyles.value.slice(0, 5).map((s, i) => ({ ...s, hotBar: TOP5_BARS[i] })))
+const TOP8_BARS = [100, 84, 70, 58, 46, 36, 26, 18]
+const top5 = computed(() => hotStyles.value.slice(0, 8).map((s, i) => ({ ...s, hotBar: TOP8_BARS[i] })))
 const suggestions = computed(() => ops.value?.suggestions || [])
 const activities = computed(() => ops.value?.activities || [])
 const rangeText = computed(() => {
