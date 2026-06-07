@@ -30,22 +30,42 @@
             </div>
           </template>
           <div class="top5-list">
-            <div v-for="(row, index) in hotStyles.slice(0, 5)" :key="row.id" class="top5-item">
-              <span class="top5-rank" :class="index < 3 ? 'top3' : ''">{{ index + 1 }}</span>
-              <el-image :src="row.image" class="top5-img" fit="cover" />
-              <div class="top5-info">
-                <div class="top5-name">{{ row.name }}</div>
-                <div class="top5-tags">
-                  <el-tag v-for="tag in row.tags.slice(0, 2)" :key="tag" size="small">{{ tag }}</el-tag>
+            <el-popover
+              v-for="(row, index) in hotStyles.slice(0, 5)"
+              :key="row.id"
+              :visible="activePopover === row.id"
+              placement="right"
+              :width="220"
+              trigger="manual"
+            >
+              <template #reference>
+                <div
+                  class="top5-item"
+                  @mousedown="startLongPress(row.id)"
+                  @mouseup="cancelLongPress"
+                  @mouseleave="cancelLongPress"
+                  @touchstart.prevent="startLongPress(row.id)"
+                  @touchend="cancelLongPress"
+                >
+                  <span class="top5-rank" :class="index < 3 ? 'top3' : ''">{{ index + 1 }}</span>
+                  <el-image :src="row.image" class="top5-img" fit="cover" />
+                  <div class="top5-info">
+                    <div class="top5-name">{{ row.name }}</div>
+                    <div class="top5-tags">
+                      <el-tag v-for="tag in row.tags.slice(0, 2)" :key="tag" size="small">{{ tag }}</el-tag>
+                    </div>
+                  </div>
+                  <el-progress :percentage="Math.min(row.hotIndex, 100)" :stroke-width="6" :show-text="false" class="top5-bar" />
                 </div>
+              </template>
+              <div class="popover-metrics">
+                <div class="popover-row"><span>试戴次数</span><strong>{{ row.tryOnCount }}</strong></div>
+                <div class="popover-row"><span>想要做</span><strong>{{ row.wantCount }}</strong></div>
+                <div class="popover-row"><span>确认要做</span><strong>{{ row.confirmCount }}</strong></div>
+                <div class="popover-row"><span>确认率</span><strong>{{ row.confirmRate }}%</strong></div>
+                <div class="popover-row"><span>热门分</span><strong>{{ row.hotIndex }}</strong></div>
               </div>
-              <div class="top5-metrics">
-                <div class="top5-metric"><span class="metric-val">{{ row.tryOnCount }}</span><span class="metric-label">试戴</span></div>
-                <div class="top5-metric"><span class="metric-val">{{ row.confirmCount }}</span><span class="metric-label">确认</span></div>
-                <div class="top5-metric"><span class="metric-val">{{ row.confirmRate }}%</span><span class="metric-label">确认率</span></div>
-              </div>
-              <el-progress :percentage="Math.min(row.hotIndex, 100)" :stroke-width="6" :show-text="false" class="top5-bar" />
-            </div>
+            </el-popover>
           </div>
         </el-card>
       </el-col>
@@ -84,6 +104,16 @@ const router = useRouter()
 const trendChartRef = ref(null)
 const ops = ref(null)
 let chart = null
+const activePopover = ref(null)
+let longPressTimer = null
+
+function startLongPress(id) {
+  longPressTimer = setTimeout(() => { activePopover.value = id }, 500)
+}
+function cancelLongPress() {
+  clearTimeout(longPressTimer)
+  setTimeout(() => { activePopover.value = null }, 200)
+}
 
 const todayStats = computed(() => ops.value?.todayStats || {})
 const hotStyles = computed(() => ops.value?.hotStyles || [])
@@ -301,25 +331,27 @@ onBeforeUnmount(() => {
   gap: 4px;
   flex-wrap: wrap;
 }
-.top5-metrics {
-  display: flex;
-  gap: 16px;
-  flex-shrink: 0;
+.top5-item {
+  cursor: pointer;
+  user-select: none;
 }
-.top5-metric {
+.top5-item:active {
+  opacity: 0.75;
+}
+.popover-metrics {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
+  gap: 8px;
 }
-.metric-val {
-  font-weight: 700;
-  font-size: 15px;
+.popover-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #555;
+}
+.popover-row strong {
   color: #2d1a10;
-}
-.metric-label {
-  font-size: 11px;
-  color: #aaa;
+  font-weight: 700;
 }
 .top5-bar {
   width: 80px;
