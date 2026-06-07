@@ -136,6 +136,8 @@ const compareChartRef = ref(null)
 let dailyChart = null
 let weeklyChart = null
 let compareChart = null
+let trendRafId = null
+let compareRafId = null
 
 const STATE_ORDER = ['HotUp', 'HotStable', 'Potential', 'Stable', 'HotDown', 'ColdDown', 'ColdOut']
 function stateRank(s) { return STATE_ORDER.indexOf(s) === -1 ? 99 : STATE_ORDER.indexOf(s) }
@@ -408,7 +410,10 @@ function renderTrendCharts() {
     series: weeklyOpt.series.map(s => ({ ...s, data: s.data.map(v => v !== null ? 0 : null) }))
   }, true)
 
-  requestAnimationFrame(() => {
+  // 取消上一次还未执行的 rAF，防止快速切款时乱序
+  if (trendRafId) cancelAnimationFrame(trendRafId)
+  trendRafId = requestAnimationFrame(() => {
+    trendRafId = null
     const STAGGER_DAILY  = 60
     const STAGGER_WEEKLY = 80
 
@@ -459,14 +464,16 @@ async function renderCompareChart() {
   // 第二帧（rAF）：更新为真实数据
   // ECharts 对 update 做纵向插值 → 曲线从底部升起
   // 用 quarticOut（对应项目的 ease-out-quart）+ 700ms，各系列交错 80ms
-  requestAnimationFrame(() => {
-    const STAGGER = 80 // ms per style group
+  if (compareRafId) cancelAnimationFrame(compareRafId)
+  compareRafId = requestAnimationFrame(() => {
+    compareRafId = null
+    const STAGGER = 80
     compareChart?.setOption({
       animationDurationUpdate: 700,
       animationEasingUpdate: 'quarticOut',
       series: option.series.map((s, i) => ({
         ...s,
-        animationDelay: Math.floor(i / 2) * STAGGER  // 每对实线/虚线同组错开
+        animationDelay: Math.floor(i / 2) * STAGGER
       }))
     })
   })
@@ -544,10 +551,6 @@ watch(compareStyleIds, (value) => {
   }
 }, { deep: true })
 watch([compareStyleIds, compareMetric, compareWindowDays], fetchCompareData, { deep: true })
-watch(predictResult, async () => {
-  await nextTick()
-  renderTrendCharts()
-})
 
 onMounted(async () => {
   await fetchOverview()
