@@ -212,9 +212,20 @@ function buildDailyOption(styleMeta, pred) {
   const xData = [...daily.map((item) => item.date), 'W+1预测', 'W+2预测']
   const m = pred?.metrics || {}
 
+  const makeArea = (color) => ({
+    opacity: 0.15,
+    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      { offset: 0, color },
+      { offset: 1, color: 'transparent' }
+    ])
+  })
+
   const makeSeries = (name, histKey, predKey, color) => [
     {
       name, type: 'line', smooth: true, color,
+      symbol: 'circle', symbolSize: 6,
+      lineStyle: { width: 2.5 },
+      areaStyle: makeArea(color),
       data: [...daily.map((item) => item[histKey]), null, null], z: 2
     },
     {
@@ -343,6 +354,14 @@ function buildCompareOption(data) {
     }
     return [
       { name: item.styleName, type: 'line', smooth: true, showSymbol: false, color,
+        lineStyle: { width: 2.5 },
+        areaStyle: {
+          opacity: 0.08,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color },
+            { offset: 1, color: 'transparent' }
+          ])
+        },
         data: [...item.values, null, null], z: 2 },
       { name: `${item.styleName}(预测)`, type: 'line', smooth: false, showSymbol: true,
         symbol: 'emptyCircle', symbolSize: 6, color,
@@ -383,99 +402,66 @@ function buildCompareOption(data) {
 
 function renderTrendCharts() {
   if (!selectedStyleTrend.value || !dailyChartRef.value || !weeklyChartRef.value) return
-  if (!dailyChart) dailyChart = echarts.init(dailyChartRef.value, window.__ECHARTS_THEME__)
-  if (!weeklyChart) weeklyChart = echarts.init(weeklyChartRef.value, window.__ECHARTS_THEME__)
+
+  // 取消残留 rAF
+  if (trendRafId) { cancelAnimationFrame(trendRafId); trendRafId = null }
+
+  // dispose + 重新 init，和运营日报保持同款：ECharts 播放原生从左到右描线入场动效
+  dailyChart?.dispose()
+  weeklyChart?.dispose()
+  dailyChart  = echarts.init(dailyChartRef.value,  window.__ECHARTS_THEME__)
+  weeklyChart = echarts.init(weeklyChartRef.value, window.__ECHARTS_THEME__)
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const dailyOpt  = buildDailyOption(selectedStyleTrend.value, predictResult.value)
   const weeklyOpt = buildWeeklyOption(selectedStyleTrend.value, predictResult.value)
 
   if (reducedMotion) {
-    dailyChart.setOption(dailyOpt, true)
-    weeklyChart.setOption(weeklyOpt, true)
+    dailyChart.setOption({ ...dailyOpt,  animation: false })
+    weeklyChart.setOption({ ...weeklyOpt, animation: false })
     return
   }
 
-  // 日走势：底部归零 → rAF 升起，4条线各错开 60ms
+  // quarticOut 800ms + 各系列交错延迟（日走势每对 60ms，周走势每组 80ms）
   dailyChart.setOption({
     ...dailyOpt,
-    animation: false,
-    series: dailyOpt.series.map(s => ({ ...s, data: s.data.map(v => v !== null ? 0 : null) }))
-  }, true)
+    animationDuration: 800,
+    animationEasing: 'quarticOut',
+    series: dailyOpt.series.map((s, i) => ({ ...s, animationDelay: Math.floor(i / 2) * 60 }))
+  })
 
-  // 周走势：柱 + 折线归零 → 同步升起，3组各错开 80ms
   weeklyChart.setOption({
     ...weeklyOpt,
-    animation: false,
-    series: weeklyOpt.series.map(s => ({ ...s, data: s.data.map(v => v !== null ? 0 : null) }))
-  }, true)
-
-  // 取消上一次还未执行的 rAF，防止快速切款时乱序
-  if (trendRafId) cancelAnimationFrame(trendRafId)
-  trendRafId = requestAnimationFrame(() => {
-    trendRafId = null
-    const STAGGER_DAILY  = 60
-    const STAGGER_WEEKLY = 80
-
-    dailyChart?.setOption({
-      animationDurationUpdate: 700,
-      animationEasingUpdate: 'quarticOut',
-      series: dailyOpt.series.map((s, i) => ({
-        ...s,
-        animationDelay: Math.floor(i / 2) * STAGGER_DAILY
-      }))
-    })
-
-    weeklyChart?.setOption({
-      animationDurationUpdate: 700,
-      animationEasingUpdate: 'quarticOut',
-      series: weeklyOpt.series.map((s, i) => ({
-        ...s,
-        animationDelay: Math.floor(i / 2) * STAGGER_WEEKLY
-      }))
-    })
+    animationDuration: 800,
+    animationEasing: 'quarticOut',
+    series: weeklyOpt.series.map((s, i) => ({ ...s, animationDelay: Math.floor(i / 2) * 80 }))
   })
 }
 
 async function renderCompareChart() {
   if (!compareData.value || !compareChartRef.value) return
   await nextTick()
-  if (!compareChart) compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
+
+  if (compareRafId) { cancelAnimationFrame(compareRafId); compareRafId = null }
+
+  // dispose + 重新 init，与运营日报同款入场动效
+  compareChart?.dispose()
+  compareChart = echarts.init(compareChartRef.value, window.__ECHARTS_THEME__)
   compareChart.resize()
 
   const option = buildCompareOption(compareData.value)
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   if (reducedMotion) {
-    compareChart.setOption(option, true)
+    compareChart.setOption({ ...option, animation: false })
     return
   }
 
-  // 第一帧：全部数据归零，无动画（建立底部基准线）
   compareChart.setOption({
     ...option,
-    animation: false,
-    series: option.series.map(s => ({
-      ...s,
-      data: s.data.map(v => v !== null ? 0 : null)
-    }))
-  }, true)
-
-  // 第二帧（rAF）：更新为真实数据
-  // ECharts 对 update 做纵向插值 → 曲线从底部升起
-  // 用 quarticOut（对应项目的 ease-out-quart）+ 700ms，各系列交错 80ms
-  if (compareRafId) cancelAnimationFrame(compareRafId)
-  compareRafId = requestAnimationFrame(() => {
-    compareRafId = null
-    const STAGGER = 80
-    compareChart?.setOption({
-      animationDurationUpdate: 700,
-      animationEasingUpdate: 'quarticOut',
-      series: option.series.map((s, i) => ({
-        ...s,
-        animationDelay: Math.floor(i / 2) * STAGGER
-      }))
-    })
+    animationDuration: 800,
+    animationEasing: 'quarticOut',
+    series: option.series.map((s, i) => ({ ...s, animationDelay: Math.floor(i / 2) * 80 }))
   })
 }
 
