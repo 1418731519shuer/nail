@@ -20,9 +20,9 @@
       </el-col>
     </el-row>
 
-    <el-row :gutter="16">
-      <el-col :span="16">
-        <el-card shadow="never" class="panel">
+    <el-row :gutter="16" style="align-items: stretch">
+      <el-col :span="16" style="display:flex; flex-direction:column">
+        <el-card shadow="never" class="panel" style="flex:1">
           <template #header>
             <div class="card-header">
               <span>热门款式 TOP 5</span>
@@ -70,8 +70,8 @@
         </el-card>
       </el-col>
 
-      <el-col :span="8">
-        <el-card shadow="never" class="panel">
+      <el-col :span="8" style="display:flex; flex-direction:column">
+        <el-card shadow="never" class="panel" style="flex:1">
           <template #header>运营建议</template>
           <div v-for="item in suggestions" :key="item.title" class="suggestion" :class="item.priority">
             <strong>{{ item.title }}</strong>
