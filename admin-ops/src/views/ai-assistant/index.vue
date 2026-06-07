@@ -246,14 +246,22 @@ async function run() {
   loading.value = true
   await scrollBottom()
 
+  const context = { storeId: 'store-001', today: new Date().toISOString().slice(0, 10) }
   try {
     const dsData = await callDeepSeek(text)
     if (dsData?.reply) {
-      // advisor 纯文本回复
+      // 1. 先展示 AI 分析文字
       pushMsg({ role: 'assistant', reply: dsData.reply })
+      // 2. 写操作意图 → 追加真实原子操作 + 确认单（与侧边栏逻辑对齐）
+      if (isWriteIntent(text)) {
+        const r = executeAgentRequest(text, context, null)
+        if (r.preview || r.approval) {
+          pushMsg({ role: 'assistant', result: r })
+        }
+      }
     } else {
       // 本地规则 fallback
-      const r = executeAgentRequest(text, { today: new Date().toISOString().slice(0, 10) }, dsData)
+      const r = executeAgentRequest(text, context, dsData)
       pushMsg({ role: 'assistant', result: r })
     }
     confirmText.value = ''
@@ -264,6 +272,10 @@ async function run() {
     loading.value = false
     await scrollBottom()
   }
+}
+
+function isWriteIntent(text) {
+  return /下架|上架|归档|恢复|改价|调价|替换|推荐位|执行/.test(text)
 }
 
 async function callDeepSeek(text) {
