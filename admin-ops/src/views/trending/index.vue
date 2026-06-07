@@ -5,26 +5,6 @@
       <p>首屏只加载轻量榜单摘要，点击后再读取单款或多款趋势，兼顾速度和分析深度。</p>
     </div>
 
-    <el-card shadow="never" class="panel">
-      <div class="snapshot-head">
-        <div>
-          <strong>数据窗口</strong>
-          <p>{{ rangeText }}</p>
-        </div>
-        <div class="head-tags">
-          <el-tag type="success">{{ overview.styleCount || 0 }} 款同源样本</el-tag>
-          <el-tag type="info">榜单轻量加载</el-tag>
-        </div>
-      </div>
-      <el-row :gutter="16">
-        <el-col :span="6" v-for="item in summaryCards" :key="item.label">
-          <div class="metric-box">
-            <span>{{ item.label }}</span>
-            <strong>{{ item.value }}</strong>
-          </div>
-        </el-col>
-      </el-row>
-    </el-card>
 
     <el-row :gutter="16">
       <el-col :span="8">
