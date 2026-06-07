@@ -383,8 +383,53 @@ function renderTrendCharts() {
   if (!selectedStyleTrend.value || !dailyChartRef.value || !weeklyChartRef.value) return
   if (!dailyChart) dailyChart = echarts.init(dailyChartRef.value, window.__ECHARTS_THEME__)
   if (!weeklyChart) weeklyChart = echarts.init(weeklyChartRef.value, window.__ECHARTS_THEME__)
-  dailyChart.setOption(buildDailyOption(selectedStyleTrend.value, predictResult.value))
-  weeklyChart.setOption(buildWeeklyOption(selectedStyleTrend.value, predictResult.value))
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const dailyOpt  = buildDailyOption(selectedStyleTrend.value, predictResult.value)
+  const weeklyOpt = buildWeeklyOption(selectedStyleTrend.value, predictResult.value)
+
+  if (reducedMotion) {
+    dailyChart.setOption(dailyOpt, true)
+    weeklyChart.setOption(weeklyOpt, true)
+    return
+  }
+
+  // 日走势：底部归零 → rAF 升起，4条线各错开 60ms
+  dailyChart.setOption({
+    ...dailyOpt,
+    animation: false,
+    series: dailyOpt.series.map(s => ({ ...s, data: s.data.map(v => v !== null ? 0 : null) }))
+  }, true)
+
+  // 周走势：柱 + 折线归零 → 同步升起，3组各错开 80ms
+  weeklyChart.setOption({
+    ...weeklyOpt,
+    animation: false,
+    series: weeklyOpt.series.map(s => ({ ...s, data: s.data.map(v => v !== null ? 0 : null) }))
+  }, true)
+
+  requestAnimationFrame(() => {
+    const STAGGER_DAILY  = 60
+    const STAGGER_WEEKLY = 80
+
+    dailyChart?.setOption({
+      animationDurationUpdate: 700,
+      animationEasingUpdate: 'quarticOut',
+      series: dailyOpt.series.map((s, i) => ({
+        ...s,
+        animationDelay: Math.floor(i / 2) * STAGGER_DAILY
+      }))
+    })
+
+    weeklyChart?.setOption({
+      animationDurationUpdate: 700,
+      animationEasingUpdate: 'quarticOut',
+      series: weeklyOpt.series.map((s, i) => ({
+        ...s,
+        animationDelay: Math.floor(i / 2) * STAGGER_WEEKLY
+      }))
+    })
+  })
 }
 
 async function renderCompareChart() {
