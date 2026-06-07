@@ -931,6 +931,16 @@ onBeforeUnmount(() => {
   margin-bottom: 16px;
 }
 
+/* fixed 列单元格必须实色，否则半透明 surface 会让滚动内容透出 */
+.panel :deep(.el-table-fixed-column--left),
+.panel :deep(.el-table-fixed-column--right) {
+  background-color: #fff !important;
+}
+.panel :deep(.el-table th.el-table-fixed-column--left),
+.panel :deep(.el-table th.el-table-fixed-column--right) {
+  background-color: #f9f9f9 !important;
+}
+
 .assistant-align-note {
   margin-bottom: 14px;
   padding: 12px 14px;
