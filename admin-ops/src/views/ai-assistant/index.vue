@@ -221,6 +221,7 @@ const selectedStyleId = ref('')
 const loading = ref(false)
 const result = ref(null)
 const logs = ref(getAuditLogs())
+const chatHistory = ref([])
 const previewDialog = ref(false)
 const confirmText = ref('')
 const styleOptions = ref([])
@@ -267,22 +268,68 @@ function ask(text) {
   run()
 }
 
-function run() {
+async function run() {
   const text = input.value.trim()
   if (!text) return
 
   loading.value = true
   try {
-    result.value = executeAgentRequest(text, {
-      selectedStyleId: selectedStyleId.value,
-      today: '2026-05-29'
-    })
+    // 先尝试调用 DeepSeek 真实 API
+    const dsResult = await callDeepSeek(text)
+    if (dsResult) {
+      result.value = dsResult
+    } else {
+      // 降级：本地规则引擎
+      result.value = executeAgentRequest(text, {
+        selectedStyleId: selectedStyleId.value,
+        today: new Date().toISOString().slice(0, 10)
+      })
+    }
     confirmText.value = ''
     logs.value = result.value.auditLogs
   } catch (error) {
     ElMessage.error(error.message)
   } finally {
     loading.value = false
+  }
+}
+
+async function callDeepSeek(text) {
+  try {
+    const { buildDeepSeekToolContract } = await import('@/agent/deepseek-tool-contract')
+    const res = await fetch('/api/ops-deepseek-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        history: chatHistory.value,
+        plannerMode: true,
+        operationCatalog: buildDeepSeekToolContract(),
+        opsContext: {
+          selectedStyleId: selectedStyleId.value,
+          today: new Date().toISOString().slice(0, 10),
+          storeId: 'nail-store-001'
+        }
+      })
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    if (data.error) { ElMessage.warning('DeepSeek：' + data.error); return null }
+
+    // 把 AI 回复加入对话历史
+    chatHistory.value = [
+      ...chatHistory.value.slice(-6),
+      { role: 'user', content: text },
+      { role: 'assistant', content: JSON.stringify(data) }
+    ]
+
+    // 用 AI 返回的 plan 包装成 agentResult 格式
+    return executeAgentRequest(text, {
+      selectedStyleId: selectedStyleId.value,
+      today: new Date().toISOString().slice(0, 10)
+    }, data)
+  } catch {
+    return null
   }
 }
 

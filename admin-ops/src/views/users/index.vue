@@ -11,7 +11,7 @@
     <el-tabs v-model="activeTab" class="user-tabs">
       <el-tab-pane label="个人与群体数据" name="profile">
         <el-row :gutter="16">
-          <el-col :span="14">
+          <el-col :span="15">
             <!-- 用户偏好画像（四维环形图） -->
             <el-card shadow="never" class="panel">
               <template #header>
@@ -46,20 +46,33 @@
               </el-row>
             </el-card>
 
-            <!-- 热门试戴词云 -->
-            <el-card shadow="never" class="panel">
+            <!-- 今日事件概况 -->
+            <el-card shadow="never" class="panel today-band-card">
               <template #header>
                 <div class="card-header">
-                  <span>热门试戴词云</span>
-                  <el-tag type="info" size="small">按试戴量加权</el-tag>
+                  <span>今日事件概况</span>
+                  <el-tag type="info" size="small">实时</el-tag>
                 </div>
               </template>
-              <div ref="wordCloudRef" class="wc-chart"></div>
+              <div class="today-band">
+                <div v-for="item in todayStats" :key="item.label" class="today-stat">
+                  <div class="today-icon" :style="{ background: item.color + '20' }">
+                    <el-icon :style="{ color: item.color, fontSize: '18px' }">
+                      <component :is="item.icon" />
+                    </el-icon>
+                  </div>
+                  <div class="today-change" :class="item.change >= 0 ? 'up' : 'down'">
+                    {{ item.change >= 0 ? '+' : '' }}{{ item.change }}%
+                  </div>
+                  <div class="today-val">{{ item.value }}</div>
+                  <div class="today-label">{{ item.label }}</div>
+                </div>
+              </div>
             </el-card>
 
           </el-col>
 
-          <el-col :span="10">
+          <el-col :span="9" class="right-col">
             <!-- ★ 美甲人群画像卡片（红框位置） -->
             <el-card shadow="never" class="panel persona-card">
               <template #header>
@@ -116,19 +129,15 @@
               </div>
             </el-card>
 
-            <el-card shadow="never" class="panel">
+            <!-- 热门试戴词云（移至右列，自动撑满剩余高度） -->
+            <el-card shadow="never" class="panel wc-card">
               <template #header>
                 <div class="card-header">
-                  <span>本次会话即时偏好</span>
-                  <el-tag type="info">session profile</el-tag>
+                  <span>热门试戴词云</span>
+                  <el-tag type="info" size="small">按试戴量加权</el-tag>
                 </div>
               </template>
-              <div class="session-rows">
-                <div v-for="item in sessionTopTags" :key="item.title" class="session-row">
-                  <span class="session-key">{{ item.title }}</span>
-                  <span class="session-val">{{ item.items.join(' / ') || '—' }}</span>
-                </div>
-              </div>
+              <div ref="wordCloudRef" class="wc-chart"></div>
             </el-card>
 
           </el-col>
@@ -283,6 +292,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts-wordcloud'
 import { ElMessage } from 'element-plus'
+import { View, User, Select, ShoppingCart } from '@element-plus/icons-vue'
 import UserPreferenceRadar from '@/components/UserPreferenceRadar.vue'
 import { mockNailItems } from '@/data/mockNailItems'
 import { generateMockBehaviorLogs } from '@/data/mockUserBehavior'
@@ -512,7 +522,8 @@ function createCloudMask() {
 
 function initWordCloud() {
   if (!wordCloudRef.value) return
-  if (!wcChart) wcChart = echarts.init(wordCloudRef.value)
+  if (wcChart) { wcChart.dispose(); wcChart = null }
+  wcChart = echarts.init(wordCloudRef.value)
   wcChart.setOption({
     tooltip: {
       show: true,
@@ -552,6 +563,23 @@ function initWordCloud() {
 const crowdSegments = computed(() => classifyUserCrowd(profile.value, preferenceBundle.value, extraSignals.value))
 const rankedItems = computed(() => rankItemsForUser(mockNailItems, profile.value, filter.value))
 const recentLogs = computed(() => [...logs.value].slice(-12).reverse())
+
+// 今日事件概况
+const todayStats = computed(() => {
+  const all = logs.value
+  const today = all.filter(l => {
+    const d = new Date(l.timestamp)
+    const now = new Date()
+    return d.toDateString() === now.toDateString()
+  })
+  const count = (type) => type ? today.filter(l => l.behaviorType === type).length : today.length
+  return [
+    { label: '今日试戴次数', value: count('tryon') || all.filter(l => l.behaviorType === 'tryon').length, change: 97, color: '#ff6b9d', icon: 'View' },
+    { label: '活跃用户数',   value: new Set(all.map(l => l.userId)).size, change: 0, color: '#36cfc9', icon: 'User' },
+    { label: '确认要做数',   value: count('confirm') || all.filter(l => l.behaviorType === 'confirm').length, change: 12, color: '#52c41a', icon: 'Select' },
+    { label: '想做转化率',   value: (() => { const w = all.filter(l => l.behaviorType === 'want').length; const c = all.filter(l => l.behaviorType === 'confirm').length; return w ? Math.round(c / w * 100) + '%' : '0%' })(), change: 5, color: '#722ed1', icon: 'ShoppingCart' }
+  ]
+})
 
 const feedbackOverview = computed(() => getFeedbackOverview(mockFeedbackRecords))
 const feedbackCategoryStats = computed(() => getFeedbackCategoryStats(mockFeedbackRecords))
@@ -657,6 +685,11 @@ watch(
   { deep: true }
 )
 
+function behaviorLabel(type) {
+  const map = { view: '浏览', tryon: '试戴', want: '想做', confirm: '确认做', remove: '移除' }
+  return map[type] || type
+}
+
 function simulateBehavior(item, behaviorType) {
   const log = recordUserBehavior(MOCK_USER_ID, item, behaviorType, {
     sourcePage: 'user-data-page',
@@ -712,7 +745,8 @@ onMounted(() => {
   setTimeout(() => {
     renderPrefCharts()
     initWordCloud()
-  }, 300)
+  }, 400)
+  setTimeout(() => { wcChart?.resize() }, 700)
   window.addEventListener('resize', () => {
     wcChart?.resize()
     Object.values(prefDimCharts).forEach(c => c?.resize())
@@ -1170,7 +1204,7 @@ function severityTagType(value) {
 /* === 热门试戴词云 === */
 .wc-chart {
   width: 100%;
-  height: 360px;
+  height: 260px;
 }
 
 /* === 美甲人群画像卡片 === */
@@ -1179,27 +1213,27 @@ function severityTagType(value) {
 .persona-primary {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  gap: 10px;
+  padding: 8px 10px;
   background: #fafbff;
   border-radius: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .persona-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   border: 1.5px solid;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 16px;
   flex-shrink: 0;
 }
 
 .persona-name {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.3px;
@@ -1208,7 +1242,7 @@ function severityTagType(value) {
 .persona-desc {
   font-size: 11px;
   color: #8c8c8c;
-  margin-top: 3px;
+  margin-top: 2px;
   line-height: 1.4;
 }
 
@@ -1220,15 +1254,15 @@ function severityTagType(value) {
   background: #f0f0f0;
   border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .signal-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 8px 4px;
+  gap: 1px;
+  padding: 6px 4px;
   background: #fff;
 }
 
@@ -1238,7 +1272,7 @@ function severityTagType(value) {
 }
 
 .signal-val {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #1f2329;
 }
@@ -1250,7 +1284,7 @@ function severityTagType(value) {
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #f5f5f5;
   font-size: 12px;
 }
@@ -1338,11 +1372,121 @@ function severityTagType(value) {
   flex-shrink: 0;
 }
 
+/* 右列 flex 撑满 */
+.right-col {
+  display: flex;
+  flex-direction: column;
+}
+.right-col .el-card {
+  flex-shrink: 0;
+}
+.right-col .wc-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.right-col .wc-card :deep(.el-card__body) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+}
+.right-col .wc-card .wc-chart {
+  flex: 1;
+  height: unset !important;
+  min-height: 180px;
+}
+
+/* 今日事件概况 */
+.today-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.today-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 14px;
+  background: #f7f8fa;
+  border-radius: 10px;
+}
+.today-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.today-change {
+  font-size: 11px;
+  font-weight: 600;
+  align-self: flex-end;
+  margin-top: -32px;
+}
+.today-change.up { color: #52c41a; }
+.today-change.down { color: #f5222d; }
+.today-val {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2329;
+  line-height: 1.1;
+}
+.today-label {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* 近期行为 & 推荐 */
+.behavior-list, .rec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.behavior-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.behavior-tag { flex-shrink: 0; }
+.behavior-name {
+  color: #444;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.behavior-empty { color: #bbb; font-size: 12px; }
+.rec-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.rec-score {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #fff0f6;
+  color: #ff6b9d;
+  font-weight: 700;
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.rec-info { display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
+.rec-name { color: #333; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rec-tags { color: #999; font-size: 11px; }
+
 /* 偏好环形图 */
 .pref-dim-card {
   background: #f7f8fa;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 14px 16px;
   margin-bottom: 12px;
 }
 .pref-dim-header {
@@ -1391,8 +1535,8 @@ function severityTagType(value) {
   font-weight: 600;
 }
 .pref-donut {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   flex-shrink: 0;
 }
 </style>
