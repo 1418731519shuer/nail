@@ -179,7 +179,7 @@
         </div>
 
         <div class="input-meta">
-          <span class="data-chip">{{ trendRangeText }}</span>
+
           <span class="input-hint">Ctrl + Enter 发送</span>
         </div>
       </div>
@@ -208,10 +208,10 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
-import { getStyleManagementRows } from '@/agent/mock-data'
+import { fetchOpsData } from '@/api/opsData'
 
 const quickQuestions = [
   '这个款热门不热门？',
@@ -229,48 +229,20 @@ const quickQuestions = [
 
 const input = ref('')
 const lastInput = ref('')
-const selectedStyleId = ref('')
 const loading = ref(false)
 const result = ref(null)
 const chatHistory = ref([])
 const previewDialog = ref(false)
 const confirmText = ref('')
-const styleOptions = ref([])
-const trendOverview = ref({ dateRange: {}, hotStyles: [], coldStyles: [], potentialStyles: [] })
 const chatBodyRef = ref(null)
-
+let opsDataCache = null
 
 const protectedConditions = computed(() => result.value?.plan.objects.protectedConditions || [])
 const reportSections = computed(() => result.value?.analysis.reportSections || [])
-const trendRangeText = computed(() => {
-  const range = trendOverview.value?.dateRange || {}
-  if (!range.startDate || !range.endDate) return '120 天同源窗口'
-  return `${range.startDate} ~ ${range.endDate}`
-})
 
-const trendStyleMeta = computed(() => {
-  const rows = [
-    ...(trendOverview.value?.hotStyles || []),
-    ...(trendOverview.value?.coldStyles || []),
-    ...(trendOverview.value?.potentialStyles || [])
-  ]
-  return rows.find((item) => item.id === selectedStyleId.value) || null
-})
-
-const latestTrendLabel = computed(() => trendStyleMeta.value?.label || '趋势待观察')
-
-async function bootstrapOptions() {
-  styleOptions.value = getStyleManagementRows().slice(0, 80).map((item) => ({ id: item.id, name: item.name }))
-  if (!selectedStyleId.value && styleOptions.value.length) {
-    selectedStyleId.value = styleOptions.value[0].id
-  }
-  try {
-    const response = await fetch('/api/xhs-trend-overview')
-    const data = await response.json()
-    if (response.ok) trendOverview.value = data
-  } catch (error) {
-    console.warn('[ai-assistant] trend overview unavailable', error)
-  }
+async function ensureOpsData() {
+  if (!opsDataCache) opsDataCache = await fetchOpsData().catch(() => null)
+  return opsDataCache
 }
 
 function ask(text) {
@@ -297,10 +269,7 @@ async function run() {
       result.value = dsResult
     } else {
       ElMessage.info('DeepSeek 未响应，使用本地规则')
-      result.value = executeAgentRequest(text, {
-        selectedStyleId: selectedStyleId.value,
-        today: new Date().toISOString().slice(0, 10)
-      })
+      result.value = executeAgentRequest(text, { today: new Date().toISOString().slice(0, 10) })
     }
     confirmText.value = ''
   } catch (error) {
@@ -313,36 +282,37 @@ async function run() {
 
 async function callDeepSeek(text) {
   try {
-    const { buildDeepSeekToolContract } = await import('@/agent/deepseek-tool-contract')
+    const opsData = await ensureOpsData()
     const res = await fetch('/api/ops-deepseek-chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: text,
-        history: chatHistory.value,
-        plannerMode: true,
-        operationCatalog: buildDeepSeekToolContract(),
+        history: chatHistory.value.slice(-6).map(m => ({ role: m.role, content: m.content })),
+        plannerMode: false,
         opsContext: {
-          selectedStyleId: selectedStyleId.value,
-          today: new Date().toISOString().slice(0, 10),
-          storeId: 'nail-store-001'
+          currentPage: '/ai-assistant',
+          currentStoreId: 'store-001',
+          totals: opsData?.metrics?.totals || {},
+          todayStats: opsData?.todayStats || {},
+          hotStyles: (opsData?.hotStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, hotIndex: s.hotIndex, confirmRate: s.confirmRate, trend: s.trend })),
+          coldStyles: (opsData?.coldStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, coldRisk: s.coldRisk, trend: s.trend })),
+          potentialStyles: (opsData?.potentialStyles || []).slice(0, 6).map(s => ({ id: s.id, name: s.name, growthScore: s.growthScore })),
+          recommendList: (opsData?.recommendList || []).slice(0, 8).map(s => ({ position: s.position, styleName: s.style?.name, slotType: s.slotType })),
+          modelReport: opsData?.modelReport || null
         }
       })
     })
     if (!res.ok) return null
     const data = await res.json()
     if (data.error) { ElMessage.warning('DeepSeek：' + data.error); return null }
-    const toolPlan = data.toolPlan || data
-    if (!toolPlan?.intentType) return null
     chatHistory.value = [
       ...chatHistory.value.slice(-6),
       { role: 'user', content: text },
-      { role: 'assistant', content: JSON.stringify(toolPlan) }
+      { role: 'assistant', content: typeof data.reply === 'string' ? data.reply : JSON.stringify(data) }
     ]
-    return executeAgentRequest(text, {
-      selectedStyleId: selectedStyleId.value,
-      today: new Date().toISOString().slice(0, 10)
-    }, toolPlan)
+    // advisor 模式返回 { reply, actions }，包装成页面可渲染的结构
+    return executeAgentRequest(text, { today: new Date().toISOString().slice(0, 10) }, data)
   } catch (e) {
     console.error('[DeepSeek] 调用失败:', e?.message || e)
     return null
@@ -391,7 +361,6 @@ function approvalStatusName(status) {
   return { pending: '待确认', approved: '已批准', rejected: '已拒绝', executed: '已执行', expired: '已过期' }[status] || status
 }
 
-onMounted(async () => { await bootstrapOptions() })
 </script>
 
 <style scoped>
