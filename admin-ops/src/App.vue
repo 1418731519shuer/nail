@@ -212,7 +212,7 @@ import { useOpsData } from '@/composables/useOpsData'
 const route = useRoute()
 const activeMenu = computed(() => route.path)
 const assistantOpen = ref(false)
-const { ensureOpsData } = useOpsData()
+const { ensureOpsData, refreshOpsData } = useOpsData()
 const drawerMessages = ref([])
 const drawerInput = ref('')
 const drawerLoading = ref(false)
@@ -346,6 +346,7 @@ function approveDrawerApproval(message) {
     message.content = `${message.content}\n\n已执行：${executed.log.operationName}，并写入审计日志。款式管理页已刷新状态。`
     drawerConfirmText.value = ''
     ElMessage.success('已执行并写入审计日志')
+    refreshOpsData() // 执行后刷新缓存，下次问 AI 能拿到最新状态
   } catch (error) {
     ElMessage.error(error.message)
   }

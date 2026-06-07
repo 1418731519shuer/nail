@@ -219,7 +219,7 @@ const previewDialog = ref(false)
 const previewTarget = ref(null)
 const confirmText = ref('')
 const chatBodyRef = ref(null)
-const { ensureOpsData } = useOpsData()
+const { ensureOpsData, refreshOpsData } = useOpsData()
 
 let msgId = 0
 function pushMsg(obj) {
@@ -328,6 +328,7 @@ function approveMsg(msg) {
     const executed = approveAndExecuteOperation(msg.result.approval.approvalId, confirmText.value)
     msg.result.approval = executed.approval
     ElMessage.success('已执行，并写入审计日志')
+    refreshOpsData() // 执行后刷新缓存，下次问 AI 能拿到最新状态
   } catch (err) {
     ElMessage.error(err.message)
   }
