@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── fonts ─────────────────────────────────────────────────────────────────── */
+
+:root {
+  --font-sans: "Plus Jakarta Sans", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  color: #1C1410;
+  background: #FAF7F4;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* ── animations ─────────────────────────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(207, 99, 56, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(207, 99, 56, 0.18); }
+}
+
+/* card entrance */
+.animate-card {
+  animation: scale-in 280ms var(--ease-out-expo) both;
+}
+
+/* modal overlay */
+.animate-overlay {
+  animation: fade-in 180ms ease both;
+}
+
+/* modal panel */
+.animate-modal {
+  animation: scale-in 240ms var(--ease-out-expo) both;
+}
+
+/* toast */
+.animate-toast {
+  animation: slide-up 260ms var(--ease-out-quart) both;
+}
+
+/* result image reveal */
+.animate-reveal {
+  animation: fade-in 400ms var(--ease-out-quart) both;
+}
+
+/* loading shimmer on skeletons */
+.animate-shimmer {
+  background: linear-gradient(90deg,
+    #FAF0EA 0%,
+    #F5E4D8 40%,
+    #FAF0EA 80%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ── reduced motion ─────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── scrollbar ───────────────────────────────────────────────────────────────── */
+
+.scrollbar-soft::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-soft::-webkit-scrollbar-thumb {
+  background: rgba(207, 99, 56, 0.28);
+  border-radius: 999px;
+}
+@import "./legacy-user.css";
