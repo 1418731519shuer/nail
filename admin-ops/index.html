@@ -5,18 +5,30 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>美甲运营端</title>
-    <!--
-      字体策略：
-      · DM Sans      — 现代圆润英文/数字，跨平台稳定，契合暖色奶油风
-      · Noto Sans SC — Google 出品，Mac/Win/Linux 全平台中文，无乱码
-      两者均走 Google Fonts CDN，font-display:swap 防 FOUT
-    -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.loli.net" />
+    <link rel="preconnect" href="https://gstatic.loli.net" crossorigin />
+    <link href="https://fonts.loli.net/css2?family=Cinzel:wght@400;600;700;900&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- CDN（BootCDN 国内节点） -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.5.13/vue.global.prod.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.9.7/index.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.9.7/index.full.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.5.1/echarts.min.js"></script>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <!-- 防机器人 beacon：只有真人浏览器执行 JS 才会触发通知 -->
+    <script>
+      (function() {
+        try {
+          fetch('/api/beacon', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ page: location.pathname }),
+            keepalive: true
+          });
+        } catch(e) {}
+      })();
+    </script>
   </body>
 </html>

@@ -452,6 +452,19 @@
     </dialog>
 
     <script src="./app.js?v=20260511-nail-seg"></script>
+    <!-- 防机器人 beacon：只有真人浏览器执行 JS 才会触发通知 -->
+    <script>
+      (function() {
+        try {
+          fetch('/api/beacon', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ page: location.pathname }),
+            keepalive: true
+          });
+        } catch(e) {}
+      })();
+    </script>
   </body>
 </html>
 

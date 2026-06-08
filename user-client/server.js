@@ -167,6 +167,12 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    // 防机器人 beacon：只有执行 JS 的真人浏览器才会调用此接口
+    if (req.method === "POST" && url.pathname === "/api/beacon") {
+      await handleBeacon(req, res);
+      return;
+    }
+
     if (req.method !== "GET" && req.method !== "HEAD") {
       sendJson(res, 405, { error: "Method not allowed" });
       return;
@@ -211,9 +217,33 @@ function readJsonCached(filePath) {
   if (cached && cached.mtimeMs === stats.mtimeMs) {
     return cached.value;
   }
-  const parsed = JSON.parse(fs.readFileSync(filePath, "utf8"));
-  jsonFileCache.set(cacheKey, { mtimeMs: stats.mtimeMs, value: parsed });
+  const raw = fs.readFileSync(filePath, "utf8");
+  const parsed = JSON.parse(raw);
+  jsonFileCache.set(cacheKey, { mtimeMs: stats.mtimeMs, value: parsed, raw });
   return parsed;
+}
+
+function readJsonRawCached(filePath) {
+  const stats = fs.statSync(filePath);
+  const cacheKey = path.resolve(filePath);
+  const cached = jsonFileCache.get(cacheKey);
+  if (cached && cached.mtimeMs === stats.mtimeMs) {
+    return cached.raw || JSON.stringify(cached.value);
+  }
+  const raw = fs.readFileSync(filePath, "utf8");
+  const parsed = JSON.parse(raw);
+  jsonFileCache.set(cacheKey, { mtimeMs: stats.mtimeMs, value: parsed, raw });
+  return raw;
+}
+
+function sendJsonFile(res, filePath) {
+  try {
+    const raw = readJsonRawCached(filePath);
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(raw);
+  } catch (e) {
+    sendJson(res, 500, { error: e.message });
+  }
 }
 
 function serveStatic(pathname, res) {
@@ -593,7 +623,7 @@ async function handleXhsTrendSnapshot(req, res) {
     sendJson(res, 404, { error: "XHS trend snapshot not found. Run python scripts/build_xhs_operational_mock.py first." });
     return;
   }
-  sendJson(res, 200, readJsonCached(snapshotPath));
+  sendJsonFile(res, snapshotPath);
 }
 
 async function handleXhsTrendOverview(req, res) {
@@ -797,7 +827,7 @@ async function handleSimulationDbSummary(req, res) {
     });
     return;
   }
-  sendJson(res, 200, readJsonCached(summaryPath));
+  sendJsonFile(res, summaryPath);
 }
 
 async function handleHandDetect3D(req, res) {
@@ -1993,4 +2023,50 @@ function execFileAsync(command, args, timeout) {
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// 防机器人 beacon：真人浏览器执行 JS 后调用，写入专用日志供通知脚本监听
+const BEACON_LOG = "/tmp/visitor-beacon.log";
+async function handleBeacon(req, res) {
+  // 允许跨域（页面和 API 同源，但保险起见）
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  let body = "";
+  req.on("data", (chunk) => (body += chunk));
+  await new Promise((resolve) => req.on("end", resolve));
+
+  let page = "/";
+  try {
+    const parsed = JSON.parse(body);
+    page = parsed.page || "/";
+  } catch (_) {}
+
+  // 获取真实 IP（nginx 代理后用 X-Real-IP 或 X-Forwarded-For）
+  const ip =
+    req.headers["x-real-ip"] ||
+    (req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
+    req.socket.remoteAddress ||
+    "";
+
+  const ua = req.headers["user-agent"] || "";
+  const time = new Date()
+    .toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })
+    .replace(/\//g, "/");
+
+  // 格式：IP|PAGE|UA|TIME
+  const line = `${ip}|${page}|${ua}|${time}\n`;
+
+  try {
+    fs.appendFileSync(BEACON_LOG, line);
+  } catch (_) {}
+
+  sendJson(res, 200, { ok: true });
 }
