@@ -10,6 +10,10 @@ interesting.next/
 # ── 构建产物 ──────────────────────────────────────
 admin-ops/dist/
 
+# ── 脚本生成的中间数据集（由 build_xhs_style_dataset.mjs 生成）──
+data/xhs/processed/xhs-style-dataset.json
+admin-ops/src/data/xhs-admin-seed.json
+
 # ── 脚本生成的数据（run_all.sh 重新生成） ──────────
 user-client/outputs/simulation/
 user-client/db/nail_simulation.sqlite

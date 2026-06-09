@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:full": "concurrently -n mock,vite -c cyan,green \"node mock-server.js\" \"vite\"",
-    "init-db": "node init-styles-db.js",
+    "dev:full": "concurrently -n mock,vite -c cyan,green \"node mock-server.cjs\" \"vite\"",
+    "init-db": "node init-styles-db.cjs",
     "build": "vite build",
     "preview": "vite preview"
   },

@@ -73,9 +73,10 @@ export async function fetchOpsData() {
     getJson('/api/metrics-summary', fallbackMetrics),
     getJson('/api/simulation-summary', fallbackSimulation),
     getJson('/api/xhs-style-dataset', fallbackXhsDataset),
-    getJson('/api/xhs-trend-snapshot', fallbackTrendSnapshot)
-  ]).then(([metrics, simulation, xhsDataset, trendSnapshot]) => {
-    const built = buildOpsData(metrics, simulation, xhsDataset, trendSnapshot)
+    getJson('/api/xhs-trend-snapshot', fallbackTrendSnapshot),
+    getJson('/api/daily-trend?days=14', { dates: [], tryon: [], confirm: [], want: [], view: [] })
+  ]).then(([metrics, simulation, xhsDataset, trendSnapshot, dailyTrend]) => {
+    const built = buildOpsData(metrics, simulation, xhsDataset, trendSnapshot, dailyTrend)
     opsCacheValue = built
     opsCacheTime = Date.now()
     return built
@@ -155,15 +156,19 @@ function normalizeMetricRow(row, index, contentStyle) {
   }
 }
 
-function buildTrendData(metrics, hotStyles, coldStyles) {
-  const dates = Array.from({ length: 7 }, (_, i) => `D${i + 1}`)
-  const hotBase = hotStyles.slice(0, 7).map((item) => item.confirmCount || item.tryOnCount || 0)
-  const coldBase = coldStyles.slice(0, 7).map((item) => item.tryOnCount || item.viewCount || 0)
-  return {
-    dates,
-    hotTrend: dates.map((_, i) => hotBase[i] || Math.round((metrics.totals?.orders || 1) * (0.7 + i * 0.12))),
-    coldTrend: dates.map((_, i) => coldBase[i] || Math.round((metrics.totals?.try_ons || 1) * (1.05 - i * 0.04)))
+function buildTrendData(dailyTrend) {
+  if (dailyTrend?.dates?.length) {
+    return {
+      dates:     dailyTrend.dates.map(d => d.slice(5)),  // "04-20" 省略年份
+      hotTrend:  dailyTrend.confirm,
+      coldTrend: dailyTrend.tryon,
+      wantTrend: dailyTrend.want,
+      viewTrend: dailyTrend.view
+    }
   }
+  // fallback
+  const dates = Array.from({ length: 7 }, (_, i) => `D${i + 1}`)
+  return { dates, hotTrend: [], coldTrend: [], wantTrend: [], viewTrend: [] }
 }
 
 function buildSuggestions(hotStyles, coldStyles, potentialStyles, totals) {
@@ -257,7 +262,7 @@ function buildRecommendationSlots({ hotStyles, potentialStyles, coldStyles, styl
     .filter(Boolean)
 }
 
-export function buildOpsData(metrics = fallbackMetrics, simulation = fallbackSimulation, xhsDataset = fallbackXhsDataset, trendSnapshot = fallbackTrendSnapshot) {
+export function buildOpsData(metrics = fallbackMetrics, simulation = fallbackSimulation, xhsDataset = fallbackXhsDataset, trendSnapshot = fallbackTrendSnapshot, dailyTrend = null) {
   const totals = metrics.totals || fallbackMetrics.totals
   const xhsStyles = Array.isArray(xhsDataset.styles) ? xhsDataset.styles : []
   const hotBank = pickContentBank(xhsStyles, 'hot')
@@ -286,15 +291,37 @@ export function buildOpsData(metrics = fallbackMetrics, simulation = fallbackSim
     .filter((item, index, arr) => item.id && arr.findIndex((x) => x.id === item.id) === index)
   const styleLookup = new Map(styleList.map((item) => [item.id, item]))
 
+  // 用 daily-trend 14天数据算环比：后7天 vs 前7天
+  function calcGrowth(arr) {
+    if (!arr || arr.length < 2) return 0
+    const half = Math.floor(arr.length / 2)
+    const prev = arr.slice(0, half).reduce((s, v) => s + v, 0)
+    const curr = arr.slice(-half).reduce((s, v) => s + v, 0)
+    if (!prev) return 0
+    return Math.round((curr - prev) / prev * 1000) / 10  // 保留1位小数
+  }
+
+  const tryOnGrowth   = calcGrowth(dailyTrend?.tryon)
+  const confirmGrowth = calcGrowth(dailyTrend?.confirm)
+  const wantGrowth    = calcGrowth(dailyTrend?.want)
+  const viewGrowth    = calcGrowth(dailyTrend?.view)
+
+  // 今日（最新一天）数值
+  const lastIdx = (dailyTrend?.tryon?.length || 0) - 1
+  const todayTryon   = lastIdx >= 0 ? (dailyTrend.tryon[lastIdx]   || 0) : (totals.try_ons || 0)
+  const todayConfirm = lastIdx >= 0 ? (dailyTrend.confirm[lastIdx] || 0) : (totals.orders  || 0)
+  const todayUsers   = Math.round(todayTryon * 0.58)
+  const todayAvg     = todayConfirm ? Math.round((todayTryon / todayConfirm) * 10) / 10 : 0
+
   const todayStats = {
-    tryOnCount: totals.try_ons || potentialStyles.reduce((sum, item) => sum + item.tryOnCount, 0),
-    userCount: totals.try_on_users || Math.max(0, Math.round((totals.try_ons || 0) * 0.58)),
-    confirmCount: totals.orders || hotStyles.reduce((sum, item) => sum + item.confirmCount, 0),
-    avgTryPerOrder: totals.orders ? Math.round((totals.try_ons / totals.orders) * 10) / 10 : 0,
-    tryOnTrend: Math.round((simulation.model_report_true_3class?.accuracy || 0.12) * 100),
-    userTrend: percent(totals.candidate_rate),
-    confirmTrend: percent(totals.total_confirm_rate),
-    avgTryTrend: percent(totals.tryon_confirm_rate) - percent(totals.total_confirm_rate)
+    tryOnCount:    todayTryon,
+    userCount:     todayUsers,
+    confirmCount:  todayConfirm,
+    avgTryPerOrder: todayAvg,
+    tryOnTrend:    tryOnGrowth,
+    userTrend:     tryOnGrowth,   // 用户数与试戴同源
+    confirmTrend:  confirmGrowth,
+    avgTryTrend:   wantGrowth
   }
 
   return {
@@ -303,7 +330,7 @@ export function buildOpsData(metrics = fallbackMetrics, simulation = fallbackSim
     xhsDataset,
     trendSnapshot,
     todayStats,
-    trendData: buildTrendData(metrics, hotStyles, coldStyles),
+    trendData: buildTrendData(dailyTrend),
     hotStyles,
     coldStyles,
     potentialStyles,

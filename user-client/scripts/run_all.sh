@@ -1,21 +1,29 @@
 #!/bin/bash
-# 一键运行三个数据生成脚本（按顺序）
-# 用法：bash scripts/run_all.sh
-
+# 一键数据生成（从 nail/ 或 user-client/ 均可运行）
 set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-cd "$SCRIPT_DIR/.."
+ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+UC="$ROOT/user-client"
+ADMIN="$ROOT/admin-ops"
 
-echo "=== [1/3] 生成趋势仿真数据 ==="
-python3 scripts/simulate_nail_trends.py
-
-echo ""
-echo "=== [2/3] 构建运营 mock 数据 ==="
-python3 scripts/build_xhs_operational_mock.py
+echo "=== [1/5] 构建 XHS 款式数据集 ==="
+node "$UC/scripts/build_xhs_style_dataset.mjs"
 
 echo ""
-echo "=== [3/3] 导入 SQLite ==="
-python3 scripts/import_simulation_to_sqlite.py
+echo "=== [2/5] 生成趋势仿真数据（~30s）==="
+python3 "$UC/scripts/simulate_nail_trends.py"
 
 echo ""
-echo "✓ 全部完成。mock-server 会在 500ms 内自动重载 CSV 数据。"
+echo "=== [3/5] 构建运营 mock 数据 ==="
+python3 "$UC/scripts/build_xhs_operational_mock.py"
+
+echo ""
+echo "=== [4/5] 导入 SQLite ==="
+python3 "$UC/scripts/import_simulation_to_sqlite.py"
+
+echo ""
+echo "=== [5/5] 初始化运营端数据库 ==="
+node "$ADMIN/init-styles-db.cjs"
+
+echo ""
+echo "✅ 数据生成完毕。"

@@ -84,11 +84,10 @@
     <el-card shadow="never" class="panel">
       <template #header>
         <div class="card-header">
-          <span>试戴与冷热趋势</span>
-          <el-tag type="info" size="small">7 日窗口</el-tag>
+          <span>近 14 日行为趋势</span>
+          <el-tag type="info" size="small">{{ rangeText }}</el-tag>
         </div>
       </template>
-      <p class="range-note">{{ rangeText }}</p>
       <div ref="trendChartRef" class="chart"></div>
     </el-card>
   </div>
@@ -122,8 +121,9 @@ const top5 = computed(() => hotStyles.value.slice(0, 8).map((s, i) => ({ ...s, h
 const suggestions = computed(() => ops.value?.suggestions || [])
 const activities = computed(() => ops.value?.activities || [])
 const rangeText = computed(() => {
-  const range = ops.value?.trendSnapshot?.dateRange || {}
-  return range.startDate ? `当前分析基于 ${range.startDate} 到 ${range.endDate} 的 120 天同源模拟数据。` : '当前分析基于已生成的模拟数据。'
+  const dates = ops.value?.trendData?.dates || []
+  if (dates.length >= 2) return `${dates[0]} ~ ${dates[dates.length - 1]}`
+  return '数据加载中...'
 })
 
 const statCards = computed(() => [
@@ -137,10 +137,10 @@ function initChart() {
   if (!trendChartRef.value || !ops.value) return
   if (chart) chart.dispose()
 
-  const data = ops.value.trendData || { dates: [], hotTrend: [], coldTrend: [] }
+  const data = ops.value.trendData || { dates: [], hotTrend: [], coldTrend: [], wantTrend: [], viewTrend: [] }
   chart = echarts.init(trendChartRef.value, window.__ECHARTS_THEME__)
   chart.setOption({
-    color: ['#ff6b9d', '#1890ff'],
+    color: ['#ff6b9d', '#52c41a', '#1890ff', '#faad14'],
     tooltip: {
       trigger: 'axis',
       backgroundColor: 'rgba(255,255,255,0.96)',
@@ -149,17 +149,11 @@ function initChart() {
       textStyle: { color: '#333' }
     },
     legend: {
-      data: ['热门确认', '冷门风险'],
+      data: ['确认要做', '想做', '试戴', '浏览'],
       bottom: 0,
       icon: 'roundRect'
     },
-    grid: {
-      left: 36,
-      right: 24,
-      top: 24,
-      bottom: 48,
-      containLabel: true
-    },
+    grid: { left: 36, right: 24, top: 24, bottom: 48, containLabel: true },
     xAxis: {
       type: 'category',
       boundaryGap: false,
@@ -175,36 +169,31 @@ function initChart() {
     },
     series: [
       {
-        name: '热门确认',
-        type: 'line',
-        smooth: true,
-        symbol: 'circle',
-        symbolSize: 7,
+        name: '确认要做',
+        type: 'line', smooth: true, symbol: 'circle', symbolSize: 6,
         data: data.hotTrend,
-        lineStyle: { width: 3 },
-        areaStyle: {
-          opacity: 0.18,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(255,107,157,0.35)' },
-            { offset: 1, color: 'rgba(255,107,157,0.03)' }
-          ])
-        }
+        lineStyle: { width: 2.5 },
+        areaStyle: { opacity: 0.12, color: new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(255,107,157,0.3)'},{offset:1,color:'rgba(255,107,157,0.02)'}]) }
       },
       {
-        name: '冷门风险',
-        type: 'line',
-        smooth: true,
-        symbol: 'circle',
-        symbolSize: 7,
+        name: '想做',
+        type: 'line', smooth: true, symbol: 'circle', symbolSize: 6,
+        data: data.wantTrend,
+        lineStyle: { width: 2.5 },
+        areaStyle: { opacity: 0.08, color: new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(82,196,26,0.28)'},{offset:1,color:'rgba(82,196,26,0.02)'}]) }
+      },
+      {
+        name: '试戴',
+        type: 'line', smooth: true, symbol: 'circle', symbolSize: 6,
         data: data.coldTrend,
-        lineStyle: { width: 3 },
-        areaStyle: {
-          opacity: 0.14,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(24,144,255,0.28)' },
-            { offset: 1, color: 'rgba(24,144,255,0.03)' }
-          ])
-        }
+        lineStyle: { width: 2.5 },
+        areaStyle: { opacity: 0.08, color: new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(24,144,255,0.22)'},{offset:1,color:'rgba(24,144,255,0.02)'}]) }
+      },
+      {
+        name: '浏览',
+        type: 'line', smooth: true, symbol: 'none',
+        data: data.viewTrend,
+        lineStyle: { width: 1.5, type: 'dashed', color: '#faad14' }
       }
     ]
   })
