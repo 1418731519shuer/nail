@@ -271,7 +271,7 @@ function buildDailyOption(styleMeta, pred) {
       axisLabel: { color: '#888', showMaxLabel: true, showMinLabel: true },
       axisLine: { lineStyle: { color: '#eee' } }
     },
-    yAxis: { type: 'value', splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } } },
+    yAxis: { type: 'value', scale: true, splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } } },
     series: allSeries.map(s => ({ ...s, legendHoverLink: !s.name.includes('(预测)') }))
   }
 }
@@ -329,7 +329,7 @@ function buildWeeklyOption(styleMeta, pred) {
 
 function buildCompareOption(data) {
   const series = data?.series || []
-  const dates = series[0]?.dates || []
+  const dates = data?.dates || series[0]?.dates || []
   const histLen = dates.length
   const xData = [...dates, 'W+1 预测', 'W+2 预测']
   const COLORS = ['#ff6b9d', '#36cfc9', '#722ed1', '#fa8c16']
@@ -341,7 +341,8 @@ function buildCompareOption(data) {
     const localStyle = selectableStyles.value.find(s => s.id === item.styleId || s.styleCode === item.styleId)
     const pred = buildMockPrediction(localStyle?.id || item.styleId)
     const predM = pred?.metrics || {}
-    const lastVal = item.values[histLen - 1] ?? null
+    const vals = item.data || item.values || []
+    const lastVal = vals[histLen - 1] ?? null
     let w1Val = null, w2Val = null
     if (metricKey.includes('_per_')) {
       const factor = pred.w1State === 'HotUp' ? 1.08 : pred.w1State === 'ColdDown' ? 0.92 : 1.0
@@ -362,7 +363,7 @@ function buildCompareOption(data) {
             { offset: 1, color: 'transparent' }
           ])
         },
-        data: [...item.values, null, null], z: 2 },
+        data: [...vals, null, null], z: 2 },
       { name: `${item.styleName}(预测)`, type: 'line', smooth: false, showSymbol: true,
         symbol: 'emptyCircle', symbolSize: 6, color,
         lineStyle: { type: 'dashed', width: 2, opacity: 0.7 },
@@ -371,7 +372,25 @@ function buildCompareOption(data) {
     ]
   })
 
-  const valFmt = (v) => isRate ? `${(Number(v || 0) * 100).toFixed(1)}%` : `${Number(v || 0)}`
+  // 收集所有历史数值，计算合适的 y 轴范围
+  const allVals = series.flatMap(item => (item.data || item.values || []).filter(v => v != null))
+  const dataMin = allVals.length ? Math.min(...allVals) : 0
+  const dataMax = allVals.length ? Math.max(...allVals) : 1
+  const dataSpan = dataMax - dataMin || 1
+
+  // 率类指标：格式化精度自适应（< 0.1 时保留 2 位小数）
+  const fmtRate = (v) => {
+    const pct = Number(v || 0) * 100
+    return pct < 1 ? `${pct.toFixed(2)}%` : pct < 10 ? `${pct.toFixed(1)}%` : `${Math.round(pct)}%`
+  }
+  const valFmt = (v) => isRate ? fmtRate(v) : `${Number(v || 0)}`
+
+  // y 轴范围：数据最小值下移 10%，最大值上移 10%，不强制从 0 开始
+  const yMin = isRate
+    ? Math.max(0, dataMin - dataSpan * 0.15)
+    : Math.max(0, dataMin - dataSpan * 0.1)
+  const yMax = dataMax + dataSpan * 0.1
+
   return {
     tooltip: { trigger: 'axis', valueFormatter: valFmt },
     legend: { data: series.map(s => s.styleName), bottom: 0 },
@@ -393,7 +412,9 @@ function buildCompareOption(data) {
     },
     yAxis: {
       type: 'value',
-      axisLabel: { formatter: (v) => isRate ? `${Math.round(v * 100)}%` : `${v}` },
+      min: yMin,
+      max: yMax,
+      axisLabel: { formatter: valFmt },
       splitLine: { lineStyle: { color: '#eef0f4', type: 'dashed' } }
     },
     series: allSeries
@@ -542,10 +563,12 @@ onMounted(async () => {
   await fetchOverview()
   // 若从热度榜单跳转带了 styleId，优先选中它
   const queryId = route.query.styleId
-  selectedStyleId.value = queryId || overview.value.latestHotIds?.[0] || selectableStyles.value[0]?.id || ''
+  const hotIds = (overview.value.hotStyles || []).map(s => s.id)
+  const potentialIds = (overview.value.potentialStyles || []).map(s => s.id)
+  selectedStyleId.value = queryId || hotIds[0] || selectableStyles.value[0]?.id || ''
   compareStyleIds.value = normalizeCompareSelection([
-    overview.value.latestHotIds?.[0],
-    overview.value.latestPotentialIds?.[0]
+    hotIds[0],
+    potentialIds[0] || hotIds[1]
   ].filter(Boolean))
   window.addEventListener('resize', resizeCharts)
 })

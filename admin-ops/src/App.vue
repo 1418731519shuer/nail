@@ -88,112 +88,93 @@
 
     <el-drawer
       v-model="assistantOpen"
-      title="AI 运营助手"
       direction="rtl"
-      size="420px"
+      size="440px"
       class="assistant-drawer"
+      :with-header="true"
     >
+      <template #header>
+        <div class="drawer-header-inner">
+          <span class="drawer-title">AI 运营助手</span>
+          <div class="drawer-mode-bar">
+            <button
+              v-for="m in drawerModes" :key="m.key"
+              class="drawer-mode-btn"
+              :class="{ active: drawerMode === m.key }"
+              @click="switchDrawerMode(m.key)"
+            >
+              <span class="dm-en">{{ m.en }}</span>
+              <span class="dm-zh">{{ m.zh }}</span>
+            </button>
+          </div>
+        </div>
+      </template>
+
       <div class="drawer-chat">
         <div ref="drawerChatRef" class="drawer-chat-body">
           <div v-if="drawerMessages.length === 0" class="drawer-welcome">
-            <strong>我可以帮你快速看运营。</strong>
-            <p>比如：把冷掉的款下架但猫眼不要动；首页前 8 款怎么排；生成今日运营报告。</p>
+            <strong>{{ drawerModeConfig.welcomeTitle }}</strong>
+            <p>{{ drawerModeConfig.welcomeDesc }}</p>
           </div>
 
-          <div v-for="message in drawerMessages" :key="message.id" class="drawer-message" :class="message.role">
-            <div class="drawer-bubble">
-              <div v-html="formatAssistantText(message.content)"></div>
-              <template v-if="message.result">
-                <div class="drawer-plan-card">
-                  <div class="drawer-plan-head">
-                    <strong>任务计划</strong>
-                    <el-tag size="small" :type="riskType(message.result.plan.riskLevel)">
-                      {{ riskName(message.result.plan.riskLevel) }}
-                    </el-tag>
-                  </div>
-                  <p>
-                    意图：{{ intentName(message.result.plan.intentType) }} ·
-                    确认：{{ message.result.plan.needConfirm ? '需要' : '不需要' }} ·
-                    二次确认：{{ message.result.plan.needSecondConfirm ? '需要' : '不需要' }}
-                  </p>
-                  <p v-if="message.result.plan.objects.protectedConditions?.length">
-                    保护条件：{{ message.result.plan.objects.protectedConditions.join('、') }}
-                  </p>
-                  <ol>
-                    <li v-for="item in message.result.plan.plan" :key="item.step">
-                      <b>{{ item.operation }}</b>：{{ item.reason }}
-                    </li>
-                  </ol>
-                </div>
+          <div v-for="msg in drawerMessages" :key="msg.id" class="drawer-message" :class="msg.role">
+            <!-- system-notice -->
+            <div v-if="msg.role === 'system-notice'" class="drawer-notice">{{ msg.text }}</div>
+            <template v-else>
+              <div class="drawer-bubble">
+                <div v-html="formatDrawerText(msg.role === 'user' ? msg.text : msg.reply)"></div>
 
-                <div v-if="message.result.preview" class="drawer-preview-card">
-                  <div class="drawer-plan-head">
-                    <strong>{{ message.result.preview.title }}</strong>
-                    <el-tag size="small" type="warning">Preview</el-tag>
-                  </div>
-                  <p>{{ message.result.preview.summary }}</p>
-                  <div v-if="feedPreviewSlots(message.result.preview).length" class="drawer-slot-grid">
-                    <div v-for="slot in feedPreviewSlots(message.result.preview)" :key="slot.slot" class="drawer-slot-card">
-                      <div class="drawer-slot-head">
-                        <strong>{{ slot.slot }}</strong>
-                        <span>{{ slot.slotName }}</span>
-                      </div>
-                      <p>{{ slot.styleName }}</p>
-                      <small>{{ strategyTypeName(slot.strategyType) }}</small>
+                <!-- Action 模式确认卡 -->
+                <template v-if="msg.ops && !msg.executed">
+                  <div class="drawer-ops-card">
+                    <div class="drawer-ops-head">
+                      <strong>执行计划（{{ msg.ops.length }} 步）</strong>
+                      <el-tag size="small" type="warning">待确认</el-tag>
+                    </div>
+                    <ol class="drawer-ops-list">
+                      <li v-for="op in msg.ops" :key="op.opId">
+                        <b>{{ op.opId }}</b>
+                        <span v-if="describeDrawerOp(op)" class="drawer-op-hint"> · {{ describeDrawerOp(op) }}</span>
+                        <span class="drawer-op-reason"> — {{ op.reason }}</span>
+                      </li>
+                    </ol>
+                    <div class="drawer-ops-actions">
+                      <el-button size="small" @click="cancelDrawerOps(msg)">取消</el-button>
+                      <el-button size="small" type="primary" :loading="msg.executing" @click="confirmDrawerOps(msg)">确认执行</el-button>
                     </div>
                   </div>
-                  <ul>
-                    <li v-for="item in message.result.preview.reasons.slice(0, 4)" :key="item">{{ item }}</li>
-                  </ul>
-                  <p v-if="message.result.preview.after?.diversityScore !== undefined">
-                    多样性分：{{ message.result.preview.after.diversityScore }}
-                  </p>
-                  <ul v-if="message.result.preview.after?.riskNotes?.length">
-                    <li v-for="item in message.result.preview.after.riskNotes" :key="item">{{ item }}</li>
-                  </ul>
-                  <p v-if="message.result.preview.targets.length">
-                    对象：{{ message.result.preview.targets.map((item) => item.targetName || item.targetId).join('、') }}
-                  </p>
-                  <div
-                    v-if="message.result.preview.operationName === 'preview_feed_mix_change' && !message.result.approval"
-                    class="drawer-approval-actions"
-                  >
-                    <el-button size="small" type="primary" plain @click="createFeedStrategyApproval(message)">
-                      按该策略生成确认单
-                    </el-button>
-                    <span class="drawer-tip">也可以继续输入自定义调整，比如“P3 换成 S0244”。</span>
-                  </div>
-                </div>
+                </template>
 
-                <div v-if="message.result.approval" class="drawer-approval-card">
-                  <p>确认单：{{ message.result.approval.approvalId }}</p>
-                  <p>状态：{{ message.result.approval.status }}</p>
-                  <el-input
-                    v-if="message.result.preview?.secondConfirmRequired && message.result.approval.status === 'pending'"
-                    v-model="drawerConfirmText"
-                    size="small"
-                    placeholder="请输入：确认执行"
-                  />
-                  <div v-if="message.result.approval.status === 'pending'" class="drawer-approval-actions">
-                    <el-button size="small" @click="rejectDrawerApproval(message)">取消</el-button>
-                    <el-button size="small" type="danger" @click="approveDrawerApproval(message)">
-                      {{ message.result.preview?.secondConfirmRequired ? '确认执行' : '确认' }}
-                    </el-button>
+                <!-- 执行结果 -->
+                <template v-if="msg.execResults">
+                  <div class="drawer-exec-result">
+                    <div v-for="(r, i) in msg.execResults" :key="i" class="drawer-exec-row">
+                      <span>{{ r.ok ? '✅' : '❌' }}</span>
+                      <span>{{ msg.ops?.[i]?.opId }}</span>
+                      <span class="drawer-exec-hint">{{ describeDrawerResult(r) }}</span>
+                    </div>
                   </div>
-                </div>
-              </template>
-            </div>
+                </template>
+              </div>
+            </template>
           </div>
         </div>
 
+        <!-- 快捷问题 -->
         <div class="drawer-quick-list">
-          <el-button v-for="item in drawerQuickQuestions" :key="item" round size="small" @click="askDrawer(item)">
-            {{ item }}
-          </el-button>
+          <el-button
+            v-for="item in drawerQuickQuestions" :key="item"
+            round size="small"
+            @click="askDrawer(item)"
+          >{{ item }}</el-button>
         </div>
 
         <div class="drawer-input-row">
-          <el-input v-model="drawerInput" placeholder="问一个运营问题" @keyup.enter="sendDrawer" />
+          <el-input
+            v-model="drawerInput"
+            :placeholder="drawerModeConfig.placeholder"
+            @keyup.enter="sendDrawer"
+          />
           <el-button type="primary" :loading="drawerLoading" @click="sendDrawer">发送</el-button>
         </div>
       </div>
@@ -205,116 +186,72 @@
 import { computed, nextTick, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
-import { buildDeepSeekToolContract } from '@/agent/deepseek-tool-contract'
 import { useOpsData } from '@/composables/useOpsData'
 
 const route = useRoute()
 const activeMenu = computed(() => route.path)
 const assistantOpen = ref(false)
-const { ensureOpsData, refreshOpsData } = useOpsData()
+const { ensureOpsData } = useOpsData()
+
+// ── 三模式定义（与主页面保持一致）──────────────────────────────
+const drawerModes = [
+  {
+    key: 'chat',
+    en: 'Chat', zh: '对话', icon: '💬',
+    placeholder: '随便聊点什么，比如：最近流行什么风格？',
+    welcomeTitle: '随便聊点什么。',
+    welcomeDesc: '美甲趋势、风格灵感、小红书文案，什么都可以问。',
+    systemHint: '你现在处于自由对话模式。用户可能聊美甲趋势、风格灵感、随便提问，不需要强制引导到数据或操作。轻松、自然地回答即可，不用输出结构化分析。'
+  },
+  {
+    key: 'insight',
+    en: 'Insight', zh: '洞察', icon: '📊',
+    placeholder: '问数据，比如：最近哪些款冷门风险高？',
+    welcomeTitle: '数据都在这里。',
+    welcomeDesc: '热度、冷门风险、趋势、日报，直接问就行。',
+    systemHint: '你现在处于数据洞察模式。用户希望看到基于真实运营数据的深度分析。必须引用具体指标（hot_score、cold_risk_score、试戴量、确认率等），给出有数据支撑的结论。可以生成分析报告、趋势判断、异常预警。'
+  },
+  {
+    key: 'action',
+    en: 'Action', zh: '执行', icon: '⚡',
+    placeholder: '说要做什么，比如：把冷门款下架，猫眼保留',
+    welcomeTitle: '告诉我要做什么。',
+    welcomeDesc: '上下架、改推荐位、批量操作，我来帮你执行。',
+    systemHint: '你现在处于操作执行模式。用户希望真实执行运营操作。分析完成后，必须明确列出要执行的原子操作（上架/下架/推荐位调整等），说明影响范围和风险等级，并等待用户确认后执行。写操作必须先预览，高风险操作必须二次确认。'
+  }
+]
+
+const QUICK_MAP = {
+  chat:    ['最近流行什么美甲风格？', '帮我写一段猫眼款的小红书文案', '春夏季最受欢迎的色系是什么？'],
+  insight: ['哪些款冷门风险最高？', '最近 7 天哪些款变热？', '生成今日运营日报'],
+  action:  ['把冷掉的款下架，猫眼保留', '首页前 8 款怎么排？', '帮我刷新推荐位']
+}
+
+const drawerMode = ref('chat')
+const drawerModeConfig = computed(() => drawerModes.find(m => m.key === drawerMode.value) || drawerModes[0])
+const drawerQuickQuestions = computed(() => QUICK_MAP[drawerMode.value] || QUICK_MAP.chat)
+
+function switchDrawerMode(key) {
+  if (drawerMode.value === key) return
+  drawerMode.value = key
+  if (drawerMessages.value.length) {
+    const cfg = drawerModes.find(m => m.key === key)
+    drawerMessages.value.push({ id: ++dmId, role: 'system-notice', text: `已切换到 ${cfg.en} ${cfg.zh} 模式` })
+    scrollDrawerBottom()
+  }
+}
+
+// ── 消息状态 ────────────────────────────────────────────────
+let dmId = 0
 const drawerMessages = ref([])
 const drawerInput = ref('')
 const drawerLoading = ref(false)
 const drawerChatRef = ref(null)
-const drawerConfirmText = ref('')
-
-const drawerQuickQuestions = [
-  '生成今日运营报告。',
-  '把最近冷掉的款下架，但猫眼不要动。',
-  '推荐位怎么排？',
-  '哪些款有冷门风险？'
-]
-
-function formatAssistantText(text) {
-  return String(text || '').replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-}
+const drawerHistory = ref([])  // 传给后端的精简上下文
 
 async function scrollDrawerBottom() {
   await nextTick()
   if (drawerChatRef.value) drawerChatRef.value.scrollTop = drawerChatRef.value.scrollHeight
-}
-
-async function sendDrawer() {
-  const text = drawerInput.value.trim()
-  if (!text) return
-
-  const pendingMessage = [...drawerMessages.value].reverse().find((message) => {
-    return message.role === 'assistant' && message.result?.approval?.status === 'pending'
-  })
-  if (pendingMessage && /^(确认|确认执行|执行|同意|批准|ok|OK)$/i.test(text)) {
-    drawerMessages.value.push({ id: Date.now(), role: 'user', content: text })
-    drawerInput.value = ''
-    drawerConfirmText.value = text
-    approveDrawerApproval(pendingMessage)
-    await scrollDrawerBottom()
-    return
-  }
-
-  drawerMessages.value.push({ id: Date.now(), role: 'user', content: text })
-  drawerInput.value = ''
-  drawerLoading.value = true
-  await scrollDrawerBottom()
-  try {
-    // 优先用 DeepSeek advisor 回复
-    const context = { selectedStyleId: 'style-gradient-003', storeId: 'store-001', today: new Date().toISOString().slice(0,10) }
-    const aiData = await requestDeepSeekToolPlan(text).catch(() => null)
-    if (aiData?.reply) {
-      // DeepSeek 正常回复：先展示 AI 分析文字
-      const replyText = [
-        aiData.reply,
-        aiData.actions?.length ? '\n\n**建议动作：**\n' + aiData.actions.map((a, i) => `${i+1}. ${a}`).join('\n') : ''
-      ].join('')
-      drawerMessages.value.push({ id: Date.now() + 1, role: 'assistant', content: replyText })
-      // 如果是写操作意图，再追加本地原子操作 + approval card
-      if (isWriteIntent(text)) {
-        const result = executeAgentRequest(text, context, null)
-        if (result.preview || result.approval) {
-          drawerMessages.value.push({ id: Date.now() + 2, role: 'assistant', content: buildAgentDrawerText(result), result })
-        }
-      }
-    } else {
-      // 降级：本地规则
-      const result = executeAgentRequest(text, context, null)
-      drawerMessages.value.push({ id: Date.now() + 1, role: 'assistant', content: buildAgentDrawerText(result), result })
-    }
-    drawerConfirmText.value = ''
-  } catch (error) {
-    drawerMessages.value.push({ id: Date.now() + 1, role: 'assistant', content: `执行失败：${error.message}` })
-  } finally {
-    drawerLoading.value = false
-    await scrollDrawerBottom()
-  }
-}
-
-async function requestDeepSeekToolPlan(text) {
-  const opsData = await ensureOpsData()
-  const controller = new AbortController()
-  const timeoutId = window.setTimeout(() => controller.abort(), 30000) // 延长到 30s
-  const response = await fetch('/api/ops-deepseek-chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    signal: controller.signal,
-    body: JSON.stringify({
-      plannerMode: false,
-      message: text,
-      history: drawerMessages.value.slice(-6).map(m => ({ role: m.role, content: m.content })),
-      opsContext: {
-        currentPage: route.path,
-        currentStoreId: 'store-001',
-        totals: opsData?.metrics?.totals || {},
-        todayStats: opsData?.todayStats || {},
-        hotStyles: (opsData?.hotStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, hotIndex: s.hotIndex, confirmRate: s.confirmRate, trend: s.trend })),
-        coldStyles: (opsData?.coldStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, coldRisk: s.coldRisk, trend: s.trend })),
-        potentialStyles: (opsData?.potentialStyles || []).slice(0, 6).map(s => ({ id: s.id, name: s.name, growthScore: s.growthScore })),
-        recommendList: (opsData?.recommendList || []).slice(0, 8).map(s => ({ position: s.position, styleName: s.style?.name, slotType: s.slotType })),
-        modelReport: opsData?.modelReport || null
-      }
-    })
-  }).finally(() => window.clearTimeout(timeoutId))
-  const data = await response.json()
-  if (!response.ok) throw new Error(data.error || 'DeepSeek 请求失败')
-  return data  // advisor 模式直接返回 { reply, actions, ... }
 }
 
 function askDrawer(text) {
@@ -322,114 +259,124 @@ function askDrawer(text) {
   sendDrawer()
 }
 
-function buildAgentDrawerText(result) {
-  const parts = [
-    `**${result.analysis.title}**`,
-    result.analysis.conclusion,
-    `\n数据依据：\n${result.analysis.evidence.slice(0, 4).map((item, index) => `${index + 1}. ${item}`).join('\n')}`,
-    `\n建议动作：\n${result.analysis.actions.slice(0, 4).map((item, index) => `${index + 1}. ${item}`).join('\n')}`
-  ]
-  if (result.approval) {
-    parts.push(`\n已生成确认单 ${result.approval.approvalId}。${result.preview?.secondConfirmRequired ? '这是极高风险操作，需要输入“确认执行”。' : '确认后才会执行。'}`)
-  } else if (result.preview) {
-    parts.push('\n这是操作预览，不会自动改数据。')
-  } else {
-    parts.push('\n该任务是只读/报告/分析类，不需要确认。')
-  }
-  return parts.join('\n')
-}
+async function sendDrawer() {
+  const text = drawerInput.value.trim()
+  if (!text || drawerLoading.value) return
 
-function approveDrawerApproval(message) {
+  drawerInput.value = ''
+  drawerMessages.value.push({ id: ++dmId, role: 'user', text })
+  drawerLoading.value = true
+  await scrollDrawerBottom()
+
   try {
-    const executed = approveAndExecuteOperation(message.result.approval.approvalId, drawerConfirmText.value)
-    message.result.approval = executed.approval
-    message.content = `${message.content}\n\n已执行：${executed.log.operationName}，并写入审计日志。款式管理页已刷新状态。`
-    drawerConfirmText.value = ''
-    ElMessage.success('已执行并写入审计日志')
-    refreshOpsData() // 执行后刷新缓存，下次问 AI 能拿到最新状态
-  } catch (error) {
-    ElMessage.error(error.message)
-  }
-}
-
-function feedPreviewSlots(preview) {
-  return preview?.after?.slots || []
-}
-
-function strategyTypeName(type) {
-  return {
-    hot_conversion: '热门成交',
-    stable_conversion: '稳定成交',
-    potential_activation: '潜力激活',
-    style_diversity: '风格补位',
-    scroll_attraction: '下滑吸引',
-    new_style_test: '新品测试',
-    potential_extension: '潜力扩展',
-    long_tail_diversity: '多样性兜底'
-  }[type] || type
-}
-
-function createFeedStrategyApproval(message) {
-  try {
-    const slots = message.result.preview?.after?.slots || []
-    const result = executeAgentRequest('按推荐策略生成确认单', {
-      selectedStyleId: 'style-gradient-003',
-      storeId: 'store-001',
-      today: '2026-05-29'
-    }, {
-      intentType: 'execute',
-      riskLevel: 'critical',
-      needConfirm: true,
-      needSecondConfirm: true,
-      userGoal: '按 P1-P8 推荐策略替换首页推荐流',
-      objects: {
-        sectionIds: ['home_feed'],
-        filters: { source: 'feed_strategy', slots },
-        protectedConditions: []
-      },
-      plan: [
-        { step: 1, operation: 'get_section_styles', reason: '读取当前首页推荐流。', params: { sectionId: 'home_feed' } },
-        { step: 2, operation: 'preview_replace_section', reason: '按 P1-P8 策略生成区块替换预览。', params: { sectionId: 'home_feed', slots } },
-        { step: 3, operation: 'create_approval', reason: '推荐区块整体替换需要人工确认。', params: {} }
-      ],
-      finalResponseType: 'approval_required'
-    })
-    drawerMessages.value.push({
-      id: Date.now() + 2,
+    const data = await callDrawerDeepSeek(text)
+    const msg = {
+      id: ++dmId,
       role: 'assistant',
-      content: buildAgentDrawerText(result),
-      result
-    })
-    scrollDrawerBottom()
-  } catch (error) {
-    ElMessage.error(error.message)
+      reply: data?.reply || '抱歉，未能获取回复。',
+      ops: data?.ops?.length ? data.ops : null,
+      executed: false,
+      executing: false,
+      execResults: null
+    }
+    drawerMessages.value.push(msg)
+    // 更新上下文
+    drawerHistory.value = [
+      ...drawerHistory.value.slice(-6),
+      { role: 'user', content: text },
+      { role: 'assistant', content: typeof data?.reply === 'string' ? data.reply : JSON.stringify(data) }
+    ]
+  } catch (err) {
+    ElMessage.error(err.message)
+    drawerMessages.value.push({ id: ++dmId, role: 'assistant', reply: '请求失败，请稍后重试。' })
+  } finally {
+    drawerLoading.value = false
+    await scrollDrawerBottom()
   }
 }
 
-function rejectDrawerApproval(message) {
+async function callDrawerDeepSeek(text) {
   try {
-    message.result.approval = rejectApproval(message.result.approval.approvalId)
-    message.content = `${message.content}\n\n已取消该确认单，不会执行写操作。`
-    ElMessage.info('已取消确认单')
-  } catch (error) {
-    ElMessage.error(error.message)
+    const opsData = await ensureOpsData()
+    const res = await fetch('/api/ops-deepseek-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        history: drawerHistory.value.slice(-6),
+        mode: drawerMode.value,
+        modeHint: drawerModeConfig.value.systemHint,
+        plannerMode: false,
+        opsContext: {
+          currentPage: route.path,
+          currentStoreId: 'store-001',
+          totals: opsData?.metrics?.totals || {},
+          todayStats: opsData?.todayStats || {},
+          hotStyles: (opsData?.hotStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, hotIndex: s.hotIndex, confirmRate: s.confirmRate, trend: s.trend })),
+          coldStyles: (opsData?.coldStyles || []).slice(0, 8).map(s => ({ id: s.id, name: s.name, coldRisk: s.coldRisk, trend: s.trend })),
+          potentialStyles: (opsData?.potentialStyles || []).slice(0, 6).map(s => ({ id: s.id, name: s.name, growthScore: s.growthScore })),
+          recommendList: (opsData?.recommendList || []).slice(0, 8).map(s => ({ position: s.position, styleName: s.style?.name, slotType: s.slotType })),
+          modelReport: opsData?.modelReport || null
+        }
+      })
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    if (data.error) { ElMessage.warning('DeepSeek：' + data.error); return null }
+    return data
+  } catch (e) {
+    console.error('[Drawer DeepSeek]', e?.message || e)
+    return null
   }
 }
 
-function isWriteIntent(text) {
-  return /下架|上架|归档|恢复|改价|调价|替换|推荐位|执行/.test(text)
+// ── Action 确认卡执行逻辑 ───────────────────────────────────
+async function confirmDrawerOps(msg) {
+  if (!msg.ops?.length || msg.executing) return
+  msg.executing = true
+  try {
+    const { executePlan } = await import('./views/ai-assistant/aichata/action/executor.js')
+    const results = await executePlan(msg.ops)
+    msg.execResults = results
+    msg.executed = true
+    const failed = results.filter(r => !r.ok)
+    if (failed.length === 0) {
+      ElMessage.success(`全部 ${results.length} 步执行成功`)
+    } else {
+      ElMessage.warning(`${results.length - failed.length} 成功，${failed.length} 失败`)
+    }
+    window.dispatchEvent(new CustomEvent('agent-state-changed'))
+  } catch (e) {
+    ElMessage.error(e.message)
+  } finally {
+    msg.executing = false
+  }
 }
 
-function riskName(level) {
-  return { low: '低风险', medium: '中风险', high: '高风险', critical: '极高风险' }[level] || level
+function cancelDrawerOps(msg) {
+  msg.ops = null
+  ElMessage.info('已取消操作')
 }
 
-function riskType(level) {
-  return { low: 'success', medium: 'warning', high: 'danger', critical: 'danger' }[level] || 'info'
+// ── 工具函数 ───────────────────────────────────────────────
+function formatDrawerText(text) {
+  return String(text || '').replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
 }
 
-function intentName(intent) {
-  return { query: '查询', analysis: '分析', generate: '生成', execute: '执行', report: '报告' }[intent] || intent
+function describeDrawerOp(op) {
+  const p = op.params || {}
+  if (p.ids?.$ref) return `← ${p.ids.$ref}`
+  if (Array.isArray(p.ids)) return `${p.ids.length} 个款式`
+  return p.name || p.styleId || (p.filters ? `${p.filters.length}个条件` : '') || ''
+}
+
+function describeDrawerResult(r) {
+  if (!r.ok) return r.error || '失败'
+  const p = r.resolvedParams || r.params || {}
+  if (p.ids && Array.isArray(p.ids)) return `成功（${p.ids.length} 条）`
+  if (r.data?.count != null) return `查询到 ${r.data.count} 条`
+  if (r.data?.affected != null) return `影响 ${r.data.affected} 条`
+  return p.name || p.styleId || '成功'
 }
 </script>
 
@@ -586,19 +533,58 @@ function intentName(intent) {
 :deep(.assistant-drawer .el-drawer__header) {
   background: rgba(255,252,248,0.92);
   border-bottom: 1px solid rgba(185,120,80,0.10);
-  color: #2d1a10 !important;
-  font-weight: 800 !important;
-  font-size: 16px !important;
-  letter-spacing: -0.01em;
-  padding: 16px 20px;
+  padding: 14px 20px;
+  margin-bottom: 0;
 }
+/* 隐藏 el-drawer 自带的关闭按钮左边的默认 title slot 空间 */
+:deep(.assistant-drawer .el-drawer__header .el-drawer__title) { display: none; }
 
 .drawer-chat {
   height: 100%; display: flex; flex-direction: column;
   background: #fff8f2;
 }
 
+/* ── Drawer header 自定义 ── */
+.drawer-header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; gap: 12px;
+}
+.drawer-title {
+  font-size: 15px; font-weight: 800; color: #2d1a10;
+  letter-spacing: -0.01em; white-space: nowrap;
+}
+
+/* ── 模式切换（header 内嵌） ── */
+.drawer-mode-bar {
+  display: flex; gap: 2px;
+  background: rgba(201,122,78,0.08);
+  border-radius: 8px;
+  padding: 2px;
+}
+.drawer-mode-btn {
+  border: none; background: transparent; cursor: pointer;
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 6px;
+  font-family: inherit;
+  color: rgba(45,26,16,0.45);
+  transition: background 150ms, color 150ms;
+}
+.drawer-mode-btn:hover { color: #a85e35; }
+.drawer-mode-btn.active {
+  background: #fff;
+  color: #b86e4a;
+  box-shadow: 0 1px 4px rgba(180,100,50,0.12);
+}
+.dm-en { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; }
+.dm-zh { font-size: 11px; opacity: 0.75; }
+
 .drawer-chat-body { flex: 1; overflow: auto; padding: 16px; }
+
+/* system-notice 分隔线 */
+.drawer-notice {
+  text-align: center; font-size: 11px; color: rgba(45,26,16,0.35);
+  padding: 4px 0 8px; letter-spacing: 0.03em;
+}
 
 .drawer-welcome {
   padding: 16px; border-radius: 16px;
@@ -630,78 +616,35 @@ function intentName(intent) {
   box-shadow: 0 2px 10px rgba(180,100,50,0.06);
 }
 
-.drawer-plan-card,
-.drawer-preview-card,
-.drawer-approval-card {
+/* ── Action 确认卡 ── */
+.drawer-ops-card {
   margin-top: 10px; padding: 10px;
-  border: 1px solid rgba(128,75,45,0.12);
+  border: 1px solid rgba(201,122,78,0.22);
   border-radius: 12px;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,248,242,0.9);
 }
-
-.drawer-plan-head,
-.drawer-approval-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+.drawer-ops-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 8px;
 }
-
-.drawer-plan-card p,
-.drawer-preview-card p,
-.drawer-approval-card p {
-  margin: 6px 0;
-  color: #606266;
+.drawer-ops-list {
+  margin: 0 0 10px; padding-left: 18px; font-size: 12.5px; color: #4a3020;
 }
+.drawer-ops-list li { margin-bottom: 4px; line-height: 1.6; }
+.drawer-op-hint { color: #a85e35; }
+.drawer-op-reason { color: rgba(45,26,16,0.45); font-size: 11.5px; }
+.drawer-ops-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
-.drawer-plan-card ol,
-.drawer-preview-card ul {
-  margin: 8px 0 0;
-  padding-left: 18px;
-}
-
-.drawer-plan-card li,
-.drawer-preview-card li {
-  margin-bottom: 5px;
-}
-
-.drawer-approval-actions {
-  justify-content: flex-end;
-  margin-top: 8px;
-}
-
-.drawer-slot-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.drawer-slot-card {
-  padding: 10px;
-  border: 1px solid rgba(213,139,104,0.2);
+/* ── 执行结果 ── */
+.drawer-exec-result {
+  margin-top: 10px; padding: 8px 10px;
   border-radius: 10px;
-  background: rgba(255,248,242,0.8);
-}
-
-.drawer-slot-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  background: rgba(240,255,245,0.9);
+  border: 1px solid rgba(80,180,100,0.18);
   font-size: 12px;
 }
-
-.drawer-slot-card p,
-.drawer-slot-card small {
-  margin: 4px 0 0;
-  display: block;
-}
-
-.drawer-tip {
-  color: #909399;
-  font-size: 12px;
-}
+.drawer-exec-row { display: flex; gap: 8px; align-items: center; padding: 2px 0; }
+.drawer-exec-hint { color: rgba(45,26,16,0.5); font-size: 11.5px; }
 
 .drawer-message.user .drawer-bubble {
   color: #fff;

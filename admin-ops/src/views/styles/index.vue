@@ -57,10 +57,10 @@
           <template #default="{ row }">
             <div class="row-actions">
               <el-button text class="btn-warm" @click="detail = row">详情</el-button>
-              <el-button v-if="canPublish(row)" text class="btn-success" @click="openManualPreview('publish', row)">上架</el-button>
-              <el-button v-if="canUnpublish(row)" text class="btn-muted" @click="openManualPreview('unpublish', row)">下架</el-button>
-              <el-button v-if="canRestore(row)" text class="btn-warm" @click="openManualPreview('restore', row)">恢复上架</el-button>
-              <el-button v-if="canArchive(row)" text class="btn-danger" @click="openManualPreview('archive', row)">归档</el-button>
+              <el-button v-if="canPublish(row)" text class="btn-success" @click="executeAction('publish', row)">上架</el-button>
+              <el-button v-if="canUnpublish(row)" text class="btn-muted" @click="executeAction('unpublish', row)">下架</el-button>
+              <el-button v-if="canRestore(row)" text class="btn-warm" @click="executeAction('restore', row)">恢复上架</el-button>
+              <el-button v-if="canArchive(row)" text class="btn-danger" @click="executeAction('archive', row)">归档</el-button>
               <el-button text class="btn-warm" @click="detail = row">走势</el-button>
               <el-button text class="btn-promote" @click="togglePromote(row)">
                 {{ row.isRecommend ? '取消主推' : '设为主推' }}
@@ -305,74 +305,14 @@
         <el-button type="primary" @click="submitBatchStyles">批量新增</el-button>
       </template>
     </el-dialog>
-    <el-dialog v-model="previewDialogVisible" :title="previewResult?.preview?.title || '操作预览'" width="720px">
-      <div v-if="previewResult?.preview" class="preview-dialog">
-        <p class="preview-summary">{{ previewResult.preview.summary }}</p>
-        <div class="preview-meta">
-          <el-tag :type="riskTagType(previewResult.preview.riskLevel)">{{ riskLabel(previewResult.preview.riskLevel) }}</el-tag>
-          <el-tag v-if="previewResult.preview.secondConfirmRequired" type="danger">闇€瑕佷簩娆＄‘璁</el-tag>
-        </div>
-
-        <el-descriptions :column="2" border>
-          <el-descriptions-item label="操作">{{ previewResult.preview.operationName }}</el-descriptions-item>
-          <el-descriptions-item label="瀵硅薄">
-            {{ previewResult.preview.targets.map((item) => item.targetName || item.targetId).join(' / ') }}
-          </el-descriptions-item>
-        </el-descriptions>
-
-        <div class="preview-columns">
-          <div class="preview-block">
-            <h4>Before</h4>
-            <pre>{{ formatJson(previewResult.preview.before) }}</pre>
-          </div>
-          <div class="preview-block">
-            <h4>After</h4>
-            <pre>{{ formatJson(previewResult.preview.after) }}</pre>
-          </div>
-        </div>
-
-        <div class="preview-block">
-          <h4>鍘熷洜</h4>
-          <ul>
-            <li v-for="item in previewResult.preview.reasons" :key="item">{{ item }}</li>
-          </ul>
-        </div>
-
-        <div class="preview-block">
-          <h4>褰卞搷</h4>
-          <ul>
-            <li v-for="item in previewResult.preview.impact" :key="item">{{ item }}</li>
-          </ul>
-        </div>
-
-        <el-input
-          v-if="previewResult.preview.secondConfirmRequired && previewResult.approval?.status === 'pending'"
-          v-model="confirmText"
-          placeholder="请输入：确认执行"
-        />
-      </div>
-
-      <template #footer>
-        <el-button @click="cancelPreview">取消</el-button>
-        <el-button
-          v-if="previewResult?.approval?.status === 'pending'"
-          type="primary"
-          :loading="approving"
-          @click="confirmPreview"
-        >
-          {{ previewResult?.preview?.secondConfirmRequired ? '确认执行' : '确认' }}
-        </el-button>
-      </template>
-    </el-dialog>
   </div>
 </template>
 
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 import * as echarts from 'echarts'
-import { approveAndExecuteOperation, executeAgentRequest, rejectApproval } from '@/agent/agent-executor'
 import { createMockStyle, getStyleManagementRows, persistAgentState } from '@/agent/mock-data'
 
 const keyword = ref('')
@@ -382,10 +322,6 @@ const detail = ref(null)
 const drawerVisible = ref(false)
 const addDialogVisible = ref(false)
 const batchDialogVisible = ref(false)
-const previewDialogVisible = ref(false)
-const previewResult = ref(null)
-const confirmText = ref('')
-const approving = ref(false)
 const trendSnapshot = ref({ dateRange: {}, styles: [] })
 const detailWindowDays = ref(30)
 const detailDailyChartRef = ref(null)
@@ -712,117 +648,45 @@ function togglePromote(row) {
   ElMessage.info('主推开关当前还是页面态，下一步可以补成原子操作和审计日志。')
 }
 
-function buildManualPlan(action, row) {
-  const base = {
-    userGoal: `${action} ${row.styleCode || row.id}`,
-    objects: {
-      styleIds: [row.styleCode || row.id],
-      filters: { targetStatus: row.rawStatus }
-    }
-  }
-
-  if (action === 'publish') {
-    return {
-      intentType: 'execute',
-      riskLevel: 'high',
-      needConfirm: true,
-      ...base,
-      plan: [
-        { step: 1, operation: 'search_styles', reason: '按款式编号定位目标款式。', params: { keyword: row.styleCode || row.id } },
-        { step: 2, operation: 'check_style_publish_readiness', reason: '检查上架资料完整度和可制作性。', params: { styleId: row.styleCode || row.id } },
-        { step: 3, operation: 'preview_publish_style', reason: '生成上架预览，不直接执行。', params: { styleId: row.styleCode || row.id } },
-        { step: 4, operation: 'create_approval', reason: '生成确认单。', params: {} }
-      ],
-      finalResponseType: 'approval_required'
-    }
-  }
-
-  if (action === 'restore') {
-    return {
-      intentType: 'execute',
-      riskLevel: 'high',
-      needConfirm: true,
-      ...base,
-      plan: [
-        { step: 1, operation: 'search_styles', reason: '按款式编号定位要恢复上架的款式。', params: { keyword: row.styleCode || row.id } },
-        { step: 2, operation: 'preview_restore_style', reason: '预览恢复上架后的状态和影响。', params: { styleId: row.styleCode || row.id } },
-        { step: 3, operation: 'create_approval', reason: '生成确认单。', params: {} }
-      ],
-      finalResponseType: 'approval_required'
-    }
-  }
-
-  if (action === 'archive') {
-    return {
-      intentType: 'execute',
-      riskLevel: 'critical',
-      needConfirm: true,
-      needSecondConfirm: true,
-      ...base,
-      plan: [
-        { step: 1, operation: 'search_styles', reason: '按款式编号定位要归档的款式。', params: { keyword: row.styleCode || row.id } },
-        { step: 2, operation: 'preview_archive_style', reason: '生成归档预览，不物理删除。', params: { styleId: row.styleCode || row.id } },
-        { step: 3, operation: 'create_approval', reason: '生成确认单。', params: {} }
-      ],
-      finalResponseType: 'approval_required'
-    }
-  }
-
-  return {
-    intentType: 'execute',
-    riskLevel: 'high',
-    needConfirm: true,
-    ...base,
-    plan: [
-      { step: 1, operation: 'search_styles', reason: '按款式编号定位要下架的款式。', params: { keyword: row.styleCode || row.id } },
-      { step: 2, operation: 'get_style_window_metrics', reason: '补充查看趋势和风险指标。', params: { styleId: row.styleCode || row.id } },
-      { step: 3, operation: 'preview_unpublish_style', reason: '生成单款下架预览，不直接执行。', params: { styleId: row.styleCode || row.id } },
-      { step: 4, operation: 'create_approval', reason: '生成确认单。', params: {} }
-    ],
-    finalResponseType: 'approval_required'
-  }
+const ACTION_MAP = {
+  publish:   { label: '上架', opId: 'style.publish',   status: 'published',   confirmType: 'info' },
+  unpublish: { label: '下架', opId: 'style.unpublish', status: 'unpublished', confirmType: 'warning' },
+  restore:   { label: '恢复上架', opId: 'style.publish', status: 'published', confirmType: 'info' },
+  archive:   { label: '归档', opId: 'style.archive',   status: 'archived',    confirmType: 'error' },
 }
 
-function openManualPreview(action, row) {
-  const result = executeAgentRequest(
-    `${action} ${row.styleCode || row.id}`,
-    {
-      selectedStyleId: row.id,
-      storeId: 'store-001',
-      today: '2026-05-29'
-    },
-    buildManualPlan(action, row)
-  )
-
-  previewResult.value = result
-  confirmText.value = ''
-  previewDialogVisible.value = true
-}
-
-async function confirmPreview() {
-  if (!previewResult.value?.approval?.approvalId) return
-  approving.value = true
+async function executeAction(action, row) {
+  const cfg = ACTION_MAP[action]
+  if (!cfg) return
   try {
-    approveAndExecuteOperation(previewResult.value.approval.approvalId, confirmText.value)
-    ElMessage.success('操作已执行，并写入审计日志。')
-    previewDialogVisible.value = false
-    previewResult.value = null
-    confirmText.value = ''
-    refreshStylesFromAgent()
-  } catch (error) {
-    ElMessage.error(error.message || '执行失败')
-  } finally {
-    approving.value = false
+    await ElMessageBox.confirm(
+      `确认对「${row.name}」执行【${cfg.label}】操作？`,
+      cfg.label,
+      { confirmButtonText: '确认', cancelButtonText: '取消', type: cfg.confirmType }
+    )
+  } catch {
+    return  // 用户取消
   }
-}
-
-function cancelPreview() {
-  if (previewResult.value?.approval?.status === 'pending') {
-    rejectApproval(previewResult.value.approval.approvalId)
+  try {
+    const r = await fetch(`/api/styles/${row.id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: cfg.status })
+    })
+    const data = await r.json()
+    if (!data.ok) throw new Error(data.error || '执行失败')
+    // 写审计日志
+    await fetch('/api/audit-log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ op: cfg.opId, params: { styleId: row.id, name: row.name }, result: data })
+    }).catch(() => {})
+    ElMessage.success(`「${row.name}」已${cfg.label}`)
+    window.dispatchEvent(new CustomEvent('agent-state-changed'))
+    await refreshStylesFromAgent()
+  } catch (e) {
+    ElMessage.error(e.message || '执行失败')
   }
-  previewDialogVisible.value = false
-  previewResult.value = null
-  confirmText.value = ''
 }
 
 function sliceTrendWindow(series, windowDays) {
@@ -894,12 +758,48 @@ function resizeDetailCharts() {
   detailWeeklyChart?.resize()
 }
 
-function refreshStylesFromAgent() {
-  styleList.value = getStyleManagementRows()
+async function refreshStylesFromAgent() {
+  try {
+    const res = await fetch(`/api/styles?pageSize=200&${keyword.value ? `q=${encodeURIComponent(keyword.value)}&` : ''}${status.value ? `status=${status.value}` : ''}`)
+    const data = await res.json()
+    styleList.value = (data.rows || []).map(row => ({
+      id: row.id,
+      styleCode: row.style_code,
+      name: row.name,
+      image: row.cover_image,
+      detailImages: [],
+      referenceImages: [],
+      tryonAssets: [],
+      category: row.category,
+      priceLevel: row.price <= 140 ? 'low' : row.price >= 220 ? 'high' : 'mid',
+      tags: [...(row.tags_style || []), ...(row.tags_color || []), ...(row.tags_season || [])].slice(0, 5),
+      price: row.price,
+      status: row.status === 'published' ? 'active' : 'inactive',
+      rawStatus: row.status,
+      isHot: row.trend_label === 'HotUp',
+      isRecommend: row.is_promoted,
+      viewCount: row.view_uv,
+      tryOnCount: row.tryon_uv,
+      wantCount: row.want_uv,
+      confirmCount: row.confirm_uv,
+      confirmRate: row.view_uv ? Math.round((row.confirm_uv / row.view_uv) * 1000) / 10 : 0,
+      hotIndex: Math.round(row.hot_score * 100),
+      coldRisk: Math.round(row.cold_risk_score * 100),
+      createTime: row.listed_at || '未上架',
+      recommendBucket: row.recommend_bucket,
+      description: row.description,
+      author: row.author,
+      xhsLikes: row.xhs_likes,
+      xhsSaves: row.xhs_saves,
+    }))
+  } catch (e) {
+    console.warn('[styles] API 加载失败，回退到本地数据', e.message)
+    styleList.value = getStyleManagementRows()
+  }
 }
 
 onMounted(async () => {
-  refreshStylesFromAgent()
+  await refreshStylesFromAgent()
   await fetchTrendSnapshot()
   window.addEventListener('agent-state-changed', refreshStylesFromAgent)
   window.addEventListener('resize', resizeDetailCharts)
