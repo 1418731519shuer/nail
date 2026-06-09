@@ -151,6 +151,29 @@ const server = http.createServer(async (req, res) => {
       await handleRecommendSyncApply(req, res);
       return;
     }
+    // ── OPS 原子操作路由 ────────────────────────────────────────────────────────
+    if (req.method === "GET" && url.pathname === "/api/ops/styles") {
+      await handleOpsStyles(req, res); return;
+    }
+    if (req.method === "GET" && url.pathname === "/api/ops/feed-slots") {
+      await handleOpsFeedSlots(req, res); return;
+    }
+    if (req.method === "GET" && url.pathname === "/api/ops/audit-log") {
+      await handleOpsAuditLog(req, res); return;
+    }
+    if (req.method === "GET" && url.pathname === "/api/ops/context") {
+      await handleOpsContext(req, res); return;
+    }
+    if (req.method === "POST" && url.pathname === "/api/ops/execute") {
+      await handleOpsExecute(req, res); return;
+    }
+    if (req.method === "OPTIONS" && url.pathname.startsWith("/api/ops/")) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+      res.writeHead(204); res.end(); return;
+    }
+
 
     if (req.method === "POST" && url.pathname === "/api/hand-detect-clean") {
       await handleHandDetectClean(req, res);
@@ -170,6 +193,21 @@ const server = http.createServer(async (req, res) => {
     // 防机器人 beacon：只有执行 JS 的真人浏览器才会调用此接口
     if (req.method === "POST" && url.pathname === "/api/beacon") {
       await handleBeacon(req, res);
+      return;
+    }
+
+    // beacon log query
+    if (url.pathname === "/api/beacon-log") {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      if (req.method === "OPTIONS") { res.writeHead(204); res.end(); return; }
+    }
+    if (req.method === "GET" && url.pathname === "/api/beacon-log") {
+      try {
+        const raw = fs.existsSync(BEACON_LOG) ? fs.readFileSync(BEACON_LOG, "utf8") : "";
+        const lines2 = raw.trim().split(String.fromCharCode(10)).filter(Boolean).reverse().slice(0, 200);
+        const records = lines2.map(l2 => { const [ip,page,ua,time]=l2.split("|"); return {ip,page,ua,time}; });
+        sendJson(res, 200, { records });
+      } catch(e) { sendJson(res, 500, { error: String(e) }); }
       return;
     }
 
@@ -338,7 +376,6 @@ async function handleOpsDeepSeekChat(req, res) {
   const userMessage = String(body.message || "").trim();
   const history = Array.isArray(body.history) ? body.history.slice(-8) : [];
   const opsContext = body.opsContext && typeof body.opsContext === "object" ? body.opsContext : {};
-  const operationCatalog = body.operationCatalog && typeof body.operationCatalog === "object" ? body.operationCatalog : null;
   const plannerMode = Boolean(body.plannerMode);
 
   if (!userMessage) {
@@ -346,11 +383,14 @@ async function handleOpsDeepSeekChat(req, res) {
     return;
   }
 
+  // Load current state for planner context
+  const opsState = plannerMode ? loadOpsState() : null;
+
   const messages = [
     {
       role: "system",
-      content: plannerMode && operationCatalog
-        ? buildOpsToolPlannerPrompt(opsContext, operationCatalog)
+      content: plannerMode
+        ? buildOpsToolPlannerPrompt(opsContext, opsState)
         : buildOpsSystemPrompt(opsContext)
     },
     ...history.map((item) => ({
@@ -385,7 +425,15 @@ async function handleOpsDeepSeekChat(req, res) {
     parsed = { reply: content };
   }
 
-  sendJson(res, 200, plannerMode ? normalizeOpsToolPlanReply(parsed, userMessage) : normalizeOpsAdvisorReply(parsed));
+  if (plannerMode) {
+    const toolPlanResult = normalizeOpsToolPlanReply(parsed, userMessage);
+    if (toolPlanResult.toolPlan && toolPlanResult.toolPlan.needConfirm && opsState) {
+      toolPlanResult.executionResult = generateExecutionResult(toolPlanResult.toolPlan, opsState);
+    }
+    sendJson(res, 200, toolPlanResult);
+  } else {
+    sendJson(res, 200, normalizeOpsAdvisorReply(parsed));
+  }
 }
 
 async function handleTryOnGenerate(req, res, tryOnLevel = "normal") {
@@ -1169,10 +1217,10 @@ function buildSystemPrompt(styles, memory, hasPhoto) {
 你是美甲门店的 AI 试戴客服，语气像真实店员：口语、简短、直接，不要长篇科普。
 你的任务：
 1. 根据用户需求推荐店内可做的款式，不要编造不存在的款式。
-2. 一次最多说 2-4 句，重点放在“为什么适合”和“一个小提醒”。
+2. 一次最多说 2-4 句，重点放在"为什么适合"和"一个小提醒"。
 3. 可以追问预算、甲长、肤色顾虑、场景、是否接受贴钻/金箔/手绘，但追问要短。
 4. 必须提醒真实顾虑，例如手绘考验技师、猫眼光泽持久度、渐变长出来分层、短甲效果限制，但一句话带过。
-5. 如果用户已上传手部照片入口，说明“我会结合手部照片判断”，但不要假装已经做了真实视觉识别。
+5. 如果用户已上传手部照片入口，说明"我会结合手部照片判断"，但不要假装已经做了真实视觉识别。
 6. 输出必须是 JSON 对象，不要 Markdown。
 
 店内款式数据库：
@@ -1221,10 +1269,10 @@ function buildOpsSystemPrompt(opsContext) {
   const compactContext = {
     totals: opsContext.totals || {},
     todayStats: opsContext.todayStats || {},
-    hotStyles: Array.isArray(opsContext.hotStyles) ? opsContext.hotStyles.slice(0, 8) : [],
-    coldStyles: Array.isArray(opsContext.coldStyles) ? opsContext.coldStyles.slice(0, 8) : [],
-    potentialStyles: Array.isArray(opsContext.potentialStyles) ? opsContext.potentialStyles.slice(0, 6) : [],
-    recommendList: Array.isArray(opsContext.recommendList) ? opsContext.recommendList.slice(0, 8) : [],
+    hotStyles: Array.isArray(opsContext.hotStyles) ? opsContext.hotStyles.slice(0, 5).map(s => ({ id: s.id, name: s.name, hotIndex: s.hotIndex, confirmRate: s.confirmRate, trend: s.trend })) : [],
+    coldStyles: Array.isArray(opsContext.coldStyles) ? opsContext.coldStyles.slice(0, 5).map(s => ({ id: s.id, name: s.name, coldRisk: s.coldRisk, trend: s.trend })) : [],
+    potentialStyles: Array.isArray(opsContext.potentialStyles) ? opsContext.potentialStyles.slice(0, 4).map(s => ({ id: s.id, name: s.name, growthScore: s.growthScore })) : [],
+    recommendList: Array.isArray(opsContext.recommendList) ? opsContext.recommendList.slice(0, 8).map(s => ({ position: s.position, styleName: s.styleName, slotType: s.slotType })) : [],
     modelReport: opsContext.modelReport || null,
     currentPage: opsContext.currentPage || ""
   };
@@ -1236,71 +1284,265 @@ function buildOpsSystemPrompt(opsContext) {
 你的任务：
 1. 基于提供的运营数据回答，不能编造不存在的数据。
 2. 能解释今日运营、热门款、冷门风险、潜力款、推荐位排序、试戴/想要做/确认要做转化。
-3. 给建议时必须可执行，例如“把某款放到首屏第几位”“降低某款曝光”“检查封面/价格/试戴效果”。
-4. 如果数据不足，要直接说明“样本不足”，不要假装预测准确。
+3. 给建议时必须可执行，例如"把某款放到首屏第几位""降低某款曝光""检查封面/价格/试戴效果"。
+4. 如果数据不足，要直接说明"样本不足"，不要假装预测准确。
 5. 用户问推荐位时，优先使用 8 个推荐槽：前 4 个负责转化，后 4 个负责探索。
 6. 输出必须是 JSON 对象，不要 Markdown。
+7. reply 字段严格控制在 80-150 字以内，禁止列举大量款式名。
+8. actions 最多 4 条，每条不超过 30 字，只说关键操作，不列举款式名单。
+9. focusStyles 最多列 3 个款式名，且必须是数据中表现最突出的。
 
 当前运营数据：
 ${JSON.stringify(compactContext, null, 2)}
 
 返回 JSON 格式：
 {
-  "reply": "给运营看的自然中文回复，80-220字",
-  "actions": ["最多4条可执行动作"],
-  "focusStyles": ["最多4个重点款式名"],
+  "reply": "给运营看的自然中文回复，严格80-150字，不要列举款式名单",
+  "actions": ["最多4条，每条≤30字"],
+  "focusStyles": ["最多3个最重要款式名"],
   "riskLevel": "low|medium|high",
   "followUpQuestion": "一个可选追问，最多30字"
 }
 `;
 }
 
-function buildOpsToolPlannerPrompt(opsContext, operationCatalog) {
-  const compactContext = {
-    currentPage: opsContext.currentPage || "",
-    currentStoreId: opsContext.currentStoreId || "store-001"
-  };
+function buildOpsToolPlannerPrompt(opsContext, state) {
+  // Build current styles context for DeepSeek to match names to IDs
+  const allStyles = (state && state.styles) ? state.styles : [];
+  const styleContext = allStyles
+    .filter(s => s.name && s.id)
+    .slice(0, 100)
+    .map(s => ({
+      id: s.id,
+      name: s.name,
+      code: s.styleCode || s.id,
+      status: s.status || s.rawStatus || 'published',
+      tags: Array.isArray(s.tags) ? s.tags.slice(0, 4) : []
+    }));
 
-  return `
-你是美甲运营端 Tool Planner，不是聊天助手。
+  // Feed slots context
+  const feedSlots = (state && state.recommendConfig && state.recommendConfig.slots)
+    ? state.recommendConfig.slots.slice(0, 8).map(sl => ({
+        pos: sl.position,
+        styleId: sl.styleId,
+        name: allStyles.find(s => s.id === sl.styleId)?.name || sl.styleId
+      }))
+    : [];
 
-你的唯一任务：把用户自然语言转换成 JSON ToolPlan。不要输出自然语言建议，不要解释，不要生成 SQL，不要直接修改数据库。
+  const opsStr = [
+    '── 款式状态操作 ──',
+    'unpublish_style       下架单款  params:{styleId}',
+    'publish_style         上架单款  params:{styleId}',
+    'archive_style         归档单款  params:{styleId}',
+    'restore_style         恢复上架  params:{styleId}',
+    'batch_unpublish_styles 批量下架  params:{styleIds:[]}',
+    '── 推荐位操作 ──',
+    'replace_recommendation_slot    替换单个推荐槽  params:{position,newStyleId}',
+    'batch_replace_recommendation_slots 批量替换槽位 params:{slots:[{position,styleId}]}',
+    '── 款式属性操作 ──',
+    'update_style_sort_weight  修改排序权重  params:{styleId,weight}',
+    'toggle_style_promoted     开关主推标记  params:{styleId,promoted:bool}',
+    'toggle_style_makeable     开关可制作    params:{styleId,makeable:bool}',
+    'batch_update_price        批量改价      params:{styleIds:[],newPrice}',
+    'batch_update_tags         批量改标签    params:{styleIds:[],tags:{}}',
+    'create_style              新增款式      params:{name,price,...}',
+    '── 查询操作（只读，不需确认）──',
+    'search_styles             搜索款式      params:{keyword?,status?,tag?}',
+    'get_style_detail          款式详情      params:{styleId}',
+    'get_daily_stats           今日数据      params:{}',
+    'get_recommendation_config 推荐位配置   params:{}',
+  ].join('\n');
 
-必须遵守：
-1. 只能从 operationCatalog.operations 里选择 operation。
-2. 写操作不能直接调用，只能先 preview_*，再 create_approval。
-3. 用户明确指定的对象和位置必须进入 params，例如“S0244 放到位置2”必须用 search_styles + get_section_styles + preview_replace_single_slot + create_approval。
-4. execute_approved_operation 只能在用户确认后由业务系统调用，本轮规划不要直接执行。
-5. 删除必须转为下架或归档预览。
-6. 保护条件必须写入 objects.protectedConditions，并加入 exclude_* 操作。
+  return `你是美甲运营端 ToolPlanner AI。把用户自然语言指令转成 ToolPlan JSON。
+禁止输出自然语言，禁止 Markdown，只输出 JSON。
 
-当前上下文：
-${JSON.stringify(compactContext, null, 2)}
+【当前门店款式（共${styleContext.length}款）】
+${JSON.stringify(styleContext, null, 2)}
 
-原子操作契约：
-${JSON.stringify(operationCatalog, null, 2)}
+【当前推荐位（共${feedSlots.length}槽）】
+${JSON.stringify(feedSlots, null, 2)}
 
-只返回 JSON，格式：
+【可用原子操作】
+${opsStr}
+
+【判断规则】
+1. 用户要求下架/上架/归档/恢复/替换/改价/改标签 → intentType="execute", needConfirm=true, riskLevel="medium"或"high"
+2. 用户要查数据/分析趋势 → intentType="query"或"analysis", needConfirm=false
+3. 必须从上方款式列表匹配目标款式名称 → 直接把匹配到的 id 写入 params.styleId
+4. 如果款式名模糊匹配多个，取最相似的一个并说明
+5. 推荐位替换需同时指定 position 和 newStyleId
+6. 写操作 finalResponseType 必须是 "approval_required"
+
+【输出格式（严格 JSON）】
 {
   "toolPlan": {
-    "intentType": "query|analysis|generate|execute|report",
-    "riskLevel": "low|medium|high|critical",
+    "intentType": "execute",
+    "riskLevel": "medium",
     "needConfirm": true,
     "needSecondConfirm": false,
-    "userGoal": "用户目标",
+    "userGoal": "用户目标描述",
     "objects": {
-      "styleIds": ["S0244"],
-      "sectionIds": ["home_feed"],
-      "filters": { "targetPosition": 2 },
+      "styleIds": ["匹配到的id"],
       "protectedConditions": []
     },
     "plan": [
-      { "step": 1, "operation": "search_styles", "reason": "定位目标款", "params": { "keyword": "S0244", "tag": "猫眼" } }
+      {
+        "step": 1,
+        "operation": "unpublish_style",
+        "reason": "下架目标款式",
+        "params": { "styleId": "实际id" }
+      }
     ],
     "finalResponseType": "approval_required"
   }
+}`;
 }
-`;
+
+function generateExecutionResult(toolPlan, state) {
+  const plan = toolPlan.plan || [];
+  const styles = (state && state.styles) ? state.styles : [];
+  let preview = null;
+  let approval = null;
+
+  // Map from direct op name to preview op name (for frontend compatibility)
+  const opToPreview = {
+    unpublish_style: "preview_unpublish_style",
+    publish_style: "preview_publish_style",
+    archive_style: "preview_archive_style",
+    restore_style: "preview_restore_style",
+    batch_unpublish_styles: "preview_batch_unpublish",
+    replace_recommendation_slot: "preview_replace_single_slot",
+    batch_replace_recommendation_slots: "preview_replace_section",
+    toggle_style_promoted: "preview_toggle_promoted",
+    batch_update_price: "preview_price_change",
+    batch_update_tags: "preview_update_tags",
+  };
+
+  const statusAfter = {
+    unpublish_style: "unpublished",
+    publish_style: "published",
+    archive_style: "archived",
+    restore_style: "published",
+    batch_unpublish_styles: "unpublished",
+  };
+
+  for (const step of plan) {
+    const op = step.operation;
+    const params = step.params || {};
+
+    // Skip read-only ops
+    if (["search_styles","get_style_detail","get_daily_stats","get_recommendation_config","get_section_styles","search_by_tag"].includes(op)) continue;
+
+    const previewName = opToPreview[op] || ("preview_" + op);
+
+    if (["unpublish_style","publish_style","archive_style","restore_style"].includes(op)) {
+      const styleId = params.styleId;
+      const style = styles.find(s => s.id === styleId || s.styleCode === styleId);
+      const newStatus = statusAfter[op] || "unknown";
+      preview = {
+        operationName: previewName,
+        targets: style ? [{
+          targetId: style.id,
+          name: style.name,
+          before: { status: style.status || style.rawStatus || "published" },
+          after: { status: newStatus }
+        }] : [{ targetId: styleId, name: styleId, before: {}, after: { status: newStatus } }],
+        after: { status: newStatus }
+      };
+      approval = {
+        approvalId: "ai-plan-" + Date.now(),
+        status: "pending",
+        operationName: op,
+        params: { styleId: style ? style.id : styleId }
+      };
+      break; // take first write op
+    }
+
+    if (op === "batch_unpublish_styles") {
+      const ids = params.styleIds || [];
+      const matched = styles.filter(s => ids.includes(s.id) || ids.includes(s.styleCode));
+      preview = {
+        operationName: previewName,
+        targets: matched.map(s => ({ targetId: s.id, name: s.name, before: { status: s.status || "published" }, after: { status: "unpublished" } })),
+        after: { status: "unpublished" }
+      };
+      approval = {
+        approvalId: "ai-plan-" + Date.now(),
+        status: "pending",
+        operationName: op,
+        params: { styleIds: matched.map(s => s.id) }
+      };
+      break;
+    }
+
+    if (op === "replace_recommendation_slot") {
+      const newStyle = styles.find(s => s.id === params.newStyleId || s.styleCode === params.newStyleId);
+      preview = {
+        operationName: previewName,
+        targets: newStyle ? [{ targetId: newStyle.id, name: newStyle.name }] : [],
+        after: { position: params.position, styleId: params.newStyleId }
+      };
+      approval = {
+        approvalId: "ai-plan-" + Date.now(),
+        status: "pending",
+        operationName: op,
+        params
+      };
+      break;
+    }
+
+    if (op === "toggle_style_promoted") {
+      const style = styles.find(s => s.id === params.styleId || s.styleCode === params.styleId);
+      preview = {
+        operationName: previewName,
+        targets: style ? [{ targetId: style.id, name: style.name, before: { promoted: !params.promoted }, after: { promoted: params.promoted } }] : [],
+        after: { promoted: params.promoted }
+      };
+      approval = {
+        approvalId: "ai-plan-" + Date.now(),
+        status: "pending",
+        operationName: op,
+        params: { styleId: style ? style.id : params.styleId, promoted: params.promoted }
+      };
+      break;
+    }
+
+    if (op === "batch_update_price") {
+      const ids = params.styleIds || [];
+      const matched = styles.filter(s => ids.includes(s.id));
+      preview = {
+        operationName: previewName,
+        targets: matched.map(s => ({ targetId: s.id, name: s.name, before: { price: s.price }, after: { price: params.newPrice } })),
+        after: { price: params.newPrice }
+      };
+      approval = {
+        approvalId: "ai-plan-" + Date.now(),
+        status: "pending",
+        operationName: op,
+        params
+      };
+      break;
+    }
+
+    // Generic fallback for other write ops
+    if (op.startsWith("update_") || op.startsWith("batch_") || op.startsWith("create_") || op.startsWith("toggle_")) {
+      preview = {
+        operationName: previewName,
+        targets: [],
+        after: params
+      };
+      approval = {
+        approvalId: "ai-plan-" + Date.now(),
+        status: "pending",
+        operationName: op,
+        params
+      };
+      break;
+    }
+  }
+
+  if (!preview || !approval) return null;
+  return { preview, approval, plan: toolPlan };
 }
 
 function normalizeOpsToolPlanReply(parsed, userMessage) {
@@ -2069,4 +2311,582 @@ async function handleBeacon(req, res) {
   } catch (_) {}
 
   sendJson(res, 200, { ok: true });
+}
+
+
+// ── OPS STATE DB ─────────────────────────────────────────────────────────────
+const opsStatePath = path.join(root, "db", "ops-state.json");
+
+function loadOpsState() {
+  if (fs.existsSync(opsStatePath)) {
+    try { return JSON.parse(fs.readFileSync(opsStatePath, "utf8")); } catch(_) {}
+  }
+  // 首次：从种子数据初始化
+  const seedPath = path.join(root, "db", "xhs-admin-seed.json");
+  const styles = fs.existsSync(seedPath) ? JSON.parse(fs.readFileSync(seedPath, "utf8")) : [];
+  const state = {
+    styles,
+    feedSlots: [
+      { position: 1, slotName: "P1 主爆款位", visibleType: "full_visible", styleId: styles[0]&&styles[0].id || null, styleName: styles[0]&&styles[0].name || null },
+      { position: 2, slotName: "P2 稳转化位", visibleType: "full_visible", styleId: styles[1]&&styles[1].id || null, styleName: styles[1]&&styles[1].name || null },
+      { position: 3, slotName: "P3 潜力激活位", visibleType: "full_visible", styleId: styles[2]&&styles[2].id || null, styleName: styles[2]&&styles[2].name || null },
+      { position: 4, slotName: "P4 风格补位", visibleType: "full_visible", styleId: styles[3]&&styles[3].id || null, styleName: styles[3]&&styles[3].name || null },
+      { position: 5, slotName: "P5 下滑吸引位", visibleType: "half_visible", styleId: styles[4]&&styles[4].id || null, styleName: styles[4]&&styles[4].name || null },
+      { position: 6, slotName: "P6 新品测试位", visibleType: "half_visible", styleId: styles[5]&&styles[5].id || null, styleName: styles[5]&&styles[5].name || null },
+      { position: 7, slotName: "P7 潜力扩展位", visibleType: "half_visible", styleId: styles[6]&&styles[6].id || null, styleName: styles[6]&&styles[6].name || null },
+      { position: 8, slotName: "P8 多样性兜底位", visibleType: "half_visible", styleId: styles[7]&&styles[7].id || null, styleName: styles[7]&&styles[7].name || null }
+    ],
+    auditLogs: []
+  };
+  saveOpsState(state);
+  return state;
+}
+
+function saveOpsState(state) {
+  fs.writeFileSync(opsStatePath, JSON.stringify(state, null, 2), "utf8");
+}
+
+// GET /api/ops/styles
+async function handleOpsStyles(req, res) {
+  const state = loadOpsState();
+  sendJson(res, 200, { styles: state.styles });
+}
+
+// GET /api/ops/feed-slots
+async function handleOpsFeedSlots(req, res) {
+  const state = loadOpsState();
+  sendJson(res, 200, { feedSlots: state.feedSlots });
+}
+
+// GET /api/ops/audit-log
+async function handleOpsAuditLog(req, res) {
+  const state = loadOpsState();
+  sendJson(res, 200, { logs: (state.auditLogs || []).slice(-200) });
+}
+
+// GET /api/ops/context  -- 给 DeepSeek 用的精简 JSON 上下文
+async function handleOpsContext(req, res) {
+  const state = loadOpsState();
+  const ctx = {
+    updatedAt: new Date().toISOString(),
+    styleSummary: state.styles.map(function(s) {
+      return {
+        id: s.id, styleCode: s.styleCode, name: s.name,
+        status: s.status, category: s.category, price: s.price,
+        makeable: s.makeable, isPromoted: s.isPromoted,
+        metrics: s.metrics ? {
+          exposure: s.metrics.exposure, view: s.metrics.view,
+          tryonSuccess: s.metrics.tryonSuccess, want: s.metrics.want,
+          confirm: s.metrics.confirm, hotScore: s.metrics.hotScore,
+          coldRiskScore: s.metrics.coldRiskScore, trendLabel: s.metrics.trendLabel,
+          sampleStatus: s.metrics.sampleStatus
+        } : null
+      };
+    }),
+    feedSlots: state.feedSlots,
+    recentLogs: (state.auditLogs || []).slice(-20)
+  };
+  sendJson(res, 200, ctx);
+}
+
+// POST /api/ops/execute  -- 执行原子写操作
+async function handleOpsExecute(req, res) {
+  let body = "";
+  req.on("data", function(c) { body += c; });
+  await new Promise(function(r) { req.on("end", r); });
+
+  let payload;
+  try { payload = JSON.parse(body); } catch(_) {
+    return sendJson(res, 400, { ok: false, error: "invalid_json" });
+  }
+
+  const operation = payload.operation;
+  const params = payload.params || {};
+  const operatorId = payload.operatorId || "ops-manual";
+  const note = payload.note || "";
+
+  const state = loadOpsState();
+
+  function findStyle(id) {
+    if (!id) return null;
+    return state.styles.find(function(s) { return s.id === id || s.styleCode === id; });
+  }
+
+  function writeLog(op, target, before, after) {
+    if (!state.auditLogs) state.auditLogs = [];
+    state.auditLogs.push({
+      logId: "log-" + Date.now(),
+      operation: op,
+      targetId: target,
+      operatorId: operatorId,
+      note: note,
+      before: before,
+      after: after,
+      executedAt: new Date().toISOString()
+    });
+  }
+
+  var result;
+
+  switch (operation) {
+    case "unpublish_style":
+    case "preview_unpublish_style": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before0 = { status: style.status };
+      style.status = "unpublished";
+      style.unpublishedAt = new Date().toISOString().slice(0, 10);
+      writeLog("unpublish_style", style.id, before0, { status: style.status });
+      result = { ok: true, styleId: style.id, status: style.status };
+      break;
+    }
+    case "publish_style":
+    case "preview_publish_style":
+    case "restore_style":
+    case "preview_restore_style": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before1 = { status: style.status };
+      style.status = "published";
+      style.unpublishedAt = null;
+      writeLog("publish_style", style.id, before1, { status: style.status });
+      result = { ok: true, styleId: style.id, status: style.status };
+      break;
+    }
+    case "archive_style":
+    case "preview_archive_style": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before2 = { status: style.status };
+      style.status = "archived";
+      writeLog("archive_style", style.id, before2, { status: style.status });
+      result = { ok: true, styleId: style.id, status: style.status };
+      break;
+    }
+    case "update_style_description":
+    case "preview_update_description": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before3 = { description: style.description };
+      style.description = params.description || style.description;
+      writeLog("update_style_description", style.id, before3, { description: style.description });
+      result = { ok: true, styleId: style.id };
+      break;
+    }
+    case "update_style_tags":
+    case "preview_update_tags": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before4 = { tags: style.tags };
+      style.tags = params.tags || style.tags;
+      writeLog("update_style_tags", style.id, before4, { tags: style.tags });
+      result = { ok: true, styleId: style.id };
+      break;
+    }
+    case "update_style_price":
+    case "preview_price_change": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before5 = { price: style.price };
+      style.price = params.price || style.price;
+      writeLog("update_style_price", style.id, before5, { price: style.price });
+      result = { ok: true, styleId: style.id };
+      break;
+    }
+    case "replace_single_slot":
+    case "preview_replace_single_slot": {
+      var slot = state.feedSlots.find(function(s) { return s.position === params.position; });
+      if (!slot) return sendJson(res, 404, { ok: false, error: "slot_not_found" });
+      var newStyle = findStyle(params.newStyleId);
+      var before6 = { styleId: slot.styleId, styleName: slot.styleName };
+      slot.styleId = params.newStyleId;
+      slot.styleName = newStyle ? newStyle.name : params.newStyleId;
+      writeLog("replace_single_slot", "slot-" + params.position, before6, { styleId: slot.styleId, styleName: slot.styleName });
+      result = { ok: true, position: slot.position, styleId: slot.styleId };
+      break;
+    }
+    case "replace_section_styles":
+    case "preview_replace_section": {
+      var slots = params.slots || [];
+      var before7 = state.feedSlots.map(function(s) { return { position: s.position, styleId: s.styleId }; });
+      slots.forEach(function(item) {
+        var slot = state.feedSlots.find(function(s) { return s.position === item.position; });
+        if (slot) {
+          var sty = findStyle(item.styleId);
+          slot.styleId = item.styleId;
+          slot.styleName = sty ? sty.name : item.styleId;
+        }
+      });
+      writeLog("replace_section_styles", "home_feed", before7, state.feedSlots.map(function(s) { return { position: s.position, styleId: s.styleId }; }));
+      result = { ok: true, feedSlots: state.feedSlots };
+      break;
+    }
+    case "batch_unpublish_styles":
+    case "preview_batch_unpublish": {
+      var ids = params.styleIds || [];
+      var changed = [];
+      ids.forEach(function(id) {
+        var style = findStyle(id);
+        if (style && style.status === "published") {
+          var before8 = { status: style.status };
+          style.status = "unpublished";
+          style.unpublishedAt = new Date().toISOString().slice(0, 10);
+          writeLog("unpublish_style", style.id, before8, { status: style.status });
+          changed.push(style.id);
+        }
+      });
+      result = { ok: true, changed: changed };
+      break;
+    }
+    case "update_style_cover_image":
+    case "preview_update_cover_image": {
+      var style = findStyle(params.styleId);
+      if (!style) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before_cover = { coverImage: style.coverImage };
+      style.coverImage = params.coverImage || style.coverImage;
+      if (style.imageAssets) { style.imageAssets.detailImages = params.detailImages || style.imageAssets.detailImages || []; }
+      writeLog("update_style_cover_image", style.id, before_cover, { coverImage: style.coverImage });
+      result = { ok: true, styleId: style.id };
+      break;
+    }
+    case "save_recommend_config_draft":
+    case "preview_replace_section_draft": {
+      var slots = params.slots || state.feedSlots;
+      var before_draft = JSON.parse(JSON.stringify(state.feedSlots));
+      slots.forEach(function(item) {
+        var slot = state.feedSlots.find(function(s) { return s.position === item.position; });
+        if (slot && item.styleId) {
+          var sty = findStyle(item.styleId);
+          slot.styleId = item.styleId;
+          slot.styleName = sty ? sty.name : item.styleId;
+          if (item.reason) slot.reason = item.reason;
+        }
+      });
+      writeLog("save_recommend_config_draft", "home_feed", before_draft, state.feedSlots.map(function(s) { return { position: s.position, styleId: s.styleId }; }));
+      result = { ok: true, feedSlots: state.feedSlots, versionId: "draft-" + Date.now() };
+      break;
+    }
+    case "publish_recommend_config":
+    case "preview_feed_mix_change": {
+      var slots2 = params.slots || state.feedSlots;
+      var before_pub = JSON.parse(JSON.stringify(state.feedSlots));
+      slots2.forEach(function(item) {
+        var slot = state.feedSlots.find(function(s) { return s.position === item.position; });
+        if (slot && item.styleId) {
+          var sty = findStyle(item.styleId);
+          slot.styleId = item.styleId;
+          slot.styleName = sty ? sty.name : item.styleId;
+          if (item.reason) slot.reason = item.reason;
+        }
+      });
+      var pubVersion = "published-" + Date.now();
+      writeLog("publish_recommend_config", "home_feed", before_pub, state.feedSlots.map(function(s) { return { position: s.position, styleId: s.styleId }; }));
+      result = { ok: true, feedSlots: state.feedSlots, versionId: pubVersion, publishedAt: new Date().toISOString() };
+      break;
+    }
+    case "create_operation_task": {
+      if (!state.tasks) state.tasks = [];
+      var task = {
+        taskId: "task-" + Date.now(),
+        title: params.title || "新运营待办",
+        description: params.description || "",
+        source: params.source || "manual",
+        status: params.status || "todo",
+        priority: params.priority || "medium",
+        ownerId: params.ownerId || operatorId,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      state.tasks.unshift(task);
+      writeLog("create_operation_task", task.taskId, null, { title: task.title, status: task.status });
+      result = { ok: true, task: task };
+      break;
+    }
+    case "update_task_status": {
+      if (!state.tasks) state.tasks = [];
+      var task2 = state.tasks.find(function(t) { return t.taskId === params.taskId; });
+      if (!task2) return sendJson(res, 404, { ok: false, error: "task_not_found" });
+      var before_task = { status: task2.status };
+      task2.status = params.status || task2.status;
+      task2.updatedAt = new Date().toISOString();
+      writeLog("update_task_status", task2.taskId, before_task, { status: task2.status });
+      result = { ok: true, task: task2 };
+      break;
+    }
+    case "assign_task_owner": {
+      if (!state.tasks) state.tasks = [];
+      var task3 = state.tasks.find(function(t) { return t.taskId === params.taskId; });
+      if (!task3) return sendJson(res, 404, { ok: false, error: "task_not_found" });
+      var before_owner = { ownerId: task3.ownerId };
+      task3.ownerId = params.ownerId || task3.ownerId;
+      task3.updatedAt = new Date().toISOString();
+      writeLog("assign_task_owner", task3.taskId, before_owner, { ownerId: task3.ownerId });
+      result = { ok: true, task: task3 };
+      break;
+    }
+    case "clone_recommend_config": {
+      var cloned = JSON.parse(JSON.stringify(state.feedSlots));
+      var cloneId = "config-clone-" + Date.now();
+      if (!state.savedConfigs) state.savedConfigs = [];
+      state.savedConfigs.push({ configId: cloneId, slots: cloned, savedAt: new Date().toISOString(), note: params.note || "" });
+      writeLog("clone_recommend_config", cloneId, null, { configId: cloneId, slotsCount: cloned.length });
+      result = { ok: true, configId: cloneId, slots: cloned };
+      break;
+    }
+    case "create_recommendation_experiment": {
+      if (!state.experiments) state.experiments = [];
+      var exp = {
+        experimentId: "exp-" + Date.now(),
+        name: params.name || "新实验",
+        description: params.description || "",
+        controlSlots: JSON.parse(JSON.stringify(state.feedSlots)),
+        testSlots: params.testSlots || [],
+        trafficRatio: params.trafficRatio || 0.1,
+        status: "created",
+        createdAt: new Date().toISOString()
+      };
+      state.experiments.push(exp);
+      writeLog("create_recommendation_experiment", exp.experimentId, null, { name: exp.name, status: exp.status });
+      result = { ok: true, experiment: exp };
+      break;
+    }
+    case "assign_experiment_traffic": {
+      if (!state.experiments) state.experiments = [];
+      var exp2 = state.experiments.find(function(e) { return e.experimentId === params.experimentId; });
+      if (!exp2) return sendJson(res, 404, { ok: false, error: "experiment_not_found" });
+      var before_exp = { trafficRatio: exp2.trafficRatio, status: exp2.status };
+      exp2.trafficRatio = params.trafficRatio !== undefined ? params.trafficRatio : exp2.trafficRatio;
+      exp2.status = "running";
+      exp2.startedAt = new Date().toISOString();
+      writeLog("assign_experiment_traffic", exp2.experimentId, before_exp, { trafficRatio: exp2.trafficRatio, status: exp2.status });
+      result = { ok: true, experiment: exp2 };
+      break;
+    }
+    case "stop_experiment": {
+      if (!state.experiments) state.experiments = [];
+      var exp3 = state.experiments.find(function(e) { return e.experimentId === params.experimentId; });
+      if (!exp3) return sendJson(res, 404, { ok: false, error: "experiment_not_found" });
+      var before_exp3 = { status: exp3.status };
+      exp3.status = params.winner ? "completed" : "stopped";
+      exp3.winner = params.winner || null;
+      exp3.stoppedAt = new Date().toISOString();
+      writeLog("stop_experiment", exp3.experimentId, before_exp3, { status: exp3.status, winner: exp3.winner });
+      result = { ok: true, experiment: exp3 };
+      break;
+    }
+    case "create_report_draft": {
+      if (!state.reports) state.reports = [];
+      var report = {
+        reportId: "report-" + Date.now(),
+        title: params.title || "新报告",
+        type: params.type || "weekly",
+        status: "draft",
+        sections: params.sections || [],
+        createdBy: operatorId,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      state.reports.push(report);
+      writeLog("create_report_draft", report.reportId, null, { title: report.title, type: report.type });
+      result = { ok: true, report: report };
+      break;
+    }
+    case "save_report_snapshot": {
+      if (!state.reports) state.reports = [];
+      var report2 = state.reports.find(function(r) { return r.reportId === params.reportId; });
+      if (!report2) return sendJson(res, 404, { ok: false, error: "report_not_found" });
+      var before_rpt = { status: report2.status };
+      report2.snapshot = params.snapshotData || { stylesCount: state.styles.length, publishedCount: state.styles.filter(function(s){return s.status==="published";}).length };
+      report2.snapshotAt = new Date().toISOString();
+      report2.updatedAt = new Date().toISOString();
+      writeLog("save_report_snapshot", report2.reportId, before_rpt, { snapshotAt: report2.snapshotAt });
+      result = { ok: true, report: report2 };
+      break;
+    }
+    case "export_report": {
+      if (!state.reports) state.reports = [];
+      var report3 = state.reports.find(function(r) { return r.reportId === params.reportId; });
+      if (!report3) return sendJson(res, 404, { ok: false, error: "report_not_found" });
+      report3.exportedAt = new Date().toISOString();
+      report3.exportFormat = params.format || "pdf";
+      writeLog("export_report", report3.reportId, null, { format: report3.exportFormat, exportedAt: report3.exportedAt });
+      result = { ok: true, reportId: report3.reportId, downloadUrl: "/api/ops/report-export/" + report3.reportId };
+      break;
+    }
+    case "mark_report_reviewed": {
+      if (!state.reports) state.reports = [];
+      var report4 = state.reports.find(function(r) { return r.reportId === params.reportId; });
+      if (!report4) return sendJson(res, 404, { ok: false, error: "report_not_found" });
+      var before_rpt4 = { status: report4.status };
+      report4.status = "reviewed";
+      report4.reviewedBy = operatorId;
+      report4.reviewedAt = new Date().toISOString();
+      writeLog("mark_report_reviewed", report4.reportId, before_rpt4, { status: "reviewed", reviewedBy: operatorId });
+      result = { ok: true, report: report4 };
+      break;
+    }
+    case "create_style": {
+      var newStyle = {
+        id: params.id || ("style-" + Date.now() + "-" + Math.floor(Math.random()*10000)),
+        styleCode: params.styleCode || ("S" + Date.now()),
+        name: params.name || "未命名款式",
+        description: params.description || "",
+        category: params.category || "",
+        price: Number(params.price) || 0,
+        status: params.status || "draft",
+        makeable: params.makeable !== undefined ? params.makeable : true,
+        crawled: params.crawled || false,
+        isPromoted: false,
+        isColdStart: false,
+        sortWeight: 0,
+        listedAt: new Date().toISOString().slice(0,10),
+        unpublishedAt: null,
+        coverImage: params.coverImage || "",
+        tags: params.tags || {
+          color: params.colorTags || [],
+          style: params.styleTags || [],
+          craft: params.craftTags || [],
+          length: params.lengthTags || [],
+          scene: params.sceneTags || [],
+          effect: params.effectTags || []
+        },
+        imageAssets: {
+          detailImages: params.detailImages || [],
+          referenceImages: params.referenceImages || [],
+          tryonAssets: params.tryonAssets || []
+        },
+        metrics: { exposure: 0, view: 0, detail: 0, basketAdd: 0, tryonSuccess: 0, order: 0 }
+      };
+      state.styles.unshift(newStyle);
+      writeLog("create_style", newStyle.id, null, { name: newStyle.name, status: newStyle.status });
+      result = { ok: true, style: newStyle };
+      break;
+    }
+    case "batch_create_styles": {
+      var newStyles = Array.isArray(params.styles) ? params.styles : [];
+      var created = [];
+      newStyles.forEach(function(p) {
+        var ns = {
+          id: p.id || ("style-" + Date.now() + "-" + Math.floor(Math.random()*100000)),
+          styleCode: p.styleCode || ("S" + Date.now()),
+          name: p.name || "未命名",
+          description: p.description || "",
+          category: p.category || "",
+          price: Number(p.price) || 0,
+          status: p.status || "draft",
+          makeable: p.makeable !== undefined ? p.makeable : true,
+          crawled: p.crawled || false,
+          isPromoted: false,
+          isColdStart: false,
+          sortWeight: 0,
+          listedAt: new Date().toISOString().slice(0,10),
+          unpublishedAt: null,
+          coverImage: p.coverImage || "",
+          tags: p.tags || {
+            color: p.colorTags || [],
+            style: p.styleTags || [],
+            craft: p.craftTags || [],
+            length: p.lengthTags || [],
+            scene: p.sceneTags || [],
+            effect: p.effectTags || []
+          },
+          imageAssets: {
+            detailImages: p.detailImages || [],
+            referenceImages: p.referenceImages || [],
+            tryonAssets: p.tryonAssets || []
+          },
+          metrics: { exposure: 0, view: 0, detail: 0, basketAdd: 0, tryonSuccess: 0, order: 0 }
+        };
+        state.styles.unshift(ns);
+        created.push(ns);
+      });
+      writeLog("batch_create_styles", "bulk", null, { count: created.length });
+      result = { ok: true, styles: created, count: created.length };
+      break;
+    }
+    case "toggle_style_promoted":
+    case "set_style_promoted": {
+      var sty_promo = findStyle(params.styleId);
+      if (!sty_promo) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before_promo = { isPromoted: sty_promo.isPromoted, isColdStart: sty_promo.isColdStart };
+      if (params.isPromoted !== undefined) sty_promo.isPromoted = params.isPromoted;
+      if (params.isColdStart !== undefined) sty_promo.isColdStart = params.isColdStart;
+      writeLog("toggle_style_promoted", sty_promo.id, before_promo, { isPromoted: sty_promo.isPromoted });
+      result = { ok: true, styleId: sty_promo.id, isPromoted: sty_promo.isPromoted };
+      break;
+    }
+    case "toggle_style_makeable": {
+      var sty_mk = findStyle(params.styleId);
+      if (!sty_mk) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before_mk = { makeable: sty_mk.makeable };
+      sty_mk.makeable = params.makeable !== undefined ? params.makeable : !sty_mk.makeable;
+      writeLog("toggle_style_makeable", sty_mk.id, before_mk, { makeable: sty_mk.makeable });
+      result = { ok: true, styleId: sty_mk.id, makeable: sty_mk.makeable };
+      break;
+    }
+    case "update_style_sort_weight": {
+      var sty_sort = findStyle(params.styleId);
+      if (!sty_sort) return sendJson(res, 404, { ok: false, error: "style_not_found" });
+      var before_sort = { sortWeight: sty_sort.sortWeight };
+      sty_sort.sortWeight = params.sortWeight !== undefined ? params.sortWeight : sty_sort.sortWeight;
+      writeLog("update_style_sort_weight", sty_sort.id, before_sort, { sortWeight: sty_sort.sortWeight });
+      result = { ok: true, styleId: sty_sort.id };
+      break;
+    }
+    case "batch_update_tags": {
+      var styleIds_bt = Array.isArray(params.styleIds) ? params.styleIds : (params.styleId ? [params.styleId] : []);
+      var updated_bt = 0;
+      styleIds_bt.forEach(function(sid) {
+        var sty = findStyle(sid);
+        if (sty) {
+          var before = { tags: sty.tags };
+          if (params.tags) {
+            sty.tags = params.tags;
+          } else if (params.addTags || params.removeTags) {
+            // tags can be array or dict; normalise to dict by category
+            if (Array.isArray(sty.tags)) {
+              if (params.addTags) sty.tags = Array.from(new Set(sty.tags.concat(params.addTags)));
+              if (params.removeTags) sty.tags = sty.tags.filter(function(t){return !params.removeTags.includes(t);});
+            } else {
+              // tags is object {color:[...], style:[...]}
+              if (params.addTags) {
+                if (!sty.tags.custom) sty.tags.custom = [];
+                params.addTags.forEach(function(tag) { if (!sty.tags.custom.includes(tag)) sty.tags.custom.push(tag); });
+              }
+              if (params.removeTags) {
+                Object.keys(sty.tags).forEach(function(k) {
+                  if (Array.isArray(sty.tags[k])) sty.tags[k] = sty.tags[k].filter(function(t){return !params.removeTags.includes(t);});
+                });
+              }
+            }
+          }
+          writeLog("batch_update_tags", sty.id, before, { tags: sty.tags });
+          updated_bt++;
+        }
+      });
+      result = { ok: true, updatedCount: updated_bt };
+      break;
+    }
+    case "batch_update_price": {
+      var styleIds_bp = Array.isArray(params.styleIds) ? params.styleIds : (params.styleId ? [params.styleId] : []);
+      var updated_bp = 0;
+      styleIds_bp.forEach(function(sid) {
+        var sty = findStyle(sid);
+        if (sty) {
+          var before = { price: sty.price };
+          if (params.price !== undefined) sty.price = params.price;
+          if (params.priceAdjust) sty.price = Math.max(0, (sty.price||0) + params.priceAdjust);
+          writeLog("batch_update_price", sty.id, before, { price: sty.price });
+          updated_bp++;
+        }
+      });
+      result = { ok: true, updatedCount: updated_bp };
+      break;
+    }
+    default:
+      return sendJson(res, 400, { ok: false, error: "unknown_operation", operation: operation });
+  }
+
+  saveOpsState(state);
+  sendJson(res, 200, result);
 }
