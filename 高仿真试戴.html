@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>指尖灵感 · 高仿真试戴</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/tokens/colors.css">
+<link rel="stylesheet" href="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/tokens/typography.css">
+<link rel="stylesheet" href="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/tokens/effects.css">
+<link rel="stylesheet" href="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/tokens/base.css">
+<link rel="stylesheet" href="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/styles.css">
+<style>
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── Claude-tone: replace coral red with warm orange ── */
+:root {
+  --coral:       #D97757;
+  --coral-tint:  rgba(217, 119, 87, 0.12);
+  --rosewood:    #8B5444;
+}
+
+/* ── Font overrides — warmer, less mechanical ── */
+body, input, textarea, button {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+h1, h2, h3 {
+  font-family: 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+h1 { font-weight: 500; }
+</style>
+</head>
+<body>
+  <!-- bundle mounts its App into #root; we omit #root so createRoot(null) throws and
+       is caught by the bundle's own try-catch. DS components still export cleanly. -->
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <!-- DS bundle: exports Button, Tag, NailCard, UploadBox, ProgressBar, etc. to window.DesignSystem_65361f -->
+  <script src="_ds/design-system-65361fd7-f013-4df8-97a0-47fed831dd8c/_ds_bundle.js"></script>
+
+  <script type="text/babel">
+  // ── ALL app code in one inline Babel script so scope is shared and timing is guaranteed. ──
+
+  const {
+    NailCard, Pill, Button, SearchBar, ProgressBar, UploadBox,
+    Tag, Toast, Dialog, ChatBubble, Panel, Badge,
+  } = window.DesignSystem_65361f;
+
+  // ─── Nail data (correct asset paths) ───────────────────────────────────────
+  const NAIL_DATA = [
+    { id: "cat-eye-diamond", name: "璀璨猫眼钻饰美甲", category: "猫眼", price: 213, subTag: "钻饰", heat: 95, image: "assets/nail-cat-eye.jpg", definition: "深蓝猫眼叠钻饰点缀，光泽随光线流动，贵气又有记忆点，适合想要焦点感的场合。", review: { name: "打工人小周", likes: 208, text: "自然光下的猫眼光泽感绝了，不浮夸但很有细节。" } },
+    { id: "plain-water",      name: "白开水美甲",       category: "冰透", price: 150, subTag: "显白", heat: 94, image: "assets/nail-ice.jpg",     definition: "冰透裸粉叠奶白，干净到像白开水，伪素颜显白，见家长面试都不踩雷。",           review: { name: "面试刚需选手",  likes: 86,  text: "伪素颜美甲天花板，干净又显白。" } },
+    { id: "baby-blue-cat-eye",name: "baby蓝猫眼夏日甲", category: "猫眼", price: 138, subTag: "夏日", heat: 94, image: "assets/nail-gradient.jpg",definition: "baby 蓝猫眼配清透底，像夏日海面的光，清爽减龄，短甲也好看。" },
+    { id: "oil-paint-handpaint",name:"抽象油画手绘美甲",category: "手绘", price: 183, subTag: "显白", heat: 92, image: "assets/nail-cute.jpg",    definition: "奶杏底搭抽象油画手绘笔触，文艺又显白，独一无二的小众感。",               review: { name: "奶糖不加冰",    likes: 312, text: "手绘笔触超细腻，上班做完全不突兀。" } },
+    { id: "lime-star-moon",   name: "青柠星月猫眼",     category: "猫眼", price: 178, subTag: "星月", heat: 91, image: "assets/nail-cat-eye.jpg", definition: "冰透裸粉叠青柠绿猫眼，配鎏金星月线条，清透又贵气，通勤也不夸张。" },
+    { id: "premium-six",      name: "高级感美甲六选一", category: "高级感",price: 150, subTag: "显白", heat: 91, image: "assets/nail-ice.jpg",     definition: "六款高级感配色任选，低饱和裸调显白，气质通勤首选。" },
+  ];
+  const NAIL_NAV = [
+    { id: "catalog",        label: "首页",       route: "/user/catalog" },
+    { id: "style-library",  label: "款式库",     route: "/user/style-library" },
+    { id: "quick-try-on",   label: "高仿真试戴", route: "/user/quick-try-on" },
+    { id: "precise-try-on", label: "定制试戴",   route: "/user/precise-try-on" },
+    { id: "batch",          label: "一键试戴结果",route: "/user/batch-results" },
+    { id: "recommend",      label: "智能助手",   route: "/user/recommend" },
+    { id: "want",           label: "我的",       route: "/user/want-list" },
+  ];
+  const NAIL_THEMES = ["猫眼显白", "通勤短甲", "冰透干净", "可爱手绘"];
+
+  // ─── Shared helpers ────────────────────────────────────────────────────────
+  function Eyebrow({ children }) {
+    return <p style={{ margin: "0 0 10px", color: "var(--coral)", fontSize: 12, fontWeight: 800, letterSpacing: ".05em", textTransform: "uppercase" }}>{children}</p>;
+  }
+  function uniqPush(list, item) { return list.some(x => x.id === item.id) ? list : [...list, item]; }
+
+  // ─── Topbar ────────────────────────────────────────────────────────────────
+  function Topbar({ page, onPage, userId }) {
+    return (
+      <header style={{ position: "sticky", top: 0, zIndex: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 18, padding: "12px 28px", borderBottom: "1px solid rgba(232,224,222,0.84)", background: "rgba(255,250,248,0.88)", backdropFilter: "blur(18px)" }}>
+        <a href="#" onClick={e => { e.preventDefault(); onPage("catalog"); }} style={{ display: "inline-flex", alignItems: "center", gap: 10, color: "var(--ink)", fontWeight: 800, textDecoration: "none", whiteSpace: "nowrap" }}>
+          <span style={{ width: 26, height: 26, borderRadius: 7, background: "var(--grad-spectrum)", boxShadow: "inset 0 0 0 4px rgba(255,255,255,0.55)" }}></span>
+          <span>指尖灵感</span>
+          <span style={{ color: "var(--muted)", fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700 }}>v1.0.1</span>
+        </a>
+        <nav style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center", flex: 1 }}>
+          {NAIL_NAV.map(n => {
+            const active = n.id === page;
+            return <button key={n.id} onClick={() => onPage(n.id)} style={{ minHeight: 36, padding: "0 12px", border: 0, borderRadius: 7, color: active ? "#fff" : "var(--muted)", background: active ? "var(--charcoal)" : "transparent", fontWeight: 800, fontSize: 14, whiteSpace: "nowrap", transition: "var(--transition-base)", cursor: "pointer" }}>{n.label}</button>;
+          })}
+        </nav>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, minHeight: 40, padding: "5px 8px 5px 12px", border: "1px solid var(--line)", borderRadius: 8, background: "rgba(255,255,255,0.78)", whiteSpace: "nowrap" }}>
+          <span style={{ color: "var(--muted)", fontSize: 12, fontWeight: 800 }}>匿名用户</span>
+          <strong style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>{userId}</strong>
+          <button onClick={() => onPage("recommend")} style={{ minHeight: 28, padding: "0 10px", border: 0, borderRadius: 7, color: "#fff", background: "var(--coral)", fontSize: 12, fontWeight: 800, cursor: "pointer" }}>模拟登录</button>
+        </div>
+      </header>
+    );
+  }
+
+  // ─── CatalogScreen ─────────────────────────────────────────────────────────
+  function TryOnSession({ items, onGenerate, onAdvisor, onRemove }) {
+    const pct = Math.min(100, Math.round((items.length / 4) * 100));
+    return (
+      <aside style={{ position: "sticky", top: 88, display: "grid", alignContent: "start", gap: 14, padding: 18, border: "1px solid var(--line)", borderRadius: 8, background: "rgba(255,255,255,0.92)", boxShadow: "var(--shadow-lg)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+          <h2 style={{ margin: 0, fontSize: 18 }}>试戴会话</h2>
+          <span style={{ padding: "4px 9px", borderRadius: 999, background: "var(--coral-tint)", color: "var(--rosewood)", fontSize: 12, fontWeight: 800 }}>已选 {items.length} 款</span>
+        </div>
+        <ProgressBar value={pct} label={items.length ? `手图 ✓ · ${items.length} 款 · 可生成` : "上传手图并选款开始试戴"} />
+        <p style={{ margin: 0, color: "var(--muted)", fontSize: 13, lineHeight: 1.55 }}>选款、上传手图、生成结果会一直保留在这里。</p>
+        {items.length === 0
+          ? <div style={{ display: "grid", placeItems: "center", minHeight: 84, border: "1px dashed var(--line-dashed)", borderRadius: 8, color: "var(--muted)", background: "var(--panel-warm)", fontSize: 13, fontWeight: 800, textAlign: "center", padding: 12 }}>还没有加入试戴的款式</div>
+          : <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8 }}>
+              {items.map(it => (
+                <button key={it.id} onClick={() => onRemove(it.id)} title={`移出 ${it.name}`} style={{ position: "relative", aspectRatio: "1/1", border: 0, padding: 0, borderRadius: 7, overflow: "hidden", cursor: "pointer", background: "#f8e9e6" }}>
+                  <img src={it.image} alt={it.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </button>
+              ))}
+            </div>
+        }
+        <UploadBox variant="hand" guideSrc="assets/hand-guide-outline.png" hint="上传手部照片" />
+        <Button variant="emphasis" fullWidth disabled={!items.length} onClick={onGenerate}>一键生成试戴</Button>
+        <button onClick={onAdvisor} style={{ minHeight: 38, border: "1px solid var(--line)", borderRadius: 8, background: "#fff", color: "var(--ink)", fontWeight: 800, cursor: "pointer" }}>让 AI 帮我选款式</button>
+      </aside>
+    );
+  }
+
+  function CatalogScreen({ basket, onToggle, onDetails, onGenerate, onAdvisor }) {
+    const [q, setQ] = React.useState("");
+    const [theme, setTheme] = React.useState(null);
+    const items = NAIL_DATA.filter(d => basket.includes(d.id));
+    const visible = NAIL_DATA.filter(d => {
+      if (q && !(d.name.includes(q) || (d.subTag||"").includes(q) || (d.category||"").includes(q))) return false;
+      return true;
+    });
+    return (
+      <section style={{ display: "grid", gap: 26 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1.1fr) minmax(0,0.9fr)", overflow: "hidden", borderRadius: 8, boxShadow: "var(--shadow-xl)", background: "#fff" }}>
+          <div style={{ padding: "40px 36px", display: "grid", alignContent: "center", gap: 16 }}>
+            <div>
+              <Eyebrow>AI Nail Try-On</Eyebrow>
+              <h1 style={{ margin: "0 0 10px", fontSize: "clamp(30px,3.4vw,44px)", lineHeight: 1.08 }}>找到适合今天的美甲</h1>
+              <p style={{ margin: 0, maxWidth: 460, color: "var(--ink-soft)" }}>先挑 1–4 款，再上传一张手图生成试戴效果。结果可直接加入想做或确认做。</p>
+            </div>
+            <SearchBar value={q} onChange={setQ} placeholder="搜索猫眼、通勤、显白、短甲" />
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {NAIL_THEMES.map(t => <Pill key={t} active={theme === t} onClick={() => { setTheme(theme === t ? null : t); setQ(theme === t ? "" : t.slice(0,2)); }}>{t}</Pill>)}
+            </div>
+          </div>
+          <div style={{ position: "relative", minHeight: 300 }}>
+            <img src="assets/nail-hero.png" alt="美甲试戴示例" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) 320px", gap: 22, alignItems: "start" }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, marginBottom: 16, flexWrap: "wrap" }}>
+              <div><Eyebrow>Today Picks</Eyebrow><h2 style={{ margin: 0 }}>先试这几款</h2></div>
+              <Button variant="secondary" size="sm" onClick={() => onDetails()}>进入款式库</Button>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
+              {visible.map(d => <NailCard key={d.id} {...d} selected={basket.includes(d.id)} onTryOn={() => onToggle(d.id)} onDetails={() => onDetails(d)} onPreview={() => onDetails(d)} />)}
+            </div>
+          </div>
+          <TryOnSession items={items} onGenerate={onGenerate} onAdvisor={onAdvisor} onRemove={onToggle} />
+        </div>
+      </section>
+    );
+  }
+
+  // ─── StyleLibraryScreen ───────────────────────────────────────────────────
+  function StyleLibraryScreen({ basket, onToggle, onPreview }) {
+    const [cat, setCat] = React.useState("全部");
+    const [q, setQ] = React.useState("");
+    const cats = ["全部", ...Array.from(new Set(NAIL_DATA.map(d => d.category)))];
+    const visible = NAIL_DATA.filter(d => {
+      if (cat !== "全部" && d.category !== cat) return false;
+      if (q && !(d.name.includes(q)||(d.subTag||"").includes(q)||(d.category||"").includes(q))) return false;
+      return true;
+    });
+    return (
+      <section>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 24, marginBottom: 22, flexWrap: "wrap" }}>
+          <div>
+            <Eyebrow>Style Library</Eyebrow>
+            <h1 style={{ margin: "0 0 8px", fontSize: 38 }}>店内真实款式</h1>
+            <p style={{ maxWidth: 540, margin: 0, color: "var(--ink-soft)" }}>店内全部真实款式，按风格筛选。点图看详情，或直接加入试戴会话。</p>
+          </div>
+          <div style={{ minWidth: 280 }}>
+            <SearchBar value={q} onChange={setQ} placeholder="猫眼、冰透、短甲、显白" />
+            {q && <button onClick={() => setQ("")} style={{ marginTop: 8, fontSize: 12, color: "var(--coral)", background: "none", border: 0, cursor: "pointer", fontWeight: 800 }}>清空条件</button>}
+          </div>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
+          {cats.map(c => <Pill key={c} active={cat === c} onClick={() => setCat(c)}>{c}</Pill>)}
+        </div>
+        <p style={{ margin: "0 0 16px", fontSize: 13, color: "var(--muted)", fontWeight: 800 }}>共 {visible.length} 款真实款式</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
+          {visible.map(d => <NailCard key={d.id} {...d} selected={basket.includes(d.id)} onTryOn={() => onToggle(d.id)} onDetails={() => onPreview(d)} onPreview={() => onPreview(d)} />)}
+        </div>
+      </section>
+    );
+  }
+
+  // ─── TryOnScreen v2 — REDESIGNED ──────────────────────────────────────────
+  function TryOnScreen({ mode, basket, onToggle, onGenerate, onBrowse, onWant, onConfirm }) {
+    const isPrecise = mode === "precise";
+    const items = NAIL_DATA.filter(d => basket.includes(d.id));
+    const [note, setNote] = React.useState("");
+    const [handUploaded, setHandUploaded] = React.useState(false);
+    const [keepShape, setKeepShape] = React.useState(false);
+    const [generating, setGenerating] = React.useState(false);
+    const [genProgress, setGenProgress] = React.useState(0);
+    // activeStyleId: which style is queued / currently shown in result
+    const [activeStyleId, setActiveStyleId] = React.useState(() => items[0]?.id || null);
+    // generatedIds: styles that already have a result rendered
+    const [generatedIds, setGeneratedIds] = React.useState([]);
+    // openSlotMenu: index of empty slot whose add-menu is open (null = none)
+    const [openSlotMenu, setOpenSlotMenu] = React.useState(null);
+    const [confirmedIds, setConfirmedIds] = React.useState([]);
+    const [wantedIds, setWantedIds] = React.useState([]);
+
+    // Keep activeStyleId valid when basket changes
+    React.useEffect(() => {
+      if (!items.find(d => d.id === activeStyleId) && items.length > 0) {
+        setActiveStyleId(items[0].id);
+      }
+    }, [basket]);
+
+    const activeItem = items.find(d => d.id === activeStyleId) || items[0] || null;
+    const isGenerated = activeItem && generatedIds.includes(activeItem.id);
+    const styleReady = !!activeItem;
+    const pct = (styleReady ? 50 : 0) + (handUploaded ? 50 : 0);
+    const statusLabel = !styleReady ? "先从右侧选一款或加款"
+      : !handUploaded ? "已选款式，上传手图后即可生成"
+      : isGenerated ? "已生成，可重新生成或切换款式"
+      : "已就绪，点击生成当前款试戴效果";
+
+    function handleGenerate() {
+      if (!styleReady) return;
+      setGenerating(true);
+      setGenProgress(0);
+      // Simulate 3–4 min generation: crawl 0→90% over 1.6s then snap to 100%
+      const startTime = Date.now();
+      const duration = 1600;
+      const tick = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const raw = elapsed / duration;
+        // ease-out curve: fast start, slow near 90%
+        const pct = Math.min(90, Math.round(90 * (1 - Math.pow(1 - raw, 2))));
+        setGenProgress(pct);
+        if (elapsed >= duration) clearInterval(tick);
+      }, 40);
+      setTimeout(() => {
+        clearInterval(tick);
+        setGenProgress(100);
+        setTimeout(() => {
+          setGenerating(false);
+          setGenProgress(0);
+          setGeneratedIds(ids => ids.includes(activeItem.id) ? ids : [...ids, activeItem.id]);
+        }, 260);
+      }, 1800);
+    }
+    function handleReset() {
+      setGeneratedIds(ids => ids.filter(id => id !== activeItem?.id));
+    }
+    function handleWant(d) { setWantedIds(ids => ids.includes(d.id) ? ids : [...ids, d.id]); if (onWant) onWant(d); }
+    function handleConfirm(d) { setConfirmedIds(ids => ids.includes(d.id) ? ids : [...ids, d.id]); if (onConfirm) onConfirm(d); }
+
+    const emptySlots = Math.max(0, 4 - items.length);
+
+    // Close slot menu when clicking outside
+    React.useEffect(() => {
+      if (openSlotMenu === null) return;
+      function close(e) { if (!e.target.closest('[data-slot-menu]')) setOpenSlotMenu(null); }
+      document.addEventListener('mousedown', close);
+      return () => document.removeEventListener('mousedown', close);
+    }, [openSlotMenu]);
+
+    return (
+      <section style={{ display: "grid", gap: 22 }}>
+
+        {/* Page header */}
+        <div>
+          <Eyebrow>{isPrecise ? "Precise Try-On" : "Hyper-Real Try-On"}</Eyebrow>
+          <h1 style={{ margin: "0 0 8px", fontSize: 38 }}>{isPrecise ? "定制试戴" : "高仿真试戴"}</h1>
+          <p style={{ maxWidth: 560, margin: 0, color: "var(--ink-soft)", lineHeight: 1.7 }}>
+            {isPrecise ? "在高仿真基础上，补充你的定制需求（改色、换图案、加钻），生成更贴合的专属效果。"
+                       : "上传一张清晰手图，对选中的 1–4 款款式生成接近真实上手的高仿真试戴效果。"}
+          </p>
+        </div>
+
+        {/* Hero panel: left = upload/controls · right = selected styles */}
+        <div style={{ position: "relative", display: "grid", gridTemplateColumns: "minmax(0,1.1fr) minmax(0,0.9fr)", overflow: "hidden", borderRadius: 8, border: "1px solid var(--line)", background: "#fff", boxShadow: "var(--shadow-xl)" }}>
+
+          {/* LEFT — main viewer (upload ↔ result) + controls below */}
+          <div style={{ borderRight: "1px solid var(--line)", display: "grid", gridTemplateRows: "1fr auto", minHeight: 520 }}>
+
+            {/* ── MAIN VIEW SLOT: upload box OR result carousel, same space ── */}
+            <div style={{ position: "relative", overflow: "hidden", background: "var(--panel-warm)", minHeight: 360 }}>
+
+              {/* Upload state */}
+              {!isGenerated && !generating && (
+                <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px 20px" }}>
+                  <div onClick={() => setHandUploaded(v => !v)}
+                    style={{ cursor: "pointer", width: "100%", maxWidth: 420 }}>
+                    <UploadBox variant="hand" filled={handUploaded} guideSrc="assets/hand-guide-outline.png"
+                      label={handUploaded ? "已上传手图" : "上传手图"}
+                      hint={handUploaded ? "点击重新上传" : "手掌对准线框 · JPG / PNG"} />
+                  </div>
+                  {handUploaded && (
+                    <span style={{ marginTop: 10, padding: "4px 14px", borderRadius: 999, background: "rgba(108,154,139,0.9)", color: "#fff", fontSize: 12, fontWeight: 800 }}>手图已上传 ✓</span>
+                  )}
+                </div>
+              )}
+
+              {/* Generating overlay */}
+              {generating && (
+                <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", background: "rgba(255,250,248,0.94)", backdropFilter: "blur(8px)" }}>
+                  <div style={{ textAlign: "center", width: "72%", maxWidth: 320 }}>
+                    <div style={{ fontSize: 32, marginBottom: 14, animation: "spin 2s linear infinite", display: "inline-block", color: "var(--coral)" }}>✦</div>
+                    <p style={{ fontWeight: 800, fontSize: 16, margin: "0 0 6px" }}>AI 高仿真生成中</p>
+                    <p style={{ fontSize: 13, color: "var(--muted)", margin: "0 0 20px" }}>正在合成当前款试戴效果…</p>
+                    {/* Progress bar */}
+                    <div style={{ width: "100%", height: 6, borderRadius: 999, background: "rgba(0,0,0,0.08)", overflow: "hidden" }}>
+                      <div style={{
+                        height: "100%", borderRadius: 999,
+                        background: "linear-gradient(90deg, #D97757, #c49a4d, #6c9a8b)",
+                        width: `${genProgress}%`,
+                        transition: genProgress === 100 ? "width 0.2s ease" : "width 0.4s ease-out",
+                      }} />
+                    </div>
+                    <p style={{ fontSize: 12, color: "var(--muted)", margin: "8px 0 0", fontVariantNumeric: "tabular-nums" }}>
+                      {genProgress < 100 ? `${genProgress}% · 高仿真渲染中，通常需 3–4 分钟` : "完成 ✓"}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Generated result — covers same slot for the active style */}
+              {isGenerated && activeItem && (() => {
+                const d = activeItem;
+                const isConfirmed = confirmedIds.includes(d.id);
+                const isWanted = wantedIds.includes(d.id);
+                return (
+                  <div style={{ position: "absolute", inset: 0, background: "#1a1820" }}>
+                    {/* Full-bleed result image */}
+                    <img src={d.image} alt={d.name}
+                      key={d.id}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", opacity: 1, transition: "opacity 0.3s ease" }} />
+
+
+                    {/* Top badges */}
+                    <div style={{ position: "absolute", top: 12, left: 12, right: 12, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                      <span style={{ padding: "4px 10px", borderRadius: 999, background: "rgba(255,250,248,0.88)", backdropFilter: "blur(8px)", color: "var(--rosewood)", fontSize: 11, fontWeight: 800 }}>
+                        AI 试戴效果
+                      </span>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        {isConfirmed && <span style={{ padding: "4px 10px", borderRadius: 999, background: "var(--jade)", color: "#fff", fontSize: 11, fontWeight: 800 }}>已确认 ✓</span>}
+                        {isWanted && !isConfirmed && <span style={{ padding: "4px 10px", borderRadius: 999, background: "var(--coral)", color: "#fff", fontSize: 11, fontWeight: 800 }}>已想做</span>}
+                        <button onClick={handleReset}
+                          style={{ padding: "4px 10px", borderRadius: 999, border: 0, background: "rgba(0,0,0,0.38)", backdropFilter: "blur(8px)", color: "rgba(255,255,255,0.85)", fontSize: 11, fontWeight: 800, cursor: "pointer" }}>
+                          重新上传
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Prev / Next arrows — switch between generated results */}
+                    {generatedIds.length > 1 && (() => {
+                      const genItems = items.filter(it => generatedIds.includes(it.id));
+                      const ci = genItems.findIndex(it => it.id === activeItem.id);
+                      return (
+                        <>
+                          <button onClick={() => setActiveStyleId(genItems[(ci - 1 + genItems.length) % genItems.length].id)}
+                            style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", width: 36, height: 36, borderRadius: 999, border: 0, background: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)", color: "#fff", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            ←
+                          </button>
+                          <button onClick={() => setActiveStyleId(genItems[(ci + 1) % genItems.length].id)}
+                            style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", width: 36, height: 36, borderRadius: 999, border: 0, background: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)", color: "#fff", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            →
+                          </button>
+                        </>
+                      );
+                    })()}
+
+                    {/* Dot indicators — bottom center, only if multiple results */}
+                    {generatedIds.length > 1 && (() => {
+                      const genItems = items.filter(it => generatedIds.includes(it.id));
+                      return (
+                        <div style={{ position: "absolute", bottom: 12, left: 0, right: 0, display: "flex", gap: 5, justifyContent: "center" }}>
+                          {genItems.map(it => (
+                            <button key={it.id} onClick={() => setActiveStyleId(it.id)}
+                              style={{ width: it.id === activeItem.id ? 18 : 6, height: 6, borderRadius: 999, border: 0, background: it.id === activeItem.id ? "#fff" : "rgba(255,255,255,0.4)", cursor: "pointer", padding: 0, transition: "all 0.2s" }} />
+                          ))}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* ── CONTROLS BELOW THE MAIN VIEW ── */}
+            <div style={{ padding: "22px 28px", display: "grid", gap: 16, borderTop: "1px solid var(--line)", background: "#fff" }}>
+
+              {/* Precise: custom note */}
+              {isPrecise && !isGenerated && (
+                <div>
+                  <p style={{ margin: "0 0 8px", fontWeight: 800, fontSize: 14 }}>定制需求</p>
+                  <textarea value={note} onChange={e => setNote(e.target.value)} rows={2}
+                    placeholder="例如：把猫眼换成奶茶色、第 4 指加一颗钻..."
+                    style={{ width: "100%", resize: "none", minHeight: 64, padding: 10, border: "1px solid var(--line)", borderRadius: 8, font: "inherit", fontSize: 13, lineHeight: 1.5, boxSizing: "border-box", color: "var(--ink)", background: "#fff" }} />
+                </div>
+              )}
+
+              {/* Keep-shape toggle (before generation) */}
+              {!isGenerated && (
+                <label style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+                  <input type="checkbox" checked={keepShape} onChange={e => setKeepShape(e.target.checked)}
+                    style={{ accentColor: "var(--coral)", width: 15, height: 15, flexShrink: 0 }} />
+                  <div>
+                    <p style={{ margin: 0, fontWeight: 800, fontSize: 13, color: keepShape ? "var(--coral)" : "var(--ink)" }}>保持自身甲型不变</p>
+                    <p style={{ margin: 0, fontSize: 11, color: "var(--muted)" }}>只换图案，不改变指甲长度与弧度</p>
+                  </div>
+                </label>
+              )}
+
+              {/* Main CTA */}
+              <div style={{ display: "grid", gap: 8 }}>
+                {!isGenerated && (
+                  <Button variant="emphasis" fullWidth disabled={!styleReady || generating} onClick={handleGenerate}>
+                    {generating ? "生成中…" : isPrecise ? "生成定制效果" : "一键生成"}
+                  </Button>
+                )}
+                {isGenerated && activeItem && (() => {
+                  const d = activeItem;
+                  const isConfirmed = confirmedIds.includes(d.id);
+                  const isWanted = wantedIds.includes(d.id);
+                  return (
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                      {/* 我想做 */}
+                      <button onClick={() => handleWant(d)}
+                        style={{ minHeight: 44, border: `1.5px solid ${isWanted ? "var(--jade)" : "var(--line)"}`, borderRadius: 8, background: isWanted ? "rgba(108,154,139,0.10)" : "#fff", color: isWanted ? "var(--jade)" : "var(--ink)", fontWeight: 800, fontSize: 14, cursor: "pointer", transition: "all 0.18s" }}>
+                        {isWanted ? "已想做 ✓" : "我想做"}
+                      </button>
+                      {/* 我确定做 */}
+                      <button onClick={() => handleConfirm(d)}
+                        style={{ minHeight: 44, border: 0, borderRadius: 8, background: isConfirmed ? "var(--jade)" : "#D97757", color: "#fff", fontWeight: 800, fontSize: 14, cursor: "pointer", transition: "all 0.18s", opacity: isConfirmed ? 1 : 1 }}>
+                        {isConfirmed ? "已确定做 ✓" : "我确定做"}
+                      </button>
+                    </div>
+                  );
+                })()}
+                {isGenerated && (
+                  <button style={{ minHeight: 44, border: "1.5px solid #D97757", borderRadius: 8, background: "#fff", color: "#D97757", fontWeight: 800, fontSize: 15, cursor: "pointer", width: "100%", transition: "all 0.18s" }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(217,119,87,0.06)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "#fff"; }}
+                    onClick={handleGenerate}>
+                    重新生成
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — selected styles 2×2 */}
+          <div style={{ padding: "28px 24px", display: "grid", alignContent: "start", gap: 16, background: "var(--panel-warm)" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+              <div>
+                <p style={{ margin: 0, fontWeight: 800, fontSize: 15 }}>本次选中</p>
+                <p style={{ margin: "2px 0 0", fontSize: 11, color: "var(--muted)" }}>点击款式卡切换生成目标</p>
+              </div>
+              <span style={{ padding: "4px 10px", borderRadius: 999, fontSize: 12, fontWeight: 800, background: items.length > 0 ? "var(--coral-tint)" : "rgba(0,0,0,0.06)", color: items.length > 0 ? "var(--rosewood)" : "var(--muted)" }}>
+                {items.length} / 4 款
+              </span>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }}>
+              {items.map(d => {
+                const isActive = d.id === activeStyleId;
+                const hasResult = generatedIds.includes(d.id);
+                return (
+                  <article key={d.id} onClick={() => setActiveStyleId(d.id)}
+                    style={{ overflow: "hidden", borderRadius: 8, background: "#fff", border: `2px solid ${isActive ? "var(--coral)" : "transparent"}`, boxShadow: isActive ? "0 0 0 3px rgba(var(--coral-rgb,214,100,80),0.18)" : "var(--shadow-md)", cursor: "pointer", outline: "none", transition: "border-color 0.18s, box-shadow 0.18s" }}>
+                    <div style={{ overflow: "hidden", aspectRatio: "1 / 1", position: "relative" }}>
+                      <img src={d.image} alt={d.name}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.24s ease" }}
+                        onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
+                        onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
+                      {/* Active badge */}
+                      {isActive && (
+                        <span style={{ position: "absolute", top: 6, left: 6, padding: "2px 7px", borderRadius: 999, background: "var(--coral)", color: "#fff", fontSize: 10, fontWeight: 800 }}>当前</span>
+                      )}
+                      {/* Result badge */}
+                      {hasResult && (
+                        <span style={{ position: "absolute", bottom: 6, left: 6, padding: "2px 7px", borderRadius: 999, background: "rgba(108,154,139,0.92)", color: "#fff", fontSize: 10, fontWeight: 800 }}>已生成</span>
+                      )}
+                      {/* Remove button */}
+                      <button onClick={e => { e.stopPropagation(); onToggle(d.id); }} title={`移出 ${d.name}`}
+                        style={{ position: "absolute", top: 6, right: 6, width: 20, height: 20, borderRadius: 999, border: 0, background: "rgba(255,255,255,0.90)", color: "var(--muted)", fontWeight: 800, fontSize: 10, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}
+                        onMouseEnter={e => (e.currentTarget.style.color = "var(--coral)")}
+                        onMouseLeave={e => (e.currentTarget.style.color = "var(--muted)")}>✕</button>
+                    </div>
+                    <div style={{ padding: "8px 10px" }}>
+                      <p style={{ margin: "0 0 4px", fontWeight: 800, fontSize: 12, lineHeight: 1.3 }}>{d.name}</p>
+                      <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                        <Tag>{d.category}</Tag>
+                        <span style={{ color: "var(--muted)", fontSize: 10, fontWeight: 800 }}>热度 {d.heat}</span>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+
+              {/* Empty slots with two-option add menu */}
+              {Array.from({ length: emptySlots }).map((_, i) => (
+                <div key={`slot-${i}`} style={{ position: "relative", overflow: "hidden", borderRadius: 8, border: "1px dashed var(--line-dashed)", background: "rgba(255,255,255,0.55)", display: "flex", flexDirection: "column" }}>
+                  {openSlotMenu === i ? (
+                    <div data-slot-menu="true" style={{ position: "absolute", inset: 0, borderRadius: 8, border: "1.5px solid var(--coral)", background: "#fff", display: "grid", gridTemplateRows: "1fr 1px 1fr", overflow: "hidden", boxShadow: "var(--shadow-lg)", zIndex: 2 }}>
+                      <button onClick={() => { setOpenSlotMenu(null); onBrowse(); }}
+                        style={{ border: 0, background: "transparent", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, padding: 8, transition: "background 0.15s" }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "var(--panel-warm)")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+                        <span style={{ fontSize: 11, fontWeight: 800, color: "var(--ink)" }}>从款式库选款</span>
+                      </button>
+                      <div style={{ background: "var(--line)" }} />
+                      <button onClick={() => setOpenSlotMenu(null)}
+                        style={{ border: 0, background: "transparent", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, padding: 8, transition: "background 0.15s" }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "var(--panel-warm)")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+                        <span style={{ fontSize: 11, fontWeight: 800, color: "var(--ink)" }}>自主上传参考图</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Image area — same aspect ratio as filled cards */}
+                      <button onClick={() => setOpenSlotMenu(i)}
+                        style={{ aspectRatio: "1 / 1", border: 0, background: "transparent", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, transition: "var(--transition-base)", width: "100%" }}
+                        onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.7)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
+                        <span style={{ fontSize: 20, color: "var(--muted)", lineHeight: 1 }}>+</span>
+                        <span style={{ fontSize: 12, color: "var(--muted)", fontWeight: 800 }}>加款</span>
+                      </button>
+                      {/* Text area placeholder — same height as card text area */}
+                      <div style={{ padding: "8px 10px", borderTop: "1px solid rgba(0,0,0,0.04)" }}>
+                        <p style={{ margin: "0 0 4px", fontSize: 12, color: "transparent", userSelect: "none" }}>—</p>
+                        <div style={{ height: 18 }} />
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <p style={{ margin: 0, fontSize: 11, color: "var(--muted)", lineHeight: 1.6 }}>
+              点击款式卡切换当前生成目标。每次生成一款效果图，可多次生成对比。
+            </p>
+          </div>
+        </div>
+
+      </section>
+    );
+  }
+
+  // ─── BatchResultsScreen ────────────────────────────────────────────────────
+  function BatchResultsScreen({ basket, onConfirm, onWant, onBack }) {
+    const items = NAIL_DATA.filter(d => basket.includes(d.id));
+    return (
+      <section>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 18, marginBottom: 22, flexWrap: "wrap" }}>
+          <div>
+            <Eyebrow>Batch Try-On</Eyebrow>
+            <h1 style={{ margin: "0 0 8px", fontSize: 38 }}>一键试戴结果</h1>
+            <p style={{ maxWidth: 640, margin: 0, color: "var(--ink-soft)" }}>从款式库批量加入后生成的试戴结果。每款独立生成，返回一张展示一张。</p>
+          </div>
+          <Button variant="secondary" onClick={onBack}>继续选款</Button>
+        </div>
+        {items.length === 0
+          ? <div style={{ display: "grid", placeItems: "center", minHeight: 240, border: "1px dashed var(--line-dashed)", borderRadius: 8, color: "var(--muted)", background: "rgba(255,255,255,0.72)", fontWeight: 800, textAlign: "center", padding: 24 }}>还没有生成结果。先去「款式库」加入多个款式，再点击「一键试戴」。</div>
+          : <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))", gap: 18 }}>
+              {items.map(d => (
+                <article key={d.id} style={{ overflow: "hidden", border: "1px solid var(--line)", borderRadius: 8, background: "#fff", boxShadow: "var(--shadow-md)" }}>
+                  <div style={{ overflow: "hidden" }}>
+                    <img src={d.image} alt={d.name} style={{ width: "100%", height: 280, objectFit: "cover", display: "block", transition: "transform 0.24s ease" }}
+                      onMouseEnter={e => (e.currentTarget.style.transform="scale(1.04)")}
+                      onMouseLeave={e => (e.currentTarget.style.transform="scale(1)")} />
+                  </div>
+                  <div style={{ padding: 16 }}>
+                    <h3 style={{ margin: "0 0 8px" }}>{d.name}</h3>
+                    <div style={{ display: "flex", gap: 6, marginBottom: 10, flexWrap: "wrap" }}>
+                      <Tag>{d.category}</Tag>
+                      {d.subTag && <Tag variant="sub">{d.subTag}</Tag>}
+                      <span style={{ fontSize: 12, color: "var(--muted)", fontWeight: 800 }}>¥{d.price}</span>
+                    </div>
+                    <p style={{ margin: "0 0 14px", fontSize: 13, color: "var(--ink-soft)" }}>已生成高仿真试戴效果图。</p>
+                    <div style={{ display: "flex", gap: 10 }}>
+                      <Button size="sm" variant="primary" onClick={() => onConfirm(d)}>确认要做</Button>
+                      <Button size="sm" variant="secondary" onClick={() => onWant(d)}>我想做</Button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+        }
+      </section>
+    );
+  }
+
+  // ─── AdvisorScreen ─────────────────────────────────────────────────────────
+  function AdvisorScreen({ onConfirm }) {
+    const [messages, setMessages] = React.useState([
+      { kind: "ai", text: "我会根据你的手部照片、肤色倾向、甲床长度、使用场景和店内款式库来推荐。你可以直接说：想要显白、不要太夸张、预算 200 左右。" },
+    ]);
+    const [input, setInput] = React.useState("");
+    const picks = NAIL_DATA.slice(0, 3);
+    function send(text) {
+      const t = (text || input).trim();
+      if (!t) return;
+      setMessages(m => [...m, { kind: "user", text: t }, { kind: "ai", text: "收到～根据你的需求，我先从店里挑了几款显白又稳的，右侧「当前可推荐」里可以直接加入我想做。" }]);
+      setInput("");
+    }
+    return (
+      <section style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) 340px", gap: 22 }}>
+        <div style={{ display: "flex", flexDirection: "column", padding: 24, border: "1px solid var(--line)", borderRadius: 8, background: "rgba(255,255,255,0.9)", boxShadow: "var(--shadow-lg)", minHeight: 640 }}>
+          <Eyebrow>AI Nail Advisor</Eyebrow>
+          <h1 style={{ margin: "0 0 10px", fontSize: 38 }}>智能助手</h1>
+          <p style={{ maxWidth: 760, margin: "0 0 18px", color: "var(--ink-soft)" }}>上传手部照片，再像聊天一样告诉它预算、场景、风格和顾虑，它会从店内款式库帮你选。</p>
+          <div style={{ display: "flex", flex: 1, flexDirection: "column", gap: 14, minHeight: 300, margin: "0 0 16px", padding: 18, overflowY: "auto", border: "1px solid var(--line)", borderRadius: 8, background: "linear-gradient(180deg, rgba(255,250,248,0.76), rgba(247,250,247,0.88)), #fff" }}>
+            {messages.map((m, i) => <ChatBubble key={i} kind={m.kind}>{m.text}</ChatBubble>)}
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+            {["通勤显白","可爱但稳","猫眼预算","黄皮冰透"].map(p => (
+              <button key={p} onClick={() => send(p)} style={{ minHeight: 34, padding: "0 12px", border: "1px solid var(--line)", borderRadius: 8, color: "var(--muted)", background: "#fff", fontWeight: 700, cursor: "pointer" }}>{p}</button>
+            ))}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "150px minmax(0,1fr) auto", gap: 10 }}>
+            <UploadBox variant="hand" guideSrc="assets/hand-guide-outline.png" />
+            <textarea value={input} onChange={e => setInput(e.target.value)} rows={2} placeholder="告诉 AI：场景、预算、喜欢/不喜欢、甲型、肤色顾虑..." style={{ minHeight: 116, resize: "vertical", padding: 12, border: "1px solid var(--line)", borderRadius: 8, color: "var(--ink)", background: "#fff", font: "inherit", lineHeight: 1.55 }} />
+            <Button variant="emphasis" onClick={() => send()}>发送</Button>
+          </div>
+        </div>
+        <aside style={{ display: "grid", alignContent: "start", gap: 16 }}>
+          <Panel pad={18}>
+            <Eyebrow>Memory Draft</Eyebrow>
+            <h2 style={{ margin: "0 0 12px" }}>本次对话记忆</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {["待提取：肤色倾向","待提取：甲型/甲床","待提取：预算","待提取：禁忌偏好"].map(t => (
+                <span key={t} style={{ padding: "7px 9px", borderRadius: 7, color: "#5d4f52", background: "var(--coral-tint)", fontSize: 12, fontWeight: 800 }}>{t}</span>
+              ))}
+            </div>
+          </Panel>
+          <Panel pad={18}>
+            <Eyebrow>Shop Picks</Eyebrow>
+            <h2 style={{ margin: "0 0 12px" }}>当前可推荐</h2>
+            <div style={{ display: "grid", gap: 10 }}>
+              {picks.map(p => (
+                <article key={p.id} style={{ display: "grid", gridTemplateColumns: "64px minmax(0,1fr)", gap: 10, padding: 8, border: "1px solid var(--line)", borderRadius: 8, background: "var(--panel-warm)" }}>
+                  <img src={p.image} alt={p.name} style={{ width: 64, height: 64, borderRadius: 7, objectFit: "cover" }} />
+                  <div>
+                    <h3 style={{ margin: "0 0 4px", fontSize: 14 }}>{p.name}</h3>
+                    <p style={{ margin: "0 0 6px", fontSize: 12, lineHeight: 1.45, color: "var(--muted)" }}>{p.category} · 热度 {p.heat} · ¥{p.price}</p>
+                    <Badge variant="tint">AI 优先推荐</Badge>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </Panel>
+        </aside>
+      </section>
+    );
+  }
+
+  // ─── WantListScreen ────────────────────────────────────────────────────────
+  function WantListScreen({ wants, orders, onConfirm }) {
+    return (
+      <section style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) 300px", gap: 22, alignItems: "start" }}>
+        <div>
+          <div style={{ marginBottom: 22 }}>
+            <Eyebrow>My Studio</Eyebrow>
+            <h1 style={{ margin: "0 0 8px", fontSize: 38 }}>我的意向</h1>
+            <p style={{ maxWidth: 640, margin: 0, color: "var(--ink-soft)" }}>意向款和已确认款直接展示在这里，方便到店前快速比较和决策。</p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0,1fr))", gap: 22 }}>
+            {[
+              { title: "我想做", sub: "已加入候选，适合稍后比较后再确认。", items: wants, empty: "还没有「我想做」的款式。", action: it => <Button size="sm" variant="primary" onClick={() => onConfirm(it)}>确认做 / 下单</Button> },
+              { title: "已确认做", sub: "预约成交，默认代表已经确认要做。", items: orders, empty: "还没有确认做的预约成交。", action: () => <span style={{ color: "var(--jade)", fontSize: 13, fontWeight: 800 }}>已确认做 ✓</span> },
+            ].map(col => (
+              <section key={col.title}>
+                <h2 style={{ margin: "0 0 4px" }}>{col.title}</h2>
+                <p style={{ margin: "0 0 14px", fontSize: 13, color: "var(--muted)" }}>{col.sub}</p>
+                {col.items.length === 0
+                  ? <div style={{ display: "grid", placeItems: "center", minHeight: 200, border: "1px dashed var(--line-dashed)", borderRadius: 8, color: "var(--muted)", background: "rgba(255,255,255,0.72)", fontWeight: 800, textAlign: "center", padding: 20 }}>{col.empty}</div>
+                  : <div style={{ display: "grid", gap: 16 }}>
+                      {col.items.map(it => (
+                        <article key={it.id} style={{ overflow: "hidden", border: "1px solid var(--line)", borderRadius: 8, background: "#fff", boxShadow: "var(--shadow-md)" }}>
+                          <img src={it.image} alt={it.name} style={{ width: "100%", height: 200, objectFit: "cover", display: "block" }} />
+                          <div style={{ padding: 16 }}>
+                            <h3 style={{ margin: "0 0 8px" }}>{it.name}</h3>
+                            {col.action(it)}
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                }
+              </section>
+            ))}
+          </div>
+        </div>
+        <aside style={{ display: "grid", gap: 16 }}>
+          <div style={{ padding: 18, border: "1px solid var(--line)", borderRadius: 8, background: "#fff", boxShadow: "var(--shadow-lg)" }}>
+            <Eyebrow>Recent</Eyebrow>
+            <h2 style={{ margin: "0 0 14px", fontSize: 18 }}>最近试戴</h2>
+            {[...wants,...orders].slice(0,3).length === 0
+              ? <p style={{ fontSize: 13, color: "var(--muted)" }}>暂无记录</p>
+              : <div style={{ display: "grid", gap: 10 }}>
+                  {[...wants,...orders].slice(0,3).map(it => (
+                    <div key={it.id} style={{ display: "grid", gridTemplateColumns: "48px minmax(0,1fr)", gap: 10, alignItems: "center" }}>
+                      <img src={it.image} alt={it.name} style={{ width: 48, height: 48, borderRadius: 7, objectFit: "cover" }} />
+                      <div>
+                        <p style={{ margin: 0, fontWeight: 800, fontSize: 13 }}>{it.name}</p>
+                        <p style={{ margin: 0, fontSize: 12, color: "var(--muted)" }}>¥{it.price}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+            }
+          </div>
+        </aside>
+      </section>
+    );
+  }
+
+  // ─── App ───────────────────────────────────────────────────────────────────
+  function App() {
+    const [page, setPage] = React.useState("quick-try-on");
+    const [basket, setBasket] = React.useState(["cat-eye-diamond", "plain-water"]);
+    const [wants, setWants] = React.useState([]);
+    const [orders, setOrders] = React.useState([]);
+    const [preview, setPreview] = React.useState(null);
+    const [toast, setToast] = React.useState(null);
+    const userId = "guest-nail-2026";
+
+    function flash(msg) { setToast(msg); clearTimeout(flash._t); flash._t = setTimeout(() => setToast(null), 2600); }
+    function toggle(id) { setBasket(b => b.includes(id) ? b.filter(x => x !== id) : b.length >= 4 ? b : [...b, id]); }
+    function want(d) { setWants(w => uniqPush(w, d)); flash(`已加入「想做」：${d.name}`); }
+    function confirm(d) { setOrders(o => uniqPush(o, d)); setWants(w => w.filter(x => x.id !== d.id)); setPreview(null); flash(`已确认做：${d.name}`); }
+    function generate() { setPage("batch"); flash(`一键试戴已生成 ${basket.length} 个结果`); }
+
+    return (
+      <>
+        <Topbar page={page} onPage={setPage} userId={userId} />
+        <main style={{ width: "min(1180px, calc(100% - 32px))", margin: "0 auto", padding: "26px 0 54px" }}>
+          {page === "catalog"        && <CatalogScreen basket={basket} onToggle={toggle} onDetails={d => d ? setPreview(d) : setPage("style-library")} onGenerate={generate} onAdvisor={() => setPage("recommend")} />}
+          {page === "style-library"  && <StyleLibraryScreen basket={basket} onToggle={toggle} onPreview={setPreview} />}
+          {page === "quick-try-on"   && <TryOnScreen mode="quick"   basket={basket} onToggle={toggle} onGenerate={generate} onBrowse={() => setPage("style-library")} onWant={want} onConfirm={confirm} />}
+          {page === "precise-try-on" && <TryOnScreen mode="precise" basket={basket} onToggle={toggle} onGenerate={generate} onBrowse={() => setPage("style-library")} onWant={want} onConfirm={confirm} />}
+          {page === "batch"          && <BatchResultsScreen basket={basket} onConfirm={confirm} onWant={want} onBack={() => setPage("style-library")} />}
+          {page === "recommend"      && <AdvisorScreen onConfirm={confirm} />}
+          {page === "want"           && <WantListScreen wants={wants} orders={orders} onConfirm={confirm} />}
+        </main>
+        <div style={{ position: "fixed", top: 76, right: 24, zIndex: 20 }}>
+          {toast && <Toast message={toast} actionLabel="查看" onAction={() => setPage("want")} />}
+        </div>
+        <Dialog open={!!preview} onClose={() => setPreview(null)}>
+          {preview && (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, padding: 28 }}>
+              <div style={{ overflow: "hidden", minHeight: 300, borderRadius: 8 }}>
+                <img src={preview.image} alt={preview.name} style={{ width: "100%", height: "100%", minHeight: 300, objectFit: "cover" }} />
+              </div>
+              <div>
+                <Eyebrow>Instant Try-On</Eyebrow>
+                <h2 style={{ margin: "0 0 8px" }}>{preview.name}</h2>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, color: "var(--muted)", fontSize: 13, fontWeight: 800 }}>
+                  <span>{preview.category}</span><span>·</span><span>热度 {preview.heat}</span><span style={{ color: "var(--ink)" }}>¥{preview.price}</span>
+                </div>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--ink-soft)" }}>{preview.definition}</p>
+                <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
+                  <Button size="sm" variant="secondary" onClick={() => want(preview)}>加入想做</Button>
+                  <Button size="sm" variant="primary" onClick={() => confirm(preview)}>确认要做</Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </Dialog>
+      </>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+  </script>
+</body>
+</html>
